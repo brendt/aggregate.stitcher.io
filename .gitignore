@@ -1,0 +1,16 @@
+.env
+.idea
+.php_cs.cache
+.vagrant
+Homestead.json
+Homestead.yaml
+node_modules
+npm-debug.log
+public/css
+public/hot
+public/js
+public/mix-manifest.json
+public/storage
+storage/*.key
+vendor
+yarn-error.log
