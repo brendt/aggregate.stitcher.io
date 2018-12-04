@@ -5,7 +5,7 @@ namespace Domain\Post\Decorators;
 use Carbon\Carbon;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
-class EntryDecorator extends AbstractEntry
+class RssEntryDecorator extends AbstractEntry
 {
     /** @var \Zend\Feed\Reader\Entry\AbstractEntry|\Zend\Feed\Reader\Entry\EntryInterface */
     private $decoratedEntry;
@@ -27,6 +27,10 @@ class EntryDecorator extends AbstractEntry
             $date = $this->entry->getElementsByTagName('updated')->item(0)->lastChild->textContent;
         }
 
+        if (!$date && $this->entry->getElementsByTagName('pubDate')->length > 0) {
+            $date = $this->entry->getElementsByTagName('pubDate')->item(0)->lastChild->textContent;
+        }
+
         if (!$date) {
             $date = now();
         }
@@ -36,7 +40,7 @@ class EntryDecorator extends AbstractEntry
 
     public function title(): string
     {
-        return $this->decoratedEntry->getTitle();
+        return strip_tags($this->decoratedEntry->getTitle());
     }
 
     public function url(): string

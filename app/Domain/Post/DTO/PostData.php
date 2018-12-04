@@ -3,7 +3,7 @@
 namespace Domain\Post\DTO;
 
 use Carbon\Carbon;
-use Domain\Post\Decorators\EntryDecorator;
+use Domain\Post\Decorators\RssEntryDecorator;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 use Zend\Feed\Reader\Entry\EntryInterface;
@@ -24,7 +24,7 @@ class PostData extends DataTransferObject
 
     public static function create(AbstractEntry $entry): PostData
     {
-        $decoratedEntry = new EntryDecorator($entry);
+        $decoratedEntry = new RssEntryDecorator($entry);
 
         return new self([
             'url' => $decoratedEntry->url(),
