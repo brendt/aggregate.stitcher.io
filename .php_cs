@@ -5,8 +5,7 @@ $finder = Symfony\Component\Finder\Finder::create()
     ->notPath('storage/*')
     ->notPath('vendor')
     ->in([
-        __DIR__ . '/src/App',
-        __DIR__ . '/src/Domain',
+        __DIR__ . '/app/',
         __DIR__ . '/tests',
         __DIR__ . '/database',
     ])

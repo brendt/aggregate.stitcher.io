@@ -5,10 +5,10 @@ namespace App\Console\Jobs;
 use Domain\Source\Actions\UpdateSourceAction;
 use Domain\Source\Models\Source;
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
+use Illuminate\Queue\InteractsWithQueue;
+use Illuminate\Queue\SerializesModels;
 
 class UpdateSourceJob implements ShouldQueue
 {

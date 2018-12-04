@@ -2,11 +2,9 @@
 
 namespace Domain\Post\DTO;
 
-use Carbon\Carbon;
 use Domain\Post\Decorators\RssEntryDecorator;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
-use Zend\Feed\Reader\Entry\EntryInterface;
 
 class PostData extends DataTransferObject
 {

@@ -23,15 +23,15 @@ class RssEntryDecorator extends AbstractEntry
             ?? $this->data['datemodified']
             ?? null;
 
-        if (!$date && $this->entry->getElementsByTagName('updated')->length > 0) {
+        if (! $date && $this->entry->getElementsByTagName('updated')->length > 0) {
             $date = $this->entry->getElementsByTagName('updated')->item(0)->lastChild->textContent;
         }
 
-        if (!$date && $this->entry->getElementsByTagName('pubDate')->length > 0) {
+        if (! $date && $this->entry->getElementsByTagName('pubDate')->length > 0) {
             $date = $this->entry->getElementsByTagName('pubDate')->item(0)->lastChild->textContent;
         }
 
-        if (!$date) {
+        if (! $date) {
             $date = now();
         }
 

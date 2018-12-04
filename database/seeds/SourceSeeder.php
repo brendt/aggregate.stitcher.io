@@ -17,7 +17,7 @@ class SourceSeeder extends Seeder
         foreach ($sources as $url => $email) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
                 return factory(User::class)->create([
-                    'email' => $email
+                    'email' => $email,
                 ]);
             });
 
