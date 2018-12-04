@@ -9,12 +9,13 @@ use Illuminate\Http\Request;
 
 class PostsController
 {
-    public function index(PostsQuery $query)
+    public function index(PostsQuery $query, Request $request)
     {
         $posts = $query->paginate();
 
         return view('posts.index', [
             'posts' => $posts,
+            'user' => $request->user(),
         ]);
     }
 

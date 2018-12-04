@@ -50,7 +50,7 @@ class VoteProjector implements Projector
 
         Vote::query()
             ->whereUser($user)
-            ->where($post)
+            ->wherePost($post)
             ->delete();
 
         $this->updateVoteCountAction->execute($post->refresh());

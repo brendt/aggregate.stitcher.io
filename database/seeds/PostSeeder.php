@@ -35,16 +35,14 @@ class PostSeeder extends Seeder
 
     private function createPosts(Source $source): void
     {
-        foreach (range(1, 3) as $i) {
-            $post = Post::create([
-                'source_id' => $source->id,
-                'url' => '/#',
-                'title' => faker()->words(faker()->numberBetween(1, 4), true),
-                'date_created' => now()->subDays(faker()->numberBetween(0, 1000)),
-            ]);
+        $post = Post::create([
+            'source_id' => $source->id,
+            'url' => '/#',
+            'title' => faker()->words(faker()->numberBetween(1, 4), true),
+            'date_created' => now()->subDays(faker()->numberBetween(0, 1000)),
+        ]);
 
-            $this->addViewsAndVotes($post);
-        }
+        $this->addViewsAndVotes($post);
     }
 
     private function addViewsAndVotes(Post $post): void

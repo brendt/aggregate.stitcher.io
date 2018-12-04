@@ -3,6 +3,7 @@
 namespace Domain\User\Models;
 
 use App\Support\HasUuid;
+use Domain\Post\Models\Post;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -35,5 +36,14 @@ class User extends BaseUser
     public function votes(): HasMany
     {
         return $this->hasMany(Vote::class);
+    }
+
+    public function votedFor(Post $post): bool
+    {
+        return $this->votes
+            ->filter(function (Vote $vote) use ($post) {
+                return $vote->post_id === $post->id;
+            })
+            ->isNotEmpty();
     }
 }

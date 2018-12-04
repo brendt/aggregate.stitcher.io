@@ -22,10 +22,26 @@
 </head>
 <body>
 
-{{ $slot }}
+<header>
+    @if(current_user())
+        <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
+            {{ __('Logout') }}
+        </a>
+    @else
+        <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}">
+            {{ __('Login') }}
+        </a>
+
+        <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">
+            {{ __('Register') }}
+        </a>
+    @endif
+</header>
+
+{{ $slot ?? null }}
 
 {{--<script>--}}
-    {{--window.locales = {!! json_encode(config('app.available_locales')) !!};--}}
+{{--window.locales = {!! json_encode(config('app.available_locales')) !!};--}}
 {{--</script>--}}
 
 {{--@include('admin.layouts.partials.bugsnag')--}}
