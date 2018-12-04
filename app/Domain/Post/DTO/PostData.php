@@ -14,7 +14,7 @@ class PostData extends DataTransferObject
     /** @var string */
     public $title;
 
-    /** @var \Carbon\Carbon */
+    /** @var \Carbon\Carbon|null */
     public $date_created;
 
     /** @var string */

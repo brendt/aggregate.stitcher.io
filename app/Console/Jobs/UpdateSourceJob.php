@@ -2,7 +2,7 @@
 
 namespace App\Console\Jobs;
 
-use Domain\Source\Actions\UpdateSourceAction;
+use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\Models\Source;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -14,13 +14,13 @@ class UpdateSourceJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /** @var \Domain\Source\Actions\UpdateSourceAction */
+    /** @var \Domain\Source\Actions\SyncSourceAction */
     protected $updateSource;
 
     /** @var \Domain\Source\Models\Source */
     protected $source;
 
-    public function __construct(UpdateSourceAction $updateSource, Source $source)
+    public function __construct(SyncSourceAction $updateSource, Source $source)
     {
         $this->updateSource = $updateSource;
         $this->source = $source;

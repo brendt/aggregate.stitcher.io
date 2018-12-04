@@ -46,4 +46,9 @@ class User extends BaseUser
             })
             ->isNotEmpty();
     }
+
+    public function getPrimarySource(): ?Source
+    {
+        return $this->sources->first();
+    }
 }

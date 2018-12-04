@@ -17,7 +17,7 @@ class RssEntryDecorator extends AbstractEntry
         parent::__construct($entry->entry, $entry->entryKey, $entry->data['type']);
     }
 
-    public function createdAt(): Carbon
+    public function createdAt(): ?Carbon
     {
         $date = $this->data['datecreated']
             ?? $this->data['datemodified']
@@ -29,10 +29,6 @@ class RssEntryDecorator extends AbstractEntry
 
         if (! $date && $this->entry->getElementsByTagName('pubDate')->length > 0) {
             $date = $this->entry->getElementsByTagName('pubDate')->item(0)->lastChild->textContent;
-        }
-
-        if (! $date) {
-            $date = now();
         }
 
         return Carbon::make($date);

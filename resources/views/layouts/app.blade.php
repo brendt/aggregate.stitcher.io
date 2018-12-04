@@ -23,7 +23,15 @@
 <body>
 
 <header>
+    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
+        {{ __('Read') }}
+    </a>
+
     @if(current_user())
+        <a href="{{ action([\App\Http\Controllers\SourcesController::class, 'edit']) }}">
+            {{ __('Sources') }}
+        </a>
+
         <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
             {{ __('Logout') }}
         </a>

@@ -19,6 +19,19 @@ class Post extends Model
         'view_count' => 'integer',
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        self::creating(function (Post $post) {
+            if ($post->date_created === null) {
+                $post->date_created = now();
+            }
+
+            return $post;
+        });
+    }
+
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
