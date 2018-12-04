@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Queries\PostsQuery;
 use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Models\Post;
 use Illuminate\Http\Request;
 
 class PostsController
 {
-    public function index()
+    public function index(PostsQuery $query)
     {
-        $posts = Post::whereActive()->get();
+        $posts = $query->paginate();
 
         return view('posts.index', [
             'posts' => $posts,
@@ -22,7 +23,7 @@ class PostsController
         Post $post,
         AddViewAction $addViewAction
     ) {
-        $post = $addViewAction->execute($post, $request->user());
+        $addViewAction->execute($post, $request->user());
 
         return redirect()->to($post->url);
     }

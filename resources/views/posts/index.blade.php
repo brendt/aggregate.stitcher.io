@@ -12,7 +12,7 @@
 
                 <a
                     href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
-                    target="_blank"
+                    {{--target="_blank"--}}
                     rel="noopener noreferrer">
                     {{ $post->title }}
                 </a>
@@ -27,4 +27,6 @@
             <hr>
         @endforeach
     </ul>
+
+    {{ $posts->render() }}
 @endcomponent

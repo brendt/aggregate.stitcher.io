@@ -31,6 +31,7 @@ class UpdateSourceAction
         foreach ($feed as $entry) {
             $postData = PostData::create($entry);
 
+            /** @var \Domain\Post\Models\Post $post */
             $post = $source->posts()->where('url', $postData->url)->first();
 
             if (! $post) {

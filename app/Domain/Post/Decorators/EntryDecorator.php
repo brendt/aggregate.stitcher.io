@@ -21,11 +21,16 @@ class EntryDecorator extends AbstractEntry
     {
         $date = $this->data['datecreated']
             ?? $this->data['datemodified']
-            ?? $this->data['updated']
-            ?? now();
+            ?? null;
 
-        dd($this->entry->childNodes);
-        
+        if (!$date && $this->entry->getElementsByTagName('updated')->length > 0) {
+            $date = $this->entry->getElementsByTagName('updated')->item(0)->lastChild->textContent;
+        }
+
+        if (!$date) {
+            $date = now();
+        }
+
         return Carbon::make($date);
     }
 

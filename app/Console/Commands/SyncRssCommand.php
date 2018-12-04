@@ -12,7 +12,7 @@ class SyncRssCommand extends Command
     /** @var \Domain\Source\Actions\UpdateSourceAction */
     protected $updateSource;
 
-    protected $signature = 'sync:rss';
+    protected $signature = 'rss:sync';
 
     protected $description = 'Sync RSS';
 
