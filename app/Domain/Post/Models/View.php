@@ -8,7 +8,7 @@ use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Vote extends Model
+class View extends Model
 {
     use HasUuid;
 

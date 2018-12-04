@@ -4,11 +4,11 @@ namespace Domain\Post\Actions;
 
 use Domain\Post\Models\Post;
 
-class CalculateVotesAction
+class UpdateViewCountAction
 {
     public function execute(Post $post): Post
     {
-        $post->vote_count = $post->votes()->count();
+        $post->view_count = $post->views()->count();
 
         $post->save();
 

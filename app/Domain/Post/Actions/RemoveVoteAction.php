@@ -2,27 +2,22 @@
 
 namespace Domain\Post\Actions;
 
+use App\Domain\Post\Events\RemoveVoteEvent;
 use Domain\Post\Models\Post;
-use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
 
 class RemoveVoteAction
 {
-    /** @var \Domain\Post\Actions\CalculateVotesAction */
+    /** @var \Domain\Post\Actions\UpdateVoteCountAction */
     protected $calculateVotesAction;
 
-    public function __construct(CalculateVotesAction $calculateVotesAction)
+    public function __construct(UpdateVoteCountAction $calculateVotesAction)
     {
         $this->calculateVotesAction = $calculateVotesAction;
     }
 
-    public function execute(Post $post, User $user): Post
+    public function execute(Post $post, User $user): void
     {
-        Vote::query()
-            ->whereUser($user)
-            ->wherePost($post)
-            ->delete();
-
-        return $this->calculateVotesAction->execute($post->refresh());
+        event(RemoveVoteEvent::create($post, $user));
     }
 }

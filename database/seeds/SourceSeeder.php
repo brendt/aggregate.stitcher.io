@@ -14,6 +14,7 @@ class SourceSeeder extends Seeder
             Source::create([
                 'url' => $url,
                 'user_id' => User::first()->id,
+                'is_active' => true,
             ]);
         });
     }

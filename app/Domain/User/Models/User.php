@@ -2,6 +2,7 @@
 
 namespace Domain\User\Models;
 
+use App\Support\HasUuid;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -10,7 +11,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends BaseUser
 {
-    use Notifiable;
+    use Notifiable, HasUuid;
 
     protected $guarded = [];
 

@@ -2,27 +2,22 @@
 
 namespace Domain\Post\Actions;
 
+use App\Domain\Post\Events\AddVoteEvent;
 use Domain\Post\Models\Post;
-use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
 
 class AddVoteAction
 {
-    /** @var \Domain\Post\Actions\CalculateVotesAction */
+    /** @var \Domain\Post\Actions\UpdateVoteCountAction */
     protected $calculateVotesAction;
 
-    public function __construct(CalculateVotesAction $calculateVotesAction)
+    public function __construct(UpdateVoteCountAction $calculateVotesAction)
     {
         $this->calculateVotesAction = $calculateVotesAction;
     }
 
-    public function execute(Post $post, User $user): Post
+    public function execute(Post $post, User $user): void
     {
-        Vote::create([
-            'user_id' => $user->id,
-            'post_id' => $post->id,
-        ]);
-
-        return $this->calculateVotesAction->execute($post->refresh());
+        event(AddVoteEvent::create($post, $user));
     }
 }

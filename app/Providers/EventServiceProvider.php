@@ -3,30 +3,20 @@
 namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
+use Spatie\EventProjector\Projectionist;
 
 class EventServiceProvider extends ServiceProvider
 {
-    /**
-     * The event listener mappings for the application.
-     *
-     * @var array
-     */
-    protected $listen = [
-        'App\Events\Event' => [
-            'App\Listeners\EventListener',
-        ],
-    ];
-
-    /**
-     * Register any events for your application.
-     *
-     * @return void
-     */
     public function boot()
     {
         parent::boot();
 
-        //
+        /** @var \Spatie\EventProjector\Projectionist $projectionist */
+        $projectionist = $this->app->get(Projectionist::class);
+
+        $projectionist->addProjectors([
+            \App\Domain\Post\Projectors\VoteProjector::class,
+            \App\Domain\Post\Projectors\ViewProjector::class,
+        ]);
     }
 }

@@ -8,5 +8,6 @@ class DatabaseSeeder extends Seeder
     {
          $this->call(UserSeeder::class);
          $this->call(SourceSeeder::class);
+         $this->call(PostSeeder::class);
     }
 }
