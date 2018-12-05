@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Post\Events\AddVoteEvent;
+use App\Domain\Post\Events\RemoveVoteEvent;
 use Domain\Post\Actions\AddVoteAction;
 use Domain\Post\Actions\RemoveVoteAction;
 use Domain\Post\Models\Post;
@@ -11,10 +13,9 @@ class VotesController
 {
     public function store(
         Request $request,
-        Post $post,
-        AddVoteAction $addVoteAction
+        Post $post
     ) {
-        $addVoteAction->execute($post, $request->user());
+        event(AddVoteEvent::create($post, $request->user()));
 
         if (! $request->wantsJson()) {
             return redirect()->action([PostsController::class, 'index']);
@@ -25,10 +26,9 @@ class VotesController
 
     public function delete(
         Request $request,
-        Post $post,
-        RemoveVoteAction $removeVoteAction
+        Post $post
     ) {
-        $removeVoteAction->execute($post, $request->user());
+        event(RemoveVoteEvent::create($post, $request->user()));
 
         if (! $request->wantsJson()) {
             return redirect()->action([PostsController::class, 'index']);

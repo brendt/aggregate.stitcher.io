@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Post\Events\AddViewEvent;
 use App\Http\Queries\PostsQuery;
 use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Models\Post;
@@ -21,10 +22,9 @@ class PostsController
 
     public function show(
         Request $request,
-        Post $post,
-        AddViewAction $addViewAction
+        Post $post
     ) {
-        $addViewAction->execute($post, $request->user());
+        event(AddViewEvent::create($post, $request->user()));
 
         return redirect()->to($post->url);
     }

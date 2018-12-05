@@ -17,6 +17,7 @@ class EventServiceProvider extends ServiceProvider
         $projectionist->addProjectors([
             \App\Domain\Post\Projectors\VoteProjector::class,
             \App\Domain\Post\Projectors\ViewProjector::class,
+            \App\Domain\Post\Projectors\PostProjector::class,
         ]);
     }
 }

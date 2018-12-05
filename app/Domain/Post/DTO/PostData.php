@@ -1,13 +1,18 @@
 <?php
 
-namespace Domain\Post\DTO;
+namespace App\Domain\Post\DTO;
 
 use Domain\Post\Decorators\RssEntryDecorator;
+use Domain\Post\Models\Post;
+use Ramsey\Uuid\Uuid;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
 class PostData extends DataTransferObject
 {
+    /** @var string */
+    public $uuid;
+
     /** @var string */
     public $url;
 
@@ -20,8 +25,16 @@ class PostData extends DataTransferObject
     /** @var string */
     public $teaser;
 
-    public static function create(AbstractEntry $entry): PostData
+    public function __construct(array $parameters)
     {
+        $parameters['uuid'] = $parameters['uuid'] ?? (string) Uuid::uuid4();
+
+        parent::__construct($parameters);
+    }
+
+    public static function create(
+        AbstractEntry $entry
+    ): PostData {
         $decoratedEntry = new RssEntryDecorator($entry);
 
         return new self([
@@ -30,5 +43,11 @@ class PostData extends DataTransferObject
             'date_created' => $decoratedEntry->createdAt(),
             'teaser' => '',
         ]);
+    }
+
+    public function hasChanges(Post $post): bool
+    {
+        return $post->title !== $this->title
+            || $post->teaser !== $this->teaser;
     }
 }

@@ -17,7 +17,7 @@ class CreateSourcesTable extends Migration
 
             $table->boolean('is_active')->default(0);
 
-            $table->string('url');
+            $table->string('url')->unique();
 
             $table->timestamps();
         });

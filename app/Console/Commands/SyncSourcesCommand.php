@@ -7,14 +7,14 @@ use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\Models\Source;
 use Illuminate\Console\Command;
 
-class SyncRssCommand extends Command
+class SyncSourcesCommand extends Command
 {
     /** @var \Domain\Source\Actions\SyncSourceAction */
     protected $updateSource;
 
-    protected $signature = 'rss:sync';
+    protected $signature = 'sync:sources';
 
-    protected $description = 'Sync RSS';
+    protected $description = 'Sync sources';
 
     public function __construct(SyncSourceAction $updateSource)
     {
@@ -25,13 +25,15 @@ class SyncRssCommand extends Command
 
     public function handle()
     {
-        foreach (Source::all() as $source) {
+        $sources = Source::whereActive()->get();
+
+        foreach ($sources as $source) {
             dispatch(new UpdateSourceJob(
                 $this->updateSource,
                 $source
             ));
 
-            $this->comment("Updated {$source->url}");
+            $this->comment("Updated {$source->url} ({$source->uuid})");
         }
     }
 }

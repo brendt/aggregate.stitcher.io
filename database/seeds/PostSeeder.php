@@ -1,7 +1,11 @@
 <?php
 
+use App\Domain\Post\DTO\PostData;
+use App\Domain\Post\Events\AddViewEvent;
+use App\Domain\Post\Events\AddVoteEvent;
 use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Actions\AddVoteAction;
+use Domain\Post\Events\CreatePostEvent;
 use Domain\Post\Models\Post;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
@@ -12,18 +16,9 @@ class PostSeeder extends Seeder
     /** @var \Domain\User\Models\User[]|\Illuminate\Database\Eloquent\Collection */
     private $users;
 
-    /** @var \Domain\Post\Actions\AddVoteAction|\Illuminate\Foundation\Application|mixed */
-    private $addVoteAction;
-
-    /** @var \Domain\Post\Actions\AddViewAction|\Illuminate\Foundation\Application|mixed */
-    private $addViewAction;
-
     public function __construct()
     {
         $this->users = User::all();
-
-        $this->addVoteAction = app(AddVoteAction::class);
-        $this->addViewAction = app(AddViewAction::class);
     }
 
     public function run()
@@ -35,12 +30,16 @@ class PostSeeder extends Seeder
 
     private function createPosts(Source $source): void
     {
-        $post = Post::create([
-            'source_id' => $source->id,
+        $postData = new PostData([
             'url' => '/#',
             'title' => faker()->words(faker()->numberBetween(1, 4), true),
             'date_created' => now()->subDays(faker()->numberBetween(0, 1000)),
+            'teaser' => '',
         ]);
+
+        event(CreatePostEvent::create($source, $postData));
+
+        $post = Post::whereUuid($postData->uuid)->firstOrFail();
 
         $this->addViewsAndVotes($post);
     }
@@ -49,11 +48,11 @@ class PostSeeder extends Seeder
     {
         foreach ($this->users as $user) {
             if (faker()->boolean(35)) {
-                $this->addVoteAction->execute($post, $user);
+                event(AddVoteEvent::create($post, $user));
             }
 
-            foreach (range(0, faker()->numberBetween(0, 5)) as $i) {
-                $this->addViewAction->execute($post, $user);
+            if (faker()->boolean(60)) {
+                event(AddViewEvent::create($post, $user));
             }
         }
     }
