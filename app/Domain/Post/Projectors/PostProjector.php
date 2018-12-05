@@ -19,6 +19,11 @@ class PostProjector implements Projector
         UpdatePostEvent::class => 'updatePost',
     ];
 
+//    public function resetState()
+//    {
+//        Post::query()->delete();
+//    }
+
     /** @var \Domain\Post\Actions\UpdateViewCountAction */
     private $updateViewCountAction;
 

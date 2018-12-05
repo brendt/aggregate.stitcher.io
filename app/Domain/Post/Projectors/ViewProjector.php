@@ -26,6 +26,11 @@ class ViewProjector implements Projector
         $this->updateViewCountAction = $calculateViewsAction;
     }
 
+//    public function resetState()
+//    {
+//        View::query()->delete();
+//    }
+
     public function addView(AddViewEvent $event): void
     {
         $user = $event->user_uuid
