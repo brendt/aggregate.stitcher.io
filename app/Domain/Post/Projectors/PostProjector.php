@@ -2,14 +2,11 @@
 
 namespace App\Domain\Post\Projectors;
 
-use App\Domain\Post\Events\AddViewEvent;
 use Domain\Post\Actions\UpdateViewCountAction;
 use Domain\Post\Events\CreatePostEvent;
 use Domain\Post\Events\UpdatePostEvent;
 use Domain\Post\Models\Post;
-use Domain\Post\Models\View;
 use Domain\Source\Models\Source;
-use Domain\User\Models\User;
 use Spatie\EventProjector\Projectors\Projector;
 use Spatie\EventProjector\Projectors\ProjectsEvents;
 

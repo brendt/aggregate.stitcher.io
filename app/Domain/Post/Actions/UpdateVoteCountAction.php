@@ -6,7 +6,7 @@ use Domain\Post\Models\Post;
 
 class UpdateVoteCountAction
 {
-    public function execute(Post $post): Post
+    public function __invoke(Post $post): Post
     {
         $post->vote_count = $post->votes()->count();
 

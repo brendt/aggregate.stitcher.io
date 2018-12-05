@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Source\Actions\DeleteSourceAction;
+use App\Domain\Source\Events\CreateSourceEvent;
+use App\Domain\Source\Events\DeleteSourceEvent;
+use App\Domain\Source\Events\UpdateSourceEvent;
 use App\Http\Requests\SourceRequest;
 use App\Http\ViewModels\SourceViewModel;
-use Domain\Source\Actions\CreateSourceAction;
-use Domain\Source\Actions\UpdateSourceAction;
-use Domain\Source\DTO\SourceData;
 use Domain\User\Models\User;
 
 class SourcesController
@@ -19,36 +18,34 @@ class SourcesController
         return $viewModel->view('sources.form');
     }
 
-    public function update(
-        SourceRequest $request,
-        User $user,
-        CreateSourceAction $createSourceAction,
-        UpdateSourceAction $updateSourceAction
-    ) {
-        $sourceData = SourceData::fromRequest($request);
+    public function update(SourceRequest $request, User $user)
+    {
+        $primarySource = $user->getPrimarySource();
 
-        $source = $user->getPrimarySource();
+        if (! $primarySource) {
+            event(CreateSourceEvent::fromRequest($request));
 
-        if (! $source) {
-            $createSourceAction->execute($user, $sourceData);
-        } else {
-            $updateSourceAction->execute($source, $sourceData);
+            return redirect()->action([self::class, 'edit']);
+        }
+
+        $updateSourceEvent = UpdateSourceEvent::fromRequest($primarySource, $request);
+
+        if ($updateSourceEvent->hasChanges($primarySource)) {
+            event($updateSourceEvent);
         }
 
         return redirect()->action([self::class, 'edit']);
     }
 
-    public function delete(
-        User $user,
-        DeleteSourceAction $deleteSourceAction
-    ) {
+    public function delete(User $user)
+    {
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
             return redirect()->action([self::class, 'edit']);
         }
 
-        $deleteSourceAction->execute($primarySource);
+        event(DeleteSourceEvent::create($primarySource));
 
         return redirect()->action([self::class, 'edit']);
     }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Database\Seeder;
@@ -22,11 +23,10 @@ class SourceSeeder extends Seeder
                 ]);
             });
 
-            Source::create([
-                'url' => $url,
-                'user_id' => $user->id,
-                'is_active' => true,
-            ]);
+            event(new CreateSourceEvent(
+                $url,
+                $user->uuid
+            ));
         }
     }
 }

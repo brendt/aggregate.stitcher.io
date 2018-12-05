@@ -28,6 +28,6 @@ class UpdateSourceJob implements ShouldQueue
 
     public function handle()
     {
-        $this->updateSource->execute($this->source);
+        $this->updateSource->__invoke($this->source);
     }
 }

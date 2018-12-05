@@ -39,7 +39,7 @@ class VoteProjector implements Projector
             'post_id' => $post->id,
         ]);
 
-        $this->updateVoteCountAction->execute($post->refresh());
+        $this->updateVoteCountAction->__invoke($post->refresh());
     }
 
     public function removeVote(RemoveVoteEvent $event): void
@@ -53,6 +53,6 @@ class VoteProjector implements Projector
             ->wherePost($post)
             ->delete();
 
-        $this->updateVoteCountAction->execute($post->refresh());
+        $this->updateVoteCountAction->__invoke($post->refresh());
     }
 }

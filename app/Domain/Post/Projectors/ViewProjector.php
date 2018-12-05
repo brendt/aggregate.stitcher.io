@@ -39,6 +39,6 @@ class ViewProjector implements Projector
             'post_id' => $post->id,
         ]);
 
-        $this->updateViewCountAction->execute($post->refresh());
+        $this->updateViewCountAction->__invoke($post->refresh());
     }
 }

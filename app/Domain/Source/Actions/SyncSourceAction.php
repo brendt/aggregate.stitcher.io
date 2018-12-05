@@ -10,7 +10,7 @@ use Zend\Feed\Reader\Reader;
 
 class SyncSourceAction
 {
-    public function execute(Source $source)
+    public function __invoke(Source $source)
     {
         $feed = Reader::import($source->url);
 

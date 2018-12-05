@@ -6,7 +6,7 @@ use Domain\Post\Models\Post;
 
 class UpdateViewCountAction
 {
-    public function execute(Post $post): Post
+    public function __invoke(Post $post): Post
     {
         $post->view_count = $post->views()->count();
 
