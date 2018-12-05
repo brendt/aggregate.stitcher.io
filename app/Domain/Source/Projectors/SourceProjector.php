@@ -27,7 +27,7 @@ class SourceProjector implements Projector
         Source::create([
             'user_id' => $user->id,
             'url' => $event->url,
-            'is_active' => false,
+            'is_active' => $event->is_active,
         ]);
     }
 
