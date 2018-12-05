@@ -12,6 +12,7 @@ class SourceSeeder extends Seeder
             'https://assertchris.io/feed' => 'chris@assertchris.io',
             'https://stitcher.io/rss' => 'brent@stitcher.io',
             'https://blog.cleancoder.com/atom' => 'unclebob@cleancoder.com',
+            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
         ];
 
         foreach ($sources as $url => $email) {

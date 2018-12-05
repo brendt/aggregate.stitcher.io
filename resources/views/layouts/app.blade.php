@@ -14,7 +14,7 @@
 
     {{--@include('admin.layouts.partials.favicons')--}}
 
-    {{--<link rel="stylesheet" href="{{ mix('css/app.css') }}">--}}
+    <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     {{--<link rel="stylesheet" href="{{ mix('css/vendor.css') }}" media="none" onload="this.media='all'">--}}
 
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
