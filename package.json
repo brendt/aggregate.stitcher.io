@@ -26,9 +26,10 @@
     "eslint-plugin-vue": "^4.4.0",
     "laravel-mix": "^2.1.0",
     "laravel-mix-purgecss": "^2.0.0",
-    "postcss-cssnext": "^3.0.2",
     "postcss-easy-import": "^3.0.0",
     "prettier": "^1.10.2",
-    "tailwindcss": "^0.7.2"
+    "tailwindcss": "^0.7.2",
+    "vue": "^2.5.17",
+    "vue-data-component": "^1.0.0-alpha.33"
   }
 }

@@ -18,7 +18,7 @@
     {{--<link rel="stylesheet" href="{{ mix('css/vendor.css') }}" media="none" onload="this.media='all'">--}}
 
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
-    {{--<script defer src="{{ mix('js/app.js') }}"></script>--}}
+    <script defer src="{{ mix('js/app.js') }}"></script>
 </head>
 <body>
 
@@ -46,7 +46,9 @@
     @endif
 </header>
 
-{{ $slot ?? null }}
+<div id="app">
+    {{ $slot ?? null }}
+</div>
 
 {{--<script>--}}
 {{--window.locales = {!! json_encode(config('app.available_locales')) !!};--}}

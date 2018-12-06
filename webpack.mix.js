@@ -13,12 +13,7 @@ mix
         postCss: [
             require('postcss-easy-import')(),
             require('tailwindcss')('./tailwind.js'),
-            require('postcss-cssnext')(),
         ],
-
-        // CSSNext already processes our css with Autoprefixer, so we don't
-        // need mix to do it twice.
-        autoprefixer: false,
 
         // Since we don't do any image preprocessing and write url's that are
         // relative to the site root, we don't want the css loader to try to
