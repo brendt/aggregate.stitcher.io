@@ -32,6 +32,8 @@ final class QueryFilter
         [$url] = explode('?', $request->getUri());
 
         $this->url = $url;
+
+        unset($this->query['page']);
     }
 
     public function filter(string $name, Filterable $filterable): string
@@ -57,6 +59,7 @@ final class QueryFilter
                 $query[$key] = "{$key}={$value}";
             }
         }
+
         return $this->url . '?' . implode('&', $query);
     }
 

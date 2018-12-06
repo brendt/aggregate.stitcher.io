@@ -10,9 +10,13 @@ use Illuminate\Http\Request;
 
 class PostsController
 {
-    public function index(PostsQuery $query, Request $request)
-    {
+    public function index(
+        Request $request,
+        PostsQuery $query
+    ) {
         $posts = $query->paginate();
+
+        $posts->appends($request->except('page'));
 
         return view('posts.index', [
             'posts' => $posts,
