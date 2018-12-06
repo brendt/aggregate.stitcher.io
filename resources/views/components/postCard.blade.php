@@ -3,14 +3,12 @@
     /** @var \Domain\User\Models\User $user */
 @endphp
 
-<a
-   href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
-   rel="noopener noreferrer"
+<div
    class="
-        bg-white shadow-lg block p-4 w-full cursor-pointer
+        bg-white shadow-lg block p-4 w-full
         border border-l-2 hover:border-black border-gray-light
         flex
-        text-grey-dark hover:text-black
+        text-grey-dark
     "
 >
     <div class="mr-4 w-32">
@@ -44,9 +42,15 @@
     </div>
 
     <div>
-        {{ $post->title }}
-        <br>
-        <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
+        <a
+            class="hover:text-black"
+            href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
+            rel="noopener noreferrer"
+        >
+            {{ $post->title }}
+            <br>
+            <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
+        </a>
         <br>
         <div class="mt-2">
             @foreach ($post->tags as $tag)
@@ -60,4 +64,4 @@
             {{ $post->view_count }} views
         </small>
     </div>
-</a>
+</div>

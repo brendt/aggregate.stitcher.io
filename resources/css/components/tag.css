@@ -4,6 +4,7 @@
     color: var(--tag-color);
 }
 
+.tag.active,
 .tag:hover {
     background-color: var(--tag-color);
     color: #fff;

@@ -2,10 +2,11 @@
 
 namespace Domain\Post\Models;
 
+use App\Support\Filterable;
 use Domain\Model;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
-class Tag extends Model
+class Tag extends Model implements Filterable
 {
     protected $casts = [
         'keywords' => 'array'
@@ -21,5 +22,10 @@ class Tag extends Model
             'id',
             'post_id'
         );
+    }
+
+    public function getFilterValue(): string
+    {
+        return $this->name;
     }
 }
