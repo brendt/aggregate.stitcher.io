@@ -6,6 +6,7 @@ use Domain\Post\Actions\UpdateViewCountAction;
 use Domain\Post\Events\CreatePostEvent;
 use Domain\Post\Events\UpdatePostEvent;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\PostTag;
 use Domain\Source\Models\Source;
 use Spatie\EventProjector\Projectors\Projector;
 use Spatie\EventProjector\Projectors\ProjectsEvents;
@@ -36,9 +37,16 @@ class PostProjector implements Projector
     {
         $source = Source::whereUuid($event->source_uuid)->firstOrFail();
 
-        Post::create(array_merge([
+        $post = Post::create(array_merge([
             'source_id' => $source->id,
         ], $event->post_data));
+
+        foreach ($event->tag_ids as $tag_id) {
+            PostTag::create([
+                'post_id' => $post->id,
+                'tag_id' => $tag_id,
+            ]);
+        }
     }
 
     public function updatePost(UpdatePostEvent $event): void

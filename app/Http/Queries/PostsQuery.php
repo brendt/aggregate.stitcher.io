@@ -12,6 +12,7 @@ class PostsQuery extends QueryBuilder
     {
         $query = Post::query()
             ->whereActive()
+            ->with('tags')
             ->select('posts.*');
 
         parent::__construct($query, $request);

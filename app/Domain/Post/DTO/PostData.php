@@ -4,6 +4,7 @@ namespace App\Domain\Post\DTO;
 
 use Domain\Post\Decorators\RssEntryDecorator;
 use Domain\Post\Models\Post;
+use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
@@ -25,6 +26,9 @@ class PostData extends DataTransferObject
     /** @var string */
     public $teaser;
 
+    /** @var int[] */
+    public $tag_ids = [];
+
     public function __construct(array $parameters)
     {
         $parameters['uuid'] = $parameters['uuid'] ?? (string) Uuid::uuid4();
@@ -32,16 +36,24 @@ class PostData extends DataTransferObject
         parent::__construct($parameters);
     }
 
+    /**
+     * @param \Zend\Feed\Reader\Entry\AbstractEntry $entry
+     * @param \Illuminate\Support\Collection|\Domain\Post\Models\Tag[] $tags
+     *
+     * @return \App\Domain\Post\DTO\PostData
+     */
     public static function create(
-        AbstractEntry $entry
+        AbstractEntry $entry,
+        Collection $tags
     ): PostData {
-        $decoratedEntry = new RssEntryDecorator($entry);
+        $decoratedEntry = new RssEntryDecorator($entry, $tags);
 
         return new self([
             'url' => $decoratedEntry->url(),
             'title' => $decoratedEntry->title(),
             'date_created' => $decoratedEntry->createdAt(),
             'teaser' => '',
+            'tag_ids' => $decoratedEntry->tags()->toArray()
         ]);
     }
 

@@ -1,0 +1,10 @@
+.tag {
+    cursor: pointer;
+    border-color: var(--tag-color);
+    color: var(--tag-color);
+}
+
+.tag:hover {
+    background-color: var(--tag-color);
+    color: #fff;
+}

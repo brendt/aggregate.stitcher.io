@@ -13,6 +13,7 @@ class SourceSeeder extends Seeder
             'https://stitcher.io/rss' => 'brent@stitcher.io',
             'https://blog.cleancoder.com/atom' => 'unclebob@cleancoder.com',
 //            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
+//            'http://aggregate.stitcher.io.test/rss',
         ];
 
         foreach ($sources as $url => $email) {

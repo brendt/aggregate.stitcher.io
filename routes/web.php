@@ -4,9 +4,18 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SourcesController;
 use App\Http\Controllers\VotesController;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
+
+Route::get('rss', function () {
+    return new Response(
+        file_get_contents(storage_path('mock/rss.xml')),
+        200,
+        ['Content-Type' => 'application/xml']
+    );
+});
 
 Route::get('/logout', [LogoutController::class, 'logout']);
 
