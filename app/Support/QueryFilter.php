@@ -47,13 +47,16 @@ final class QueryFilter
         $query = [];
 
         foreach ($this->query as $key => $value) {
-            if ($value === null) {
+            if ($key === null || $key === '') {
+                continue;
+            }
+
+            if ($value === null || $value === '') {
                 $query[$key] = $key;
             } else {
                 $query[$key] = "{$key}={$value}";
             }
         }
-
         return $this->url . '?' . implode('&', $query);
     }
 
