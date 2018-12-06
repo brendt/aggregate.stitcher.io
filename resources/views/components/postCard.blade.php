@@ -12,32 +12,26 @@
     "
 >
     <div class="mr-4 w-32">
-        {{ $post->vote_count }} votes
+        <span id="vote-count-{{ $post->uuid }}">{{ $post->vote_count }}</span> votes
 
         @if ($user)
-            @if ($user->votedFor($post))
-                <form
-                    action="{{ action([\App\Http\Controllers\VotesController::class, 'delete'], $post) }}"
-                    method="post"
-                >
-                    @csrf
+            <ajax-button
+                :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
+                :data-done="'updateVote'"
+                :class="$user->votedFor($post) ? '' : 'hidden'"
+                :id="'delete-vote-' . $post->uuid"
+            >
+                {{ __('Remove vote') }}
+            </ajax-button>
 
-                    <button type="submit">
-                        {{ __('Remove vote') }}
-                    </button>
-                </form>
-            @else
-                <form
-                    action="{{ action([\App\Http\Controllers\VotesController::class, 'store'], $post) }}"
-                    method="post"
-                >
-                    @csrf
-
-                    <button type="submit">
-                        {{ __('Add vote') }}
-                    </button>
-                </form>
-            @endif
+            <ajax-button
+                :action="action([\App\Http\Controllers\VotesController::class, 'store'], $post)"
+                :data-done="'updateVote'"
+                :class="$user->votedFor($post) ? 'hidden' : ''"
+                :id="'add-vote-' . $post->uuid"
+            >
+                {{ __('Add vote') }}
+            </ajax-button>
         @endif
     </div>
 
