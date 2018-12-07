@@ -1,0 +1,15 @@
+.add-vote-button {
+    display: inline-block;
+}
+
+.voted-for .add-vote-button {
+    display: none;
+}
+
+.delete-vote-button {
+    display: none;
+}
+
+.voted-for .delete-vote-button {
+    display: inline-block;
+}

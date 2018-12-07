@@ -11,24 +11,30 @@
         text-grey-dark
     "
 >
-    <div class="mr-4 w-32">
-        <span id="vote-count-{{ $post->uuid }}">{{ $post->vote_count }}</span> votes
+    <div
+        class="
+            mr-4 w-32
+            @if($user->votedFor($post))
+                voted-for
+            @endif
+        "
+         id="post-vote-{{$post->uuid}}"
+    >
+        <span class="vote-count">{{ $post->vote_count }}</span> votes
 
         @if ($user)
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
-                :data-done="'updateVote'"
-                :class="$user->votedFor($post) ? '' : 'hidden'"
-                :id="'delete-vote-' . $post->uuid"
+                data-done="updateVote"
+                class="delete-vote-button"
             >
                 {{ __('Remove vote') }}
             </ajax-button>
 
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'store'], $post)"
-                :data-done="'updateVote'"
-                :class="$user->votedFor($post) ? 'hidden' : ''"
-                :id="'add-vote-' . $post->uuid"
+                data-done="updateVote"
+                class="add-vote-button"
             >
                 {{ __('Add vote') }}
             </ajax-button>
