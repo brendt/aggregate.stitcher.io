@@ -16,7 +16,10 @@ class UpdatePostEvent extends DataTransferObject implements ShouldBeStored
     /** @var array */
     public $post_data;
 
-    public function __construct(string $post_uuid, array $post_data)
+    /** @var int[] */
+    public $tag_ids;
+
+    public function __construct(string $post_uuid, array $post_data, array $tag_ids)
     {
         $post_data['date_created'] = $post_data['date_created'] instanceof Carbon
             ? $post_data['date_created']->toDateTimeString()
@@ -25,14 +28,16 @@ class UpdatePostEvent extends DataTransferObject implements ShouldBeStored
         parent::__construct([
             'post_uuid' => $post_uuid,
             'post_data' => $post_data,
+            'tag_ids' => $tag_ids,
         ]);
     }
 
-    public static function create(Post $post, PostData $postData): UpdatePostEvent
+    public static function new(Post $post, PostData $postData): UpdatePostEvent
     {
         return new self(
             $post->uuid,
-            $postData->all()
+            $postData->fillable(),
+            $postData->tag_ids
         );
     }
 }

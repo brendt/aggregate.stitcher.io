@@ -51,12 +51,14 @@
             <br>
             <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
         </a>
-        <br>
-        <div class="mt-2">
-            @foreach ($post->tags as $tag)
-                <tag :tag="$tag"></tag>
-            @endforeach
-        </div>
+
+        @if($post->tags->isNotEmpty())
+            <div class="mt-2">
+                @foreach ($post->tags as $tag)
+                    <tag :tag="$tag"></tag>
+                @endforeach
+            </div>
+        @endif
     </div>
 
     <div class="ml-auto">

@@ -26,6 +26,19 @@ class TagSeeder extends Seeder
                 ],
                 'color' => '#006eb6',
             ],
+            'design' => [
+                'keywords' => [
+                    'design'
+                ],
+                'color' => '#68CC14',
+            ],
+            'writing' => [
+                'keywords' => [
+                    'content', 'blog',
+                ],
+                'color' => '#CC146B',
+            ]
+            // #19E0FF
         ];
 
         foreach ($tags as $name => $data) {

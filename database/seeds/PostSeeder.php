@@ -37,7 +37,7 @@ class PostSeeder extends Seeder
             'teaser' => '',
         ]);
 
-        event(CreatePostEvent::create($source, $postData));
+        event(CreatePostEvent::new($source, $postData));
 
         $post = Post::whereUuid($postData->uuid)->firstOrFail();
 

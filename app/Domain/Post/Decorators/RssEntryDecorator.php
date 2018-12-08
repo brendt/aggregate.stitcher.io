@@ -51,7 +51,7 @@ class RssEntryDecorator extends AbstractEntry
 
     public function tags(): Collection
     {
-        $content = strip_tags($this->getContent());
+        $content = $this->getContent();
 
         $foundTags = [];
 
@@ -67,7 +67,9 @@ class RssEntryDecorator extends AbstractEntry
             }
         }
 
-        return collect($foundTags)
+        $threshold = 3;
+
+        $tagsByVotes = collect($foundTags)
             ->map(function (array $keywords) {
                 return array_reduce($keywords, function (?int $sum, int $current) {
                     $sum = $sum ?? 0;
@@ -75,12 +77,14 @@ class RssEntryDecorator extends AbstractEntry
                     return $sum + $current;
                 });
             })
-            ->filter(function (int $count) {
-                return $count > 0;
+            ->filter(function (int $count) use ($threshold) {
+                return $count >= $threshold;
             })
             ->sortByDesc(function (int $count) {
                 return $count;
-            })
+            });
+
+        return $tagsByVotes
             ->take(2)
             ->map(function (int $count, int $id) {
                 return $id;

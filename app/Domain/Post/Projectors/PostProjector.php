@@ -60,5 +60,21 @@ class PostProjector implements Projector
         $post->fill($data);
 
         $post->save();
+
+        foreach ($event->tag_ids as $tagId) {
+            if ($post->getTagById($tagId)) {
+                continue;
+            }
+
+            PostTag::create([
+                'post_id' => $post->id,
+                'tag_id' => $tagId,
+            ]);
+        }
+
+        PostTag::query()
+            ->wherePost($post)
+            ->whereNotIn('tag_id', $event->tag_ids)
+            ->delete();
     }
 }

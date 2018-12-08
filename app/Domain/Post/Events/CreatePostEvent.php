@@ -32,11 +32,11 @@ class CreatePostEvent extends DataTransferObject implements ShouldBeStored
         ]);
     }
 
-    public static function create(Source $source, PostData $postData): CreatePostEvent
+    public static function new(Source $source, PostData $postData): CreatePostEvent
     {
         return new self(
             $source->uuid,
-            $postData->except('tag_ids')->toArray(),
+            $postData->fillable(),
             $postData->tag_ids
         );
     }

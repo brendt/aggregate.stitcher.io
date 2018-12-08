@@ -37,7 +37,7 @@ class PostData extends DataTransferObject
     }
 
     /**
-     * @param \Zend\Feed\Reader\Entry\AbstractEntry $entry
+     * @param \Zend\Feed\Reader\Entry\AbstractEntry|\Zend\Feed\Reader\Entry\EntryInterface $entry
      * @param \Illuminate\Support\Collection|\Domain\Post\Models\Tag[] $tags
      *
      * @return \App\Domain\Post\DTO\PostData
@@ -57,9 +57,24 @@ class PostData extends DataTransferObject
         ]);
     }
 
+    public function fillable(): array
+    {
+        return $this->only(
+            'uuid',
+            'url',
+            'title',
+            'date_created',
+            'teaser'
+        )->toArray();
+    }
+
     public function hasChanges(Post $post): bool
     {
         return $post->title !== $this->title
-            || $post->teaser !== $this->teaser;
+            || $post->teaser !== $this->teaser
+            || (
+                collect($this->tag_ids)->sort()->values()->toArray()
+                    !== $post->tags->pluck('id')->toArray()
+            );
     }
 }

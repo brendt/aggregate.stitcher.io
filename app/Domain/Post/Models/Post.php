@@ -67,4 +67,17 @@ class Post extends Model
             ->join('sources', 'sources.id', '=', 'posts.source_id')
             ->where('sources.is_active', true);
     }
+
+    public function getTagById(int $tagId): ?Tag
+    {
+        foreach ($this->tags as $tag) {
+            if ($tag->id !== $tagId) {
+                continue;
+            }
+
+            return $tag;
+        }
+
+        return null;
+    }
 }

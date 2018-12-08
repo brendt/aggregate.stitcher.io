@@ -30,4 +30,17 @@ class Source extends Model
     {
         return $builder->where('is_active', true);
     }
+
+    public function getPostByUrl(string $url): ?Post
+    {
+        foreach ($this->posts as $post) {
+            if ($post->url !== $url) {
+                continue;
+            }
+
+            return $post;
+        }
+
+        return null;
+    }
 }
