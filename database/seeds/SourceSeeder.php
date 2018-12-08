@@ -14,8 +14,8 @@ class SourceSeeder extends Seeder
             'https://blog.cleancoder.com/atom' => 'unclebob@cleancoder.com',
             'https://www.stilldrinking.org/rss/feed.xml' => 'info@stilldrinking.org',
             'https://codingwriter.com/feed/' => 'info@codingwriter.com',
+            'https://murze.be/feed/originals' => 'freek@spatie.be',
 //            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
-//            'http://aggregate.stitcher.io.test/rss',
         ];
 
         foreach ($sources as $url => $email) {
