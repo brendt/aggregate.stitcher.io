@@ -14,7 +14,7 @@
     <div
         class="
             mr-4 w-32
-            @if($user->votedFor($post))
+            @if($user && $user->votedFor($post))
                 voted-for
             @endif
         "

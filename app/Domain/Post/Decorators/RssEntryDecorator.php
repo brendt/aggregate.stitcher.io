@@ -61,7 +61,7 @@ class RssEntryDecorator extends AbstractEntry
             foreach ($tag->keywords as $keyword) {
                 $matches = [];
 
-                preg_match_all("/{$keyword}[\s\.\",:-–—]/i", $content, $matches);
+                preg_match_all("/[^a-z]{$keyword}[^a-z]/i", $content, $matches);
 
                 $foundTags[$tag->id][$keyword] = count($matches[0]);
             }

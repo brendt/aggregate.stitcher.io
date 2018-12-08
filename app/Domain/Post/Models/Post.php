@@ -63,6 +63,7 @@ class Post extends Model
     public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder
+            ->distinct()
             ->join('sources', 'sources.id', '=', 'posts.source_id')
             ->where('sources.is_active', true);
     }

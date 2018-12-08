@@ -10,24 +10,24 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class UpdateSourceJob implements ShouldQueue
+class SyncSourceJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /** @var \Domain\Source\Actions\SyncSourceAction */
-    protected $updateSource;
+    protected $updateSourceAction;
 
     /** @var \Domain\Source\Models\Source */
     protected $source;
 
-    public function __construct(SyncSourceAction $updateSource, Source $source)
+    public function __construct(SyncSourceAction $updateSourceAction, Source $source)
     {
-        $this->updateSource = $updateSource;
+        $this->updateSourceAction = $updateSourceAction;
         $this->source = $source;
     }
 
     public function handle()
     {
-        $this->updateSource->__invoke($this->source);
+        $this->updateSourceAction->__invoke($this->source);
     }
 }

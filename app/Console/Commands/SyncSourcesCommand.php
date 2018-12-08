@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Console\Jobs\UpdateSourceJob;
+use App\Console\Jobs\SyncSourceJob;
 use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\Models\Source;
 use Illuminate\Console\Command;
@@ -10,15 +10,15 @@ use Illuminate\Console\Command;
 class SyncSourcesCommand extends Command
 {
     /** @var \Domain\Source\Actions\SyncSourceAction */
-    protected $updateSource;
+    protected $syncSourceAction;
 
     protected $signature = 'sync:sources';
 
     protected $description = 'Sync sources';
 
-    public function __construct(SyncSourceAction $updateSource)
+    public function __construct(SyncSourceAction $syncSourceAction)
     {
-        $this->updateSource = $updateSource;
+        $this->syncSourceAction = $syncSourceAction;
 
         parent::__construct();
     }
@@ -28,8 +28,8 @@ class SyncSourcesCommand extends Command
         $sources = Source::whereActive()->get();
 
         foreach ($sources as $source) {
-            dispatch(new UpdateSourceJob(
-                $this->updateSource,
+            dispatch(new SyncSourceJob(
+                $this->syncSourceAction,
                 $source
             ));
 
