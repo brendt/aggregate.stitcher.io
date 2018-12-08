@@ -12,6 +12,8 @@ class SourceSeeder extends Seeder
             'https://assertchris.io/feed' => 'chris@assertchris.io',
             'https://stitcher.io/rss' => 'brent@stitcher.io',
             'https://blog.cleancoder.com/atom' => 'unclebob@cleancoder.com',
+            'https://www.stilldrinking.org/rss/feed.xml' => 'info@stilldrinking.org',
+            'https://codingwriter.com/feed/' => 'info@codingwriter.com',
 //            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
 //            'http://aggregate.stitcher.io.test/rss',
         ];

@@ -1,0 +1,58 @@
+tags:
+  php:
+    color: '#8791c2'
+    keywords:
+      - php
+      - laravel
+      - symfony
+      - yii
+      - composer
+
+  javascript:
+    color: '#f3dc20'
+    keywords:
+      - javascript
+      - vuejs
+      - vue
+      - reactjs
+      - npm
+      - node
+      - nodejs
+
+  css:
+    color: '#006eb6'
+    keywords:
+      - css
+      - tailwind
+      - sccs
+      - postcss
+      - sass
+
+  design:
+    color: '#68CC14'
+    keywords:
+      - design
+
+  writing:
+    color: '#19E0FF'
+    keywords:
+      - content
+      - blog
+
+  ruby:
+    color: '#ac1401'
+    keywords:
+      - ruby
+      - on rails
+      - gems
+      - rubygems
+
+  devops:
+    color: '#100dbb'
+    keywords:
+      - CI
+      - continuous integration
+      - jenkins
+      - linux
+      - ubuntu
+      - server

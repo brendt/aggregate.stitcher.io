@@ -26,6 +26,7 @@
         "spatie/laravel-query-builder": "^1.12",
         "spatie/laravel-tail": "^3.0",
         "spatie/laravel-view-models": "^1.1",
+        "symfony/yaml": "^4.2",
         "zendframework/zend-feed": "^2.10",
         "zendframework/zend-http": "^2.8"
     },
