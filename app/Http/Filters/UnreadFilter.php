@@ -2,11 +2,20 @@
 
 namespace App\Http\Filters;
 
+use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Spatie\QueryBuilder\Filters\Filter;
 
 final class UnreadFilter implements Filter
 {
+    /** @var \Domain\User\Models\User */
+    protected $user;
+
+    public function __construct(?User $user)
+    {
+        $this->user = $user;
+    }
+
     /**
      * @param \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
      * @param $value
@@ -16,6 +25,10 @@ final class UnreadFilter implements Filter
      */
     public function __invoke(Builder $query, $value, string $property): Builder
     {
-        return $query->whereUnread();
+        if ($this->user === null) {
+            return $query;
+        }
+
+        return $query->whereUnread($this->user);
     }
 }

@@ -5,6 +5,7 @@ namespace Domain\Post\Models;
 use App\Support\HasUuid;
 use Domain\Model;
 use Domain\Source\Models\Source;
+use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -68,9 +69,11 @@ class Post extends Model
             ->where('sources.is_active', true);
     }
 
-    public function scopeWhereUnread(Builder $builder): Builder
+    public function scopeWhereUnread(Builder $builder, User $user): Builder
     {
-        return $builder->whereDoesntHave('views');
+        return $builder->whereDoesntHave('views', function (Builder $builder) use ($user) {
+            return $builder->where('user_id', $user->id);
+        });
     }
 
     public function getTagById(int $tagId): ?Tag

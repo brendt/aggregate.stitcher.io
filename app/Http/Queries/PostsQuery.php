@@ -18,7 +18,7 @@ abstract class PostsQuery extends QueryBuilder
             ->allowedSorts(['date_created'])
             ->allowedFilters([
                 Filter::exact('tags.name'),
-                Filter::custom('unread', new UnreadFilter())
+                Filter::custom('unread', new UnreadFilter($request->user()))
             ])
             ->defaultSort('-date_created');
     }
