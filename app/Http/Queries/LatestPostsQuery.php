@@ -5,10 +5,8 @@ namespace App\Http\Queries;
 use Domain\Post\Models\Post;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\Filter;
-use Spatie\QueryBuilder\QueryBuilder;
 
-class LatestPostsQuery extends QueryBuilder
+class LatestPostsQuery extends PostsQuery
 {
     public function __construct(Request $request)
     {
@@ -25,12 +23,5 @@ class LatestPostsQuery extends QueryBuilder
             ->with('tags');
 
         parent::__construct($query, $request);
-
-        $this
-            ->allowedSorts(['date_created'])
-            ->allowedFilters([
-                Filter::exact('tags.name'),
-            ])
-            ->defaultSort('-date_created');
     }
 }

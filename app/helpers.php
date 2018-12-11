@@ -21,14 +21,14 @@ function current_user(): ?User
     return Auth::user();
 }
 
-function filter(string $name, Filterable $filterable): string
+function filter(string $name, Filterable $filterable = null): string
 {
     $queryFilter = app(QueryFilter::class);
 
     return $queryFilter->filter($name, $filterable);
 }
 
-function is_filter_active(string $name, Filterable $filterable): bool
+function is_filter_active(string $name, Filterable $filterable = null): bool
 {
     $queryFilter = app(QueryFilter::class);
 

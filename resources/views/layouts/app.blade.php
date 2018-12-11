@@ -24,7 +24,11 @@
 
 <header>
     <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
-        {{ __('Read') }}
+        {{ __('All') }}
+    </a>
+
+    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
+        {{ __('Latest') }}
     </a>
 
     @if(current_user())

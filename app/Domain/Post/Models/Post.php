@@ -68,6 +68,11 @@ class Post extends Model
             ->where('sources.is_active', true);
     }
 
+    public function scopeWhereUnread(Builder $builder): Builder
+    {
+        return $builder->whereDoesntHave('views');
+    }
+
     public function getTagById(int $tagId): ?Tag
     {
         foreach ($this->tags as $tag) {

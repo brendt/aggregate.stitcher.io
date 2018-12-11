@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Domain\Post\Events\AddViewEvent;
 use App\Http\Queries\LatestPostsQuery;
-use App\Http\Queries\PostsQuery;
+use App\Http\Queries\AllPostsQuery;
 use Domain\Post\Models\Post;
 use Illuminate\Http\Request;
 
@@ -12,7 +12,7 @@ class PostsController
 {
     public function index(
         Request $request,
-        PostsQuery $query
+        AllPostsQuery $query
     ) {
         $posts = $query->paginate();
 

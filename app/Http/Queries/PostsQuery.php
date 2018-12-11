@@ -2,29 +2,23 @@
 
 namespace App\Http\Queries;
 
-use Domain\Post\Models\Post;
+use App\Http\Filters\UnreadFilter;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 
-class PostsQuery extends QueryBuilder
+abstract class PostsQuery extends QueryBuilder
 {
-    public function __construct(Request $request)
+    public function __construct(Builder $query, Request $request)
     {
-        $query = Post::query()
-            ->whereActive()
-            ->with('tags')
-            ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
-            ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
-            ->distinct()
-            ->select('posts.*');
-
         parent::__construct($query, $request);
 
         $this
             ->allowedSorts(['date_created'])
             ->allowedFilters([
                 Filter::exact('tags.name'),
+                Filter::custom('unread', new UnreadFilter())
             ])
             ->defaultSort('-date_created');
     }

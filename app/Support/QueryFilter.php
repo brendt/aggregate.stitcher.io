@@ -36,14 +36,16 @@ final class QueryFilter
         unset($this->query['page']);
     }
 
-    public function filter(string $name, Filterable $filterable): string
+    public function filter(string $name, ?Filterable $filterable = null): string
     {
         $name = $this->resolveName($name);
 
         if ($this->isActive($name, $filterable)) {
             unset($this->query[$name]);
         } else {
-            $this->query[$name] = $filterable->getFilterValue();
+            $this->query[$name] = $filterable !== null
+                ? $filterable->getFilterValue()
+                : '';
         }
 
         $query = [];
@@ -63,9 +65,13 @@ final class QueryFilter
         return $this->url . '?' . implode('&', $query);
     }
 
-    public function isActive(string $name, Filterable $filterable): bool
+    public function isActive(string $name, ?Filterable $filterable = null): bool
     {
         $name = $this->resolveName($name);
+
+        if ($filterable === null) {
+            return isset($this->query[$name]);
+        }
 
         return ($this->query[$name] ?? null) === $filterable->getFilterValue();
     }
