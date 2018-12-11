@@ -43,14 +43,15 @@
 
     <div>
         <a
-            class="hover:text-black"
+            class="post-link"
             href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
             rel="noopener noreferrer"
         >
             {{ $post->title }}
-            <br>
-            <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
         </a>
+
+        <br>
+        <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
 
         @if($post->tags->isNotEmpty())
             <div class="mt-2">

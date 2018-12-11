@@ -20,6 +20,7 @@ Route::get('rss', function () {
 Route::get('/logout', [LogoutController::class, 'logout']);
 
 Route::get('/', [PostsController::class, 'index']);
+Route::get('/latest', [PostsController::class, 'latest']);
 
 Route::prefix('profile')->group(function () {
     Route::get('sources', [SourcesController::class, 'edit']);

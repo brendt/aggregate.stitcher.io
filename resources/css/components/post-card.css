@@ -1,0 +1,11 @@
+.post-link {
+    @apply .text-blue;
+}
+
+.post-link:visited {
+    @apply .text-grey-darker;
+}
+
+.post-link:hover {
+    @apply .text-black;
+}

@@ -9,9 +9,9 @@ class TagSeeder extends Seeder
     /** @var \App\Domain\Post\Actions\SyncTagAction */
     private $syncTagAction;
 
-    public function __construct(SyncTagAction $syncTagAction)
+    public function __construct()
     {
-        $this->syncTagAction = $syncTagAction;
+        $this->syncTagAction = app(SyncTagAction::class);
     }
 
     public function run()
