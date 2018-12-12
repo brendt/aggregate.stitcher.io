@@ -15,7 +15,8 @@ class SourceSeeder extends Seeder
             'https://www.stilldrinking.org/rss/feed.xml' => 'info@stilldrinking.org',
             'https://codingwriter.com/feed/' => 'info@codingwriter.com',
             'https://murze.be/feed/originals' => 'freek@spatie.be',
-//            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
+            'https://gomakethings.com/feed/index.xml' => 'info@gomakethings.com',
+            'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
         ];
 
         foreach ($sources as $url => $email) {

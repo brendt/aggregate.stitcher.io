@@ -51,7 +51,7 @@ class RssEntryDecorator extends AbstractEntry
 
     public function tags(): Collection
     {
-        $content = $this->getContent();
+        $searchContent = $this->title() . ' ' . $this->getContent();
 
         $foundTags = [];
 
@@ -61,13 +61,14 @@ class RssEntryDecorator extends AbstractEntry
             foreach ($tag->keywords as $keyword) {
                 $matches = [];
 
-                preg_match_all("/[^a-z]{$keyword}[^a-z]/i", $content, $matches);
+                preg_match_all("/[^a-z]{$keyword}[^a-z]/i", $searchContent, $matches);
 
                 $foundTags[$tag->id][$keyword] = count($matches[0]);
+
             }
         }
 
-        $threshold = 3;
+        $threshold = 2;
 
         $tagsByVotes = collect($foundTags)
             ->map(function (array $keywords) {
@@ -93,12 +94,17 @@ class RssEntryDecorator extends AbstractEntry
 
     private function getContent(): string
     {
-        if ($this->entry->getElementsByTagName('summary')->length > 0) {
-            return $this->entry->getElementsByTagName('summary')->item(0)->lastChild->textContent;
-        }
+        $contentTags = [
+            'content',
+            'encoded',
+            'description',
+            'summary',
+        ];
 
-        if ($this->entry->getElementsByTagName('description')->length > 0) {
-            return $this->entry->getElementsByTagName('description')->item(0)->lastChild->textContent;
+        foreach ($contentTags as $tagName) {
+            if ($this->entry->getElementsByTagName($tagName)->length > 0) {
+                return $this->entry->getElementsByTagName($tagName)->item(0)->textContent;
+            }
         }
 
         return '';
