@@ -12,6 +12,8 @@ abstract class PostsQuery extends QueryBuilder
 {
     public function __construct(Builder $query, Request $request)
     {
+        $query->with('tags', 'views', 'source');
+
         parent::__construct($query, $request);
 
         $this

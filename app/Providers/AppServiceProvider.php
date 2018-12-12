@@ -12,7 +12,10 @@ class AppServiceProvider extends ServiceProvider
         /** @var \Spatie\BladeX\BladeX $bladeX */
         $bladeX = $this->app->get(BladeX::class);
 
-        $bladeX->component('components.*');
+        $bladeX->component([
+            'components.*',
+            'components.form.*',
+        ]);
     }
 
     public function register()

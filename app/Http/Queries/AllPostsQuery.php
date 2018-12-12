@@ -11,7 +11,6 @@ class AllPostsQuery extends PostsQuery
     {
         $query = Post::query()
             ->whereActive()
-            ->with('tags')
             ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
             ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
             ->distinct()

@@ -4,6 +4,7 @@ namespace Domain\User\Models;
 
 use App\Support\HasUuid;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -13,6 +14,11 @@ use Illuminate\Notifications\Notifiable;
 class User extends BaseUser
 {
     use Notifiable, HasUuid;
+
+    protected $with = [
+        'views',
+        'votes',
+    ];
 
     protected $guarded = [];
 
@@ -38,13 +44,31 @@ class User extends BaseUser
         return $this->hasMany(Vote::class);
     }
 
+    public function views(): HasMany
+    {
+        return $this->hasMany(View::class);
+    }
+
     public function votedFor(Post $post): bool
     {
-        return $this->votes
-            ->filter(function (Vote $vote) use ($post) {
-                return $vote->post_id === $post->id;
-            })
-            ->isNotEmpty();
+        foreach ($this->votes as $vote) {
+            if ($vote->post_id === $post->id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasViewed(Post $post): bool
+    {
+        foreach ($this->views as $view) {
+            if ($view->post_id === $post->id) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public function getPrimarySource(): ?Source

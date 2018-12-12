@@ -5,32 +5,30 @@
 @component('layouts.app', [
     'title' => __('Sources'),
 ])
-    <form
-        action="{{ action([\App\Http\Controllers\SourcesController::class, 'update']) }}"
-        method="post"
+    <form-component
+        :action="action([\App\Http\Controllers\SourcesController::class, 'update'])"
+        class="w-2/5"
     >
-        @csrf
+        <text-field
+            name="url"
+            :label="__('URL')"
+            :initial-value="$url"
+        ></text-field>
 
-        <label for="url">{{ __('URL') }}</label>
-        <input id="url" type="text" name="url" value="{{ $source->url }}">
-
-        @if ($errors->has('url'))
-            <strong>{{ $errors->first('url') }}</strong>
-        @endif
-
-        <button>
+        <submit-button>
             {{ __('Save') }}
-        </button>
-    </form>
+        </submit-button>
+    </form-component>
 
-    <form
-        action="{{ action([\App\Http\Controllers\SourcesController::class, 'delete']) }}"
-        method="post"
+    <form-component
+        :action="action([\App\Http\Controllers\SourcesController::class, 'delete'])"
+        class="w-2/5 mt-2"
     >
-        @csrf
-
-        <button>
+        <submit-button class="
+            bg-red text-white
+            hover:bg-white hover:text-red
+        ">
             {{ __('Delete source') }}
-        </button>
-    </form>
+        </submit-button>
+    </form-component>
 @endcomponent

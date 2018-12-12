@@ -9,6 +9,11 @@ tags:
       - composer
       - phpstorm
 
+  html:
+    color: '#ed6e2d'
+    keywords:
+      - language-html
+
   javascript:
     color: '#f3dc20'
     keywords:
@@ -20,6 +25,7 @@ tags:
       - node
       - nodejs
       - vanilla js
+      - language-js
 
   css:
     color: '#006eb6'
@@ -29,6 +35,7 @@ tags:
       - sccs
       - postcss
       - sass
+      - language-css
 
   design:
     color: '#68CC14'

@@ -17,6 +17,12 @@ class SourceSeeder extends Seeder
             'https://murze.be/feed/originals' => 'freek@spatie.be',
             'https://gomakethings.com/feed/index.xml' => 'info@gomakethings.com',
             'https://sebastiandedeyne.com/feed' => 'sebastian@spatie.be',
+            'https://bitsofco.de/rss/' => 'info@bitsofco.de',
+            'https://flaviocopes.com/index.xml' => 'info@flaviocopes.com',
+            'http://shortdiv.com/index.xml' => 'info@shortdiv.com',
+            'https://rachelandrew.co.uk/feed' => 'info@rachelandrew.co.uk',
+            'https://adactio.com/rss/' => 'info@adactio.com',
+
         ];
 
         foreach ($sources as $url => $email) {

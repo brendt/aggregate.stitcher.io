@@ -2,7 +2,7 @@
     @apply .text-blue;
 }
 
-.post-link:visited {
+.post-link.viewed {
     @apply .text-grey-darker;
 }
 
