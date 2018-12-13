@@ -10,7 +10,7 @@
         p-2 pt-1 pb-1
         border
         text-xs
-        @if(is_filter_active('tags.name', $tag))
+        @if(filter_active('tags.name', $tag))
             active
         @endif
     "

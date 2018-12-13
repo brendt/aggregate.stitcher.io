@@ -28,9 +28,16 @@ function filter(string $name, Filterable $filterable = null): string
     return $queryFilter->filter($name, $filterable);
 }
 
-function is_filter_active(string $name, Filterable $filterable = null): bool
+function filter_active(string $name, Filterable $filterable = null): bool
 {
     $queryFilter = app(QueryFilter::class);
 
     return $queryFilter->isActive($name, $filterable);
+}
+
+function clear_filter(string $name): string
+{
+    $queryFilter = app(QueryFilter::class);
+
+    return $queryFilter->clear($name);
 }

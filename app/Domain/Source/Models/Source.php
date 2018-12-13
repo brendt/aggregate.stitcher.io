@@ -2,13 +2,14 @@
 
 namespace Domain\Source\Models;
 
+use App\Support\Filterable;
 use App\Support\HasUuid;
 use Domain\Model;
 use Domain\Post\Models\Post;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Source extends Model
+class Source extends Model implements Filterable
 {
     use HasUuid;
 
@@ -16,14 +17,20 @@ class Source extends Model
         'is_active' => 'boolean',
     ];
 
+    public static function boot()
+    {
+        self::creating(function (Source $source) {
+            if ($source->website === null) {
+                $source->website = parse_url($source->url, PHP_URL_HOST);
+            }
+        });
+
+        parent::boot();
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
-    }
-
-    public function getWebsiteAttribute(): string
-    {
-        return parse_url($this->url, PHP_URL_HOST);
     }
 
     public function scopeWhereActive(Builder $builder): Builder
@@ -42,5 +49,10 @@ class Source extends Model
         }
 
         return null;
+    }
+
+    public function getFilterValue(): string
+    {
+        return $this->website;
     }
 }

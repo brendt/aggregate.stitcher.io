@@ -55,6 +55,11 @@ class RssEntryDecorator extends AbstractEntry
         return $this->decoratedEntry->getLink();
     }
 
+    public function categories(): array
+    {
+dd($this->simpleDom);
+    }
+
     public function tags(): Collection
     {
         $searchContent = $this->title() . ' ' . $this->getContent();

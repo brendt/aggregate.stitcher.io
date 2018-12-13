@@ -10,6 +10,23 @@ tags:
       - phpstorm
       - language-php
 
+  frontend:
+    color: '#CCA3C7'
+    keywords:
+      - browser
+      - push notifications
+      - offline storage
+      - web worker
+      - pwa
+      - bandwidth
+      - progressive web app
+      - progressive web application
+      - devtools
+      - dev tools
+      - frontend
+      - service worker
+      - service workers
+
   html:
     color: '#ed6e2d'
     keywords:

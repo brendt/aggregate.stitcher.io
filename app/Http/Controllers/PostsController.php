@@ -6,6 +6,7 @@ use App\Domain\Post\Events\AddViewEvent;
 use App\Http\Queries\LatestPostsQuery;
 use App\Http\Queries\AllPostsQuery;
 use Domain\Post\Models\Post;
+use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
 
 class PostsController
@@ -14,11 +15,14 @@ class PostsController
         Request $request,
         AllPostsQuery $query
     ) {
+        $sources = Source::whereActive()->get();
+
         $posts = $query->paginate();
 
         $posts->appends($request->except('page'));
 
         return view('posts.index', [
+            'sources' => $sources,
             'posts' => $posts,
             'user' => $request->user(),
         ]);
@@ -28,11 +32,14 @@ class PostsController
         Request $request,
         LatestPostsQuery $query
     ) {
+        $sources = Source::whereActive()->get();
+
         $posts = $query->paginate();
 
         $posts->appends($request->except('page'));
 
         return view('posts.index', [
+            'sources' => $sources,
             'posts' => $posts,
             'user' => $request->user(),
             'title' => __('Latest'),

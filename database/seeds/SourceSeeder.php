@@ -22,6 +22,7 @@ class SourceSeeder extends Seeder
             'http://shortdiv.com/index.xml' => 'info@shortdiv.com',
             'https://rachelandrew.co.uk/feed' => 'info@rachelandrew.co.uk',
             'https://kinsta.com/feed/' => 'info@kinsta.com',
+            'https://ohdear.app/feed' => 'info@ohdear.app',
         ];
 
         foreach ($sources as $url => $email) {
