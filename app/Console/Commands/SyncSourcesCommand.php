@@ -34,7 +34,13 @@ class SyncSourcesCommand extends Command
         }
 
         if ($this->option('filter-url')) {
-            $this->syncSourceAction->setFilterUrl($this->option('filter-url'));
+            $filterUrl = $this->option('filter-url');
+
+            $this->syncSourceAction->setFilterUrl($filterUrl);
+
+            $sources = $sources->filter(function (Source $source) use ($filterUrl) {
+                return $source->website === parse_url($filterUrl, PHP_URL_HOST);
+            });
         }
 
         foreach ($sources as $source) {
