@@ -114,6 +114,10 @@ class RssEntryDecorator extends AbstractEntry
                 continue;
             }
 
+            if (!$content) {
+                $content = $this->simpleDom->{$contentTag} ?? null;
+            }
+
             if (! $content) {
                 continue;
             }

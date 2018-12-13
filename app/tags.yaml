@@ -46,8 +46,11 @@ tags:
   writing:
     color: '#19E0FF'
     keywords:
-      - content
-      - blog
+      - copywrite
+      - copywriting
+      - website
+      - writing
+      - grammar
 
   ruby:
     color: '#ac1401'
@@ -67,3 +70,12 @@ tags:
       - linux
       - ubuntu
       - server
+
+  programming:
+    color: '#063840'
+    keywords:
+      - discipline
+      - agile
+      - software
+      - programmer
+      - programmers
