@@ -43,7 +43,7 @@
 
     <div>
         <a
-            class="post-link {{ $user->hasViewed($post) ? 'viewed' : '' }}"
+            class="post-link {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
             href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
             rel="noopener noreferrer"
         >

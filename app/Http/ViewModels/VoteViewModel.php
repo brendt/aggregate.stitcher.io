@@ -16,7 +16,7 @@ class VoteViewModel extends ViewModel
 
     public function __construct(User $user, Post $post)
     {
-        $this->user = $user;
+        $this->user = $user->refresh();
         $this->post = $post->refresh();
     }
 
