@@ -3,6 +3,7 @@
 namespace Domain\Post\Decorators;
 
 use Carbon\Carbon;
+use ErrorException;
 use Illuminate\Support\Collection;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
@@ -12,7 +13,10 @@ class RssEntryDecorator extends AbstractEntry
     private $decoratedEntry;
 
     /** @var \Illuminate\Support\Collection|\Domain\Post\Models\Tag[] */
-    protected $tags;
+    private $tags;
+
+    /** @var \SimpleXMLElement */
+    private $simpleDom;
 
     public function __construct(AbstractEntry $entry, Collection $tags)
     {
@@ -20,6 +24,8 @@ class RssEntryDecorator extends AbstractEntry
         $this->tags = $tags;
 
         parent::__construct($entry->entry, $entry->entryKey, $entry->data['type']);
+
+        $this->simpleDom = simplexml_import_dom($this->entry);
     }
 
     public function createdAt(): ?Carbon
@@ -61,7 +67,7 @@ class RssEntryDecorator extends AbstractEntry
             foreach ($tag->keywords as $keyword) {
                 $matches = [];
 
-                preg_match_all("/[^a-z]{$keyword}[^a-z]/i", $searchContent, $matches);
+                preg_match_all("/\b({$keyword})\b/i", $searchContent, $matches);
 
                 $foundTags[$tag->id][$keyword] = count($matches[0]);
 
@@ -92,19 +98,27 @@ class RssEntryDecorator extends AbstractEntry
             });
     }
 
-    private function getContent(): string
+    public function getContent(): string
     {
         $contentTags = [
+            'content:encoded',
             'content',
-            'encoded',
             'description',
             'summary',
         ];
 
-        foreach ($contentTags as $tagName) {
-            if ($this->entry->getElementsByTagName($tagName)->length > 0) {
-                return $this->entry->getElementsByTagName($tagName)->item(0)->textContent;
+        foreach ($contentTags as $contentTag) {
+            try {
+                $content = $this->simpleDom->xpath($contentTag);
+            } catch (ErrorException $exception) {
+                continue;
             }
+
+            if (! $content) {
+                continue;
+            }
+
+            return (string) $content[0];
         }
 
         return '';
