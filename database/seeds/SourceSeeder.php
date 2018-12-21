@@ -23,6 +23,7 @@ class SourceSeeder extends Seeder
             'https://rachelandrew.co.uk/feed' => 'info@rachelandrew.co.uk',
             'https://kinsta.com/feed/' => 'info@kinsta.com',
             'https://ohdear.app/feed' => 'info@ohdear.app',
+            'https://jerguslejko.com/feed.xml' => 'info@jerguslejko.com',
         ];
 
         foreach ($sources as $url => $email) {

@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Support\QueryFilter;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\BladeX\BladeX;
 
@@ -18,6 +19,8 @@ class AppServiceProvider extends ServiceProvider
             'components.*',
             'components.form.*',
         ]);
+
+        LengthAwarePaginator::defaultView('layouts.pagination');
     }
 
     public function register()

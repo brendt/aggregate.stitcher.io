@@ -26,6 +26,7 @@ tags:
       - frontend
       - service worker
       - service workers
+      - progressive enhancement
 
   html:
     color: '#ed6e2d'

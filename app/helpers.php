@@ -25,7 +25,8 @@ function filter(string $name, Filterable $filterable = null): string
 {
     $queryFilter = app(QueryFilter::class);
 
-    return $queryFilter->filter($name, $filterable);
+    return $queryFilter
+        ->filter($name, $filterable);
 }
 
 function filter_active(string $name, Filterable $filterable = null): bool

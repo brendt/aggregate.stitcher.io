@@ -43,4 +43,6 @@
     @endif
 </nav>
 
-{{ $posts->render() }}
+<div class="mt-4 mb-4">
+    {{ $posts->render() }}
+</div>
