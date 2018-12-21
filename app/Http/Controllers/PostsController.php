@@ -17,7 +17,7 @@ class PostsController
     ) {
         $sources = Source::whereActive()->get();
 
-        $posts = $query->paginate();
+        $posts = $query->paginate(15, ['posts.id']);
 
         $posts->appends($request->except('page'));
 

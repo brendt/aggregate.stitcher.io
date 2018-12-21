@@ -1,10 +1,10 @@
 <?php
 
 use App\Support\Filterable;
-use App\Support\QueryFilter;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;
+use Spatie\QueryString\QueryString;
 
 function locale()
 {
@@ -23,22 +23,29 @@ function current_user(): ?User
 
 function filter(string $name, Filterable $filterable = null): string
 {
-    $queryFilter = app(QueryFilter::class);
+    $queryFilter = app(QueryString::class);
 
     return $queryFilter
-        ->filter($name, $filterable);
+        ->disable('page')
+        ->filter(
+            $name,
+            $filterable ? $filterable->getFilterValue() : null
+        );
 }
 
 function filter_active(string $name, Filterable $filterable = null): bool
 {
-    $queryFilter = app(QueryFilter::class);
+    $queryFilter = app(QueryString::class);
 
-    return $queryFilter->isActive($name, $filterable);
+    return $queryFilter->isActive(
+        $queryFilter->resolveFilterName($name),
+        $filterable ? $filterable->getFilterValue() : null
+    );
 }
 
 function clear_filter(string $name): string
 {
-    $queryFilter = app(QueryFilter::class);
+    $queryFilter = app(QueryString::class);
 
     return $queryFilter->clear($name);
 }

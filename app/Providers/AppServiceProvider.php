@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
-use App\Support\QueryFilter;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 use Spatie\BladeX\BladeX;
+use Spatie\QueryString\QueryString;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -28,11 +28,11 @@ class AppServiceProvider extends ServiceProvider
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
 
-        $this->app->singleton(QueryFilter::class, function () {
+        $this->app->singleton(QueryString::class, function () {
             /** @var \Illuminate\Http\Request $request */
             $request = $this->app->get(Request::class);
 
-            return new QueryFilter($request->getRequestUri());
+            return new QueryString(urldecode($request->getRequestUri()));
         });
     }
 }

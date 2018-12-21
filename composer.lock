@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "738f17ed6717c7c9f47f067f8c76b886",
+    "content-hash": "b60de1a685ffde563492ada7e470bddc",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -2833,6 +2833,69 @@
                 "spatie"
             ],
             "time": "2018-09-26T06:33:35+00:00"
+        },
+        {
+            "name": "spatie/query-string",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/query-string.git",
+                "reference": "af4aed2cc23a79cd2829b208c98ee47bdb7e0549"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/query-string/zipball/af4aed2cc23a79cd2829b208c98ee47bdb7e0549",
+                "reference": "af4aed2cc23a79cd2829b208c98ee47bdb7e0549",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\QueryString\\": "src"
+                }
+            },
+            "autoload-dev": {
+                "psr-4": {
+                    "Spatie\\QueryString\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ]
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Manipulate query strings",
+            "homepage": "https://github.com/spatie/query-string",
+            "keywords": [
+                "query-string",
+                "spatie"
+            ],
+            "support": {
+                "source": "https://github.com/spatie/query-string/tree/master",
+                "issues": "https://github.com/spatie/query-string/issues"
+            },
+            "time": "2018-12-21T14:43:05+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -7540,6 +7603,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "spatie/query-string": 20,
         "barryvdh/laravel-ide-helper": 20
     },
     "prefer-stable": false,

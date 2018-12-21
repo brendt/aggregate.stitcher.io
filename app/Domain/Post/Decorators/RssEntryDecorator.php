@@ -47,7 +47,13 @@ class RssEntryDecorator extends AbstractEntry
 
     public function title(): string
     {
-        return strip_tags($this->decoratedEntry->getTitle());
+        $title = $this->decoratedEntry->getTitle();
+
+        $title = preg_replace_callback("/(&#[0-9]+;)/", function ($match) {
+            return mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES");
+        }, $title);
+
+        return $title;
     }
 
     public function url(): string
@@ -57,7 +63,7 @@ class RssEntryDecorator extends AbstractEntry
 
     public function categories(): array
     {
-dd($this->simpleDom);
+        dd($this->simpleDom);
     }
 
     public function tags(): Collection
@@ -119,7 +125,7 @@ dd($this->simpleDom);
                 continue;
             }
 
-            if (!$content) {
+            if (! $content) {
                 $content = $this->simpleDom->{$contentTag} ?? null;
             }
 

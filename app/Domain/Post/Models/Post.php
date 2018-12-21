@@ -2,6 +2,8 @@
 
 namespace Domain\Post\Models;
 
+use App\Domain\Post\Collections\PostCollection;
+use App\Domain\Post\Query\PostQueryBuilder;
 use App\Support\HasUuid;
 use Domain\Model;
 use Domain\Source\Models\Source;
@@ -10,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Pagination\Paginator;
 
 class Post extends Model
 {
@@ -87,5 +90,14 @@ class Post extends Model
         }
 
         return null;
+    }
+
+    protected function newBaseQueryBuilder()
+    {
+        $connection = $this->getConnection();
+
+        return new PostQueryBuilder(
+            $connection, $connection->getQueryGrammar(), $connection->getPostProcessor()
+        );
     }
 }
