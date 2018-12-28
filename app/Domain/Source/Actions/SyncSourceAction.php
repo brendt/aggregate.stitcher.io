@@ -11,16 +11,8 @@ use Zend\Feed\Reader\Reader;
 
 class SyncSourceAction
 {
-    /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection */
-    private $tags;
-
     /** @var string|null */
     private $filterUrl = null;
-
-    public function __construct()
-    {
-        $this->tags = Tag::all();
-    }
 
     public function setFilterUrl(string $filterUrl): SyncSourceAction
     {
@@ -31,6 +23,9 @@ class SyncSourceAction
 
     public function __invoke(Source $source)
     {
+        /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection */
+        $tags = Tag::all();
+
         $feed = Reader::import($source->url);
 
         /** @var \Zend\Feed\Reader\Entry\EntryInterface $entry */
@@ -39,7 +34,7 @@ class SyncSourceAction
                 continue;
             }
 
-            $postData = PostData::create($entry, $this->tags);
+            $postData = PostData::create($entry, $tags);
 
             /** @var \Domain\Post\Models\Post $post */
             $post = $source->posts()->where('url', $postData->url)->first();
