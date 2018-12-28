@@ -18,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
         $bladeX->component([
             'components.*',
             'components.form.*',
+            'components.icons.*',
         ]);
 
         LengthAwarePaginator::defaultView('layouts.pagination');

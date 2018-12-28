@@ -1,70 +1,61 @@
 @php
     /** @var \Domain\Post\Models\Post $post */
     /** @var \Domain\User\Models\User $user */
+    $last = $last ?? true;
 @endphp
 
-<div
-   class="
-        bg-white shadow-lg block p-4 w-full
-        border border-l-2 hover:border-black border-gray-light
-        flex
-        text-grey-dark
-    "
->
+<div class="w-full flex py-6">
     <div
-        class="
-            mr-4 w-32
-            @if($user && $user->votedFor($post))
-                voted-for
-            @endif
-        "
-         id="post-vote-{{$post->uuid}}"
+        class="mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
+        id="post-vote-{{ $post->uuid }}"
     >
-        <span class="vote-count">{{ $post->vote_count }}</span> votes
-
-        @if ($user)
+        {{-- @if ($user) --}}
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
                 data-done="updateVote"
                 class="delete-vote-button"
+                style="margin-top: 0.175rem"
             >
-                {{ __('Remove vote') }}
+                <heart-icon />
             </ajax-button>
 
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'store'], $post)"
                 data-done="updateVote"
                 class="add-vote-button"
+                style="margin-top: 0.175rem"
             >
-                {{ __('Add vote') }}
+                <heart-icon :fill="rand(0, 1) ? 'red' : null" />
             </ajax-button>
-        @endif
+        {{-- @endif --}}
     </div>
 
-    <div>
-        <a
-            class="post-link {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
-            href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
-            rel="noopener noreferrer"
-        >
-            {{ $post->title }}
-        </a>
+    <div class="flex-1">
+        <p class="mb-1">
+            <a
+                class="text-xl font-bold font-title {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
+                href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
+                rel="noopener noreferrer"
+            >
+                {{ $post->title }}
+            </a>
+        </p>
 
-        <br>
-        <small>{{ $post->source->website }}</small>&thinsp;—&thinsp;<small>{{ $post->date_created->format('Y-m-d') }}</small>
-
+        <p class="text-grey-dark text-sm">
+            {{ $post->vote_count }} {{ str_plural('vote', $post->vote_count) }}
+            –
+            <a href="https://{{ $post->source->website }}" class="underline">{{ $post->source->website }}</a>
+            –
+            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}" class="underline">
+                {{ $post->relative_date }}
+            </a>
+        </p>
         @if($post->tags->isNotEmpty())
-            <div class="mt-2">
+            <p class="text-sm mt-2">
                 @foreach ($post->tags as $tag)
-                    <tag :tag="$tag"></tag>
+                    <tag :tag="$tag" class="mr-1/2"></tag>
                 @endforeach
-            </div>
+            </p>
         @endif
-    </div>
-
-    <div class="ml-auto">
-        <small>
-            {{ $post->view_count }} views
-        </small>
     </div>
 </div>

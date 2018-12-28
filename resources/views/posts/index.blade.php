@@ -1,7 +1,10 @@
 @component('layouts.app', [
     'title' => __('Posts'),
 ])
-    <h1>{{ $title ?? __('Posts') }}</h1>
-
-    <post-list :posts="$posts" :user="$user" :sources="$sources"></post-list>
+    <post-list
+        :title="$title ?? __('Posts')"
+        :posts="$posts"
+        :user="$user"
+        :sources="$sources"
+    ></post-list>
 @endcomponent

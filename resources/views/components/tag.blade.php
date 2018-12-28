@@ -4,17 +4,10 @@
 
 <a
     href="{{ filter('tags.name', $tag) }}"
-    class="
-        tag
-        inline-block
-        p-2 pt-1 pb-1
-        border
-        text-xs
-        @if(filter_active('tags.name', $tag))
-            active
-        @endif
-    "
+    class="tag {{ $class ?? null }} {{ filter_active('tags.name', $tag) ? 'active' : null }}"
     style="--tag-color: {{ $tag->color }}"
 >
-    {{ $tag->name }}
+    <span class="tag-inner">
+        {{ $tag->name }}
+    </span>
 </a>

@@ -4,7 +4,7 @@
     /** @var \Domain\User\Models\User $user */
 @endphp
 
-<div>
+{{-- <div>
     @if($user)
         <a href="{{ filter('unread') }}"
            class="
@@ -31,17 +31,21 @@
             {{ __('clear') }}
         </a>
     @endif
-</div>
+</div> --}}
 
-<nav class="flex flex-wrap justify-center mt-4 mb-4 m-4">
+<section class="py-2">
     @foreach($posts as $post)
-        <post-card :post="$post" :user="$user"></post-card>
+        <post-card
+            :post="$post"
+            :user="$user"
+            :last="$loop->last"
+        ></post-card>
     @endforeach
 
     @if($posts->isEmpty())
         {{ __('Nothing to see here!') }}
     @endif
-</nav>
+</section>
 
 <div class="mt-4 mb-4">
     {{ $posts->render() }}

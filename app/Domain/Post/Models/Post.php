@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Carbon;
 
 class Post extends Model
 {
@@ -99,5 +100,35 @@ class Post extends Model
         return new PostQueryBuilder(
             $connection, $connection->getQueryGrammar(), $connection->getPostProcessor()
         );
+    }
+
+    public function getRelativeDateAttribute(): string
+    {
+        $diffInSeconds = Carbon::now()
+            ->diffInSeconds($this->date_created);
+
+        if ($diffInSeconds < 60) {
+            return 'Just now';
+        }
+
+        $diffInMinutes = round($diffInSeconds / 60);
+
+        if ($diffInMinutes < 60) {
+            return $diffInMinutes . ' ' . str_plural('minute', $diffInMinutes) . ' ago';
+        }
+
+        $diffInHours = round($diffInMinutes / 60);
+
+        if ($diffInHours < 24) {
+            return $diffInHours . ' ' . str_plural('hour', $diffInHours) . ' ago';
+        }
+
+        $diffInDays = round($diffInHours / 24);
+
+        if ($diffInDays < 30) {
+            return $diffInDays . ' ' . str_plural('day', $diffInDays) . ' ago';
+        }
+
+        return $this->date_created->format('F jS, Y');
     }
 }
