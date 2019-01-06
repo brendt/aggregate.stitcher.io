@@ -4,10 +4,9 @@
     $last = $last ?? true;
 @endphp
 
-<div class="w-full flex py-6">
+<div class="w-full flex py-6" id="post-vote-{{ $post->uuid }}">
     <div
         class="mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
-        id="post-vote-{{ $post->uuid }}"
     >
         {{-- @if ($user) --}}
             <ajax-button
@@ -25,7 +24,7 @@
                 class="add-vote-button"
                 style="margin-top: 0.175rem"
             >
-                <heart-icon :fill="rand(0, 1) ? 'red' : null" />
+                <heart-icon />
             </ajax-button>
         {{-- @endif --}}
     </div>
@@ -42,7 +41,7 @@
         </p>
 
         <p class="text-grey-dark text-sm">
-            {{ $post->vote_count }} {{ str_plural('vote', $post->vote_count) }}
+            <span class="vote-count">{{ $post->vote_count }}</span> {{ str_plural('vote', $post->vote_count) }}
             –
             <a href="https://{{ $post->source->website }}" class="underline">{{ $post->source->website }}</a>
             –

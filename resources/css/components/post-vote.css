@@ -13,3 +13,11 @@
 .voted-for .delete-vote-button {
     display: inline-block;
 }
+
+.heart-icon {
+    fill: #8795a1;
+}
+
+.voted-for .heart-icon {
+    fill: red;
+}
