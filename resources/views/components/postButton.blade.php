@@ -6,9 +6,8 @@
 
     <button
         type="submit"
-        class="ajax-button {{ $class ?? '' }}"
+        class="{{ $class ?? '' }}"
         style="{{ $style ?? null }}"
-        data-done="{!! $dataDone ?? '() => {};' !!}"
     >
         {{ $slot }}
     </button>

@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\SourcesController;
+use App\Http\Controllers\SourceMutesController;
+use App\Http\Controllers\UserSourcesController;
+use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\VotesController;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -22,13 +24,19 @@ Route::get('/logout', [LogoutController::class, 'logout']);
 Route::get('/', [PostsController::class, 'index']);
 Route::get('/latest', [PostsController::class, 'latest']);
 
-Route::prefix('profile')->group(function () {
-    Route::get('sources', [SourcesController::class, 'edit']);
-    Route::post('sources', [SourcesController::class, 'update']);
-    Route::post('sources/delete', [SourcesController::class, 'delete']);
+Route::middleware('auth')->prefix('profile')->group(function () {
+    Route::get('sources', [UserSourcesController::class, 'edit']);
+    Route::post('sources', [UserSourcesController::class, 'update']);
+    Route::post('sources/delete', [UserSourcesController::class, 'delete']);
+
+    Route::post('posts/{post}/add-vote', [VotesController::class, 'store']);
+    Route::post('posts/{post}/remove-vote', [VotesController::class, 'delete']);
+
+    Route::post('sources/{source}/mute', [SourceMutesController::class, 'store']);
+    Route::post('sources/{source}/unmute', [SourceMutesController::class, 'delete']);
+
+    Route::get('mutes', [UserMutesController::class, 'index']);
 });
 
-Route::post('{post}/add-vote', [VotesController::class, 'store']);
-Route::post('{post}/remove-vote', [VotesController::class, 'delete']);
 
 Route::get('{post}', [PostsController::class, 'show']);

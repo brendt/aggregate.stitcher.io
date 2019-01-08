@@ -19,6 +19,7 @@ class EventServiceProvider extends ServiceProvider
             \App\Domain\Post\Projectors\VoteProjector::class,
             \App\Domain\Post\Projectors\ViewProjector::class,
             \App\Domain\Post\Projectors\PostProjector::class,
+            \App\Domain\Mute\Projectors\MuteProjector::class,
         ]);
     }
 }

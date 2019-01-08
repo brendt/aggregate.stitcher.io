@@ -2,14 +2,19 @@
 
 namespace Domain\Source\Models;
 
+use App\Domain\Mute\Muteable;
+use App\Http\Controllers\SourceMutesController;
 use App\Support\Filterable;
 use App\Support\HasUuid;
 use Domain\Model;
+use Domain\Mute\Models\Mute;
 use Domain\Post\Models\Post;
+use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
-class Source extends Model implements Filterable
+class Source extends Model implements Filterable, Muteable
 {
     use HasUuid;
 
@@ -33,9 +38,28 @@ class Source extends Model implements Filterable
         return $this->hasMany(Post::class);
     }
 
+    public function mutes(): MorphMany
+    {
+        return $this->morphMany(
+            Mute::class,
+            'muteable',
+            'muteable_type',
+            'muteable_uuid',
+            'uuid'
+        );
+    }
+
     public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder->where('is_active', true);
+    }
+
+    public function scopeWhereNotMuted(Builder $builder, User $user): Builder
+    {
+        return $builder->whereDoesntHave('mutes', function (Builder $builder) use ($user) {
+            /** @var \Domain\Mute\Models\Mute $builder */
+            return $builder->whereUser($user);
+        });
     }
 
     public function getPostByUrl(string $url): ?Post
@@ -54,5 +78,25 @@ class Source extends Model implements Filterable
     public function getFilterValue(): string
     {
         return $this->website;
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
+
+    public function getMuteableType(): string
+    {
+        return $this->getMorphClass();
+    }
+
+    public function getName(): string
+    {
+        return __(':website', ['website' => $this->website]);
+    }
+
+    public function getUnmuteUrl(): string
+    {
+        return action([SourceMutesController::class, 'delete'], $this);
     }
 }

@@ -8,7 +8,7 @@
     <div
         class="mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
     >
-        {{-- @if ($user) --}}
+         {{--@if ($user) --}}
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
                 data-done="updateVote"
@@ -49,12 +49,31 @@
                 {{ $post->relative_date }}
             </a>
         </p>
-        @if($post->tags->isNotEmpty())
-            <p class="text-sm mt-2">
-                @foreach ($post->tags as $tag)
-                    <tag :tag="$tag" class="mr-1/2"></tag>
-                @endforeach
-            </p>
-        @endif
+
+        <div class="flex items-baseline mt-2">
+            @if($post->tags->isNotEmpty())
+                <p class="text-sm mr-2">
+                    @foreach ($post->tags as $tag)
+                        <tag :tag="$tag" class="mr-1/2"></tag>
+                    @endforeach
+                </p>
+            @endif
+
+            @if ($user)
+                @if(! $user->hasMuted($post->source))
+                    <post-button
+                        :action="action([\App\Http\Controllers\SourceMutesController::class, 'store'], $post->source)"
+                    >
+                    <span class="
+                        underline
+                        text-grey text-sm
+                        hover:no-underline
+                    ">
+                        {{ __('Mute source') }}
+                    </span>
+                    </post-button>
+                @endif
+            @endif
+        </div>
     </div>
 </div>

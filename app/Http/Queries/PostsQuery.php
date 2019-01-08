@@ -10,9 +10,19 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class PostsQuery extends QueryBuilder
 {
+    /**
+     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
+     * @var \Illuminate\Http\Request $request
+     */
     public function __construct(Builder $query, Request $request)
     {
         $query->with('tags', 'views', 'source');
+
+        $user = $request->user();
+
+        if ($user) {
+            $query->whereNotMuted($user);
+        }
 
         parent::__construct($query, $request);
 

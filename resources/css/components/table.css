@@ -1,0 +1,16 @@
+.table {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+}
+
+.table tr {
+    border-top-width: 1px;
+    @apply .border-grey-lighter;
+}
+
+.table td {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}

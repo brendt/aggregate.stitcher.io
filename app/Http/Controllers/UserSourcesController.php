@@ -9,13 +9,13 @@ use App\Http\Requests\SourceRequest;
 use App\Http\ViewModels\SourceViewModel;
 use Domain\User\Models\User;
 
-class SourcesController
+class UserSourcesController
 {
     public function edit(User $user)
     {
         $viewModel = new SourceViewModel($user);
 
-        return $viewModel->view('sources.form');
+        return $viewModel->view('userSources.form');
     }
 
     public function update(SourceRequest $request, User $user)

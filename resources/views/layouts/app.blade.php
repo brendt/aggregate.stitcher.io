@@ -39,8 +39,13 @@
                 <ul class="flex">
                     @if(current_user())
                         <li class="mr-4">
-                            <a href="{{ action([\App\Http\Controllers\SourcesController::class, 'edit']) }}">
-                                {{ __('Sources') }}
+                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'edit']) }}">
+                                {{ __('My sources') }}
+                            </a>
+                        </li>
+                        <li class="mr-4">
+                            <a href="{{ action([\App\Http\Controllers\UserMutesController::class, 'index']) }}">
+                                {{ __('Mutes') }}
                             </a>
                         </li>
                         <li>

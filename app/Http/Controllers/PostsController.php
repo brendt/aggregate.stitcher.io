@@ -15,7 +15,16 @@ class PostsController
         Request $request,
         AllPostsQuery $query
     ) {
-        $sources = Source::whereActive()->get();
+        $sourceQuery = Source::query()
+            ->whereActive();
+
+        $user = $request->user();
+
+        if ($user) {
+            $sourceQuery->whereNotMuted($user);
+        }
+
+        $sources = $sourceQuery->get();
 
         $posts = $query->paginate(15, ['posts.id']);
 

@@ -2,7 +2,6 @@
 
 namespace Domain\Post\Models;
 
-use App\Domain\Post\Collections\PostCollection;
 use App\Domain\Post\Query\PostQueryBuilder;
 use App\Support\HasUuid;
 use Domain\Model;
@@ -12,7 +11,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
-use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Carbon;
 
 class Post extends Model
@@ -77,6 +75,14 @@ class Post extends Model
     {
         return $builder->whereDoesntHave('views', function (Builder $builder) use ($user) {
             return $builder->where('user_id', $user->id);
+        });
+    }
+
+    public function scopeWhereNotMuted(Builder $builder, User $user): Builder
+    {
+        return $builder->whereHas('source', function (Builder $builder) use ($user) {
+            /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Source\Models\Source $builder */
+            return $builder->whereNotMuted($user);
         });
     }
 

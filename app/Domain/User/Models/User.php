@@ -2,12 +2,15 @@
 
 namespace Domain\User\Models;
 
+use App\Domain\Mute\Muteable;
 use App\Support\HasUuid;
+use Domain\Mute\Models\Mute;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 
@@ -49,6 +52,11 @@ class User extends BaseUser
         return $this->hasMany(View::class);
     }
 
+    public function mutes(): HasMany
+    {
+        return $this->hasMany(Mute::class);
+    }
+
     public function votedFor(Post $post): bool
     {
         foreach ($this->votes as $vote) {
@@ -64,6 +72,17 @@ class User extends BaseUser
     {
         foreach ($this->views as $view) {
             if ($view->post_id === $post->id) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function hasMuted(Muteable $muteable): bool
+    {
+        foreach ($this->mutes as $mute) {
+            if ($mute->muteableEquals($muteable)) {
                 return true;
             }
         }
