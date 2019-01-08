@@ -44,13 +44,13 @@
             <post-button
                 :action="$currentTag->getMuteUrl()"
             >
-                    <span class="
-                        underline
-                        text-grey text-sm
-                        hover:no-underline
-                    ">
-                        {{ __('Mute tag') }}
-                    </span>
+                <span class="
+                    underline
+                    text-grey text-xs
+                    hover:no-underline
+                ">
+                    {{ __('Mute tag') }}
+                </span>
             </post-button>
         @endif
     @endif
