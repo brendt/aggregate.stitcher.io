@@ -10,5 +10,7 @@ interface Muteable
 
     public function getName(): string;
 
+    public function getMuteUrl(): string;
+
     public function getUnmuteUrl(): string;
 }

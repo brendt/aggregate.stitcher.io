@@ -11,7 +11,16 @@
             @foreach ($mutes as $mute)
                 <tr>
                     <td>
-                        {{ $mute->getMuteable()->getName() }}
+                        @if($mute->getMuteable() instanceof \Domain\Post\Models\Tag)
+                            <span
+                                class="tag"
+                                style="--tag-color: {{ $mute->getMuteable()->color }}"
+                            >
+                                {{ $mute->getMuteable()->getName() }}
+                            </span>
+                        @else
+                            {{ $mute->getMuteable()->getName() }}
+                        @endif
                     </td>
                     <td class="text-right">
                         <post-button

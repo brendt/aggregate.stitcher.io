@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Domain\Post\Events\AddViewEvent;
+use App\Http\Queries\ActiveSourcesQuery;
 use App\Http\Queries\LatestPostsQuery;
 use App\Http\Queries\AllPostsQuery;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\Tag;
 use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
 
@@ -13,20 +15,14 @@ class PostsController
 {
     public function index(
         Request $request,
-        AllPostsQuery $query
+        ActiveSourcesQuery $sourcesQuery,
+        AllPostsQuery $postsQuery
     ) {
-        $sourceQuery = Source::query()
-            ->whereActive();
+        $currentTag = $this->getCurrentTag($request);
 
-        $user = $request->user();
+        $sources = $sourcesQuery->get();
 
-        if ($user) {
-            $sourceQuery->whereNotMuted($user);
-        }
-
-        $sources = $sourceQuery->get();
-
-        $posts = $query->paginate(15, ['posts.id']);
+        $posts = $postsQuery->paginate(15, ['posts.id']);
 
         $posts->appends($request->except('page'));
 
@@ -34,6 +30,7 @@ class PostsController
             'sources' => $sources,
             'posts' => $posts,
             'user' => $request->user(),
+            'currentTag' => $currentTag,
         ]);
     }
 
@@ -41,6 +38,8 @@ class PostsController
         Request $request,
         LatestPostsQuery $query
     ) {
+        $currentTag = $this->getCurrentTag($request);
+
         $sources = Source::whereActive()->get();
 
         $posts = $query->paginate();
@@ -52,6 +51,7 @@ class PostsController
             'posts' => $posts,
             'user' => $request->user(),
             'title' => __('Latest'),
+            'currentTag' => $currentTag,
         ]);
     }
 
@@ -62,5 +62,16 @@ class PostsController
         event(AddViewEvent::create($post, $request->user()));
 
         return redirect()->to($post->url);
+    }
+
+    private function getCurrentTag(Request $request): ?Tag
+    {
+        $tagName = $request->get('filter')['tags.name'] ?? null;
+
+        if (!$tagName) {
+            return null;
+        }
+
+        return Tag::whereName($tagName)->first();
     }
 }

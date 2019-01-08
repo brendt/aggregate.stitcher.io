@@ -2,6 +2,7 @@
     /** @var \Domain\Source\Models\Source[] $sources */
     /** @var \Domain\Post\Models\Post[] $posts */
     /** @var \Domain\User\Models\User $user */
+    /** @var \Domain\Post\Models\Tag|null $currentTag */
 @endphp
 
 {{-- <div>
@@ -32,6 +33,28 @@
         </a>
     @endif
 </div> --}}
+
+@isset($currentTag)
+    <p class="text-xl mt-4">
+        <tag :tag="$currentTag" class="mr-1/2"></tag>
+    </p>
+
+    @if ($user)
+        @if(! $user->hasMuted($currentTag))
+            <post-button
+                :action="$currentTag->getMuteUrl()"
+            >
+                    <span class="
+                        underline
+                        text-grey text-sm
+                        hover:no-underline
+                    ">
+                        {{ __('Mute tag') }}
+                    </span>
+            </post-button>
+        @endif
+    @endif
+@endisset
 
 <section class="py-2">
     @foreach($posts as $post)

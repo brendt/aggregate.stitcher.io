@@ -62,7 +62,7 @@
             @if ($user)
                 @if(! $user->hasMuted($post->source))
                     <post-button
-                        :action="action([\App\Http\Controllers\SourceMutesController::class, 'store'], $post->source)"
+                        :action="$post->source->getMuteUrl()"
                     >
                     <span class="
                         underline

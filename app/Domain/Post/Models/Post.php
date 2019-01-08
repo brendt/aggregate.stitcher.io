@@ -80,10 +80,15 @@ class Post extends Model
 
     public function scopeWhereNotMuted(Builder $builder, User $user): Builder
     {
-        return $builder->whereHas('source', function (Builder $builder) use ($user) {
-            /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Source\Models\Source $builder */
-            return $builder->whereNotMuted($user);
-        });
+        return $builder
+            ->whereDoesntHave('source', function (Builder $builder) use ($user) {
+                /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Source\Models\Source $builder */
+                return $builder->whereMuted($user);
+            })
+            ->whereDoesntHave('tags', function (Builder $builder) use ($user) {
+                /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Tag $builder */
+                return $builder->whereMuted($user);
+            });
     }
 
     public function getTagById(int $tagId): ?Tag

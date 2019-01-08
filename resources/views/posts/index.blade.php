@@ -6,5 +6,6 @@
         :posts="$posts"
         :user="$user"
         :sources="$sources"
+        :currentTag="$currentTag"
     ></post-list>
 @endcomponent

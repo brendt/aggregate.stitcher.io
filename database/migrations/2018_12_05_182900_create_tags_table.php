@@ -10,6 +10,7 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
+            $table->uuid('uuid')->unique();
 
             $table->string('name');
             $table->string('color');

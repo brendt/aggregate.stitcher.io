@@ -49,6 +49,14 @@ class Source extends Model implements Filterable, Muteable
         );
     }
 
+    public function scopeWhereMuted(Builder $builder, User $user): Builder
+    {
+        return $builder->whereHas('mutes', function (Builder $builder) use ($user) {
+            /** @var \Domain\Mute\Models\Mute $builder */
+            return $builder->whereUser($user);
+        });
+    }
+
     public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder->where('is_active', true);
@@ -93,6 +101,11 @@ class Source extends Model implements Filterable, Muteable
     public function getName(): string
     {
         return __(':website', ['website' => $this->website]);
+    }
+
+    public function getMuteUrl(): string
+    {
+        return action([SourceMutesController::class, 'store'], $this);
     }
 
     public function getUnmuteUrl(): string

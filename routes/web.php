@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SourceMutesController;
+use App\Http\Controllers\TagMutesController;
 use App\Http\Controllers\UserSourcesController;
 use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\VotesController;
@@ -34,6 +35,9 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
     Route::post('sources/{source}/mute', [SourceMutesController::class, 'store']);
     Route::post('sources/{source}/unmute', [SourceMutesController::class, 'delete']);
+
+    Route::post('tags/{tag}/mute', [TagMutesController::class, 'store']);
+    Route::post('tags/{tag}/unmute', [TagMutesController::class, 'delete']);
 
     Route::get('mutes', [UserMutesController::class, 'index']);
 });
