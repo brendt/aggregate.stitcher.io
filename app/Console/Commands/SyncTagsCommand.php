@@ -29,9 +29,9 @@ class SyncTagsCommand extends Command
         $definition = Yaml::parse(file_get_contents(app_path('tags.yaml')));
 
         foreach ($definition['tags'] as $name => $item) {
-            $tag = $this->syncTagAction->__invoke($name, $item['color'], $item['keywords']);
+            $this->syncTagAction->__invoke($name, $item['color'], $item['keywords']);
 
-            $this->comment("Synced tag {$tag->name}");
+            $this->comment("Synced tag {$name}");
         }
     }
 }
