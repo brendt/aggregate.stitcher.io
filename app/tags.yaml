@@ -1,6 +1,11 @@
+topics:
+  - IT
+  - Misc
+
 tags:
   php:
     color: '#8791c2'
+    topic: IT
     keywords:
       - php
       - laravel
@@ -12,6 +17,7 @@ tags:
 
   frontend:
     color: '#CCA3C7'
+    topic: IT
     keywords:
       - browser
       - push notifications
@@ -30,11 +36,13 @@ tags:
 
   html:
     color: '#ed6e2d'
+    topic: IT
     keywords:
       - language-html
 
   javascript:
     color: '#f3dc20'
+    topic: IT
     keywords:
       - javascript
       - vuejs
@@ -48,6 +56,7 @@ tags:
 
   css:
     color: '#006eb6'
+    topic: IT
     keywords:
       - css
       - tailwind
@@ -58,11 +67,13 @@ tags:
 
   design:
     color: '#68CC14'
+    topic: IT
     keywords:
       - design
 
   writing:
     color: '#19E0FF'
+    topic: IT
     keywords:
       - copywrite
       - copywriting
@@ -72,6 +83,7 @@ tags:
 
   ruby:
     color: '#ac1401'
+    topic: IT
     keywords:
       - ruby
       - on rails
@@ -81,6 +93,7 @@ tags:
 
   devops:
     color: '#100dbb'
+    topic: IT
     keywords:
       - CI
       - continuous integration
@@ -91,6 +104,7 @@ tags:
 
   programming:
     color: '#063840'
+    topic: IT
     keywords:
       - discipline
       - agile

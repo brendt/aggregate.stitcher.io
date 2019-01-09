@@ -35,4 +35,9 @@ trait HasUuid
     {
         return $this->uuid;
     }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
+    }
 }

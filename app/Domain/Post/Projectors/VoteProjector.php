@@ -28,11 +28,6 @@ class VoteProjector implements Projector
         $this->updateVoteCountAction = $calculateVotesAction;
     }
 
-//    public function resetState()
-//    {
-//        Vote::query()->delete();
-//    }
-
     public function addVote(AddVoteEvent $event): void
     {
         $user = User::whereUuid($event->user_uuid)->firstOrFail();

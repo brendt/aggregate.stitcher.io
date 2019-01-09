@@ -5,11 +5,16 @@ namespace App\Domain\Post\Actions;
 use Domain\Post\Events\CreateTagEvent;
 use Domain\Post\Events\UpdateTagEvent;
 use Domain\Post\Models\Tag;
+use Domain\Post\Models\Topic;
 
 class SyncTagAction
 {
-    public function __invoke(string $name, string $color, array $keywords): void
-    {
+    public function __invoke(
+        string $name,
+        string $color,
+        array $keywords,
+        ?Topic $topic = null
+    ): void {
         $existingTag = Tag::whereName($name)->first();
 
         if ($existingTag) {
@@ -17,7 +22,8 @@ class SyncTagAction
                 $existingTag,
                 $name,
                 $color,
-                $keywords
+                $keywords,
+                $topic
             );
 
             if ($event->hasChanges($existingTag)) {
@@ -30,7 +36,8 @@ class SyncTagAction
         event(CreateTagEvent::new(
             $name,
             $color,
-            $keywords
+            $keywords,
+            $topic
         ));
     }
 }

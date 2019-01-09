@@ -2,36 +2,43 @@
 
 namespace App\Console\Commands;
 
-use App\Domain\Post\Actions\SyncTagAction;
-use Domain\Post\Models\Tag;
+use App\Console\Events\TagSyncedEvent;
+use App\Console\Events\TopicSyncedEvent;
+use App\Console\Jobs\SyncTagsAndTopicsJob;
 use Illuminate\Console\Command;
-use Symfony\Component\Yaml\Yaml;
+use Illuminate\Support\Facades\Event;
 
 class SyncTagsCommand extends Command
 {
-
     protected $signature = 'sync:tags';
 
     protected $description = 'Sync tags from their YAML definition';
 
-    /** @var \App\Domain\Post\Actions\SyncTagAction */
-    private $syncTagAction;
+    /** @var \App\Console\Jobs\SyncTagsAndTopicsJob */
+    protected $syncTagsAndTopicsJob;
 
-    public function __construct(SyncTagAction $syncTagAction)
+    public function __construct(SyncTagsAndTopicsJob $syncTagsAndTopicsJob)
     {
         parent::__construct();
 
-        $this->syncTagAction = $syncTagAction;
+        $this->syncTagsAndTopicsJob = $syncTagsAndTopicsJob;
     }
 
-    public function handle()
+    public function handle(): void
     {
-        $definition = Yaml::parse(file_get_contents(app_path('tags.yaml')));
+        Event::listen(TopicSyncedEvent::class, [$this, 'topicSynced']);
+        Event::listen(TagSyncedEvent::class, [$this, 'tagSynced']);
 
-        foreach ($definition['tags'] as $name => $item) {
-            $this->syncTagAction->__invoke($name, $item['color'], $item['keywords']);
+        dispatch_now($this->syncTagsAndTopicsJob);
+    }
 
-            $this->comment("Synced tag {$name}");
-        }
+    public function topicSynced(TopicSyncedEvent $event): void
+    {
+        $this->comment("Synced topic {$event->topicName}");
+    }
+
+    public function tagSynced(TagSyncedEvent $event): void
+    {
+        $this->comment("Synced tag {$event->tagName}");
     }
 }

@@ -1,25 +1,19 @@
 <?php
 
-use App\Domain\Post\Actions\SyncTagAction;
 use Illuminate\Database\Seeder;
-use Symfony\Component\Yaml\Yaml;
 
 class TagSeeder extends Seeder
 {
-    /** @var \App\Domain\Post\Actions\SyncTagAction */
-    private $syncTagAction;
+    /** @var \App\Console\Jobs\SyncTagsAndTopicsJob */
+    private $syncTagsAndTopicsJob;
 
     public function __construct()
     {
-        $this->syncTagAction = app(SyncTagAction::class);
+        $this->syncTagsAndTopicsJob = app(\App\Console\Jobs\SyncTagsAndTopicsJob::class);
     }
 
     public function run()
     {
-        $definition = Yaml::parse(file_get_contents(app_path('tags.yaml')));
-
-        foreach ($definition['tags'] as $name => $item) {
-            $this->syncTagAction->__invoke($name, $item['color'], $item['keywords']);
-        }
+        dispatch_now($this->syncTagsAndTopicsJob);
     }
 }

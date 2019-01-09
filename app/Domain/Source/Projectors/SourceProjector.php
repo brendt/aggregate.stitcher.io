@@ -20,11 +20,6 @@ class SourceProjector implements Projector
         DeleteSourceEvent::class => 'deleteSource',
     ];
 
-//    public function resetState()
-//    {
-//        Source::query()->delete();
-//    }
-
     public function createSource(CreateSourceEvent $event): void
     {
         $user = User::whereUuid($event->user_uuid)->firstOrFail();
