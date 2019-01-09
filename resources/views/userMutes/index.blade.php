@@ -6,6 +6,12 @@
 @component('layouts.app', [
     'title' => __('Mutes'),
 ])
+    <h2 class="text-xl mt-4 mb-2">Mutes</h2>
+
+    @if(!count($mutes))
+        <p>{{ __('You have no mutes configured.') }}</p>
+    @endif
+
     <table class="table">
         <tbody>
             @foreach ($mutes as $mute)

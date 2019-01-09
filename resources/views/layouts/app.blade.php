@@ -40,7 +40,7 @@
                     @if(current_user())
                         <li class="mr-4">
                             <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'edit']) }}">
-                                {{ __('My sources') }}
+                                {{ __('My content') }}
                             </a>
                         </li>
                         <li class="mr-4">
