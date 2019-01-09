@@ -33,9 +33,9 @@ abstract class PostsQuery extends QueryBuilder
         $this
             ->allowedSorts(['date_created'])
             ->allowedFilters([
-                Filter::exact('tags.slug'),
-                Filter::exact('topics.slug'),
-                Filter::exact('sources.website'),
+                Filter::exact('tag', 'tags.slug'),
+                Filter::exact('topic', 'topics.slug'),
+                Filter::exact('source', 'sources.website'),
                 Filter::custom('unread', new UnreadFilter($request->user()))
             ])
             ->defaultSort('-date_created');

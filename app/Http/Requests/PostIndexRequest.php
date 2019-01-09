@@ -6,11 +6,11 @@ class PostIndexRequest extends Request
 {
     public function getTopicSlug(): ?string
     {
-        return $this->get('filter')['topics.slug'] ?? null;
+        return $this->get('filter')['topic'] ?? null;
     }
 
     public function getTagSlug(): ?string
     {
-        return $this->get('filter')['tags.slug'] ?? null;
+        return $this->get('filter')['tag'] ?? null;
     }
 }
