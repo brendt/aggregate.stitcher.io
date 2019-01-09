@@ -16,7 +16,11 @@ abstract class PostsQuery extends QueryBuilder
      */
     public function __construct(Builder $query, Request $request)
     {
-        $query->with('tags', 'views', 'source');
+        $query
+            ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
+            ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
+            ->leftJoin('topics', 'tags.topic_id', '=', 'topics.id')
+            ->with('tags', 'views', 'source');
 
         $user = $request->user();
 
@@ -29,7 +33,8 @@ abstract class PostsQuery extends QueryBuilder
         $this
             ->allowedSorts(['date_created'])
             ->allowedFilters([
-                Filter::exact('tags.name'),
+                Filter::exact('tags.slug'),
+                Filter::exact('topics.slug'),
                 Filter::exact('sources.website'),
                 Filter::custom('unread', new UnreadFilter($request->user()))
             ])

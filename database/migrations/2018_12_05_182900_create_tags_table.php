@@ -15,7 +15,8 @@ class CreateTagsTable extends Migration
             $table->unsignedInteger('topic_id')->nullable();
             $table->foreign('topic_id')->references('id')->on('topics')->onDelete('set null');
 
-            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('name')->unique();
             $table->string('color');
 
             $table->json('keywords');

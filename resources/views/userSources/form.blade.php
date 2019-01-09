@@ -5,7 +5,7 @@
 @component('layouts.app', [
     'title' => __('Sources'),
 ])
-    <h2 class="text-xl mt-4">My content</h2>
+    <heading>My content</heading>
 
     <div class="w-5/6">
         <p class="mt-4 mb-2">

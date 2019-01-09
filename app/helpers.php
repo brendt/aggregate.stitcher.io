@@ -21,7 +21,7 @@ function current_user(): ?User
     return Auth::user();
 }
 
-function filter(string $name, Filterable $filterable = null): string
+function filter(string $name, Filterable $filterable = null): QueryString
 {
     $queryFilter = app(QueryString::class);
 

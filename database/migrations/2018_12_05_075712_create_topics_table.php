@@ -12,7 +12,8 @@ class CreateTopicsTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->unique();
 
-            $table->string('name');
+            $table->string('slug')->unique();
+            $table->string('name')->unique();
 
             $table->timestamps();
         });

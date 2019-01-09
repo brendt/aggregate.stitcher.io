@@ -8,10 +8,6 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class ActiveSourcesQuery extends QueryBuilder
 {
-    /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
-     * @var \Illuminate\Http\Request $request
-     */
     public function __construct(Request $request)
     {
         $query = Source::query()->whereActive();

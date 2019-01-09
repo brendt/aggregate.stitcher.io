@@ -6,6 +6,7 @@ use App\Domain\Mute\HasMutes;
 use App\Domain\Mute\Muteable;
 use App\Http\Controllers\TagMutesController;
 use App\Support\Filterable;
+use App\Support\HasSlug;
 use App\Support\HasUuid;
 use Domain\Model;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Tag extends Model implements Filterable, Muteable
 {
-    use HasUuid, HasMutes;
+    use HasUuid, HasMutes, HasSlug;
 
     protected $casts = [
         'keywords' => 'array'

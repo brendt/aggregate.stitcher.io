@@ -30,9 +30,14 @@
                             {{ __('All') }}
                         </a>
                     </li>
-                    <li>
+                    <li class="mr-4">
                         <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
                             {{ __('Latest') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ action([\App\Http\Controllers\TopicsController::class, 'index']) }}">
+                            {{ __('Topics') }}
                         </a>
                     </li>
                 </ul>

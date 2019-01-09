@@ -1,11 +1,13 @@
 topics:
-  - IT
+  - Programming
+  - Music
+  - Movies
   - Misc
 
 tags:
   php:
     color: '#8791c2'
-    topic: IT
+    topic: Programming
     keywords:
       - php
       - laravel
@@ -17,7 +19,7 @@ tags:
 
   frontend:
     color: '#CCA3C7'
-    topic: IT
+    topic: Programming
     keywords:
       - browser
       - push notifications
@@ -36,7 +38,7 @@ tags:
 
   "version control":
     color: '#ed5839'
-    topic: IT
+    topic: Programming
     keywords:
       - GIT
       - SVN
@@ -46,13 +48,13 @@ tags:
 
   html:
     color: '#ed6e2d'
-    topic: IT
+    topic: Programming
     keywords:
       - language-html
 
   javascript:
     color: '#f3dc20'
-    topic: IT
+    topic: Programming
     keywords:
       - javascript
       - vuejs
@@ -66,7 +68,7 @@ tags:
 
   css:
     color: '#006eb6'
-    topic: IT
+    topic: Programming
     keywords:
       - css
       - tailwind
@@ -77,13 +79,13 @@ tags:
 
   design:
     color: '#68CC14'
-    topic: IT
+    topic: Programming
     keywords:
       - design
 
   writing:
     color: '#19E0FF'
-    topic: IT
+    topic: Programming
     keywords:
       - copywrite
       - copywriting
@@ -93,7 +95,7 @@ tags:
 
   ruby:
     color: '#ac1401'
-    topic: IT
+    topic: Programming
     keywords:
       - ruby
       - on rails
@@ -103,7 +105,7 @@ tags:
 
   devops:
     color: '#100dbb'
-    topic: IT
+    topic: Programming
     keywords:
       - CI
       - continuous integration
@@ -115,7 +117,7 @@ tags:
 
   programming:
     color: '#063840'
-    topic: IT
+    topic: Programming
     keywords:
       - discipline
       - agile

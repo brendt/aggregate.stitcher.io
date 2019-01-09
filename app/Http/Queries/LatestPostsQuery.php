@@ -16,8 +16,6 @@ class LatestPostsQuery extends PostsQuery
                 $join->on('posts.source_id', '=', 'posts_comparison.source_id')
                     ->on('posts.date_created', '<', 'posts_comparison.date_created');
             })
-            ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
-            ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
             ->whereNull('posts_comparison.source_id')
             ->select('posts.*');
 

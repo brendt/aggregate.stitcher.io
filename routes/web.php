@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SourceMutesController;
 use App\Http\Controllers\TagMutesController;
+use App\Http\Controllers\TopicsController;
 use App\Http\Controllers\UserSourcesController;
 use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\VotesController;
@@ -23,7 +24,8 @@ Route::get('rss', function () {
 Route::get('/logout', [LogoutController::class, 'logout']);
 
 Route::get('/', [PostsController::class, 'index']);
-Route::get('/latest', [PostsController::class, 'latest']);
+Route::get('latest', [PostsController::class, 'latest']);
+Route::get('topics', [TopicsController::class, 'index']);
 
 Route::middleware('auth')->prefix('profile')->group(function () {
     Route::get('sources', [UserSourcesController::class, 'edit']);
@@ -41,6 +43,5 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
     Route::get('mutes', [UserMutesController::class, 'index']);
 });
-
 
 Route::get('{post}', [PostsController::class, 'show']);
