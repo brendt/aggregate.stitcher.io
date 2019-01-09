@@ -34,6 +34,16 @@ tags:
       - service workers
       - progressive enhancement
 
+  "version control":
+    color: '#ed5839'
+    topic: IT
+    keywords:
+      - GIT
+      - SVN
+      - Mercurial
+      - version control
+      - vsc
+
   html:
     color: '#ed6e2d'
     topic: IT
@@ -101,6 +111,7 @@ tags:
       - linux
       - ubuntu
       - server
+      - docker
 
   programming:
     color: '#063840'
