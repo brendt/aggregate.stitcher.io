@@ -2,8 +2,8 @@
 
 namespace Domain\Source\Models;
 
-use App\Domain\Mute\HasMutes;
-use App\Domain\Mute\Muteable;
+use Domain\Mute\HasMutes;
+use Domain\Mute\Muteable;
 use App\Http\Controllers\SourceMutesController;
 use App\Support\Filterable;
 use App\Support\HasUuid;

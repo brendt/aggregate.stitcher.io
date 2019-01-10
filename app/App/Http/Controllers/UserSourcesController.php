@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Source\Events\CreateSourceEvent;
-use App\Domain\Source\Events\DeleteSourceEvent;
-use App\Domain\Source\Events\UpdateSourceEvent;
+use Domain\Source\Events\CreateSourceEvent;
+use Domain\Source\Events\DeleteSourceEvent;
+use Domain\Source\Events\UpdateSourceEvent;
 use App\Http\Requests\SourceRequest;
 use App\Http\ViewModels\SourceViewModel;
 use Domain\User\Models\User;

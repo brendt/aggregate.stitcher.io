@@ -2,7 +2,7 @@
 
 namespace Domain\Post\Models;
 
-use App\Domain\Post\Query\PostQueryBuilder;
+use Domain\Post\Query\PostQueryBuilder;
 use App\Support\HasUuid;
 use Domain\Model;
 use Domain\Source\Models\Source;

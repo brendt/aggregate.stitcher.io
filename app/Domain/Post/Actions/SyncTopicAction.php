@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Post\Actions;
+namespace Domain\Post\Actions;
 
 use Domain\Post\Events\CreateTopicEvent;
 use Domain\Post\Events\UpdateTopicEvent;

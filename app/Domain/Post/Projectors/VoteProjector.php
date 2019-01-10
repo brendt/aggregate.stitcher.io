@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Post\Projectors;
+namespace Domain\Post\Projectors;
 
-use App\Domain\Post\Events\AddVoteEvent;
-use App\Domain\Post\Events\RemoveVoteEvent;
+use Domain\Post\Events\AddVoteEvent;
+use Domain\Post\Events\RemoveVoteEvent;
 use Domain\Post\Actions\UpdateVoteCountAction;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Vote;

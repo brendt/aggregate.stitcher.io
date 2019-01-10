@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\User\Events;
+namespace Domain\User\Events;
 
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\EventProjector\ShouldBeStored;

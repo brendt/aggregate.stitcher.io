@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Mute;
+namespace Domain\Mute;
 
 use Domain\Mute\Models\Mute;
 use Domain\User\Models\User;

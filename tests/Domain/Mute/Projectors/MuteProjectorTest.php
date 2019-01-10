@@ -2,9 +2,9 @@
 
 namespace Tests\Domain\Mute\Projectors;
 
-use App\Domain\Mute\Events\MuteEvent;
-use App\Domain\Mute\Events\UnmuteEvent;
-use App\Domain\Mute\Projectors\MuteProjector;
+use Domain\Mute\Events\MuteEvent;
+use Domain\Mute\Events\UnmuteEvent;
+use Domain\Mute\Projectors\MuteProjector;
 use Domain\Mute\Models\Mute;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;

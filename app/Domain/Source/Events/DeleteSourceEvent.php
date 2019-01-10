@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Source\Events;
+namespace Domain\Source\Events;
 
 use Domain\Source\Models\Source;
 use Spatie\DataTransferObject\DataTransferObject;

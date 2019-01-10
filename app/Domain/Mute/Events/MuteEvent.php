@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Domain\Mute\Events;
+namespace Domain\Mute\Events;
 
-use App\Domain\Mute\Muteable;
+use Domain\Mute\Muteable;
 use Domain\User\Models\User;
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\EventProjector\ShouldBeStored;

@@ -1,6 +1,6 @@
 <?php
 
-use App\Domain\User\Events\CreateUserEvent;
+use Domain\User\Events\CreateUserEvent;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Post\Projectors;
+namespace Domain\Post\Projectors;
 
 use Domain\Post\Actions\UpdateViewCountAction;
 use Domain\Post\Events\CreatePostEvent;

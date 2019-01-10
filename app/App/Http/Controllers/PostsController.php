@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Post\Events\AddViewEvent;
+use Domain\Post\Events\AddViewEvent;
 use App\Http\Queries\LatestPostsQuery;
 use App\Http\Queries\AllPostsQuery;
 use App\Http\Requests\PostIndexRequest;

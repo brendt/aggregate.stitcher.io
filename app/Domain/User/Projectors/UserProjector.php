@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\User\Projectors;
+namespace Domain\User\Projectors;
 
-use App\Domain\User\Events\VerifyUserEvent;
-use App\Domain\User\Events\CreateUserEvent;
+use Domain\User\Events\VerifyUserEvent;
+use Domain\User\Events\CreateUserEvent;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Spatie\EventProjector\Projectors\Projector;

@@ -44,10 +44,14 @@ class PostTest extends TestCase
     public function muted_tag_is_ignored_even_when_multiple_tags()
     {
         /** @var \Domain\Post\Models\Tag $tagA */
-        $tagA = factory(Tag::class)->create();
+        $tagA = factory(Tag::class)->create([
+            'name' => 'A',
+        ]);
 
         /** @var \Domain\Post\Models\Tag $tagB */
-        $tagB = factory(Tag::class)->create();
+        $tagB = factory(Tag::class)->create([
+            'name' => 'B',
+        ]);
 
         $post = factory(Post::class)->create();
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Domain\Mute\Projectors;
+namespace Domain\Mute\Projectors;
 
-use App\Domain\Mute\Events\MuteEvent;
-use App\Domain\Mute\Events\UnmuteEvent;
+use Domain\Mute\Events\MuteEvent;
+use Domain\Mute\Events\UnmuteEvent;
 use Domain\Mute\Models\Mute;
 use Domain\User\Models\User;
 use Spatie\EventProjector\Projectors\Projector;

@@ -2,7 +2,7 @@
 
 namespace Domain\Mute\Models;
 
-use App\Domain\Mute\Muteable;
+use Domain\Mute\Muteable;
 use App\Support\HasUuid;
 use Domain\Model;
 use Domain\User\Models\User;

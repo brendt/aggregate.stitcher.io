@@ -2,7 +2,7 @@
 
 namespace Domain\Post\Events;
 
-use App\Domain\Post\DTO\PostData;
+use Domain\Post\DTO\PostData;
 use Carbon\Carbon;
 use Domain\Source\Models\Source;
 use Spatie\DataTransferObject\DataTransferObject;

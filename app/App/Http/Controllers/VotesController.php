@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Post\Events\AddVoteEvent;
-use App\Domain\Post\Events\RemoveVoteEvent;
+use Domain\Post\Events\AddVoteEvent;
+use Domain\Post\Events\RemoveVoteEvent;
 use App\Http\ViewModels\VoteViewModel;
 use Domain\Post\Actions\AddVoteAction;
 use Domain\Post\Actions\RemoveVoteAction;

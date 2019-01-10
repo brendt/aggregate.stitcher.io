@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Post\Query;
+namespace Domain\Post\Query;
 
 use Illuminate\Database\Query\Builder;
 

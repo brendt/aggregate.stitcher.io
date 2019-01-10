@@ -1,8 +1,8 @@
 <?php
 
-use App\Domain\Post\DTO\PostData;
-use App\Domain\Post\Events\AddViewEvent;
-use App\Domain\Post\Events\AddVoteEvent;
+use Domain\Post\DTO\PostData;
+use Domain\Post\Events\AddViewEvent;
+use Domain\Post\Events\AddVoteEvent;
 use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Actions\AddVoteAction;
 use Domain\Post\Events\CreatePostEvent;

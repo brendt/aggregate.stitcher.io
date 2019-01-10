@@ -2,8 +2,8 @@
 
 namespace Domain\Post\Models;
 
-use App\Domain\Mute\HasMutes;
-use App\Domain\Mute\Muteable;
+use Domain\Mute\HasMutes;
+use Domain\Mute\Muteable;
 use App\Http\Controllers\TagMutesController;
 use App\Support\Filterable;
 use App\Support\HasSlug;

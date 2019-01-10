@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Post\Events;
+namespace Domain\Post\Events;
 
 use Domain\Post\Models\Post;
 use Domain\User\Models\User;

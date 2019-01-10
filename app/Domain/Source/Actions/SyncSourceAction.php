@@ -2,7 +2,7 @@
 
 namespace Domain\Source\Actions;
 
-use App\Domain\Post\DTO\PostData;
+use Domain\Post\DTO\PostData;
 use Domain\Post\Events\CreatePostEvent;
 use Domain\Post\Events\UpdatePostEvent;
 use Domain\Post\Models\Tag;

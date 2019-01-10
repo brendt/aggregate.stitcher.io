@@ -1,7 +1,7 @@
 <?php
 
-use App\Domain\Source\Events\CreateSourceEvent;
-use App\Domain\User\Events\CreateUserEvent;
+use Domain\Source\Events\CreateSourceEvent;
+use Domain\User\Events\CreateUserEvent;
 use Domain\User\Models\User;
 use Illuminate\Database\Seeder;
 

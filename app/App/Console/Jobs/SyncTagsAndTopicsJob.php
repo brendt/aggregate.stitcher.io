@@ -4,17 +4,17 @@ namespace App\Console\Jobs;
 
 use App\Console\Events\TagSyncedEvent;
 use App\Console\Events\TopicSyncedEvent;
-use App\Domain\Post\Actions\SyncTagAction;
-use App\Domain\Post\Actions\SyncTopicAction;
+use Domain\Post\Actions\SyncTagAction;
+use Domain\Post\Actions\SyncTopicAction;
 use Domain\Post\Models\Topic;
 use Symfony\Component\Yaml\Yaml;
 
 class SyncTagsAndTopicsJob
 {
-    /** @var \App\Domain\Post\Actions\SyncTopicAction */
+    /** @var \Domain\Post\Actions\SyncTopicAction */
     protected $syncTopicAction;
 
-    /** @var \App\Domain\Post\Actions\SyncTagAction */
+    /** @var \Domain\Post\Actions\SyncTagAction */
     protected $syncTagAction;
 
     public function __construct(
@@ -27,7 +27,7 @@ class SyncTagsAndTopicsJob
 
     public function handle()
     {
-        $definition = Yaml::parse(file_get_contents(app_path('tags.yaml')));
+        $definition = Yaml::parse(file_get_contents(base_path('app/tags.yaml')));
 
         foreach ($definition['topics'] as $topicName) {
             $this->syncTopicAction->__invoke($topicName);

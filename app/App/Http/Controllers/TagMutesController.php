@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Mute\Events\MuteEvent;
-use App\Domain\Mute\Events\UnmuteEvent;
+use Domain\Mute\Events\MuteEvent;
+use Domain\Mute\Events\UnmuteEvent;
 use Domain\Post\Models\Tag;
 use Domain\User\Models\User;
 

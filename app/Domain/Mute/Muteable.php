@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Mute;
+namespace Domain\Mute;
 
 interface Muteable
 {

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Domain\Source\Projectors;
+namespace Domain\Source\Projectors;
 
-use App\Domain\Source\Events\CreateSourceEvent;
-use App\Domain\Source\Events\DeleteSourceEvent;
-use App\Domain\Source\Events\UpdateSourceEvent;
+use Domain\Source\Events\CreateSourceEvent;
+use Domain\Source\Events\DeleteSourceEvent;
+use Domain\Source\Events\UpdateSourceEvent;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Spatie\EventProjector\Projectors\Projector;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Domain\Post\DTO;
+namespace Domain\Post\DTO;
 
 use Domain\Post\Decorators\RssEntryDecorator;
 use Domain\Post\Models\Post;
@@ -40,7 +40,7 @@ class PostData extends DataTransferObject
      * @param \Zend\Feed\Reader\Entry\AbstractEntry|\Zend\Feed\Reader\Entry\EntryInterface $entry
      * @param \Illuminate\Support\Collection|\Domain\Post\Models\Tag[] $tags
      *
-     * @return \App\Domain\Post\DTO\PostData
+     * @return \Domain\Post\DTO\PostData
      */
     public static function create(
         AbstractEntry $entry,

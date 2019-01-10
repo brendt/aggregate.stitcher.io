@@ -48,8 +48,9 @@
             "database"
         ],
         "psr-4" : {
-            "App\\" : "app/",
-            "Domain\\" : "app/Domain/"
+            "App\\" : "app/App/",
+            "Domain\\" : "app/Domain/",
+            "Support\\" : "app/Support/"
         },
         "files" : [
             "app/helpers.php"
