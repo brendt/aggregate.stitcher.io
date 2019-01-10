@@ -11,7 +11,7 @@
 |
 */
 
-$app = new App\Application(
+$app = new App\BaseApplication(
     realpath(__DIR__.'/../')
 );
 
