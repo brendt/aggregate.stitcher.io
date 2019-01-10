@@ -1,6 +1,6 @@
 <?php
 
-use App\Support\Filterable;
+use Support\Filterable;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;

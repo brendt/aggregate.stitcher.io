@@ -2,7 +2,7 @@
 
 namespace Domain\Post\Models;
 
-use App\Support\HasUuid;
+use Support\HasUuid;
 use Domain\Model;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;

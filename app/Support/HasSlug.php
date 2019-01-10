@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Support;
+namespace Support;
 
 use Domain\Model;
 use Illuminate\Support\Str;

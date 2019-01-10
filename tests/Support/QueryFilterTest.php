@@ -2,8 +2,8 @@
 
 namespace Tests\Support;
 
-use App\Support\Filterable;
-use App\Support\QueryFilter;
+use Support\Filterable;
+use Support\QueryFilter;
 use Tests\TestCase;
 
 class QueryFilterTest extends TestCase

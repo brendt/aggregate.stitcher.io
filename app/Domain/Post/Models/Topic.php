@@ -2,9 +2,9 @@
 
 namespace Domain\Post\Models;
 
-use App\Support\Filterable;
-use App\Support\HasSlug;
-use App\Support\HasUuid;
+use Support\Filterable;
+use Support\HasSlug;
+use Support\HasUuid;
 use Domain\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 

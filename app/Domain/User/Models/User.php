@@ -3,7 +3,7 @@
 namespace Domain\User\Models;
 
 use Domain\Mute\Muteable;
-use App\Support\HasUuid;
+use Support\HasUuid;
 use Domain\Mute\Models\Mute;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\View;

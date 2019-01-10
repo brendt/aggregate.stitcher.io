@@ -3,7 +3,7 @@
 namespace Domain\Post\Models;
 
 use Domain\Post\Query\PostQueryBuilder;
-use App\Support\HasUuid;
+use Support\HasUuid;
 use Domain\Model;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
