@@ -1,17 +1,12 @@
 <?php
 
-use Domain\User\Models\User;
+use App\Domain\User\Events\CreateUserEvent;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
 {
     public function run()
     {
-        factory(User::class)->create([
-            'name' => 'BrenDt',
-            'email' => 'brent@spatie.be',
-        ]);
-
-        factory(User::class, 20)->create();
+        event(new CreateUserEvent('brent@spatie.be', bcrypt('secret')));
     }
 }

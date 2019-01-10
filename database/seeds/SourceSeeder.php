@@ -1,6 +1,7 @@
 <?php
 
 use App\Domain\Source\Events\CreateSourceEvent;
+use App\Domain\User\Events\CreateUserEvent;
 use Domain\User\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -28,9 +29,9 @@ class SourceSeeder extends Seeder
 
         foreach ($sources as $url => $email) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
-                return factory(User::class)->create([
-                    'email' => $email,
-                ]);
+                event(new CreateUserEvent($email, bcrypt('secret')));
+
+                return User::whereEmail($email)->first();
             });
 
             event(new CreateSourceEvent(
