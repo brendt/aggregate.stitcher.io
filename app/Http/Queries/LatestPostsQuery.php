@@ -11,13 +11,11 @@ class LatestPostsQuery extends PostsQuery
     public function __construct(Request $request)
     {
         $query = Post::query()
-            ->whereActive()
             ->leftJoin('posts AS posts_comparison', function (JoinClause $join) {
                 $join->on('posts.source_id', '=', 'posts_comparison.source_id')
                     ->on('posts.date_created', '<', 'posts_comparison.date_created');
             })
-            ->whereNull('posts_comparison.source_id')
-            ->select('posts.*');
+            ->whereNull('posts_comparison.source_id');
 
         parent::__construct($query, $request);
     }

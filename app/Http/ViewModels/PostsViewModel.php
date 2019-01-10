@@ -2,7 +2,6 @@
 
 namespace App\Http\ViewModels;
 
-use App\Http\Requests\PostIndexRequest;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
 use Domain\User\Models\User;
@@ -11,21 +10,27 @@ use Spatie\ViewModels\ViewModel;
 
 final class PostsViewModel extends ViewModel
 {
-    /** @var \App\Http\Requests\PostIndexRequest */
-    private $request;
-
     /** @var \Illuminate\Pagination\LengthAwarePaginator */
     protected $posts;
 
-    /** @var string */
+    /** @var \Domain\User\Models\User|null */
+    protected $user;
+
+    /** @var string|null */
+    protected $topicSlug;
+
+    /** @var string|null */
+    protected $tagSlug;
+
+    /** @var string|null */
     private $title;
 
     public function __construct(
-        PostIndexRequest $request,
-        LengthAwarePaginator $posts
+        LengthAwarePaginator $posts,
+        ?User $user = null
     ) {
-        $this->request = $request;
         $this->posts = $posts;
+        $this->user = $user;
     }
 
     public function withTitle(string $title): PostsViewModel
@@ -35,9 +40,23 @@ final class PostsViewModel extends ViewModel
         return $this;
     }
 
+    public function withTopicSlug(?string $topicSlug): PostsViewModel
+    {
+        $this->topicSlug = $topicSlug;
+
+        return $this;
+    }
+
+    public function withTagSlug(?string $tagSlug): PostsViewModel
+    {
+        $this->tagSlug = $tagSlug;
+
+        return $this;
+    }
+
     public function user(): ?User
     {
-        return $this->request->user();
+        return $this->user;
     }
 
     public function posts(): LengthAwarePaginator
@@ -47,24 +66,20 @@ final class PostsViewModel extends ViewModel
 
     public function currentTopic(): ?Topic
     {
-        $slug = $this->request->getTopicSlug();
-
-        if (! $slug) {
+        if (! $this->topicSlug) {
             return null;
         }
 
-        return Topic::whereSlug($slug)->first();
+        return Topic::whereSlug($this->topicSlug)->first();
     }
 
     public function currentTag(): ?Tag
     {
-        $slug = $this->request->getTagSlug();
-
-        if (! $slug) {
+        if (! $this->tagSlug) {
             return null;
         }
 
-        return Tag::whereSlug($slug)->first();
+        return Tag::whereSlug($this->tagSlug)->first();
     }
 
     public function title(): ?string

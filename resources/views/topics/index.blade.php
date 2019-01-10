@@ -11,7 +11,7 @@
 
     <nav class="mt-4">
         @foreach($topics as $topic)
-            <a href="{{ filter('topic', $topic)->withBaseUrl(action([\App\Http\Controllers\PostsController::class, 'index'])) }}">
+            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'topic'], $topic->slug) }}">
                 <h2>
                     {{ $topic->name }}
                 </h2>

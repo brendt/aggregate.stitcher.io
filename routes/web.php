@@ -23,9 +23,6 @@ Route::get('rss', function () {
 
 Route::get('/logout', [LogoutController::class, 'logout']);
 
-Route::get('/', [PostsController::class, 'index']);
-Route::get('latest', [PostsController::class, 'latest']);
-Route::get('topics', [TopicsController::class, 'index']);
 
 Route::middleware('auth')->prefix('profile')->group(function () {
     Route::get('sources', [UserSourcesController::class, 'edit']);
@@ -43,5 +40,12 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
     Route::get('mutes', [UserMutesController::class, 'index']);
 });
+
+Route::get('/', [PostsController::class, 'index']);
+Route::get('latest', [PostsController::class, 'latest']);
+Route::get('/topic/{topic}', [PostsController::class, 'topic']);
+Route::get('/tag/{tag}', [PostsController::class, 'tag']);
+
+Route::get('topics', [TopicsController::class, 'index']);
 
 Route::get('{post}', [PostsController::class, 'show']);

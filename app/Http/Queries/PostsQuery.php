@@ -17,10 +17,13 @@ abstract class PostsQuery extends QueryBuilder
     public function __construct(Builder $query, Request $request)
     {
         $query
+            ->whereActive()
             ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
             ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
             ->leftJoin('topics', 'tags.topic_id', '=', 'topics.id')
-            ->with('tags', 'views', 'source');
+            ->with('tags', 'views', 'source')
+            ->distinct()
+            ->select('posts.*');
 
         $user = $request->user();
 

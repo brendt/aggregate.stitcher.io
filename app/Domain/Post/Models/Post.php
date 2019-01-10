@@ -91,6 +91,14 @@ class Post extends Model
             });
     }
 
+    public function scopeWhereTopic(Builder $builder, Topic $topic): Builder
+    {
+        return $builder->whereHas('tags', function (Builder $builder) use ($topic) {
+            /** @var \Domain\Post\Models\Tag $builder */
+            return $builder->whereTopic($topic);
+        });
+    }
+
     public function getTagById(int $tagId): ?Tag
     {
         foreach ($this->tags as $tag) {
