@@ -13,7 +13,7 @@
             id="{{ $name }}"
             type="{{ $type ?? 'text' }}"
             name="{{ $name }}"
-            value="{{ old($name) ?? $initialValue ?? null }}"
+            value="{{ $value ?? old($name) ?? $initialValue ?? null }}"
 
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}

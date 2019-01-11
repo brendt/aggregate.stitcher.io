@@ -44,7 +44,7 @@
                 <ul class="flex">
                     @if(current_user())
                         <li class="mr-4">
-                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'edit']) }}">
+                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
                                 {{ __('My content') }}
                             </a>
                         </li>

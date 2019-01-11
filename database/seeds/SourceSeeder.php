@@ -29,7 +29,7 @@ class SourceSeeder extends Seeder
 
         foreach ($sources as $url => $email) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
-                event(new CreateUserEvent($email, bcrypt('secret')));
+                event(CreateUserEvent::create($email, bcrypt('secret')));
 
                 return User::whereEmail($email)->first();
             });

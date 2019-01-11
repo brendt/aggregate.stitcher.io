@@ -7,6 +7,6 @@ class UserSeeder extends Seeder
 {
     public function run()
     {
-        event(new CreateUserEvent('brent@spatie.be', bcrypt('secret')));
+        event(CreateUserEvent::create('brent@spatie.be', bcrypt('secret')));
     }
 }

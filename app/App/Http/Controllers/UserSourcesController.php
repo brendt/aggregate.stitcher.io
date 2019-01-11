@@ -11,11 +11,11 @@ use Domain\User\Models\User;
 
 class UserSourcesController
 {
-    public function edit(User $user)
+    public function index(User $user)
     {
         $viewModel = new SourceViewModel($user);
 
-        return $viewModel->view('userSources.form');
+        return $viewModel->view('userSources.index');
     }
 
     public function update(SourceRequest $request, User $user)
@@ -25,7 +25,7 @@ class UserSourcesController
         if (! $primarySource) {
             event(CreateSourceEvent::fromRequest($request));
 
-            return redirect()->action([self::class, 'edit']);
+            return redirect()->action([self::class, 'index']);
         }
 
         $updateSourceEvent = UpdateSourceEvent::fromRequest($primarySource, $request);
@@ -34,7 +34,7 @@ class UserSourcesController
             event($updateSourceEvent);
         }
 
-        return redirect()->action([self::class, 'edit']);
+        return redirect()->action([self::class, 'index']);
     }
 
     public function delete(User $user)
@@ -42,11 +42,11 @@ class UserSourcesController
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
-            return redirect()->action([self::class, 'edit']);
+            return redirect()->action([self::class, 'index']);
         }
 
         event(DeleteSourceEvent::create($primarySource));
 
-        return redirect()->action([self::class, 'edit']);
+        return redirect()->action([self::class, 'index']);
     }
 }

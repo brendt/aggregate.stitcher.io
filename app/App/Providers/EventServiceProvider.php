@@ -24,5 +24,9 @@ class EventServiceProvider extends ServiceProvider
             \Domain\Post\Projectors\TagProjector::class,
             \Domain\Mute\Projectors\MuteProjector::class,
         ]);
+
+        $projectionist->addReactors([
+            \Domain\User\Reactors\UserReactor::class,
+        ]);
     }
 }

@@ -3,9 +3,9 @@
 @endphp
 
 @component('layouts.app', [
-    'title' => __('Sources'),
+    'title' => __('My content'),
 ])
-    <heading>My content</heading>
+    <heading>{{ __('My content') }}</heading>
 
     <div class="w-5/6">
         <p class="mt-4 mb-2">
@@ -38,15 +38,17 @@
         </submit-button>
     </form-component>
 
-    <form-component
-        :action="action([\App\Http\Controllers\UserSourcesController::class, 'delete'])"
-        class="w-2/5 mt-2"
-    >
-        <submit-button class="
-            bg-red text-white
-            hover:bg-white hover:text-red
-        ">
+    @if($isExistingSource)
+        <post-button
+            :action="action([\App\Http\Controllers\UserSourcesController::class, 'delete'])"
+            class="
+                mt-2
+                button
+                bg-red text-white
+                hover:bg-white hover:text-red
+            "
+        >
             {{ __('Delete source') }}
-        </submit-button>
-    </form-component>
+        </post-button>
+    @endif
 @endcomponent

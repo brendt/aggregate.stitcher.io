@@ -10,7 +10,6 @@ use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 
@@ -35,6 +34,7 @@ class User extends BaseUser
         'allow_emails' => 'boolean',
         'must_reset_password' => 'boolean',
         'password_updated_at' => 'datetime',
+        'verified' => 'boolean',
     ];
 
     public function sources(): HasMany
@@ -93,5 +93,10 @@ class User extends BaseUser
     public function getPrimarySource(): ?Source
     {
         return $this->sources->first();
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->verified === true;
     }
 }

@@ -25,4 +25,9 @@ class SourceViewModel extends ViewModel
     {
         return $this->source()->url;
     }
+
+    public function isExistingSource(): bool
+    {
+        return $this->user->sources->isNotEmpty();
+    }
 }
