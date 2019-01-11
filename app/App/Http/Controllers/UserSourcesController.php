@@ -34,6 +34,8 @@ class UserSourcesController
             event($updateSourceEvent);
         }
 
+        flash(__("Saved"));
+
         return redirect()->action([self::class, 'index']);
     }
 

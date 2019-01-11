@@ -78,4 +78,9 @@ class Source extends Model implements Filterable, Muteable
     {
         return action([SourceMutesController::class, 'delete'], $this);
     }
+
+    public function isInactive(): bool
+    {
+        return ! $this->is_active;
+    }
 }

@@ -72,6 +72,9 @@
                     @endif
                 </ul>
             </nav>
+
+            @include('flash::message')
+
             <div class="flex-1">
                 {{ $slot ?? null }}
             </div>

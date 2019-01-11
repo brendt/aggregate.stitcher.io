@@ -16,18 +16,13 @@ class SourceViewModel extends ViewModel
         $this->user = $user;
     }
 
-    public function source(): Source
+    public function source(): ?Source
     {
-        return $this->user->getPrimarySource() ?? new Source();
+        return $this->user->getPrimarySource();
     }
 
     public function url(): ?string
     {
-        return $this->source()->url;
-    }
-
-    public function isExistingSource(): bool
-    {
-        return $this->user->sources->isNotEmpty();
+        return optional($this->source())->url;
     }
 }

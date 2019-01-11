@@ -25,7 +25,6 @@
 
     <form-component
         :action="action([\App\Http\Controllers\UserSourcesController::class, 'update'])"
-        class="w-2/5"
     >
         <text-field
             name="url"
@@ -33,12 +32,18 @@
             :initial-value="$url"
         ></text-field>
 
+        @if($source && $source->isInactive())
+            <p class="mt-3 text-red">
+                {{ __("Your source is inactive at the moment. You'll recieve an email when it's activated.") }}
+            </p>
+        @endif
+
         <submit-button class="mt-3">
             {{ __('Save') }}
         </submit-button>
     </form-component>
 
-    @if($isExistingSource)
+    @if($source)
         <post-button
             :action="action([\App\Http\Controllers\UserSourcesController::class, 'delete'])"
             class="
