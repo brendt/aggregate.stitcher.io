@@ -45,7 +45,7 @@ class UserProjector implements Projector
     {
         $user = User::whereUuid($event->user_uuid)->firstOrFail();
 
-        $user->verified = true;
+        $user->is_verified = true;
 
         $user->save();
     }

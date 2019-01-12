@@ -27,6 +27,7 @@ class EventServiceProvider extends ServiceProvider
 
         $projectionist->addReactors([
             \Domain\User\Reactors\UserReactor::class,
+            \Domain\Source\Reactors\SourceReactor::class,
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace Domain\Source\Projectors;
 
+use Domain\Source\Events\ActivateSourceEvent;
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Events\DeleteSourceEvent;
 use Domain\Source\Events\UpdateSourceEvent;
@@ -18,6 +19,7 @@ class SourceProjector implements Projector
         CreateSourceEvent::class => 'createSource',
         UpdateSourceEvent::class => 'updateSource',
         DeleteSourceEvent::class => 'deleteSource',
+        ActivateSourceEvent::class => 'activateSource'
     ];
 
     public function createSource(CreateSourceEvent $event): void
@@ -45,5 +47,14 @@ class SourceProjector implements Projector
         $source = Source::whereUuid($event->source_uuid)->firstOrFail();
 
         $source->delete();
+    }
+
+    public function activateSource(ActivateSourceEvent $event): void
+    {
+        $source = Source::whereUuid($event->source_uuid)->firstOrFail();
+
+        $source->is_active = true;
+
+        $source->save();
     }
 }

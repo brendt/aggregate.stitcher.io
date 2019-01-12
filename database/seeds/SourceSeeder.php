@@ -37,7 +37,7 @@ class SourceSeeder extends Seeder
             event(new CreateSourceEvent(
                 $url,
                 $user->uuid,
-                true
+                faker()->boolean
             ));
         }
     }

@@ -5,6 +5,19 @@
 }
 
 .button:hover {
-    background: #000;
+    background-color: #000;
     color: #fff;
+}
+
+.button-small {
+    padding: .5em .8em .4em;
+}
+
+.button-green {
+    border-color: var(--green);
+    color: var(--green);
+}
+
+.button-green:hover {
+    background-color: var(--green);
 }

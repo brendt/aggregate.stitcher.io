@@ -10,6 +10,6 @@ Before submitting your RSS feed, you'll have to verify your account.
 Verify your account
 @endcomponent
 
-Kinder regards<br>
+Kind regards<br>
 Brent
 @endcomponent

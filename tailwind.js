@@ -55,6 +55,7 @@ let colors = {
   'grey-lightest': 'var(--grey-lightest)',
   'white': 'var(--white)',
   'red': 'var(--red)',
+  'green': 'var(--green)',
 }
 
 module.exports = {

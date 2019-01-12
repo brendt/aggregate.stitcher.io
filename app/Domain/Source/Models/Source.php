@@ -5,6 +5,8 @@ namespace Domain\Source\Models;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
 use App\Http\Controllers\SourceMutesController;
+use Domain\User\Models\User;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Support\Filterable;
 use Support\HasUuid;
 use Domain\Model;
@@ -29,6 +31,11 @@ class Source extends Model implements Filterable, Muteable
         });
 
         parent::boot();
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
     public function posts(): HasMany

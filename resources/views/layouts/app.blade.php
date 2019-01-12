@@ -53,6 +53,13 @@
                                 {{ __('Mutes') }}
                             </a>
                         </li>
+                        @if(current_user()->isAdmin())
+                            <li class="mr-4">
+                                <a href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
+                                    {{ __('Admin') }}
+                                </a>
+                            </li>
+                        @endif
                         <li>
                             <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
                                 {{ __('Log out') }}

@@ -29,12 +29,11 @@ class User extends BaseUser
     ];
 
     protected $casts = [
-        'is_active' => 'boolean',
-        'is_super_admin' => 'boolean',
+        'is_admin' => 'boolean',
+        'is_verified' => 'boolean',
         'allow_emails' => 'boolean',
         'must_reset_password' => 'boolean',
         'password_updated_at' => 'datetime',
-        'verified' => 'boolean',
     ];
 
     public function sources(): HasMany
@@ -97,6 +96,11 @@ class User extends BaseUser
 
     public function isVerified(): bool
     {
-        return $this->verified === true;
+        return $this->is_verified === true;
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === true;
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminSourcesController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\SourceMutesController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\UserSourcesController;
 use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\UserVerificationController;
 use App\Http\Controllers\VotesController;
+use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\VerifiedUserMiddleware;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +50,10 @@ Route::middleware('auth')->prefix('profile')->group(function () {
     Route::get('verify/{verificationToken}', [UserVerificationController::class, 'verify']);
 });
 
+Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+    Route::get('sources', [AdminSourcesController::class, 'index']);
+    Route::post('sources/{source}/activate', [AdminSourcesController::class, 'activate']);
+});
 
 Route::get('/', [PostsController::class, 'index']);
 Route::get('latest', [PostsController::class, 'latest']);
