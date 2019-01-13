@@ -35,11 +35,11 @@
                             {{ __('Latest') }}
                         </a>
                     </li>
-                    <li>
-                        <a href="{{ action([\App\Http\Controllers\TopicsController::class, 'index']) }}">
-                            {{ __('Topics') }}
-                        </a>
-                    </li>
+                    {{--<li>--}}
+                        {{--<a href="{{ action([\App\Http\Controllers\TopicsController::class, 'index']) }}">--}}
+                            {{--{{ __('Topics') }}--}}
+                        {{--</a>--}}
+                    {{--</li>--}}
                 </ul>
                 <ul class="flex">
                     @if(current_user())
