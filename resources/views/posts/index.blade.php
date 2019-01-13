@@ -48,5 +48,6 @@
     <post-list
         :posts="$posts"
         :user="$user"
+        :donationIndex="$donationIndex"
     ></post-list>
 @endcomponent

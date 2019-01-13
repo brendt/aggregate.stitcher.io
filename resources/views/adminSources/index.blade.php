@@ -8,18 +8,35 @@
 ])
     <heading>{{ __('Sources') }}</heading>
 
+    <div class="mt-6 mb-6">
+        <filter-button
+            name="is_active"
+            value="0"
+        >
+            {{ __('Inactive sources') }}
+        </filter-button>
+    </div>
+
     <table class="table mt-4">
         <thead>
             <tr>
-                <th>{{ __('Name') }}</th>
-                <th class="text-right">{{ __('Posts') }}</th>
+                <th>
+                    <sort-link name="url">
+                        {{ __('Name') }}
+                    </sort-link>
+                </th>
+                <th class="text-right">
+                    {{--<sort-link name="post_count">--}}
+                        {{ __('Posts') }}
+                    {{--</sort-link>--}}
+                </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
             @foreach ($sources as $source)
                 <tr>
-                    <td class="w-2/5">
+                    <td>
                         <a
                             class="underline hover:no-underline"
                             href="{{ $source->url }}"
@@ -47,7 +64,7 @@
                     </td>
                     <td class="text-right">
                         @if ($source->is_active)
-                            <span class="text-green">
+                            <span class="text-green font-bold">
                                 {{ __('active') }}
                             </span>
                         @else
@@ -58,6 +75,12 @@
                                 {{ __('Activate') }}
                             </post-button>
                         @endif
+
+                        <br>
+
+                        <a href="" class="">
+                            Stats
+                        </a>
                     </td>
                 </tr>
             @endforeach

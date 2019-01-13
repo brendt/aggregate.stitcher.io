@@ -5,10 +5,10 @@
 @endphp
 
 <div class="w-full flex py-6" id="post-vote-{{ $post->uuid }}">
-    <div
-        class="mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
-    >
-         {{--@if ($user) --}}
+    <div class="
+        mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}
+    ">
+         @if ($user)
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
                 data-done="updateVote"
@@ -26,7 +26,7 @@
             >
                 <heart-icon />
             </ajax-button>
-        {{-- @endif --}}
+         @endif
     </div>
 
     <div class="flex-1">

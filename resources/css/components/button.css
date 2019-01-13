@@ -1,11 +1,15 @@
 .button {
+    --button-color: #000;
+
     padding: .8em 1.1em .7em;
-    border: 1px solid #000;
+    border: 1px solid var(--button-color);
+    color: var(--button-color);
     border-radius: 2px;
 }
 
+.button-active,
 .button:hover {
-    background-color: #000;
+    background-color: var(--button-color);
     color: #fff;
 }
 
@@ -14,10 +18,5 @@
 }
 
 .button-green {
-    border-color: var(--green);
-    color: var(--green);
-}
-
-.button-green:hover {
-    background-color: var(--green);
+    --button-color: var(--green);
 }

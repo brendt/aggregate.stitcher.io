@@ -5,6 +5,10 @@
 
 <section class="py-2">
     @foreach($posts as $post)
+        @if ($loop->index === $donationIndex)
+            <donation-card></donation-card>
+        @endif
+
         <post-card
             :post="$post"
             :user="$user"

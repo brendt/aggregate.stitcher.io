@@ -15,9 +15,11 @@
 }
 
 .heart-icon {
-    fill: #8795a1;
+    --heart-icon-color: #8795a1;
+
+    fill: var(--heart-icon-color);
 }
 
 .voted-for .heart-icon {
-    fill: red;
+    --heart-icon-color: var(--red);
 }
