@@ -86,5 +86,12 @@
                 {{ $slot ?? null }}
             </div>
         </div>
+
+        <div class="mt-6 p-8 bg-grey-darker text-grey-light">
+            <div class="max-w-lg mx-auto px-8">
+                <span>&copy; {{ now()->format('Y') }} <a href="https://stitcher.io" target="_blank" rel="noopener noreferrer">stitcher.io</a></span>
+                <span class="ml-4"><a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">privacy &amp; disclaimer</a></span>
+            </div>
+        </div>
     </body>
 </html>

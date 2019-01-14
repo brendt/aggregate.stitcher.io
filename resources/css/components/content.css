@@ -1,0 +1,21 @@
+.content {
+    --content-line-height: 1.5em;
+}
+
+.content p {
+    margin: .8em 0;
+    line-height: var(--content-line-height);
+}
+
+.content ul {
+    padding-left: 2em;
+}
+
+.content li {
+    list-style: disc;
+    line-height: var(--content-line-height);
+}
+
+.content li + li {
+    margin-top: .5em;
+}
