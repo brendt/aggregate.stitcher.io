@@ -151,6 +151,7 @@ ls -dt {{ $releasesDir }}/* | tail -n +6 | xargs -d "\n" rm -rf;
 {{ logMessage("💻  Deploying code changes...") }}
 cd {{ $currentDir }}
 
+eval `ssh-agent -s`
 ssh-add -D
 ssh-add ~/.ssh/id_rsa_aggregate
 
