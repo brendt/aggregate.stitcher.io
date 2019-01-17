@@ -14,13 +14,6 @@
                 New blog posts will automatically be shown on the aggregated overview.")
             }}
         </p>
-
-        <p class="mt-2 mb-4">
-            {{ __("
-                Note that your source will have to be approved before content will show up here.
-                You'll get notified via e-mail when it is approved.
-            ") }}
-        </p>
     </div>
 
     <form-component

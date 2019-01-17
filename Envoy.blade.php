@@ -2,10 +2,10 @@
 require __DIR__.'/vendor/autoload.php';
 (new \Dotenv\Dotenv(__DIR__, '.env'))->load();
 
-$server = "";
+$server = "stitcher.io";
 $userAndServer = 'forge@'. $server;
-$repository = "spatie/{$server}";
-$baseDir = "/home/forge/{$server}";
+$repository = "brendt/aggregate.stitcher.io";
+$baseDir = "/home/forge/aggregate.stitcher.io";
 $releasesDir = "{$baseDir}/releases";
 $currentDir = "{$baseDir}/current";
 $newReleaseName = date('Ymd-His');

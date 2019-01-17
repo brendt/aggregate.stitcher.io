@@ -1,13 +1,12 @@
 @component('layouts.app', [
     'title' => __('Login'),
 ])
-    <div class="flex justify-center">
+    <heading>{{ __('Login') }}</heading>
+
+    <div class="flex mt-4">
         <form-component
             :action="route('login')"
-            class="
-                p-2 w-2/5
-                border border-black
-            "
+            class="p-2"
         >
             <email-field
                 name="email"
