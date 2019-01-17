@@ -16,6 +16,7 @@
         "fideloper/proxy": "~4.0",
         "laracasts/flash": "^3.0",
         "laravel/framework": "5.7.*",
+        "laravel/horizon": "^2.0",
         "laravel/tinker": "~1.0",
         "league/commonmark": "^0.18.1",
         "pda/pheanstalk": "^3.1",
@@ -30,9 +31,9 @@
         "spatie/laravel-view-models": "^1.1",
         "spatie/query-string": "dev-master",
         "symfony/yaml": "^4.2",
+        "themsaid/laravel-mail-preview": "^2.0",
         "zendframework/zend-feed": "^2.10",
-        "zendframework/zend-http": "^2.8",
-        "themsaid/laravel-mail-preview": "^2.0"
+        "zendframework/zend-http": "^2.8"
     },
     "require-dev" : {
         "barryvdh/laravel-ide-helper": "dev-master",
