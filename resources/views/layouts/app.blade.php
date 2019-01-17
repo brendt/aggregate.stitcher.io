@@ -93,5 +93,15 @@
                 <span class="ml-4"><a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">privacy &amp; disclaimer</a></span>
             </div>
         </div>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_id') }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', '{{ config('app.analytics_id') }}');
+        </script>
     </body>
 </html>

@@ -124,6 +124,8 @@ return [
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
 
+    'analytics_id' => env('ANALYTICS_ID'),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
