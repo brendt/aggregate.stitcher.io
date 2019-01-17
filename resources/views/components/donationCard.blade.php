@@ -31,7 +31,7 @@
         </p>
 
         <p class="mt-2 leading-normal text-grey-dark">
-            <a href="" class="underline hover:no-underline">
+            <a href="https://www.patreon.com/brendt" class="underline hover:no-underline">
                 {{ __('Donate via Patreon') }}
             </a>
         </p>
