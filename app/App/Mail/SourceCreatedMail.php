@@ -28,7 +28,7 @@ class SourceCreatedMail extends Mailable implements ShouldQueue
     {
         return $this
             ->to($this->admin->email)
-            ->subject(__("Your source is now active"))
+            ->subject(__("A new source was added"))
             ->markdown('mails.sourceAdded', [
                 'source' => $this->source,
             ]);
