@@ -53,6 +53,9 @@ cd {{ $releasesDir }};
 mkdir {{ $newReleaseDir }};
 
 # Clone the repo
+ssh-add -D
+ssh-add ~/.ssh/id_rsa_aggregate
+
 git clone --depth 1 git@github.com:{{ $repository }} {{ $newReleaseName }}
 
 # Configure sparse checkout
@@ -62,6 +65,8 @@ echo "*" > .git/info/sparse-checkout
 echo "!storage" >> .git/info/sparse-checkout
 echo "!public/build" >> .git/info/sparse-checkout
 git read-tree -mu HEAD
+
+ssh-add -D
 
 # Mark release
 cd {{ $newReleaseDir }}
@@ -144,7 +149,14 @@ ls -dt {{ $releasesDir }}/* | tail -n +6 | xargs -d "\n" rm -rf;
 @task('deployOnlyCode',['on' => 'remote'])
 {{ logMessage("💻  Deploying code changes...") }}
 cd {{ $currentDir }}
+
+ssh-add -D
+ssh-add ~/.ssh/id_rsa_aggregate
+
 git pull origin master
+
+ssh-add -D
+
 php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
