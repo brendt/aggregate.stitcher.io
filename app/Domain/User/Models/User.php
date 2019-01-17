@@ -3,6 +3,7 @@
 namespace Domain\User\Models;
 
 use Domain\Mute\Muteable;
+use Illuminate\Database\Eloquent\Builder;
 use Support\HasUuid;
 use Domain\Mute\Models\Mute;
 use Domain\Post\Models\Post;
@@ -54,6 +55,11 @@ class User extends BaseUser
     public function mutes(): HasMany
     {
         return $this->hasMany(Mute::class);
+    }
+
+    public function scopeWhereAdmin(Builder $builder): Builder
+    {
+        return $builder->where('is_admin', true);
     }
 
     public function votedFor(Post $post): bool

@@ -5,6 +5,7 @@ namespace Domain\Source\Projectors;
 use Domain\Source\Events\ActivateSourceEvent;
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Events\DeleteSourceEvent;
+use Domain\Source\Events\SourceCreatedEvent;
 use Domain\Source\Events\UpdateSourceEvent;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
@@ -26,11 +27,13 @@ class SourceProjector implements Projector
     {
         $user = User::whereUuid($event->user_uuid)->firstOrFail();
 
-        Source::create([
+        $source = Source::create([
             'user_id' => $user->id,
             'url' => $event->url,
             'is_active' => $event->is_active,
         ]);
+
+        event(SourceCreatedEvent::fromSource($source));
     }
 
     public function updateSource(UpdateSourceEvent $event): void

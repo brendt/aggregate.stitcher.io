@@ -10,5 +10,6 @@ $factory->define(User::class, function () {
         'email' => faker()->unique()->safeEmail,
         'password' => bcrypt('secret'),
         'remember_token' => str_random(10),
+        'verification_token' => 'test',
     ];
 });

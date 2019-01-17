@@ -99,10 +99,4 @@ XML
             $this->assertArrayHasKey($tag->id, $entry->tags());
         }
     }
-
-    /** @test */
-    public function it_can_find_categories()
-    {
-
-    }
 }
