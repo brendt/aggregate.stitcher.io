@@ -4,7 +4,7 @@ require __DIR__.'/vendor/autoload.php';
 
 $server = "stitcher.io";
 $userAndServer = 'forge@'. $server;
-$repository = "brendt/aggregate.stitcher.io";
+$repository = "brendt/aggregate.stitcher.io.git";
 $baseDir = "/home/forge/aggregate.stitcher.io";
 $releasesDir = "{$baseDir}/releases";
 $currentDir = "{$baseDir}/current";
