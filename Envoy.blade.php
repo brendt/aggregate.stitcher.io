@@ -53,6 +53,7 @@ cd {{ $releasesDir }};
 mkdir {{ $newReleaseDir }};
 
 # Clone the repo
+eval `ssh-agent -s`
 ssh-add -D
 ssh-add ~/.ssh/id_rsa_aggregate
 
