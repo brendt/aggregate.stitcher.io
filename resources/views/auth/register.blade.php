@@ -4,11 +4,7 @@
     <heading>{{ __('Register') }}</heading>
 
     <p class="mt-4 w-4/5">
-        {{ __("By registering an account, you'll be able to submit your own RSS link, and we'll add your links to the overview.") }}
-
-        {!! __('Already have an account? Click <a href=":register_url" class="link">here</a> to login.', [
-            'register_url' => action([\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
-        ]) !!}
+        {{ __("By registering an account, you'll be able to vote for posts and submit your own blog.") }}
     </p>
 
     <div class="flex mt-4">
@@ -39,4 +35,10 @@
             </div>
         </form-component>
     </div>
+
+    <p class="mt-4">
+        {!! __('Already have an account? Click <a href=":register_url" class="link">here</a> to login.', [
+            'register_url' => action([\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
+        ]) !!}
+    </p>
 @endcomponent
