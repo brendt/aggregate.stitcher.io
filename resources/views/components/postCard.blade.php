@@ -49,7 +49,7 @@
             –
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
-            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}" class="underline">
+            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}" class="link">
                 {{ $post->relative_date }}
             </a>
         </p>
