@@ -17,6 +17,22 @@
         </filter-button>
     </div>
 
+    <div>
+        <form-component
+            :action="action([\App\Http\Controllers\AdminSourcesController::class, 'store'])"
+            class="flex items-baseline"
+        >
+            <text-field
+                name="url"
+                :label="__('RSS url')"
+            ></text-field>
+
+            <submit-button class="ml-4 button-small">
+                {{ __('Add source') }}
+            </submit-button>
+        </form-component>
+    </div>
+
     <table class="table mt-4">
         <thead>
             <tr>

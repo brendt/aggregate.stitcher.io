@@ -34,6 +34,12 @@ class SourceReactor implements EventHandler
     {
         $source = Source::whereUuid($event->source_uuid)->firstOrFail();
 
+        $admin = User::whereAdmin()->first();
+
+        if ($source->user->is($admin)) {
+            return;
+        }
+
         $mail = new SourceAcceptedMail($source);
 
         $this->mailer->send($mail);
@@ -48,6 +54,10 @@ class SourceReactor implements EventHandler
         }
 
         $source = Source::whereUuid($event->source_uuid)->firstOrFail();
+
+        if ($source->user->is($admin)) {
+            return;
+        }
 
         $mail = new SourceCreatedMail($source, $admin);
 
