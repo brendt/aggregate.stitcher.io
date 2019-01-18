@@ -26,7 +26,7 @@
         ></text-field>
 
         @if($source && $source->isInactive())
-            <p class="mt-3 text-red">
+            <p class="mt-3 text-green">
                 {{ __("Your source is inactive at the moment. You'll recieve an email when it's activated.") }}
             </p>
         @endif
