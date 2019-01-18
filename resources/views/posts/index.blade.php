@@ -9,6 +9,12 @@
     'title' => $title,
 ])
     <div class="flex items-baseline mt-6">
+        @isset($currentSource)
+            <heading class="mr-3" nowrap="nowrap">
+                {{ $currentSource->website }}
+            </heading>
+        @endisset
+
         @isset($currentTopic)
             <heading class="mr-3" nowrap="nowrap">
                 {{ $currentTopic->name }}

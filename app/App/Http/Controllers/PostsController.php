@@ -10,6 +10,7 @@ use App\Http\ViewModels\PostsViewModel;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
+use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
 
 class PostsController
@@ -73,6 +74,22 @@ class PostsController
         $viewModel = (new PostsViewModel($posts, $request->user()))
             ->withTopicSlug($tag->topic->slug)
             ->withTagSlug($tag->slug)
+            ->view('posts.index');
+
+        return $viewModel;
+    }
+
+    public function source(
+        PostIndexRequest $request,
+        AllPostsQuery $query,
+        Source $sourceByWebsite
+    ) {
+        $posts = $query->whereSource($sourceByWebsite)->paginate();
+
+        $viewModel = (new PostsViewModel($posts, $request->user()))
+            ->withSourceWebsite($sourceByWebsite->website)
+            ->withTagSlug($request->getTagSlug())
+            ->withTopicSlug($request->getTopicSlug())
             ->view('posts.index');
 
         return $viewModel;

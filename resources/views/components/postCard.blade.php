@@ -47,7 +47,7 @@
         <p class="text-grey-dark text-sm">
             <span class="vote-count">{{ $post->vote_count }}</span> {{ str_plural('vote', $post->vote_count) }}
             –
-            <a href="https://{{ $post->source->website }}" class="underline">{{ $post->source->website }}</a>
+            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}" class="underline">
                 {{ $post->relative_date }}

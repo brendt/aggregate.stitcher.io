@@ -4,6 +4,7 @@ namespace App\Http\ViewModels;
 
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
+use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Spatie\ViewModels\ViewModel;
@@ -11,19 +12,22 @@ use Spatie\ViewModels\ViewModel;
 final class PostsViewModel extends ViewModel
 {
     /** @var \Illuminate\Pagination\LengthAwarePaginator */
-    protected $posts;
+    private $posts;
 
     /** @var \Domain\User\Models\User|null */
-    protected $user;
+    private $user;
 
     /** @var string|null */
-    protected $topicSlug;
+    private $topicSlug;
 
     /** @var string|null */
-    protected $tagSlug;
+    private $tagSlug;
 
     /** @var string|null */
     private $title;
+
+    /** @var string|null */
+    private $sourceWebsite;
 
     public function __construct(
         LengthAwarePaginator $posts,
@@ -54,6 +58,13 @@ final class PostsViewModel extends ViewModel
         return $this;
     }
 
+    public function withSourceWebsite(?string $website): PostsViewModel
+    {
+        $this->sourceWebsite = $website;
+
+        return $this;
+    }
+
     public function user(): ?User
     {
         return $this->user;
@@ -80,6 +91,15 @@ final class PostsViewModel extends ViewModel
         }
 
         return Tag::whereSlug($this->tagSlug)->first();
+    }
+
+    public function currentSource(): ?Source
+    {
+        if (! $this->sourceWebsite) {
+            return null;
+        }
+
+        return Source::whereWebsite($this->sourceWebsite)->first();
     }
 
     public function title(): ?string
