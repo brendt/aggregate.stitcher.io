@@ -12,7 +12,7 @@ class SyncSourcesCommand extends Command
     /** @var \Domain\Source\Actions\SyncSourceAction */
     protected $syncSourceAction;
 
-    protected $signature = 'sync:sources {url?} {--filter-url=}';
+    protected $signature = 'sync:sources {url?} {--filter=}';
 
     protected $description = 'Sync sources';
 
@@ -33,8 +33,8 @@ class SyncSourcesCommand extends Command
             });
         }
 
-        if ($this->option('filter-url')) {
-            $filterUrl = $this->option('filter-url');
+        if ($this->option('filter')) {
+            $filterUrl = $this->option('filter');
 
             $this->syncSourceAction->setFilterUrl($filterUrl);
 
