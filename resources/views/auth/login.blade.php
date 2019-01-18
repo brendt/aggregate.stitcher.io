@@ -6,7 +6,6 @@
     <div class="flex mt-4">
         <form-component
             :action="route('login')"
-            class="p-2"
         >
             <email-field
                 name="email"
@@ -21,17 +20,17 @@
             ></password-field>
 
             <div class="">
+            </div>
+
+            <div class="flex justify-between items-center mt-4">
+                {{--<a class="text-blue hover:text-blue-dark" href="{{ route('password.request') }}">--}}
+                    {{--{{ __('Forgot Your Password?') }}--}}
+                {{--</a>--}}
                 <checkbox-field
                     name="remember"
                     :label="__('Remember me')"
                     class="mb-2 mt-4"
                 ></checkbox-field>
-            </div>
-
-            <div class="flex justify-between items-center">
-                <a class="text-blue hover:text-blue-dark" href="{{ route('password.request') }}">
-                    {{ __('Forgot Your Password?') }}
-                </a>
 
                 <submit-button>
                     {{ __('Login') }}
@@ -39,4 +38,10 @@
             </div>
         </form-component>
     </div>
+
+    <p class="mt-4">
+        {!! __('No account yet? Click <a href=":register_url" class="link">here</a> to register.', [
+            'register_url' => action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])
+        ]) !!}
+    </p>
 @endcomponent

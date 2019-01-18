@@ -1,6 +1,6 @@
 @php
     /** @var \Domain\Post\Models\Post[] $posts */
-    /** @var \Domain\User\Models\User $user */
+    /** @var \Domain\User\Models\User|null $user */
     /** @var \Domain\Post\Models\Tag|null $currentTag */
     /** @var \Domain\Post\Models\Topic|null $currentTopic */
 @endphp
