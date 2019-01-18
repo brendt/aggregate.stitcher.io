@@ -1,13 +1,15 @@
 @php
     /** @var \Domain\Post\Models\Post $post */
     /** @var \Domain\User\Models\User $user */
-    $last = $last ?? true;
 @endphp
 
-<div class="w-full flex py-6" id="post-vote-{{ $post->uuid }}">
+<div
+    id="post-vote-{{ $post->uuid }}"
+    class="w-full flex py-6"
+>
     <div class="
         mr-6 {{ $user && $user->votedFor($post) ? 'voted-for' : null }}
-    ">
+        ">
         @if ($user)
             <ajax-button
                 :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
@@ -36,7 +38,7 @@
     <div class="flex-1">
         <p class="mb-1">
             <a
-                class="text-xl font-bold font-title {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
+                class="text-xl font-bold font-title post-link {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
                 href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
                 rel="noopener noreferrer"
             >

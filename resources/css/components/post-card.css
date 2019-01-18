@@ -1,0 +1,4 @@
+.post-link:visited,
+.post-link.viewed {
+    color: var(--grey-darker);
+}
