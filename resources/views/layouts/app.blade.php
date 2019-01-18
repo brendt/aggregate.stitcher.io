@@ -81,13 +81,13 @@
             @if(! current_user())
                 <li class="ml-4 button button-small button-green">
                     <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
-                        {{ __('Submit your content') }}
+                        {{ __('Submit your blog') }}
                     </a>
                 </li>
             @elseif(! current_user()->getPrimarySource())
                 <li class="ml-4 button button-small button-green">
                     <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
-                        {{ __('Submit your content') }}
+                        {{ __('Submit your blog') }}
                     </a>
                 </li>
             @endif
