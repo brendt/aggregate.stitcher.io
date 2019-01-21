@@ -55,6 +55,7 @@ let colors = {
   'grey-lightest': 'var(--grey-lightest)',
   'white': 'var(--white)',
   'red': 'var(--red)',
+  'red-dark': 'var(--red-dark)',
   'green': 'var(--green)',
 }
 

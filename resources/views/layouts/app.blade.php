@@ -71,21 +71,27 @@
                         {{ __('Log in') }}
                     </a>
                 </li>
-                <li>
+                <li class="mr-4">
                     <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">
                         {{ __('Register') }}
                     </a>
                 </li>
             @endif
 
+            <li class="mr-4 text-red-dark">
+                <a href="https://github.com/brendt/aggregate-roadmap/issues" target="_blank" rel="noopener noreferrer">
+                    {{ __('Report an issue') }}
+                </a>
+            </li>
+
             @if(! current_user())
-                <li class="ml-4 button button-small button-green">
+                <li class="button button-small button-green">
                     <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
                         {{ __('Submit your blog') }}
                     </a>
                 </li>
             @elseif(! current_user()->getPrimarySource())
-                <li class="ml-4 button button-small button-green">
+                <li class="button button-small button-green">
                     <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
                         {{ __('Submit your blog') }}
                     </a>
