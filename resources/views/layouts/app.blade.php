@@ -60,7 +60,7 @@
                         </a>
                     </li>
                 @endif
-                <li>
+                <li class="mr-4">
                     <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
                         {{ __('Log out') }}
                     </a>
