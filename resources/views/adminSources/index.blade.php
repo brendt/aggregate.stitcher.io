@@ -70,7 +70,7 @@
                                 inline-block
                                 mt-1
                             "
-                            href="http://{{ $source->website }}"
+                            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
                             target="_blank"
                             rel="noopener noreferrer"
                         >{{ $source->website }}</a>
