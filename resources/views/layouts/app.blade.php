@@ -79,7 +79,7 @@
             @endif
 
             <li class="text-red-dark">
-                <a href="https://github.com/brendt/aggregate-roadmap/issues" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
                     {{ __('Report an issue') }}
                 </a>
             </li>
