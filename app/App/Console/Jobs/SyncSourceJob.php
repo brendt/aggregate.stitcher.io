@@ -15,19 +15,19 @@ class SyncSourceJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     /** @var \Domain\Source\Actions\SyncSourceAction */
-    protected $updateSourceAction;
+    protected $syncSourceAction;
 
     /** @var \Domain\Source\Models\Source */
     protected $source;
 
     public function __construct(SyncSourceAction $updateSourceAction, Source $source)
     {
-        $this->updateSourceAction = $updateSourceAction;
+        $this->syncSourceAction = $updateSourceAction;
         $this->source = $source;
     }
 
     public function handle()
     {
-        $this->updateSourceAction->__invoke($this->source);
+        $this->syncSourceAction->__invoke($this->source);
     }
 }
