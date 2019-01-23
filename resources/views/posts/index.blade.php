@@ -8,57 +8,26 @@
 @component('layouts.app', [
     'title' => $title,
 ])
-    <div class="flex items-baseline mt-6 justify-between">
-        <div class="flex">
-            @isset($currentSource)
-                <heading class="mr-3" nowrap="nowrap">
-                    {{ $currentSource->website }}
-                </heading>
-            @endisset
-
-            @isset($currentTopic)
-                <heading class="mr-3" nowrap="nowrap">
-                    {{ $currentTopic->name }}
-                </heading>
-            @endisset
-
-            @isset($currentTag)
-                <p class="text-sm">
-                    <tag :tag="$currentTag"></tag>
-                </p>
-
-                @if ($user)
-                    @if(! $user->hasMuted($currentTag))
-                        <post-button
-                            :action="$currentTag->getMuteUrl()"
-                            class="ml-2"
-                        >
-                        <span class="
-                            underline
-                            text-grey text-xs
-                            hover:no-underline
-                        ">
-                            {{ __('Mute tag') }}
-                        </span>
-                        </post-button>
-                    @endif
-                @endif
-            @endisset
-
-            @if(!isset($currentTag) && !isset($currentTopic))
-                <heading nowrap="nowrap">
-                    {{ $title }}
-                </heading>
-            @endif
-        </div>
-
-        @if($user)
-            <div class="text-sm">
-                <a href="{{ filter('unread') }}" class="button button-small {{ filter_active('unread') ? 'button-active' : '' }}">
-                    {{ __('Unread') }}
-                </a>
-            </div>
-        @endif
+    <div class="flex items-baseline justify-between">
+        <nav class="text-sm text-grey-dark leading-normal pt-2 h-12 flex items-center border-b border-grey-lighter w-full">
+            <ul class="flex">
+                <li class="mr-6 text-black">
+                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
+                        {{ __('All') }}
+                    </a>
+                </li>
+                <li class="mr-6">
+                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
+                        {{ __('Latest') }}
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
+                        {{ __('Tags') }} <i class="fas fa-caret-down ml-1/2"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <post-list

@@ -2,23 +2,14 @@
 $donationLink = 'https://www.patreon.com/brendt';
 @endphp
 
-<div class="w-full flex py-6">
-    <div class="mr-6 flex items-center">
-        <heart-icon color="var(--green)"/>
-    </div>
-
-    <div class="flex-1">
-        <p class="mb-2">
-            <a
-                class="text-xl font-bold font-title"
-                href="{{ $donationLink }}"
-                target="_blank" rel="noopener noreferrer"
-            >
-                {{ __('The shameless donation block') }}
-            </a>
-        </p>
-
-        <p class="text-grey-dark leading-normal">
+<article class="p-8 -mx-4 -mt-px bg-yellow">
+    <header class="text-xl font-bold font-title mb-2">
+        <a href="{{ $donationLink }}" target="_blank" rel="noopener noreferrer">
+            {{ __('The shameless donation block') }}
+        </a>
+    </header>
+    <section class="leading-normal">
+        <p>
             {{ __("
                 We're not relying on ads to keep aggregate.stitcher.io free.
                 Bills need to be paid though.
@@ -27,14 +18,14 @@ $donationLink = 'https://www.patreon.com/brendt';
             ") }}
         </p>
 
-        <p class="text-grey-dark leading-normal">
+        <p>
             {{ __("
-               Please only do so if you're freely able to and
-               if donating doesn't affect your day-to-day life.
+                Please only do so if you're freely able to and
+                if donating doesn't affect your day-to-day life.
             ") }}
         </p>
 
-        <p class="mt-2 leading-normal text-grey-dark">
+        <p class="mt-2">
             <a
                 href="{{ $donationLink }}"
                 class="link"
@@ -42,5 +33,5 @@ $donationLink = 'https://www.patreon.com/brendt';
                 {{ __('Donate via Patreon') }}
             </a>
         </p>
-    </div>
-</div>
+    </section>
+</article>
