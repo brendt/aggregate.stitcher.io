@@ -21,9 +21,7 @@
         <p class="text-grey-dark text-sm">
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
-            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}" class="link">
-                {{ $post->relative_date }}
-            </a>
+            {{ $post->relative_date }}
         </p>
 
         <div class="flex items-baseline mt-2">
@@ -40,13 +38,13 @@
                     <post-button
                         :action="$post->source->getMuteUrl()"
                     >
-                    <span class="
-                        underline
-                        text-grey text-sm
-                        hover:no-underline
-                    ">
-                        {{ __('Mute source') }}
-                    </span>
+                        <span class="
+                            underline
+                            text-grey text-sm
+                            hover:no-underline
+                        ">
+                            {{ __('Mute source') }}
+                        </span>
                     </post-button>
                 @endif
             @endif

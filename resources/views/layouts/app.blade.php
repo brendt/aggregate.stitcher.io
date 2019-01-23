@@ -22,100 +22,111 @@
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
     <script defer src="{{ mix('js/app.js') }}"></script>
 </head>
-<body class="bg-black p-3">
-<div class="bg-white">
-    <div class="max-w-xl mx-auto flex pt-8">
-        <nav class="w-1/4 pr-8">
-            <header class="h-12 pt-2 flex items-center mb-8" style="padding-bottom: 0.375rem">
-                <strong class="font-title text-2xl text-primary font-bold">aggregate</strong>
-                <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
-            </header>
-            <ul class="text-sm">
-                @if(current_user())
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
-                            {{ __('My content') }}
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\UserMutesController::class, 'index']) }}">
-                            {{ __('Mutes') }}
-                        </a>
-                    </li>
-                    @if(current_user()->isAdmin())
+<body class="bg-black p-3 min-h-screen flex flex-col" style="min-width: 60rem">
+    <div class="bg-white flex-1 flex pb-8">
+        <div class="w-full max-w-lg ml-16 flex pt-8">
+            <nav class="w-1/3 pr-12 flex flex-col justify-between relative">
+                <header class="h-12 pt-2 flex items-center mb-8 sticky pin-t" style="padding-bottom: 0.375rem">
+                    <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
+                    <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
+                </header>
+                <ul class="text-sm sticky" style="bottom: 1rem">
+                    @if(current_user())
                         <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
-                                {{ __('Admin') }}
+                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
+                                {{ __('My content') }}
+                            </a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\UserMutesController::class, 'index']) }}">
+                                {{ __('Mutes') }}
+                            </a>
+                        </li>
+                        @if(current_user()->isAdmin())
+                            <li class="mb-3">
+                                <a href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
+                                    {{ __('Admin') }}
+                                </a>
+                            </li>
+                        @endif
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
+                                {{ __('Log out') }}
+                            </a>
+                        </li>
+                    @else
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}">
+                                <i class="fas fa-sign-in-alt w-6 opacity-75"></i> {{ __('Log in') }}
+                            </a>
+                        </li>
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">
+                                <i class="fas fa-user-plus w-6 opacity-75"></i> {{ __('Register') }}
                             </a>
                         </li>
                     @endif
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
-                            {{ __('Log out') }}
-                        </a>
-                    </li>
-                @else
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}">
-                            <i class="fas fa-user w-6 opacity-75"></i> {{ __('Log in') }}
-                        </a>
-                    </li>
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">
-                            <i class="fas fa-user-plus w-6 opacity-75"></i> {{ __('Register') }}
-                        </a>
-                    </li>
-                @endif
 
-                @if(! current_user())
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
-                            <i class="fas fa-pencil-alt w-6 opacity-75"></i> {{ __('Submit your blog') }}
+                    @if(! current_user())
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
+                                <i class="fas fa-plus-circle w-6 opacity-75"></i> {{ __('Submit your blog') }}
+                            </a>
+                        </li>
+                    @elseif(! current_user()->getPrimarySource())
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
+                                <i class="fas fa-pencil-alt w-6 opacity-75"></i> {{ __('Submit your blog') }}
+                            </a>
+                        </li>
+                    @endif
+
+                    <li>
+                        <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
+                            <i class="fas fa-bug w-6 opacity-75"></i> {{ __('Report an issue') }}
                         </a>
                     </li>
-                @elseif(! current_user()->getPrimarySource())
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
-                            <i class="fas fa-pencil-alt w-6 opacity-75"></i> {{ __('Submit your blog') }}
-                        </a>
-                    </li>
-                @endif
+                </ul>
+            </nav>
 
-                <li class="mb-3">
-                    <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-bug w-6 opacity-75"></i> {{ __('Report an issue') }}
-                    </a>
-                </li>
-            </ul>
-        </nav>
+            {{-- @include('flash::message') --}}
 
-        {{-- @include('flash::message') --}}
-
-        <div class="flex-1">
-            {{ $slot ?? null }}
+            <div class="flex-1">
+                {{ $slot ?? null }}
+            </div>
         </div>
     </div>
 
-    <footer class="mt-6 p-8 bg-black text-grey-light">
-        <div class="max-w-lg mx-auto px-8">
-            <span>&copy; {{ now()->format('Y') }} <a href="https://stitcher.io" target="_blank" rel="noopener noreferrer">stitcher.io</a></span>
-            <span class="ml-4"><a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">privacy &amp; disclaimer</a></span>
+    <footer class="pt-4 bg-black text-grey text-sm">
+        <div class="w-full max-w-lg ml-16">
+            <div class="w-2/3 ml-auto">
+                <span>
+                    &copy; {{ now()->format('Y') }}
+                    <a href="https://stitcher.io" target="_blank" rel="noopener noreferrer">
+                        stitcher.io
+                    </a>
+                </span>
+                <span class="ml-6">
+                    <a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">
+                        Privacy &amp; disclaimer
+                    </a>
+                </span>
+            </div>
         </div>
     </footer>
-</div>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_id') }}"></script>
-<script>
-    window.dataLayer = window.dataLayer || [];
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('app.analytics_id') }}"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-        dataLayer.push(arguments);
-    }
+        function gtag() {
+            dataLayer.push(arguments);
+        }
 
-    gtag('js', new Date());
+        gtag('js', new Date());
 
-    gtag('config', '{{ config('app.analytics_id') }}');
-</script>
+        gtag('config', '{{ config('app.analytics_id') }}');
+    </script>
 </body>
 </html>

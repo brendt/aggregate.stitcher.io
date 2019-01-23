@@ -21,6 +21,4 @@
     @endif
 </section>
 
-<div class="mt-4 mb-4">
-    {{ $posts->render() }}
-</div>
+{{ $posts->render() }}
