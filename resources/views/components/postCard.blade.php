@@ -12,7 +12,7 @@
             <a
                 class="text-xl font-bold font-title post-link {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
                 href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
-                rel="noopener noreferrer"
+                target="_blank" rel="noopener noreferrer"
             >
                 {{ $post->title }}
             </a>
