@@ -2,17 +2,17 @@
 
 namespace Domain\User\Models;
 
-use Domain\Mute\Muteable;
-use Illuminate\Database\Eloquent\Builder;
-use Support\HasUuid;
 use Domain\Mute\Models\Mute;
+use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Support\HasUuid;
 
 class User extends BaseUser
 {

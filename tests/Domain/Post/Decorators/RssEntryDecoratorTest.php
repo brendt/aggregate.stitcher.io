@@ -23,7 +23,8 @@ class RssEntryDecoratorTest extends TestCase
     /** @test */
     public function content_encoded_can_be_parsed()
     {
-        $entry = $this->factory->create(<<<XML
+        $entry = $this->factory->create(
+            <<<XML
 <item>
     <title>A</title>
     <description>no match</description>
@@ -40,7 +41,8 @@ XML
     /** @test */
     public function content_can_be_parsed()
     {
-        $entry = $this->factory->create(<<<XML
+        $entry = $this->factory->create(
+            <<<XML
 <item>
     <title>A</title>
     <description>no match</description>
@@ -56,7 +58,8 @@ XML
     /** @test */
     public function description_can_be_parsed()
     {
-        $entry = $this->factory->create(<<<XML
+        $entry = $this->factory->create(
+            <<<XML
 <item>
     <title>A</title>
     <summary>no match</summary>
@@ -71,7 +74,8 @@ XML
     /** @test */
     public function summary_can_be_parsed()
     {
-        $entry = $this->factory->create(<<<XML
+        $entry = $this->factory->create(
+            <<<XML
 <item>
     <title>A</title>
     <summary>match</summary>
@@ -88,7 +92,8 @@ XML
         foreach (Tag::all() as $tag) {
             $keyword = collect($tag->keywords)->random();
 
-            $entry = $this->factory->create(<<<XML
+            $entry = $this->factory->create(
+                <<<XML
 <item>
     <title>A</title>
     <summary>$keyword $keyword</summary>

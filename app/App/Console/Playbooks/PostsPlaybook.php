@@ -4,11 +4,6 @@ namespace App\Console\Playbooks;
 
 use App\Console\Jobs\SyncSourceJob;
 use App\Console\Playbook;
-use Domain\Post\DTO\PostData;
-use Domain\Post\Events\AddViewEvent;
-use Domain\Post\Events\AddVoteEvent;
-use Domain\Post\Events\CreatePostEvent;
-use Domain\Post\Models\Post;
 use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\Models\Source;
 use Symfony\Component\Console\Input\InputInterface;

@@ -23,7 +23,8 @@ class RssEntryDecoratorFactory
 
     public function createEntry(string $content): AbstractEntry
     {
-        $feed = Reader::importString(<<<XML
+        $feed = Reader::importString(
+            <<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
      xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/">

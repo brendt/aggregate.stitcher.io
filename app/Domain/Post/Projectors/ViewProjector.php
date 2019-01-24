@@ -2,8 +2,8 @@
 
 namespace Domain\Post\Projectors;
 
-use Domain\Post\Events\AddViewEvent;
 use Domain\Post\Actions\UpdateViewCountAction;
+use Domain\Post\Events\AddViewEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\View;
 use Domain\User\Models\User;

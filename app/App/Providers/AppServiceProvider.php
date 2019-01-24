@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Support\Markdown;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
@@ -10,6 +9,7 @@ use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use Spatie\BladeX\BladeX;
 use Spatie\QueryString\QueryString;
+use Support\Markdown;
 use Support\Rss\Reader;
 use Support\Rss\RssReader;
 

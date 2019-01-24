@@ -4,8 +4,8 @@ namespace Tests\Domain\Mute\Projectors;
 
 use Domain\Mute\Events\MuteEvent;
 use Domain\Mute\Events\UnmuteEvent;
-use Domain\Mute\Projectors\MuteProjector;
 use Domain\Mute\Models\Mute;
+use Domain\Mute\Projectors\MuteProjector;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Tests\TestCase;

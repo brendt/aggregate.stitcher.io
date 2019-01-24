@@ -17,7 +17,8 @@ class MockFeedInterface implements FeedInterface
 
         $date = $extra['date'] ?? '2019-01-01';
 
-        $feed->array[] = RssEntryDecoratorFactory::new()->createEntry(<<<XML
+        $feed->array[] = RssEntryDecoratorFactory::new()->createEntry(
+            <<<XML
 <item>
     <title>$url</title>
     <updated>$date</updated>

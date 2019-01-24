@@ -20,7 +20,7 @@ class SourceProjector implements Projector
         CreateSourceEvent::class => 'createSource',
         UpdateSourceEvent::class => 'updateSource',
         DeleteSourceEvent::class => 'deleteSource',
-        ActivateSourceEvent::class => 'activateSource'
+        ActivateSourceEvent::class => 'activateSource',
     ];
 
     public function createSource(CreateSourceEvent $event): void

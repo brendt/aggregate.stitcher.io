@@ -2,9 +2,9 @@
 
 namespace Domain\User\Projectors;
 
+use Domain\User\Events\CreateUserEvent;
 use Domain\User\Events\ResendVerificationEvent;
 use Domain\User\Events\VerifyUserEvent;
-use Domain\User\Events\CreateUserEvent;
 use Domain\User\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Ramsey\Uuid\Uuid;
@@ -18,7 +18,7 @@ class UserProjector implements Projector
     public $handlesEvents = [
         CreateUserEvent::class => 'createUser',
         VerifyUserEvent::class => 'verifyUser',
-        ResendVerificationEvent::class => 'resendVerification'
+        ResendVerificationEvent::class => 'resendVerification',
     ];
 
     public function createUser(CreateUserEvent $event): void

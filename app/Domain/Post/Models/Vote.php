@@ -2,11 +2,11 @@
 
 namespace Domain\Post\Models;
 
-use Support\HasUuid;
 use Domain\Model;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Support\HasUuid;
 
 class Vote extends Model
 {

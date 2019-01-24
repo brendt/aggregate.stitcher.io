@@ -53,7 +53,7 @@ class PostData extends DataTransferObject
             'title' => $decoratedEntry->title(),
             'date_created' => $decoratedEntry->createdAt(),
             'teaser' => '',
-            'tag_ids' => $decoratedEntry->tags()->toArray()
+            'tag_ids' => $decoratedEntry->tags()->toArray(),
         ]);
     }
 

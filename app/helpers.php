@@ -1,10 +1,10 @@
 <?php
 
-use Support\Filterable;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;
 use Spatie\QueryString\QueryString;
+use Support\Filterable;
 
 function locale()
 {
