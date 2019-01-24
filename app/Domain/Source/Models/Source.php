@@ -2,6 +2,7 @@
 
 namespace Domain\Source\Models;
 
+use Carbon\Carbon;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
 use App\Http\Controllers\SourceMutesController;
@@ -89,5 +90,22 @@ class Source extends Model implements Filterable, Muteable
     public function isInactive(): bool
     {
         return ! $this->is_active;
+    }
+
+    public function hasOtherPostOnSameDay(string $url, Carbon $date): bool
+    {
+        foreach ($this->posts()->get() as $post) {
+            if ($post->url === $url) {
+                continue;
+            }
+
+            if (! $post->date_created->isSameDay($date)) {
+                continue;
+            }
+
+            return true;
+        }
+
+        return false;
     }
 }

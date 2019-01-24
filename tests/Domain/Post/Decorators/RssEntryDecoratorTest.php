@@ -3,12 +3,12 @@
 namespace Tests\Domain\Post\Decorators;
 
 use Domain\Post\Models\Tag;
-use Tests\Domain\Factories\RssEntryDecoratorFactory;
+use Tests\Factories\RssEntryDecoratorFactory;
 use Tests\TestCase;
 
 class RssEntryDecoratorTest extends TestCase
 {
-    /** @var \Tests\Domain\Factories\RssEntryDecoratorFactory */
+    /** @var \Tests\Factories\RssEntryDecoratorFactory */
     private $factory;
 
     protected function setUp()

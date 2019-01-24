@@ -10,6 +10,8 @@ use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use Spatie\BladeX\BladeX;
 use Spatie\QueryString\QueryString;
+use Support\Rss\Reader;
+use Support\Rss\RssReader;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -45,6 +47,10 @@ class AppServiceProvider extends ServiceProvider
             $convertor = new CommonMarkConverter([], $environment);
 
             return new Markdown($convertor);
+        });
+
+        $this->app->singleton(Reader::class, function () {
+            return new RssReader();
         });
     }
 }

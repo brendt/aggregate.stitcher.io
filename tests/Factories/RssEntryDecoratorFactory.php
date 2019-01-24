@@ -1,9 +1,10 @@
 <?php
 
-namespace Tests\Domain\Factories;
+namespace Tests\Factories;
 
 use Domain\Post\Decorators\RssEntryDecorator;
 use Domain\Post\Models\Tag;
+use Zend\Feed\Reader\Entry\AbstractEntry;
 use Zend\Feed\Reader\Reader;
 
 class RssEntryDecoratorFactory
@@ -15,6 +16,13 @@ class RssEntryDecoratorFactory
 
     public function create(string $content): RssEntryDecorator
     {
+        $entry = $this->createEntry($content);
+
+        return new RssEntryDecorator($entry, Tag::all());
+    }
+
+    public function createEntry(string $content): AbstractEntry
+    {
         $feed = Reader::importString(<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -25,9 +33,8 @@ class RssEntryDecoratorFactory
     </channel>
 </rss>
 XML
-);
-        $entry = $feed->current();
+        );
 
-        return new RssEntryDecorator($entry, Tag::all());
+        return $feed->current();
     }
 }
