@@ -14,5 +14,5 @@ public/storage
 storage/*.key
 vendor
 yarn-error.log
-ggrgtr
 !public/vendor
+aggregate
