@@ -16,12 +16,6 @@ class DatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->call(UserSeeder::class);
-        $this->call(TagSeeder::class);
-        $this->call(SourceSeeder::class);
-
-        if ($this->withPosts) {
-            $this->call(PostSeeder::class);
-        }
+        throw new RuntimeException("Cannot run seeders this way, please use `artisan playbook:run {playbook} {--clean}`");
     }
 }
