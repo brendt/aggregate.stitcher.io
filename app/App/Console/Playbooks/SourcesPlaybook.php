@@ -27,6 +27,7 @@ final class SourcesPlaybook extends Playbook
     {
         $sources = [
             'https://stitcher.io/rss' => 'brent@stitcher.io',
+            'https://sebastiandedeyne.com/feed' => 'info@sebastiandedeyne.com',
         ];
 
         foreach ($sources as $url => $email) {
