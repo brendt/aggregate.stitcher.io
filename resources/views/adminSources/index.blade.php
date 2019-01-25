@@ -56,8 +56,6 @@
                         <a
                             class="underline hover:no-underline"
                             href="{{ $source->url }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
                         >
                             {{ $source->url }}
                         </a>
@@ -70,10 +68,18 @@
                                 inline-block
                                 mt-1
                             "
-                            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
-                            target="_blank"
-                            rel="noopener noreferrer"
+                            href="{{ $source->website }}"
                         >{{ $source->website }}</a>
+                        <a
+                            class="
+                                underline
+                                hover:no-underline
+                                text-grey-darker
+                                inline-block
+                                mt-1
+                            "
+                            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
+                        >{{ __('Show on aggregate') }}</a>
                     </td>
                     <td class="text-right">
                         {{ $source->posts->count() }}
