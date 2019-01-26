@@ -5,6 +5,7 @@ namespace Domain\Post\Decorators;
 use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Support\Collection;
+use SimpleXMLElement;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
 class RssEntryDecorator extends AbstractEntry
@@ -65,53 +66,6 @@ class RssEntryDecorator extends AbstractEntry
         return $this->decoratedEntry->getLink();
     }
 
-    public function categories(): array
-    {
-        dd($this->simpleDom);
-    }
-
-    public function tags(): Collection
-    {
-        $searchContent = $this->title() . ' ' . $this->getContent();
-
-        $foundTags = [];
-
-        foreach ($this->tags as $tag) {
-            $foundTags[$tag->id] = [];
-
-            foreach ($tag->keywords as $keyword) {
-                $matches = [];
-
-                preg_match_all("/\b({$keyword})\b/i", $searchContent, $matches);
-
-                $foundTags[$tag->id][$keyword] = count($matches[0]);
-            }
-        }
-
-        $threshold = 2;
-
-        $tagsByVotes = collect($foundTags)
-            ->map(function (array $keywords) {
-                return array_reduce($keywords, function (?int $sum, int $current) {
-                    $sum = $sum ?? 0;
-
-                    return $sum + $current;
-                });
-            })
-            ->filter(function (int $count) use ($threshold) {
-                return $count >= $threshold;
-            })
-            ->sortByDesc(function (int $count) {
-                return $count;
-            });
-
-        return $tagsByVotes
-            ->take(2)
-            ->map(function (int $count, int $id) {
-                return $id;
-            });
-    }
-
     public function getContent(): string
     {
         $contentTags = [
@@ -140,5 +94,91 @@ class RssEntryDecorator extends AbstractEntry
         }
 
         return '';
+    }
+
+    public function categories(): array
+    {
+        $categories = [];
+
+        foreach ($this->simpleDom->category ?? [] as $item) {
+            if (is_string($item)) {
+                $categories[] = $item;
+
+                continue;
+            }
+
+            $categories[] = (string) $item;
+        }
+
+        return $categories;
+    }
+
+    public function tags(): Collection
+    {
+        $tagsByCategory = $this->tagsByCategory($this->categories());
+
+        $tagsByContent = $this->tagsByContent($this->title() . ' ' . $this->getContent());
+
+        $tags = [];
+
+        foreach ($tagsByCategory as $value) {
+            $tags[] = $value;
+        }
+
+        foreach ($tagsByContent as $value) {
+            $tags[] = $value;
+        }
+
+        return collect($tags);
+    }
+
+    private function tagsByCategory(array $categories): Collection
+    {
+        $foundTags = [];
+
+        foreach ($this->tags as $tag) {
+            foreach ($tag->getAllKeywords() as $keyword) {
+                if (in_array($keyword, $categories)) {
+                    $foundTags[$tag->id] = 1;
+                }
+            }
+        }
+
+        return collect($foundTags);
+    }
+
+    private function tagsByContent(string $searchContent): Collection
+    {
+        $foundTags = [];
+
+        foreach ($this->tags as $tag) {
+            $foundTags[$tag->id] = [];
+
+            foreach ($tag->getAllKeywords() as $keyword) {
+                $matches = [];
+
+                preg_match_all("/\b({$keyword})\b/i", $searchContent, $matches);
+
+                $foundTags[$tag->id][$keyword] = count($matches[0]);
+            }
+        }
+
+        $threshold = 2;
+
+        return collect($foundTags)
+            ->map(function (array $keywords) {
+                return array_reduce($keywords, function (?int $sum, int $current) {
+                    $sum = $sum ?? 0;
+
+                    return $sum + $current;
+                });
+            })
+            ->filter(function (int $count) use ($threshold) {
+                return $count >= $threshold;
+            })
+            ->sortByDesc(function (int $count) {
+                return $count;
+            })
+            ->keys();
     }
 }

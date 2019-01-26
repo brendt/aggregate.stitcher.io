@@ -67,4 +67,13 @@ class Tag extends Model implements Filterable, Muteable
     {
         return action([TagMutesController::class, 'delete'], $this);
     }
+
+    public function getAllKeywords(): array
+    {
+        $keywords = $this->keywords;
+
+        $keywords[] = $this->name;
+
+        return $keywords;
+    }
 }

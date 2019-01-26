@@ -101,7 +101,30 @@ XML
 XML
             );
 
-            $this->assertArrayHasKey($tag->id, $entry->tags());
+            $this->assertEquals([$tag->id], $entry->tags()->toArray());
         }
+    }
+
+    /** @test */
+    public function tags_from_categories()
+    {
+        $entry = $this->factory->create(
+            <<<XML
+<item>
+    <title>A</title>
+    <summary>A</summary>
+    <category><![CDATA[javascript]]></category>
+    <category>php</category>
+</item>
+XML
+        );
+
+        $javascript = Tag::whereName('javascript')->first();
+
+        $php = Tag::whereName('php')->first();
+
+        $tags = $entry->tags();
+
+        $this->assertEquals([$php->id, $javascript->id], $tags->values()->toArray());
     }
 }

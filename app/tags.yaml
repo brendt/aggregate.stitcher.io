@@ -3,6 +3,7 @@ topics:
   - Music
   - Movies
   - Misc
+  - Life
 
 tags:
   php:
@@ -124,3 +125,9 @@ tags:
       - software
       - programmer
       - programmers
+
+  mentoring:
+    color: '#8791c2'
+    topic: Life
+    keywords:
+      - mentoring
