@@ -163,7 +163,7 @@ class RssEntryDecorator extends AbstractEntry
             }
         }
 
-        $threshold = 2;
+        $threshold = 1;
 
         return collect($foundTags)
             ->map(function (array $keywords) {
