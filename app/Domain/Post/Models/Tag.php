@@ -2,23 +2,23 @@
 
 namespace Domain\Post\Models;
 
+use App\Http\Controllers\TagMutesController;
+use Domain\Model;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
-use App\Http\Controllers\TagMutesController;
-use Support\Filterable;
-use Support\HasSlug;
-use Support\HasUuid;
-use Domain\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Support\Filterable;
+use Support\HasSlug;
+use Support\HasUuid;
 
 class Tag extends Model implements Filterable, Muteable
 {
     use HasUuid, HasMutes, HasSlug;
 
     protected $casts = [
-        'keywords' => 'array'
+        'keywords' => 'array',
     ];
 
     public function posts(): HasManyThrough

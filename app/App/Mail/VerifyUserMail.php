@@ -5,9 +5,9 @@ namespace App\Mail;
 use App\Http\Controllers\UserVerificationController;
 use Domain\User\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class VerifyUserMail extends Mailable implements ShouldQueue
 {

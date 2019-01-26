@@ -155,6 +155,4 @@ class PostTest extends TestCase
 
         $this->assertEquals(0, Post::whereNotMuted($this->user)->count());
     }
-
-
 }

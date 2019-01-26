@@ -1,4 +1,4 @@
-<div class="{{ $class ?? null }}">
+<div class="flex items-center {{ $class ?? null }}">
     <input
         class=""
         type="checkbox"
@@ -7,7 +7,7 @@
         {{ old($name) ? 'checked' : '' }}
     >
 
-    <label class="" for="{{ $name }}">
+    <label class="ml-2" style="margin-top: 0.3rem" for="{{ $name }}">
         {{ $label }}
     </label>
 </div>

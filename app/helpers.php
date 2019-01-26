@@ -1,10 +1,10 @@
 <?php
 
-use Support\Filterable;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;
 use Spatie\QueryString\QueryString;
+use Support\Filterable;
 
 function locale()
 {
@@ -84,4 +84,15 @@ function clear_filter(string $name): string
     $queryString = app(QueryString::class);
 
     return $queryString->clear($name);
+}
+
+function is_link_active(string $href): bool
+{
+    $request = app(\Illuminate\Http\Request::class);
+
+    $uriPath = parse_url($request->getUri(), PHP_URL_PATH) ?? '/';
+
+    $hrefPath = parse_url($href, PHP_URL_PATH) ?? '/';
+
+    return  $uriPath === $hrefPath;
 }

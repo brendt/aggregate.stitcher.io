@@ -2,8 +2,8 @@
 
 namespace Domain\Post\Events;
 
-use Domain\Post\DTO\PostData;
 use Carbon\Carbon;
+use Domain\Post\DTO\PostData;
 use Domain\Post\Models\Post;
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\EventProjector\ShouldBeStored;

@@ -5,3 +5,7 @@
 .link:hover {
     text-decoration: none;
 }
+
+.link-active {
+    color: #000;
+}

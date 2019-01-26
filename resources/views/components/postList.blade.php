@@ -3,7 +3,7 @@
     /** @var \Domain\User\Models\User $user */
 @endphp
 
-<section class="py-2">
+<section>
     @foreach($posts as $post)
         @if ($loop->index === $donationIndex)
             <donation-card></donation-card>
@@ -21,6 +21,4 @@
     @endif
 </section>
 
-<div class="mt-4 mb-4">
-    {{ $posts->render() }}
-</div>
+{{ $posts->render() }}

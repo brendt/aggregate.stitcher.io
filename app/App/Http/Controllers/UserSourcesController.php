@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SourceRequest;
+use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Events\DeleteSourceEvent;
 use Domain\Source\Events\UpdateSourceEvent;
-use App\Http\Requests\SourceRequest;
-use App\Http\ViewModels\SourceViewModel;
 use Domain\User\Models\User;
 
 class UserSourcesController

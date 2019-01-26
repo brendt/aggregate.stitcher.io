@@ -13,6 +13,8 @@
     --red: #fc3149;
     --red-dark: #CC1F1A;
     --green: #38C172;
+    --yellow: #fdfde5;
+    --primary: #fc3149;
 }
 
 * {
@@ -22,11 +24,11 @@
     padding: 0;
     color: inherit;
     font: inherit;
+}
 
-    &:after,
-    &:before {
-        box-sizing: inherit;
-    }
+*:after,
+*:before {
+    box-sizing: inherit;
 }
 
 html {
@@ -52,6 +54,5 @@ ul {
 
 img,
 svg {
-    display: block;
     vertical-align: middle;
 }

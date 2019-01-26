@@ -18,19 +18,12 @@
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
-            class="
-                outline-none
-                p-2
-                rounded-sm
-                bg-grey-lighter focus:bg-white
-                focus:border-blue-light
-                {{ $errors->has($name) ? 'border-red border' : 'border-transparent' }}
-            "
+            class="outline-none p-2 rounded-sm bg-grey-lighter"
         >
     </div>
     <div class="flex justify-end">
         @if ($errors->has($name))
-            <span class="text-red">
+            <span class="text-red text-sm mb-2">
                 {{ $errors->first($name) }}
             </span>
         @endif

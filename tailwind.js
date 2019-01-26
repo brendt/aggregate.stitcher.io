@@ -57,6 +57,8 @@ let colors = {
   'red': 'var(--red)',
   'red-dark': 'var(--red-dark)',
   'green': 'var(--green)',
+  'yellow': 'var(--yellow)',
+  'primary': 'var(--primary)',
 }
 
 module.exports = {
@@ -123,6 +125,9 @@ module.exports = {
   */
 
   fonts: {
+    'title': [
+      'Volkhov',
+    ],
     'sans': [
       'Hind',
       'system-ui',
@@ -585,6 +590,8 @@ module.exports = {
     '8': '2rem',
     '12': '3rem',
     '16': '4rem',
+    '20': '5rem',
+    '24': '6rem',
   },
 
 
@@ -614,6 +621,9 @@ module.exports = {
     '4': '1rem',
     '6': '1.5rem',
     '8': '2rem',
+    '10': '2.5rem',
+    '12': '3rem',
+    '16': '4rem',
   },
 
 

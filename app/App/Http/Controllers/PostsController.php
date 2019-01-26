@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Domain\Post\Events\AddViewEvent;
-use App\Http\Queries\LatestPostsQuery;
 use App\Http\Queries\AllPostsQuery;
+use App\Http\Queries\LatestPostsQuery;
 use App\Http\Requests\PostIndexRequest;
 use App\Http\ViewModels\PostsViewModel;
+use Domain\Post\Events\AddViewEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;

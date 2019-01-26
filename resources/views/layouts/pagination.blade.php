@@ -2,27 +2,29 @@
     /** @var \Illuminate\Pagination\LengthAwarePaginator $paginator */
 @endphp
 
-<nav style="margin-left: 2.375rem" class="py-4">
-    @if($paginator->previousPageUrl())
-        <a
-            href="{{ $paginator->previousPageUrl() }}"
-            rel="prev"
-            class="text-sm px-3 py-1 border-red border text-red font-bold rounded mr-2"
-            aria-label="@lang('pagination.previous')"
-        >
-            {{ __('Previous') }}
-        </a>
-    @endif
+<nav class="text-sm text-grey-dark leading-normal pt-2 flex items-center justify-between w-full">
+    <div>
+        @if($paginator->previousPageUrl())
+            <a
+                href="{{ $paginator->previousPageUrl() }}"
+                rel="prev"
+                aria-label="@lang('pagination.previous')"
+            >
+                {{ __('Newer') }}
+            </a>
+        @endif
+    </div>
 
-    @if($paginator->hasMorePages())
-        <a
-            href="{{ $paginator->nextPageUrl() }}"
-            rel="prev"
-            class="text-sm px-3 py-1 bg-red text-white font-bold rounded"
-            aria-label="@lang('pagination.previous')"
-        >
-            {{ __('Next') }}
-        </a>
-    @endif
+    <div>
+        @if($paginator->hasMorePages())
+            <a
+                href="{{ $paginator->nextPageUrl() }}"
+                rel="prev"
+                aria-label="@lang('pagination.previous')"
+            >
+                {{ __('Older') }}
+            </a>
+        @endif
+    </div>
 </nav>
 

@@ -7,12 +7,22 @@ use Domain\Post\Events\CreatePostEvent;
 use Domain\Post\Events\UpdatePostEvent;
 use Domain\Post\Models\Tag;
 use Domain\Source\Models\Source;
-use Zend\Feed\Reader\Reader;
+use Illuminate\Support\Collection;
+use Support\Rss\Reader;
+use Zend\Feed\Reader\Entry\EntryInterface;
 
 class SyncSourceAction
 {
+    /** @var \Support\Rss\Reader */
+    protected $reader;
+
     /** @var string|null */
     private $filterUrl = null;
+
+    public function __construct(Reader $reader)
+    {
+        $this->reader = $reader;
+    }
 
     public function setFilterUrl(string $filterUrl): SyncSourceAction
     {
@@ -26,7 +36,7 @@ class SyncSourceAction
         /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection */
         $tags = Tag::all();
 
-        $feed = Reader::import($source->url);
+        $feed = $this->reader->import($source->url);
 
         /** @var \Zend\Feed\Reader\Entry\EntryInterface $entry */
         foreach ($feed as $entry) {
@@ -34,22 +44,34 @@ class SyncSourceAction
                 continue;
             }
 
-            $postData = PostData::create($entry, $tags);
+            $this->syncPost($source, $entry, $tags);
+        }
+    }
 
-            /** @var \Domain\Post\Models\Post $post */
-            $post = $source->posts()->where('url', $postData->url)->first();
+    private function syncPost(
+        Source $source,
+        EntryInterface $entry,
+        Collection $tags
+    ): void {
+        $postData = PostData::create($entry, $tags);
 
-            if (! $post) {
-                event(CreatePostEvent::new($source, $postData));
+        if ($source->hasOtherPostOnSameDay($postData->url, $postData->date_created)) {
+            return;
+        }
 
-                continue;
-            }
+        /** @var \Domain\Post\Models\Post $post */
+        $post = $source->posts->where('url', $postData->url)->first();
 
-            if ($postData->hasChanges($post)) {
-                event(UpdatePostEvent::new($post, $postData));
+        if (! $post) {
+            event(CreatePostEvent::new($source, $postData));
 
-                continue;
-            }
+            return;
+        }
+
+        if ($postData->hasChanges($post)) {
+            event(UpdatePostEvent::new($post, $postData));
+
+            return;
         }
     }
 }

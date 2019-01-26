@@ -2,13 +2,13 @@
 
 namespace Domain\Mute\Models;
 
-use Domain\Mute\Muteable;
-use Support\HasUuid;
 use Domain\Model;
+use Domain\Mute\Muteable;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
+use Support\HasUuid;
 
 class Mute extends Model
 {

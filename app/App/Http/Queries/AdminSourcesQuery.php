@@ -18,5 +18,13 @@ class AdminSourcesQuery extends QueryBuilder
         $this->allowedFilters([
             Filter::exact('is_active'),
         ]);
+
+        $this->allowedSorts([
+            'post_count',
+            'created_at',
+            'url',
+        ]);
+
+        $this->defaultSort('-created_at');
     }
 }

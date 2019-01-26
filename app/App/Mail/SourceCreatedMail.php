@@ -5,9 +5,9 @@ namespace App\Mail;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Bus\Queueable;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 class SourceCreatedMail extends Mailable implements ShouldQueue
 {
@@ -15,6 +15,7 @@ class SourceCreatedMail extends Mailable implements ShouldQueue
 
     /** @var \Domain\Source\Models\Source */
     protected $source;
+
     /** @var \Domain\User\Models\User */
     protected $admin;
 

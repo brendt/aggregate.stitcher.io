@@ -2,9 +2,8 @@
 
 namespace Domain\Post\Models;
 
-use Domain\Post\Query\PostQueryBuilder;
-use Support\HasUuid;
 use Domain\Model;
+use Domain\Post\Query\PostQueryBuilder;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use Support\HasUuid;
 
 class Post extends Model
 {
@@ -117,7 +117,9 @@ class Post extends Model
         $connection = $this->getConnection();
 
         return new PostQueryBuilder(
-            $connection, $connection->getQueryGrammar(), $connection->getPostProcessor()
+            $connection,
+            $connection->getQueryGrammar(),
+            $connection->getPostProcessor()
         );
     }
 

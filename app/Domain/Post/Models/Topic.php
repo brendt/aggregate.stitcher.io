@@ -2,11 +2,11 @@
 
 namespace Domain\Post\Models;
 
+use Domain\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Support\Filterable;
 use Support\HasSlug;
 use Support\HasUuid;
-use Domain\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Topic extends Model implements Filterable
 {

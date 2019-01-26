@@ -5,7 +5,6 @@ namespace Domain\Source\Reactors;
 use App\Mail\SourceAcceptedMail;
 use App\Mail\SourceCreatedMail;
 use Domain\Source\Events\ActivateSourceEvent;
-use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Events\SourceCreatedEvent;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;

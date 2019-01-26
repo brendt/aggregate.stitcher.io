@@ -10,7 +10,7 @@ class AdminSourceRequest extends SourceRequest
             'url' => [
                 'required',
                 'string',
-                'unique:sources,url'
+                'unique:sources,url',
             ],
         ];
     }

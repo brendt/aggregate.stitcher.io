@@ -85,7 +85,6 @@ class RssEntryDecorator extends AbstractEntry
                 preg_match_all("/\b({$keyword})\b/i", $searchContent, $matches);
 
                 $foundTags[$tag->id][$keyword] = count($matches[0]);
-
             }
         }
 

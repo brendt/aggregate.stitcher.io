@@ -1,47 +1,43 @@
 @component('layouts.app', [
     'title' => __('Login'),
 ])
-    <heading>{{ __('Login') }}</heading>
+    <h1 class="font-title text-2xl mt-4 mb-8">
+        {{ __('Login') }}
+    </h1>
 
-    <div class="flex mt-4">
-        <form-component
-            :action="route('login')"
-        >
-            <email-field
-                name="email"
-                :label="__('Email')"
-                autofocus
-            ></email-field>
+    <form-component :action="route('login')">
+        <email-field
+            name="email"
+            :label="__('Email')"
+            autofocus
+        ></email-field>
 
-            <password-field
-                name="password"
-                :label="__('Password')"
-                autofocus
-            ></password-field>
+        <password-field
+            name="password"
+            :label="__('Password')"
+        ></password-field>
 
-            <div class="">
-            </div>
+        <div class="flex justify-between items-center mt-2">
+            <checkbox-field
+                name="remember"
+                :label="__('Remember me')"
+            ></checkbox-field>
 
-            <div class="flex justify-between items-center mt-4">
-                {{--<a class="text-blue hover:text-blue-dark" href="{{ route('password.request') }}">--}}
-                    {{--{{ __('Forgot Your Password?') }}--}}
-                {{--</a>--}}
-                <checkbox-field
-                    name="remember"
-                    :label="__('Remember me')"
-                    class="mb-2 mt-4"
-                ></checkbox-field>
+            <submit-button>
+                {{ __('Log in') }}
+            </submit-button>
+        </div>
+    </form-component>
 
-                <submit-button>
-                    {{ __('Login') }}
-                </submit-button>
-            </div>
-        </form-component>
-    </div>
-
-    <p class="mt-4">
-        {!! __('No account yet? Click <a href=":register_url" class="link">here</a> to register.', [
+    <p class="mt-4 text-sm mt-8 text-grey-darker">
+        {!! __('Don\'t have an account? <a href=":register_url" class="link">Register</a> instead.', [
             'register_url' => action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])
+        ]) !!}
+    </p>
+
+    <p class="mt-1 text-sm text-grey-darker">
+        {!! __('Forgot your password? <a href=":register_url" class="link">Click here</a>.', [
+            'register_url' => action([\App\Http\Controllers\Auth\ForgotPasswordController::class, 'showLinkRequestForm'])
         ]) !!}
     </p>
 @endcomponent

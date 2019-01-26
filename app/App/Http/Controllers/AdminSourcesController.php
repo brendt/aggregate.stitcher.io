@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
-use App\Http\Requests\SourceRequest;
 use Domain\Source\Events\ActivateSourceEvent;
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Models\Source;

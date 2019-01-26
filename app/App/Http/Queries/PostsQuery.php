@@ -11,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 abstract class PostsQuery extends QueryBuilder
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
+     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post
      * @var \Illuminate\Http\Request $request
      */
     public function __construct(Builder $query, Request $request)
@@ -39,7 +39,7 @@ abstract class PostsQuery extends QueryBuilder
                 Filter::exact('tag', 'tags.slug'),
                 Filter::exact('topic', 'topics.slug'),
                 Filter::exact('source', 'sources.website'),
-                Filter::custom('unread', new UnreadFilter($request->user()))
+                Filter::custom('unread', new UnreadFilter($request->user())),
             ])
             ->defaultSort('-date_created');
     }
