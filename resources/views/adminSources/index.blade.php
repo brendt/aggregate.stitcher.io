@@ -9,16 +9,7 @@
 ])
     <heading>{{ __('Sources') }}</heading>
 
-    <div class="mt-6 mb-6">
-        <filter-button
-            name="is_active"
-            value="0"
-        >
-            {{ __('Inactive sources') }}
-        </filter-button>
-    </div>
-
-    <div>
+    <div class="mt-4">
         <form-component
             :action="action([\App\Http\Controllers\AdminSourcesController::class, 'store'])"
             class="flex items-baseline"
@@ -43,16 +34,23 @@
                     </sort-link>
                 </th>
                 <th class="text-right">
-                    {{--<sort-link name="post_count">--}}
+                    <sort-link name="post_count">
                         {{ __('Posts') }}
-                    {{--</sort-link>--}}
+                    </sort-link>
                 </th>
                 <th class="text-right">
                     <sort-link name="created_at">
                         {{ __('Date created') }}
                     </sort-link>
                 </th>
-                <th></th>
+                <th class="text-right">
+                    <filter-button
+                        name="is_active"
+                        value="0"
+                    >
+                        {{ __('Inactive sources') }}
+                    </filter-button>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -76,19 +74,9 @@
                             "
                             href="{{ $source->website }}"
                         >{{ $source->website }}</a>
-                        <a
-                            class="
-                                underline
-                                hover:no-underline
-                                text-grey-darker
-                                inline-block
-                                mt-1
-                            "
-                            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
-                        >{{ __('Show on aggregate') }}</a>
                     </td>
                     <td class="text-right">
-                        {{ $source->posts->count() }}
+                        {{ $source->post_count }}
                     </td>
                     <td class="text-right">
                         {{ $source->created_at->toDateTimeString() }}
