@@ -85,3 +85,14 @@ function clear_filter(string $name): string
 
     return $queryString->clear($name);
 }
+
+function is_link_active(string $href): bool
+{
+    $request = app(\Illuminate\Http\Request::class);
+
+    $uriPath = parse_url($request->getUri(), PHP_URL_PATH) ?? '/';
+
+    $hrefPath = parse_url($href, PHP_URL_PATH) ?? '/';
+
+    return  $uriPath === $hrefPath;
+}

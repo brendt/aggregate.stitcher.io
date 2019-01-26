@@ -9,22 +9,33 @@
     'title' => $title,
 ])
     <div class="flex items-baseline justify-between">
-        <nav class="text-sm text-grey-dark leading-normal pt-2 h-12 flex items-center border-b border-grey-lighter w-full">
+        <nav class="text-sm text-grey-dark leading-normal pt-2 h-12 flex items-center justify-between border-b border-grey-lighter w-full">
             <ul class="flex">
-                <li class="mr-6 text-black">
-                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
+                <li class="mr-6">
+                    <active-link
+                        :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
+                    >
                         {{ __('All') }}
-                    </a>
+                    </active-link>
                 </li>
                 <li class="mr-6">
-                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
+                    <active-link
+                        :href="action([\App\Http\Controllers\PostsController::class, 'latest'])"
+                    >
                         {{ __('Latest') }}
-                    </a>
+                    </active-link>
                 </li>
-                <li>
-                    <a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">
-                        {{ __('Tags') }} <i class="fas fa-caret-down ml-1/2"></i>
-                    </a>
+                {{--<li>--}}
+                    {{--<a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">--}}
+                        {{--{{ __('Tags') }} <i class="fas fa-caret-down ml-1/2"></i>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
+            </ul>
+            <ul>
+                <li class="mr-6">
+                    <filter-link name="unread">
+                        {{ __('Unread') }}
+                    </filter-link>
                 </li>
             </ul>
         </nav>
