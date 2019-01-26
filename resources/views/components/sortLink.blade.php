@@ -6,9 +6,9 @@
 
     @if(query_sort_active($name))
         &#9662;
-    @endif
-
-    @if(query_sort_active('-' . $name))
+    @elseif(query_sort_active('-' . $name))
         &#9652;
+    @else
+        <span class="text-grey">&#9652; &#9662;</span>
     @endif
 </a>

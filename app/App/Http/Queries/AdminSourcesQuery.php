@@ -18,5 +18,9 @@ class AdminSourcesQuery extends QueryBuilder
         $this->allowedFilters([
             Filter::exact('is_active'),
         ]);
+
+        $this->allowedSorts([
+            'created_at',
+        ]);
     }
 }

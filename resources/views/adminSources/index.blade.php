@@ -5,6 +5,7 @@
 
 @component('layouts.app', [
     'title' => __('Sources'),
+    'fullWidth' => true,
 ])
     <heading>{{ __('Sources') }}</heading>
 
@@ -46,6 +47,11 @@
                         {{ __('Posts') }}
                     {{--</sort-link>--}}
                 </th>
+                <th class="text-right">
+                    <sort-link name="created_at">
+                        {{ __('Date created') }}
+                    </sort-link>
+                </th>
                 <th></th>
             </tr>
         </thead>
@@ -85,6 +91,9 @@
                         {{ $source->posts->count() }}
                     </td>
                     <td class="text-right">
+                        {{ $source->created_at->toDateTimeString() }}
+                    </td>
+                    <td class="text-right">
                         @if ($source->is_active)
                             <span class="text-green font-bold">
                                 {{ __('active') }}
@@ -98,11 +107,11 @@
                             </post-button>
                         @endif
 
-                        <br>
+                        {{--<br>--}}
 
-                        <a href="" class="">
-                            Stats
-                        </a>
+                        {{--<a href="" class="">--}}
+                            {{--Stats--}}
+                        {{--</a>--}}
                     </td>
                 </tr>
             @endforeach
