@@ -24,11 +24,17 @@ class SourceProjector implements Projector
         ActivateSourceEvent::class => 'activateSource',
     ];
 
+    public function streamEventsBy(): string
+    {
+        return 'source_uuid';
+    }
+
     public function createSource(CreateSourceEvent $event): void
     {
         $user = User::whereUuid($event->user_uuid)->firstOrFail();
 
         $source = Source::create([
+            'uuid' => $event->source_uuid,
             'user_id' => $user->id,
             'url' => $event->url,
             'is_active' => $event->is_active,

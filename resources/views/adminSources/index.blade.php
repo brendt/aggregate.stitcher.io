@@ -72,7 +72,7 @@
                                 inline-block
                                 mt-1
                             "
-                            href="{{ $source->website }}"
+                            href="http://{{ $source->website }}"
                         >{{ $source->website }}</a>
                     </td>
                     <td class="text-right">

@@ -28,11 +28,17 @@ class PostProjector implements Projector
         $this->updateViewCountAction = $calculateViewsAction;
     }
 
+    public function streamEventsBy(): string
+    {
+        return 'post_uuid';
+    }
+
     public function createPost(CreatePostEvent $event): void
     {
         $source = Source::whereUuid($event->source_uuid)->firstOrFail();
 
         $post = Post::create(array_merge([
+            'uuid' => $event->post_uuid,
             'source_id' => $source->id,
         ], $event->post_data));
 

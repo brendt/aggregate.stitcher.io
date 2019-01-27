@@ -5,11 +5,15 @@ namespace Domain\Post\Events;
 use Carbon\Carbon;
 use Domain\Post\DTO\PostData;
 use Domain\Source\Models\Source;
+use Ramsey\Uuid\Uuid;
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\EventProjector\ShouldBeStored;
 
 class CreatePostEvent extends DataTransferObject implements ShouldBeStored
 {
+    /** @var string */
+    public $post_uuid;
+
     /** @var string */
     public $source_uuid;
 
@@ -26,6 +30,7 @@ class CreatePostEvent extends DataTransferObject implements ShouldBeStored
             : $post_data['date_created'];
 
         parent::__construct([
+            'post_uuid' => (string) Uuid::uuid4(),
             'source_uuid' => $source_uuid,
             'post_data' => $post_data,
             'tag_ids' => $tag_ids,
