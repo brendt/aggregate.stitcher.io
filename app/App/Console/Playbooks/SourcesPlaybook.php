@@ -50,9 +50,8 @@ final class SourcesPlaybook extends Playbook
                 return $this->createUserAction->__invoke($email, bcrypt('secret'));
             });
 
-            ($this->createSourceAction)->__invoke(new SourceData([
+            ($this->createSourceAction)->__invoke($user, new SourceData([
                 'url' => $url,
-                'user_id' => $user->id,
                 'is_active' => true,
             ]));
 

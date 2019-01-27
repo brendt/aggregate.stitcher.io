@@ -28,7 +28,7 @@ class UserSourcesController
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
-            $createSourceAction(SourceData::fromRequest($request));
+            $createSourceAction($user, SourceData::fromRequest($request));
 
             return redirect()->action([self::class, 'index']);
         }
@@ -38,15 +38,17 @@ class UserSourcesController
         return redirect()->action([self::class, 'index']);
     }
 
-    public function delete(User $user)
-    {
+    public function delete(
+        User $user,
+        DeleteSourceAction $deleteSourceAction
+    ) {
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
             return redirect()->action([self::class, 'index']);
         }
 
-        event(DeleteSourceAction::create($primarySource));
+        $deleteSourceAction($primarySource);
 
         return redirect()->action([self::class, 'index']);
     }

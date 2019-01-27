@@ -8,6 +8,7 @@ use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
+use Domain\User\Models\User;
 
 class AdminSourcesController
 {
@@ -30,10 +31,11 @@ class AdminSourcesController
     }
 
     public function store(
+        User $user,
         AdminSourceRequest $sourceRequest,
         CreateSourceAction $createSourceAction
     ) {
-        $createSourceAction(SourceData::fromRequest($sourceRequest));
+        $createSourceAction($user, SourceData::fromRequest($sourceRequest));
 
         return redirect()->back();
     }

@@ -11,9 +11,6 @@ final class SourceData extends DataTransferObject
     /** @var string */
     public $url;
 
-    /** @var int */
-    public $user_id;
-
     /** @var bool */
     public $is_active;
 
@@ -21,7 +18,6 @@ final class SourceData extends DataTransferObject
     {
         return new self([
             'url' => $request->get('url'),
-            'user_uuid' => $source->user_id ?? $request->user()->id,
             'is_active' => $source->is_active ?? false,
         ]);
     }

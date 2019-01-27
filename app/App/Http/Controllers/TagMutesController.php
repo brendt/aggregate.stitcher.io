@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Domain\Mute\Events\MuteEvent;
-use Domain\Mute\Events\UnmuteEvent;
+use Domain\Mute\Actions\MuteAction;
+use Domain\Mute\Events\UnmuteAction;
 use Domain\Post\Models\Tag;
 use Domain\User\Models\User;
 
 class TagMutesController
 {
-    public function store(User $user, Tag $tag)
-    {
-        event(MuteEvent::make($user, $tag));
+    public function store(
+        User $user,
+        Tag $tag,
+        MuteAction $muteAction
+    ) {
+        $muteAction($user, $tag);
 
-        return redirect()->action([PostsController::class, 'index']);
+        return redirect()->back();
     }
 
-    public function delete(User $user, Tag $tag)
-    {
-        event(UnmuteEvent::make($user, $tag));
+    public function delete(
+        User $user,
+        Tag $tag,
+        UnmuteAction $unmuteAction
+    ) {
+        $unmuteAction($user, $tag);
 
         return redirect()->back();
     }
