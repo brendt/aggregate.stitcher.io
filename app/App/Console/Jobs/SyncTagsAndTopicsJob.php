@@ -6,6 +6,7 @@ use App\Console\Events\TagSyncedEvent;
 use App\Console\Events\TopicSyncedEvent;
 use Domain\Post\Actions\SyncTagAction;
 use Domain\Post\Actions\SyncTopicAction;
+use Domain\Post\DTO\TagData;
 use Domain\Post\Models\Topic;
 use Symfony\Component\Yaml\Yaml;
 
@@ -37,12 +38,14 @@ class SyncTagsAndTopicsJob
 
         foreach ($definition['tags'] as $tagName => $tagData) {
             $this->syncTagAction->__invoke(
-                $tagName,
-                $tagData['color'],
-                $tagData['keywords'],
-                $tagData['topic']
-                    ? Topic::whereName($tagData['topic'])->first()
-                    : null
+                TagData::new(
+                    $tagName,
+                    $tagData['color'],
+                    $tagData['keywords'],
+                    $tagData['topic']
+                        ? Topic::whereName($tagData['topic'])->first()
+                        : null
+                )
             );
 
             event(new TagSyncedEvent($tagName));

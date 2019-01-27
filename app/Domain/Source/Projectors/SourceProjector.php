@@ -2,7 +2,7 @@
 
 namespace Domain\Source\Projectors;
 
-use Domain\Post\Events\CreatePostEvent;
+use Domain\Post\Actions\CreatePostAction;
 use Domain\Source\Events\ActivateSourceEvent;
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Events\DeleteSourceEvent;

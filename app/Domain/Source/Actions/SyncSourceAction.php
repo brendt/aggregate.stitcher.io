@@ -3,25 +3,36 @@
 namespace Domain\Source\Actions;
 
 use Domain\Post\DTO\PostData;
-use Domain\Post\Events\CreatePostEvent;
-use Domain\Post\Events\UpdatePostEvent;
+use Domain\Post\Actions\CreatePostAction;
+use Domain\Post\Actions\UpdatePostAction;
 use Domain\Post\Models\Tag;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;
 use Support\Rss\Reader;
 use Zend\Feed\Reader\Entry\EntryInterface;
 
-class SyncSourceAction
+final class SyncSourceAction
 {
     /** @var \Support\Rss\Reader */
-    protected $reader;
+    private $reader;
+
+    /** @var \Domain\Post\Actions\CreatePostAction */
+    private $createPostAction;
+
+    /** @var \Domain\Post\Actions\UpdatePostAction */
+    private $updatePostAction;
 
     /** @var string|null */
     private $filterUrl = null;
 
-    public function __construct(Reader $reader)
-    {
+    public function __construct(
+        Reader $reader,
+        CreatePostAction $createPostAction,
+        UpdatePostAction $updatePostAction
+    ) {
         $this->reader = $reader;
+        $this->createPostAction = $createPostAction;
+        $this->updatePostAction = $updatePostAction;
     }
 
     public function setFilterUrl(string $filterUrl): SyncSourceAction
@@ -63,15 +74,11 @@ class SyncSourceAction
         $post = $source->posts->where('url', $postData->url)->first();
 
         if (! $post) {
-            event(CreatePostEvent::new($source, $postData));
+            $this->createPostAction->__invoke($source, $postData);
 
             return;
         }
 
-        if ($postData->hasChanges($post)) {
-            event(UpdatePostEvent::new($post, $postData));
-
-            return;
-        }
+        $this->updatePostAction->__invoke($post, $postData);
     }
 }

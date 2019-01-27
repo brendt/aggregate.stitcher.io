@@ -4,7 +4,7 @@ namespace Tests\Factories;
 
 use Domain\Source\Events\CreateSourceEvent;
 use Domain\Source\Models\Source;
-use Domain\User\Events\CreateUserEvent;
+use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
 
 final class SourceFactory
@@ -29,7 +29,7 @@ final class SourceFactory
     public function create(): Source
     {
         $user = User::whereEmail($this->email)->firstOr(function () {
-            event(CreateUserEvent::create($this->email, bcrypt('secret')));
+            event(CreateUserAction::create($this->email, bcrypt('secret')));
 
             return User::whereEmail($this->email)->first();
         });

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\ViewModels\VoteViewModel;
-use Domain\Post\Events\AddVoteEvent;
-use Domain\Post\Events\RemoveVoteEvent;
+use Domain\Post\Actions\AddVoteAction;
+use Domain\Post\Actions\RemoveVoteAction;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
@@ -15,7 +15,8 @@ class VotesController
     public function store(
         Request $request,
         User $user,
-        Post $post
+        Post $post,
+        AddVoteAction $addVoteAction
     ) {
         $voteExists = Vote::query()
             ->whereUser($user)
@@ -26,7 +27,7 @@ class VotesController
             return new VoteViewModel($user, $post);
         }
 
-        event(AddVoteEvent::create($post, $user));
+        $addVoteAction($post, $user);
 
         if (! $request->wantsJson()) {
             return redirect()->action([PostsController::class, 'index']);
@@ -38,7 +39,8 @@ class VotesController
     public function delete(
         Request $request,
         User $user,
-        Post $post
+        Post $post,
+        RemoveVoteAction $removeVoteAction
     ) {
         $voteExists = Vote::query()
             ->whereUser($user)
@@ -49,7 +51,7 @@ class VotesController
             return new VoteViewModel($user, $post);
         }
 
-        event(RemoveVoteEvent::create($post, $user));
+        $removeVoteAction($post, $user);
 
         if (! $request->wantsJson()) {
             return redirect()->action([PostsController::class, 'index']);

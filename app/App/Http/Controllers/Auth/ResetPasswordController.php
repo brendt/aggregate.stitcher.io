@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Domain\User\Events\ResetPasswordEvent;
+use Domain\User\Actions\ResetPasswordAction;
 use Domain\User\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
@@ -21,7 +21,9 @@ class ResetPasswordController extends Controller
 
     protected function resetPassword(User $user, $password)
     {
-        event(ResetPasswordEvent::create($user, Hash::make($password)));
+        $resetPasswordAction = new ResetPasswordAction();
+
+        $resetPasswordAction($user, Hash::make($password));
 
         $this->guard()->login($user);
     }

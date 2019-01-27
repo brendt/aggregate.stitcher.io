@@ -5,7 +5,6 @@ namespace Domain\Post\DTO;
 use Domain\Post\Decorators\RssEntryDecorator;
 use Domain\Post\Models\Post;
 use Illuminate\Support\Collection;
-use Ramsey\Uuid\Uuid;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
@@ -55,7 +54,6 @@ class PostData extends DataTransferObject
     public function fillable(): array
     {
         return $this->only(
-            'uuid',
             'url',
             'title',
             'date_created',

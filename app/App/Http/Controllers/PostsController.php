@@ -6,7 +6,7 @@ use App\Http\Queries\AllPostsQuery;
 use App\Http\Queries\LatestPostsQuery;
 use App\Http\Requests\PostIndexRequest;
 use App\Http\ViewModels\PostsViewModel;
-use Domain\Post\Events\AddViewEvent;
+use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
@@ -97,9 +97,10 @@ class PostsController
 
     public function show(
         Request $request,
-        Post $post
+        Post $post,
+        AddViewAction $addViewAction
     ) {
-        event(AddViewEvent::create($post, $request->user()));
+        $addViewAction($post, $request->user());
 
         return redirect()->to($post->url);
     }

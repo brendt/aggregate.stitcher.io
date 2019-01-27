@@ -4,13 +4,21 @@ namespace App\Console\Playbooks;
 
 use App\Console\Playbook;
 use Domain\Source\Events\CreateSourceEvent;
-use Domain\User\Events\CreateUserEvent;
+use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class SourcesPlaybook extends Playbook
 {
+    /** @var \Domain\User\Actions\CreateUserAction */
+    protected $createUserAction;
+
+    public function __construct(CreateUserAction $createUserAction)
+    {
+        $this->createUserAction = $createUserAction;
+    }
+
     public function before(): array
     {
         return [
@@ -32,9 +40,7 @@ final class SourcesPlaybook extends Playbook
 
         foreach ($sources as $url => $email) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
-                event(CreateUserEvent::create($email, bcrypt('secret')));
-
-                return User::whereEmail($email)->first();
+                return $this->createUserAction->__invoke($email, bcrypt('secret'));
             });
 
             event(new CreateSourceEvent($url, $user->uuid, true));

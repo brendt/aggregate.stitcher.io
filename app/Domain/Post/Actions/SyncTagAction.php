@@ -2,42 +2,36 @@
 
 namespace Domain\Post\Actions;
 
-use Domain\Post\Events\CreateTagEvent;
-use Domain\Post\Events\UpdateTagEvent;
+use Domain\Post\DTO\TagData;
+use Domain\Post\Actions\UpdateTagAction;
 use Domain\Post\Models\Tag;
-use Domain\Post\Models\Topic;
 
-class SyncTagAction
+final class SyncTagAction
 {
-    public function __invoke(
-        string $name,
-        string $color,
-        array $keywords,
-        ?Topic $topic = null
-    ): void {
-        $existingTag = Tag::whereName($name)->first();
+    /** @var \Domain\Post\Actions\CreateTagAction */
+    private $createTagAction;
+
+    /** @var \Domain\Post\Actions\UpdateTagAction */
+    private $updateTagAction;
+
+    public function __construct(
+        CreateTagAction $createTagAction,
+        UpdateTagAction $updateTagAction
+    ) {
+        $this->createTagAction = $createTagAction;
+        $this->updateTagAction = $updateTagAction;
+    }
+
+    public function __invoke(TagData $tagData): void
+    {
+        $existingTag = Tag::whereName($tagData->name)->first();
 
         if ($existingTag) {
-            $event = UpdateTagEvent::new(
-                $existingTag,
-                $name,
-                $color,
-                $keywords,
-                $topic
-            );
-
-            if ($event->hasChanges($existingTag)) {
-                event($event);
-            }
+            $this->updateTagAction->__invoke($existingTag, $tagData);
 
             return;
         }
 
-        event(CreateTagEvent::new(
-            $name,
-            $color,
-            $keywords,
-            $topic
-        ));
+        $this->createTagAction->__invoke($tagData);
     }
 }
