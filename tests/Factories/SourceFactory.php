@@ -2,7 +2,7 @@
 
 namespace Tests\Factories;
 
-use Domain\Source\Events\CreateSourceEvent;
+use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Models\Source;
 use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
@@ -34,7 +34,7 @@ final class SourceFactory
             return User::whereEmail($this->email)->first();
         });
 
-        event(new CreateSourceEvent($this->url, $user->uuid, true));
+        event(new CreateSourceAction($this->url, $user->uuid, true));
 
         return Source::whereUrl($this->url)->first();
     }

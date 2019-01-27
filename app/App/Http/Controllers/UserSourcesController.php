@@ -4,9 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SourceRequest;
 use App\Http\ViewModels\SourceViewModel;
-use Domain\Source\Events\CreateSourceEvent;
-use Domain\Source\Events\DeleteSourceEvent;
-use Domain\Source\Events\UpdateSourceEvent;
+use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\DTO\SourceData;
+use Domain\Source\Actions\DeleteSourceAction;
+use Domain\Source\Actions\UpdateSourceAction;
 use Domain\User\Models\User;
 
 class UserSourcesController
@@ -18,23 +19,21 @@ class UserSourcesController
         return $viewModel->view('userSources.index');
     }
 
-    public function update(SourceRequest $request, User $user)
-    {
+    public function update(
+        SourceRequest $request,
+        User $user,
+        CreateSourceAction $createSourceAction,
+        UpdateSourceAction $updateSourceAction
+    ) {
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
-            event(CreateSourceEvent::fromRequest($request));
+            $createSourceAction(SourceData::fromRequest($request));
 
             return redirect()->action([self::class, 'index']);
         }
 
-        $updateSourceEvent = UpdateSourceEvent::fromRequest($primarySource, $request);
-
-        if ($updateSourceEvent->hasChanges($primarySource)) {
-            event($updateSourceEvent);
-        }
-
-        flash(__("Saved"));
+        $updateSourceAction($primarySource, SourceData::fromRequest($request, $primarySource));
 
         return redirect()->action([self::class, 'index']);
     }
@@ -47,7 +46,7 @@ class UserSourcesController
             return redirect()->action([self::class, 'index']);
         }
 
-        event(DeleteSourceEvent::create($primarySource));
+        event(DeleteSourceAction::create($primarySource));
 
         return redirect()->action([self::class, 'index']);
     }

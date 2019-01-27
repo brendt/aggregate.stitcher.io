@@ -20,6 +20,8 @@ final class CreateUserAction
             'name' => $email,
             'email' => $email,
             'password' => $password_hash,
+            'verification_token' => $this->sendUserVerificationAction
+                ->generateVerificationToken($email)
         ]);
 
         ($this->sendUserVerificationAction)->__invoke($user);

@@ -3,7 +3,8 @@
 namespace App\Console\Playbooks;
 
 use App\Console\Playbook;
-use Domain\Source\Events\CreateSourceEvent;
+use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\DTO\SourceData;
 use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
 use Symfony\Component\Console\Input\InputInterface;
@@ -12,11 +13,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 final class SourcesPlaybook extends Playbook
 {
     /** @var \Domain\User\Actions\CreateUserAction */
-    protected $createUserAction;
+    private $createUserAction;
 
-    public function __construct(CreateUserAction $createUserAction)
-    {
+    /** @var \Domain\Source\Actions\CreateSourceAction */
+    private $createSourceAction;
+
+    public function __construct(
+        CreateUserAction $createUserAction,
+        CreateSourceAction $createSourceAction
+    ) {
         $this->createUserAction = $createUserAction;
+        $this->createSourceAction = $createSourceAction;
     }
 
     public function before(): array
@@ -43,7 +50,11 @@ final class SourcesPlaybook extends Playbook
                 return $this->createUserAction->__invoke($email, bcrypt('secret'));
             });
 
-            event(new CreateSourceEvent($url, $user->uuid, true));
+            ($this->createSourceAction)->__invoke(new SourceData([
+                'url' => $url,
+                'user_id' => $user->id,
+                'is_active' => true,
+            ]));
 
             $output->writeln("- Created source {$url}");
         }

@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
-use Domain\Source\Events\ActivateSourceEvent;
-use Domain\Source\Events\CreateSourceEvent;
+use Domain\Source\Actions\ActivateSourceAction;
+use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 
 class AdminSourcesController
@@ -19,16 +20,20 @@ class AdminSourcesController
         ]);
     }
 
-    public function activate(Source $source)
-    {
-        event(new ActivateSourceEvent($source->uuid));
+    public function activate(
+        Source $source,
+        ActivateSourceAction $activateSourceAction
+    ) {
+        $activateSourceAction($source);
 
         return redirect()->back();
     }
 
-    public function store(AdminSourceRequest $sourceRequest)
-    {
-        event(CreateSourceEvent::fromRequest($sourceRequest));
+    public function store(
+        AdminSourceRequest $sourceRequest,
+        CreateSourceAction $createSourceAction
+    ) {
+        $createSourceAction(SourceData::fromRequest($sourceRequest));
 
         return redirect()->back();
     }

@@ -27,12 +27,12 @@ final class SendUserVerificationAction
         $this->sendVerification($user);
     }
 
-    private function generateVerificationToken(string $email): string
+    public function generateVerificationToken(string $email): string
     {
         return sha1(Hash::make($email . (string) Uuid::uuid4()));
     }
 
-    public function sendVerification(User $user): void
+    private function sendVerification(User $user): void
     {
         $mail = new VerifyUserMail($user);
 
