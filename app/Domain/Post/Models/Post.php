@@ -152,4 +152,13 @@ class Post extends Model
 
         return $this->date_created->format('F jS, Y');
     }
+
+    public function hasDifferentTags(array $tagIds): bool
+    {
+        $ownTagIds = $this->tags->pluck('id')->sort()->toArray();
+
+        $newTagIds = collect($tagIds)->sort()->toArray();
+
+        return $ownTagIds !== $newTagIds;
+    }
 }

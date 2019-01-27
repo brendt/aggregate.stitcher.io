@@ -129,7 +129,7 @@ class RssEntryDecorator extends AbstractEntry
             $tags[] = $value;
         }
 
-        return collect($tags);
+        return collect($tags)->slice(0, 2);
     }
 
     private function tagsByCategory(array $categories): Collection

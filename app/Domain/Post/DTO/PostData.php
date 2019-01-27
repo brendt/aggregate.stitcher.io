@@ -72,9 +72,6 @@ class PostData extends DataTransferObject
     {
         return $post->title !== $this->title
             || $post->teaser !== $this->teaser
-            || (
-                collect($this->tag_ids)->sort()->values()->toArray()
-                    !== $post->tags->pluck('id')->toArray()
-            );
+            || $post->hasDifferentTags($this->tag_ids);
     }
 }
