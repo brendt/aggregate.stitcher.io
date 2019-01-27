@@ -155,9 +155,9 @@ class Post extends Model
 
     public function hasDifferentTags(array $tagIds): bool
     {
-        $ownTagIds = $this->tags->pluck('id')->sort()->toArray();
+        $ownTagIds = $this->tags->pluck('id')->sort()->values()->toArray();
 
-        $newTagIds = collect($tagIds)->sort()->toArray();
+        $newTagIds = collect($tagIds)->sort()->values()->toArray();
 
         return $ownTagIds !== $newTagIds;
     }

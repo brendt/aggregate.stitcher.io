@@ -12,9 +12,6 @@ use Zend\Feed\Reader\Entry\AbstractEntry;
 class PostData extends DataTransferObject
 {
     /** @var string */
-    public $uuid;
-
-    /** @var string */
     public $url;
 
     /** @var string */
@@ -31,8 +28,6 @@ class PostData extends DataTransferObject
 
     public function __construct(array $parameters)
     {
-        $parameters['uuid'] = $parameters['uuid'] ?? (string) Uuid::uuid4();
-
         parent::__construct($parameters);
     }
 
