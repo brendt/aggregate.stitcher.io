@@ -31,6 +31,11 @@
                     <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
                 </header>
                 <ul class="text-sm sticky" style="bottom: 1rem">
+                    <li class="mb-3">
+                        <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
+                            {{ __('All posts') }}
+                        </a>
+                    </li>
                     @if(current_user())
                         <li class="mb-3">
                             <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
@@ -46,6 +51,11 @@
                             <li class="mb-3">
                                 <a href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
                                     {{ __('Admin') }}
+                                </a>
+                            </li>
+                            <li class="mb-3">
+                                <a href="/horizon" target="_blank" rel="noopener noreferrer">
+                                    {{ __('Horizon') }}
                                 </a>
                             </li>
                         @endif
