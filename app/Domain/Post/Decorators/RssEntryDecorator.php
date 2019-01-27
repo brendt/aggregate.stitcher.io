@@ -144,7 +144,7 @@ class RssEntryDecorator extends AbstractEntry
             }
         }
 
-        return collect($foundTags);
+        return collect($foundTags)->keys();
     }
 
     private function tagsByContent(string $searchContent): Collection

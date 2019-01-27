@@ -2,8 +2,11 @@
 
 namespace Tests\Domain\Source\Actions;
 
+use Domain\Post\Actions\CreatePostAction;
+use Domain\Post\Actions\UpdatePostAction;
 use Domain\Post\Models\Post;
 use Domain\Source\Actions\SyncSourceAction;
+use Support\Rss\Reader;
 use Tests\Factories\SourceFactory;
 use Tests\Mocks\MockReader;
 use Tests\TestCase;
@@ -23,7 +26,7 @@ class SyncSourceActionTest extends TestCase
     /** @test */
     public function it_creates_a_post()
     {
-        $action = new SyncSourceAction(
+        $action = $this->createSyncAction(
             MockReader::new()->withPost()
         );
 
@@ -35,7 +38,7 @@ class SyncSourceActionTest extends TestCase
     /** @test */
     public function it_wont_create_two_posts_for_the_same_source_on_the_same_day()
     {
-        $action = new SyncSourceAction(
+        $action = $this->createSyncAction(
             MockReader::new()
                 ->withPost('/a', [
                     'date' => '2019-01-01',
@@ -53,7 +56,7 @@ class SyncSourceActionTest extends TestCase
     /** @test */
     public function it_will_create_two_posts_for_the_same_source_on_separate_days()
     {
-        $action = new SyncSourceAction(
+        $action = $this->createSyncAction(
             MockReader::new()
                 ->withPost('/a', [
                     'date' => '2019-01-01',
@@ -75,20 +78,29 @@ class SyncSourceActionTest extends TestCase
             ->withUrl('https://other.com')
             ->create();
 
-        (new SyncSourceAction(
+        $this->createSyncAction(
             MockReader::new()
                 ->withPost('/a', [
                     'date' => '2019-01-01',
                 ])
-        ))->__invoke($this->source);
+        )->__invoke($this->source);
 
-        (new SyncSourceAction(
+        $this->createSyncAction(
             MockReader::new()
                 ->withPost('/a', [
                     'date' => '2019-01-01',
                 ])
-        ))->__invoke($otherSource);
+        )->__invoke($otherSource);
 
         $this->assertCount(2, Post::all());
+    }
+
+    private function createSyncAction(Reader $reader): SyncSourceAction
+    {
+        return new SyncSourceAction(
+            $reader,
+            app(CreatePostAction::class),
+            app(UpdatePostAction::class)
+        );
     }
 }

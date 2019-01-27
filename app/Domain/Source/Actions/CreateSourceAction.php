@@ -18,7 +18,7 @@ final class CreateSourceAction
         $this->mailer = $mailer;
     }
 
-    public function __invoke(User $user, SourceData $sourceData)
+    public function __invoke(User $user, SourceData $sourceData): Source
     {
         $source = Source::create([
             'user_id' => $user->id,
@@ -27,6 +27,8 @@ final class CreateSourceAction
         ]);
 
         $this->notifyAboutNewSource($source);
+
+        return $source;
     }
 
     private function notifyAboutNewSource(Source $source): void

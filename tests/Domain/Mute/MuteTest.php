@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Domain\Mute\Projectors;
+namespace Tests\Domain\Mute;
 
 use Domain\Mute\Actions\MuteAction;
 use Domain\Mute\Events\UnmuteAction;
@@ -10,7 +10,7 @@ use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Tests\TestCase;
 
-class MuteProjectorTest extends TestCase
+class MuteTest extends TestCase
 {
     /** @var \Domain\User\Models\User */
     private $user;
@@ -18,10 +18,6 @@ class MuteProjectorTest extends TestCase
     protected function setUp()
     {
         parent::setUp();
-
-        $projectionist = app(\Spatie\EventProjector\Projectionist::class);
-
-        $projectionist->replay(collect(MuteProjector::class));
 
         $this->user = factory(User::class)->create();
     }
@@ -32,7 +28,7 @@ class MuteProjectorTest extends TestCase
         /** @var \Domain\Source\Models\Source $source */
         $source = factory(Source::class)->create();
 
-        event(MuteAction::make($this->user, $source));
+        (new MuteAction())->__invoke($this->user, $source);
 
         $this->user->refresh();
 
@@ -53,7 +49,7 @@ class MuteProjectorTest extends TestCase
 
         $this->assertTrue($this->user->hasMuted($source));
 
-        event(UnmuteAction::make($this->user, $source));
+        (new UnmuteAction())->__invoke($this->user, $source);
 
         $this->user->refresh();
 

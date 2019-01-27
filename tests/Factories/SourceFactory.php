@@ -3,9 +3,10 @@
 namespace Tests\Factories;
 
 use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
-use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
+use Tests\Mocks\MockMailer;
 
 final class SourceFactory
 {
@@ -29,14 +30,21 @@ final class SourceFactory
     public function create(): Source
     {
         $user = User::whereEmail($this->email)->firstOr(function () {
-            event(CreateUserAction::create($this->email, bcrypt('secret')));
-
-            return User::whereEmail($this->email)->first();
+            return User::create([
+                'email' => $this->email,
+                'name' => $this->email,
+                'password' => bcrypt('secret'),
+                'verification_token' => 'test',
+            ]);
         });
 
-        event(new CreateSourceAction($this->url, $user->uuid, true));
-
-        return Source::whereUrl($this->url)->first();
+        return (new CreateSourceAction(new MockMailer()))->__invoke(
+            $user,
+            new SourceData([
+                'url' => $this->url,
+                'is_active' => true,
+            ])
+        );
     }
 
     public function withUrl(string $url): SourceFactory
