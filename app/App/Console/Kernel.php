@@ -13,10 +13,10 @@ class Kernel extends ConsoleKernel
 
     protected function schedule(Schedule $schedule)
     {
-        $schedule
-            ->command(SyncSourcesCommand::class)
-            ->everyMinute()
-            ->withoutOverlapping(60);
+//        $schedule
+//            ->command(SyncSourcesCommand::class)
+//            ->everyMinute()
+//            ->withoutOverlapping(60);
     }
 
     protected function commands()
