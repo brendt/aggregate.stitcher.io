@@ -31,13 +31,15 @@
                     {{--</a>--}}
                 {{--</li>--}}
             </ul>
-            <ul>
-                <li class="mr-6">
-                    <filter-link name="unread">
-                        {{ __('Unread') }}
-                    </filter-link>
-                </li>
-            </ul>
+            @isset ($user)
+                <ul>
+                    <li class="mr-6">
+                        <filter-link name="unread" value="1">
+                            {{ __('Unread') }}
+                        </filter-link>
+                    </li>
+                </ul>
+            @endisset
         </nav>
     </div>
 
