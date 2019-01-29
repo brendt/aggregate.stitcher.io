@@ -22,11 +22,14 @@
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
             {{ $post->relative_date }}
-            –
-            @if ($post->view_count === 1)
-                {{ __(':view_count view', ['view_count' => $post->view_count]) }}
-            @else
-                {{ __(':view_count views', ['view_count' => $post->view_count]) }}
+
+            @if ($post->view_count > 0)
+                –
+                @if ($post->view_count === 1)
+                    {{ __(':view_count view', ['view_count' => $post->view_count]) }}
+                @else
+                    {{ __(':view_count views', ['view_count' => $post->view_count]) }}
+                @endif
             @endif
         </p>
 
