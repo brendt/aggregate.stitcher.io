@@ -18,10 +18,10 @@ final class CreateSourceAction
         $this->mailer = $mailer;
     }
 
-    public function __invoke(User $user, SourceData $sourceData): Source
+    public function __invoke(?User $user, SourceData $sourceData): Source
     {
         $source = Source::create([
-            'user_id' => $user->id,
+            'user_id' => $user ? $user->id : null,
             'url' => $sourceData->url,
             'is_active' => $sourceData->is_active,
         ]);

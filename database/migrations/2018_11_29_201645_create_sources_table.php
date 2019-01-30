@@ -12,7 +12,7 @@ class CreateSourcesTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->unique();
 
-            $table->unsignedInteger('user_id');
+            $table->unsignedInteger('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->boolean('is_active')->default(0);

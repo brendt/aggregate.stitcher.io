@@ -28,6 +28,10 @@ final class ActivateSourceAction
 
     private function notifySourceOwner(Source $source): void
     {
+        if (! $source->user) {
+            return;
+        }
+
         $admin = User::whereAdmin()->first();
 
         if ($source->user->is($admin)) {
