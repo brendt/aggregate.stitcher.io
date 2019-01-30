@@ -33,17 +33,13 @@ final class CreateSourceAction
 
     private function notifyAboutNewSource(Source $source): void
     {
-        if ( !$source->user) {
-            return;
-        }
-
         $admin = User::whereAdmin()->first();
 
         if (! $admin) {
             return;
         }
 
-        if ($source->user->is($admin)) {
+        if ($source->user && $source->user->is($admin)) {
             return;
         }
 
