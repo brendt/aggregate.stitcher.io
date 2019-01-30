@@ -84,7 +84,7 @@
                     <td class="text-right">
                         @if ($source->is_active)
                             <span class="text-green font-bold">
-                                {{ __('active') }}
+                                {{ __('Active') }}
                             </span>
                         @else
                             <post-button
@@ -95,11 +95,14 @@
                             </post-button>
                         @endif
 
-                        {{--<br>--}}
+                        <br>
 
-                        {{--<a href="" class="">--}}
-                            {{--Stats--}}
-                        {{--</a>--}}
+                        <a
+                            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
+                            class="mt-3 block"
+                        >
+                            {{ __('Delete') }}
+                        </a>
                     </td>
                 </tr>
             @endforeach

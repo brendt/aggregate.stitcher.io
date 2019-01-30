@@ -65,7 +65,11 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('sources', [AdminSourcesController::class, 'index']);
+    Route::get('sources/{source}/delete', [AdminSourcesController::class, 'confirmDelete']);
+
     Route::post('sources/{source}/activate', [AdminSourcesController::class, 'activate']);
+    Route::post('sources/{source}/delete', [AdminSourcesController::class, 'delete']);
+
     Route::post('sources', [AdminSourcesController::class, 'store']);
 });
 

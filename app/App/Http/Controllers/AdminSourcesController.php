@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Console\Jobs\SyncSourceJob;
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
+use Domain\Post\Models\Post;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\Actions\DeleteSourceAction;
 use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
@@ -43,5 +45,21 @@ class AdminSourcesController
         $createSourceAction($user, SourceData::fromRequest($sourceRequest));
 
         return redirect()->back();
+    }
+
+    public function confirmDelete(Source $source)
+    {
+        return view('adminSources.delete', [
+            'source' => $source,
+        ]);
+    }
+
+    public function delete(
+        Source $source,
+        DeleteSourceAction $deleteSourceAction
+    ) {
+        $deleteSourceAction($source);
+
+        return redirect()->action([self::class, 'index']);
     }
 }
