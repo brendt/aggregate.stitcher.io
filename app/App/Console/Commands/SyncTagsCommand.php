@@ -8,7 +8,7 @@ use App\Console\Jobs\SyncTagsAndTopicsJob;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Event;
 
-class SyncTagsCommand extends Command
+final class SyncTagsCommand extends Command
 {
     protected $signature = 'sync:tags';
 

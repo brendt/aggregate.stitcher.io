@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Queries\AllPostsQuery;
 use App\Http\Queries\LatestPostsQuery;
+use App\Http\Queries\TopPostsQuery;
 use App\Http\Requests\PostIndexRequest;
 use App\Http\ViewModels\PostsViewModel;
 use Domain\Post\Actions\AddViewAction;
@@ -44,6 +45,23 @@ class PostsController
             ->withTopicSlug($request->getTopicSlug())
             ->withTagSlug($request->getTagSlug())
             ->withTitle(__('Latest'))
+            ->view('posts.index');
+
+        return $viewModel;
+    }
+
+    public function top(
+        PostIndexRequest $request,
+        TopPostsQuery $query
+    ) {
+        $posts = $query->paginate();
+
+        $posts->appends($request->except('page'));
+
+        $viewModel = (new PostsViewModel($posts, $request->user()))
+            ->withTopicSlug($request->getTopicSlug())
+            ->withTagSlug($request->getTagSlug())
+            ->withTitle(__('Top this week'))
             ->view('posts.index');
 
         return $viewModel;

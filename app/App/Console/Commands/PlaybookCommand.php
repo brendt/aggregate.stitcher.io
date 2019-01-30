@@ -7,7 +7,7 @@ use App\Console\PlaybookDefinition;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
-class PlaybookCommand extends Command
+final class PlaybookCommand extends Command
 {
     protected $signature = 'playbook:run {playbook} {--clean}';
 

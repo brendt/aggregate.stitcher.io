@@ -10,6 +10,8 @@ class UpdateViewCountAction
     {
         $post->view_count = $post->views()->count();
 
+        $post->view_count_weekly = $post->viewsThisWeek()->count();
+
         $post->save();
 
         return $post->refresh();

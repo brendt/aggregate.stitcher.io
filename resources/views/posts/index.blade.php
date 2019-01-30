@@ -25,6 +25,13 @@
                         {{ __('Latest') }}
                     </active-link>
                 </li>
+                <li class="mr-6">
+                    <active-link
+                        :href="action([\App\Http\Controllers\PostsController::class, 'top'])"
+                    >
+                        {{ __('Top this week') }}
+                    </active-link>
+                </li>
                 {{--<li>--}}
                     {{--<a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">--}}
                         {{--{{ __('Tags') }} <i class="fas fa-caret-down ml-1/2"></i>--}}

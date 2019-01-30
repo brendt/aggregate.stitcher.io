@@ -46,9 +46,23 @@ class Post extends Model
         return $this->hasMany(Vote::class);
     }
 
+    public function votesThisWeek(): HasMany
+    {
+        return $this
+            ->votes()
+            ->whereDate('created_at', '>=', now()->subWeek());
+    }
+
     public function views(): HasMany
     {
         return $this->hasMany(View::class);
+    }
+
+    public function viewsThisWeek(): HasMany
+    {
+        return $this
+            ->views()
+            ->whereDate('created_at', '>=', now()->subWeek());
     }
 
     public function tags(): HasManyThrough
