@@ -32,21 +32,7 @@
                         {{ __('Top this week') }}
                     </active-link>
                 </li>
-                {{--<li>--}}
-                    {{--<a href="{{ action([\App\Http\Controllers\PostsController::class, 'latest']) }}">--}}
-                        {{--{{ __('Tags') }} <i class="fas fa-caret-down ml-1/2"></i>--}}
-                    {{--</a>--}}
-                {{--</li>--}}
             </ul>
-            @isset ($user)
-                <ul>
-                    <li class="mr-6">
-                        <filter-link name="unread" value="1">
-                            {{ __('Unread') }}
-                        </filter-link>
-                    </li>
-                </ul>
-            @endisset
         </nav>
     </div>
 
