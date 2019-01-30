@@ -6,7 +6,6 @@ use App\Http\Requests\GuestSourceRequest;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
-use Domain\User\Models\User;
 
 class GuestSourcesController
 {
@@ -22,9 +21,7 @@ class GuestSourcesController
         $url = $sourceRequest->getSourceUrl();
 
         if (! Source::whereUrl($url)->exists()) {
-            $adminUser = User::whereAdmin()->first();
-
-            $createSourceAction($adminUser, SourceData::fromRequest($sourceRequest));
+            $createSourceAction(null, SourceData::fromRequest($sourceRequest));
         }
 
         return view('guestSources.success');
