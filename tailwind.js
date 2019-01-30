@@ -57,6 +57,7 @@ let colors = {
   'red': 'var(--red)',
   'red-dark': 'var(--red-dark)',
   'green': 'var(--green)',
+  'green-dark': 'var(--green-dark)',
   'yellow': 'var(--yellow)',
   'primary': 'var(--primary)',
 }

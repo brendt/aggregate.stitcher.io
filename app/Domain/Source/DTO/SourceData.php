@@ -17,7 +17,7 @@ final class SourceData extends DataTransferObject
     public static function fromRequest(SourceRequest $request, Source $source = null): SourceData
     {
         return new self([
-            'url' => $request->get('url'),
+            'url' => $request->getSourceUrl(),
             'is_active' => $source->is_active ?? false,
         ]);
     }

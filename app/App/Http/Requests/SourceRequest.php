@@ -21,4 +21,9 @@ class SourceRequest extends Request
             ],
         ];
     }
+
+    public function getSourceUrl(): string
+    {
+        return $this->get('url');
+    }
 }

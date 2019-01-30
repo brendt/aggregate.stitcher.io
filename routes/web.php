@@ -7,6 +7,7 @@ use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\DisclaimerController;
+use App\Http\Controllers\GuestSourcesController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\SourceMutesController;
@@ -80,6 +81,9 @@ Route::get('/topic/{topic}', [PostsController::class, 'topic']);
 Route::get('/tag/{tag}', [PostsController::class, 'tag']);
 Route::get('/source/{sourceByWebsite}', [PostsController::class, 'source']);
 Route::get('/privacy', PrivacyController::class);
+
+Route::get('suggest-blog', [GuestSourcesController::class, 'index']);
+Route::post('suggest-blog', [GuestSourcesController::class, 'store']);
 
 Route::get('topics', [TopicsController::class, 'index']);
 

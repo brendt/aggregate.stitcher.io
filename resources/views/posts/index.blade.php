@@ -33,6 +33,17 @@
                     </active-link>
                 </li>
             </ul>
+
+            <ul>
+                <li>
+                    <a
+                        href="{{ action([\App\Http\Controllers\GuestSourcesController::class, 'index']) }}"
+                        class="text-green"
+                    >
+                        {{ __('Suggest a blog') }}
+                    </a>
+                </li>
+            </ul>
         </nav>
     </div>
 
