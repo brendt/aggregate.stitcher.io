@@ -6,10 +6,11 @@ use App\Console\Playbook;
 use App\Console\PlaybookDefinition;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Question\Question;
 
 final class PlaybookCommand extends Command
 {
-    protected $signature = 'playbook:run {playbook} {--clean}';
+    protected $signature = 'playbook:run {playbook?}';
 
     protected $description = 'Setup the database against a predefined playbook';
 
@@ -21,11 +22,25 @@ final class PlaybookCommand extends Command
             $this->error('This command can only be run in the local environment!');
         }
 
-        if ($this->option('clean')) {
-            $this->migrate();
+        $playbookName = $this->argument('playbook');
+
+        if (! $playbookName) {
+            $availablePlaybooks = $this->getAvailablePlaybooks();
+
+            $this->comment('Choose a playbook: ' . PHP_EOL);
+
+            foreach ($availablePlaybooks as $availablePlaybook) {
+                $this->comment("- {$availablePlaybook}");
+            }
+
+            $this->comment('');
+
+            $playbookName = $this->askPlaybookName($availablePlaybooks);
         }
 
-        $playbookDefinition = $this->resolvePlaybookDefinition($this->argument('playbook'));
+        $playbookDefinition = $this->resolvePlaybookDefinition($playbookName);
+
+        $this->migrate();
 
         $this->runPlaybook($playbookDefinition);
     }
@@ -64,6 +79,36 @@ final class PlaybookCommand extends Command
                 $this->resolvePlaybookDefinition($after)
             );
         }
+    }
+
+    protected function askPlaybookName(array $availablePlaybooks): string
+    {
+        $helper = $this->getHelper('question');
+
+        $question = new Question('');
+
+        $question->setAutocompleterValues($availablePlaybooks);
+
+        $playbookName = (string) $helper->ask($this->input, $this->output, $question);
+
+        if (! $playbookName) {
+            $this->error('Please choose a playbook');
+
+            return $this->askPlaybookName($availablePlaybooks);
+        }
+
+        return $playbookName;
+    }
+
+    protected function getAvailablePlaybooks(): array
+    {
+        $files = scandir(__DIR__ . '/../Playbooks');
+
+        unset($files[0], $files[1]);
+
+        return array_map(function (string $file) {
+            return str_replace('.php', '', $file);
+        }, $files);
     }
 
     protected function resolvePlaybookDefinition($class): PlaybookDefinition
