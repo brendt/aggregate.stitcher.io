@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Jobs\PostViewedJob;
 use App\Http\Queries\AllPostsQuery;
 use App\Http\Queries\LatestPostsQuery;
 use App\Http\Queries\TopPostsQuery;
@@ -118,7 +119,11 @@ class PostsController
         Post $post,
         AddViewAction $addViewAction
     ) {
-        $addViewAction($post, $request->user());
+        dispatch(new PostViewedJob(
+            $addViewAction,
+            $post,
+            $request->user()
+        ));
 
         return redirect()->to($post->url);
     }
