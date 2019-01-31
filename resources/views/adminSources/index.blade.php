@@ -9,21 +9,29 @@
 ])
     <heading>{{ __('Sources') }}</heading>
 
-    <div class="mt-4">
-        <form-component
-            :action="action([\App\Http\Controllers\AdminSourcesController::class, 'store'])"
-            class="flex items-baseline"
-        >
-            <text-field
-                name="url"
-                :label="__('RSS url')"
-            ></text-field>
+    <form
+        action="{{ $currentUrl }}"
+        method="GET"
+        class="flex items-bottom justify-start mt-4"
+    >
+        <text-field
+            name="filter[search]"
+            label=""
+            :value="$currentSearchQuery"
+        ></text-field>
 
-            <submit-button class="ml-4 button-small">
-                {{ __('Add source') }}
-            </submit-button>
-        </form-component>
-    </div>
+        <submit-button class="ml-4 button-small">
+            {{ __('Search') }}
+        </submit-button>
+
+        @if($currentSearchQuery)
+            <div class="ml-4 pt-2">
+                <a href="{{ $currentUrl }}" class="link">
+                    {{ __('Clear search') }}
+                </a>
+            </div>
+        @endif
+    </form>
 
     <table class="table mt-4">
         <thead>
@@ -58,13 +66,6 @@
                 <tr>
                     <td>
                         <a
-                            class="underline hover:no-underline"
-                            href="{{ $source->url }}"
-                        >
-                            {{ $source->url }}
-                        </a>
-                        <br>
-                        <a
                             class="
                                 underline
                                 hover:no-underline
@@ -74,6 +75,21 @@
                             "
                             href="http://{{ $source->website }}"
                         >{{ $source->website }}</a>
+
+                        <div class="mt-2">
+                            <a
+                                class="underline hover:no-underline"
+                                href="{{ $source->url }}"
+                            >
+                                {{ __('RSS') }}</a>&nbsp;–
+                            <a
+                                class="underline hover:no-underline"
+                                href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
+                            >
+                                {{ __('Filtered') }}
+                            </a>
+                        </div>
+
                     </td>
                     <td class="text-right">
                         {{ $source->post_count }}
@@ -99,7 +115,7 @@
 
                         <a
                             href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
-                            class="mt-3 block"
+                            class="mt-2 block"
                         >
                             {{ __('Delete') }}
                         </a>
@@ -108,6 +124,22 @@
             @endforeach
         </tbody>
     </table>
+
+    <div class="mt-4">
+        <form-component
+            :action="action([\App\Http\Controllers\AdminSourcesController::class, 'store'])"
+            class="flex items-bottom justify-end"
+        >
+            <text-field
+                name="url"
+                label=""
+            ></text-field>
+
+            <submit-button class="ml-4 button-small">
+                {{ __('Add source') }}
+            </submit-button>
+        </form-component>
+    </div>
 
     {{ $sources->render() }}
 @endcomponent

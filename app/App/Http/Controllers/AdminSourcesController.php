@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Console\Jobs\SyncSourceJob;
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
-use Domain\Post\Models\Post;
+use App\Http\Requests\Request;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
@@ -16,12 +16,16 @@ use Domain\User\Models\User;
 
 class AdminSourcesController
 {
-    public function index(AdminSourcesQuery $query)
-    {
+    public function index(
+        Request $request,
+        AdminSourcesQuery $query
+    ) {
         $sources = $query->paginate();
 
         return view('adminSources.index', [
             'sources' => $sources,
+            'currentUrl' => $request->url(),
+            'currentSearchQuery' => $request->get('filter')['search'] ?? null,
         ]);
     }
 
