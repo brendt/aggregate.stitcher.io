@@ -61,7 +61,7 @@ class RssEntryDecorator extends AbstractEntry
             return mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES");
         }, $title);
 
-        return $title;
+        return html_entity_decode($title);
     }
 
     public function url(): string
