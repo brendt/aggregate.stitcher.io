@@ -5,7 +5,6 @@ namespace Domain\Post\Decorators;
 use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Support\Collection;
-use SimpleXMLElement;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
 class RssEntryDecorator extends AbstractEntry
@@ -31,6 +30,10 @@ class RssEntryDecorator extends AbstractEntry
 
     public function createdAt(): ?Carbon
     {
+        if ($this->decoratedEntry->getDateCreated()) {
+            return Carbon::make($this->decoratedEntry->getDateCreated());
+        }
+
         $date = $this->data['datecreated']
             ?? $this->data['datemodified']
             ?? null;

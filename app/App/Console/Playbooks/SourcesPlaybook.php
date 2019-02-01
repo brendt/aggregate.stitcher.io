@@ -40,12 +40,14 @@ final class SourcesPlaybook extends Playbook
 
     private function createSources(OutputInterface $output)
     {
+        $email = 'brent@stitcher.io';
+
         $sources = [
-            'https://stitcher.io/rss' => 'brent@stitcher.io',
-            'https://sebastiandedeyne.com/feed' => 'info@sebastiandedeyne.com',
+            'https://stitcher.io/rss',
+            'https://sebastiandedeyne.com/feed',
         ];
 
-        foreach ($sources as $url => $email) {
+        foreach ($sources as $url) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
                 return $this->createUserAction->__invoke($email, bcrypt('secret'));
             });
