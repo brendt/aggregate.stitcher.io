@@ -65,6 +65,7 @@ class PostData extends DataTransferObject
     {
         return $post->title !== $this->title
             || $post->teaser !== $this->teaser
-            || $post->hasDifferentTags($this->tag_ids);
+            || $post->hasDifferentTags($this->tag_ids)
+            || $post->date_created->notEqualTo($this->date_created);
     }
 }
