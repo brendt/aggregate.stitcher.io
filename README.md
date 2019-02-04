@@ -13,4 +13,4 @@ Please refer to [LICENSE.txt](./LICENSE.txt).
 ## Local development
 
 - Docs are still a WIP
-- Instead of `artisan migrate:fresh`, you should use `artidan playbook:run PostsPlaybook --clean`
+- Instead of `artisan migrate:fresh`, you should use `artisan playbook:run PostsPlaybook --clean`
