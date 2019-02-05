@@ -47,6 +47,7 @@ return PhpCsFixer\Config::create()
         'visibility_required' => ['property', 'method'],
 
         'void_return' => true,
+        'protected_to_private' => true,
 
         'explicit_string_variable' => true,
     ])
