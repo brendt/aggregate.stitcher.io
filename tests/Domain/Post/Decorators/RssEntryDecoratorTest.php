@@ -96,7 +96,7 @@ XML
                 <<<XML
 <item>
     <title>A</title>
-    <summary>$keyword $keyword</summary>
+    <summary>${keyword} ${keyword}</summary>
 </item>
 XML
             );

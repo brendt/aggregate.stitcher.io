@@ -20,12 +20,12 @@ class MockFeedInterface implements FeedInterface
         $feed->array[] = RssEntryDecoratorFactory::new()->createEntry(
             <<<XML
 <item>
-    <title>$url</title>
-    <updated>$date</updated>
+    <title>${url}</title>
+    <updated>${date}</updated>
     <description>description</description>
     <summary>summary</summary>
     <content>content</content>
-    <link>$url</link>
+    <link>${url}</link>
 </item>
 XML
         );
