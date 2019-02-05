@@ -34,7 +34,7 @@ final class PostViewedJob implements ShouldQueue
         $this->user = $user;
     }
 
-    public function handle()
+    public function handle(): void
     {
         ($this->addViewAction)->__invoke($this->post, $this->user);
     }

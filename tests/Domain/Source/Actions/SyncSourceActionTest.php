@@ -16,7 +16,7 @@ class SyncSourceActionTest extends TestCase
     /** @var \Domain\Source\Models\Source */
     private $source;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -24,7 +24,7 @@ class SyncSourceActionTest extends TestCase
     }
 
     /** @test */
-    public function it_creates_a_post()
+    public function it_creates_a_post(): void
     {
         $action = $this->createSyncAction(
             MockReader::new()->withPost()
@@ -36,7 +36,7 @@ class SyncSourceActionTest extends TestCase
     }
 
     /** @test */
-    public function it_wont_create_two_posts_for_the_same_source_on_the_same_day()
+    public function it_wont_create_two_posts_for_the_same_source_on_the_same_day(): void
     {
         $action = $this->createSyncAction(
             MockReader::new()
@@ -54,7 +54,7 @@ class SyncSourceActionTest extends TestCase
     }
 
     /** @test */
-    public function it_will_create_two_posts_for_the_same_source_on_separate_days()
+    public function it_will_create_two_posts_for_the_same_source_on_separate_days(): void
     {
         $action = $this->createSyncAction(
             MockReader::new()
@@ -72,7 +72,7 @@ class SyncSourceActionTest extends TestCase
     }
 
     /** @test */
-    public function it_will_create_two_posts_for_separate_sources_on_the_same_day()
+    public function it_will_create_two_posts_for_separate_sources_on_the_same_day(): void
     {
         $otherSource = SourceFactory::new()
             ->withUrl('https://other.com')

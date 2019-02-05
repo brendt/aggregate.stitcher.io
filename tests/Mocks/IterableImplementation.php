@@ -13,7 +13,7 @@ trait IterableImplementation
         return $this->array[$offset] ?? null;
     }
 
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value): void
     {
         if (is_null($offset)) {
             $this->array[] = $value;
@@ -29,7 +29,7 @@ trait IterableImplementation
         return array_key_exists($offset, $this->array);
     }
 
-    public function offsetUnset($offset)
+    public function offsetUnset($offset): void
     {
         unset($this->array[$offset]);
     }
@@ -39,7 +39,7 @@ trait IterableImplementation
         return $this->array[$this->position];
     }
 
-    public function next()
+    public function next(): void
     {
         $this->position++;
     }
@@ -54,7 +54,7 @@ trait IterableImplementation
         return array_key_exists($this->position, $this->array);
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->position = 0;
     }

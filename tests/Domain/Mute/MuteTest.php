@@ -14,7 +14,7 @@ class MuteTest extends TestCase
     /** @var \Domain\User\Models\User */
     private $user;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -22,7 +22,7 @@ class MuteTest extends TestCase
     }
 
     /** @test */
-    public function it_can_mute_a_muteable()
+    public function it_can_mute_a_muteable(): void
     {
         /** @var \Domain\Source\Models\Source $source */
         $source = factory(Source::class)->create();
@@ -35,7 +35,7 @@ class MuteTest extends TestCase
     }
 
     /** @test */
-    public function it_can_unmute_a_muteable()
+    public function it_can_unmute_a_muteable(): void
     {
         /** @var \Domain\Source\Models\Source $source */
         $source = factory(Source::class)->create();

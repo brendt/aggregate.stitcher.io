@@ -15,7 +15,7 @@ class PostTest extends TestCase
     /** @var \Domain\User\Models\User */
     private $user;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -23,7 +23,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_tag_is_ignored()
+    public function muted_tag_is_ignored(): void
     {
         /** @var \Domain\Post\Models\Tag $tag */
         $tag = factory(Tag::class)->create();
@@ -41,7 +41,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_tag_is_ignored_even_when_multiple_tags()
+    public function muted_tag_is_ignored_even_when_multiple_tags(): void
     {
         /** @var \Domain\Post\Models\Tag $tagA */
         $tagA = factory(Tag::class)->create([
@@ -71,7 +71,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_source_is_ignored()
+    public function muted_source_is_ignored(): void
     {
         /** @var \Domain\Source\Models\Source $source */
         $source = factory(Source::class)->create();
@@ -86,7 +86,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_tag_with_unmuted_source_is_ignored()
+    public function muted_tag_with_unmuted_source_is_ignored(): void
     {
         /** @var \Domain\Post\Models\Tag $tag */
         $tag = factory(Tag::class)->create();
@@ -109,7 +109,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_source_with_unmuted_tag_is_ignored()
+    public function muted_source_with_unmuted_tag_is_ignored(): void
     {
         /** @var \Domain\Post\Models\Tag $tag */
         $tag = factory(Tag::class)->create();
@@ -132,7 +132,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function muted_source_with_muted_tag_is_ignored()
+    public function muted_source_with_muted_tag_is_ignored(): void
     {
         /** @var \Domain\Post\Models\Tag $tag */
         $tag = factory(Tag::class)->create();

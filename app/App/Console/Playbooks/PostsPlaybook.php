@@ -26,7 +26,7 @@ final class PostsPlaybook extends Playbook
         ];
     }
 
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run(InputInterface $input, OutputInterface $output): void
     {
         foreach (Source::all() as $source) {
             $output->writeln("- Syncing source {$source->url}");

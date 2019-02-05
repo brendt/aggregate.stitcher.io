@@ -17,7 +17,7 @@ class FuzzyFilter implements Filter
 
     public function __invoke(Builder $builder, $values, string $property): Builder
     {
-        $builder->where(function (Builder $builder) use ($values) {
+        $builder->where(function (Builder $builder) use ($values): void {
             foreach ($this->fields as $field) {
                 $values = (array) $values;
 

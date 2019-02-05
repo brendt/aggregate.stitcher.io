@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSourcesTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('sources', function (Blueprint $table) {
+        Schema::create('sources', function (Blueprint $table): void {
             $table->increments('id');
             $table->uuid('uuid')->unique();
 

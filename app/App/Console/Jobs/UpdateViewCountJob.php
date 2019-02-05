@@ -22,7 +22,7 @@ class UpdateViewCountJob implements ShouldQueue
         $this->updateViewCountAction = $updateViewCountAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $posts = Post::all();
 

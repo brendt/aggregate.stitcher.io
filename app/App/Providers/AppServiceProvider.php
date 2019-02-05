@@ -15,7 +15,7 @@ use Support\Rss\RssReader;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         /** @var \Spatie\BladeX\BladeX $bladeX */
         $bladeX = $this->app->get(BladeX::class);
@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
         LengthAwarePaginator::defaultView('layouts.pagination');
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);

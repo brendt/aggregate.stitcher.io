@@ -26,7 +26,7 @@ abstract class Playbook
 
     abstract public function run(InputInterface $input, OutputInterface $output);
 
-    public function hasRun()
+    public function hasRun(): void
     {
         self::$timesRun += 1;
     }

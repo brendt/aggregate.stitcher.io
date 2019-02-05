@@ -24,7 +24,7 @@ final class BasePlaybook extends Playbook
         $this->createUserAction = $createUserAction;
     }
 
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run(InputInterface $input, OutputInterface $output): void
     {
         $this->syncTags();
 
@@ -35,12 +35,12 @@ final class BasePlaybook extends Playbook
         $output->writeln('- Admin user created');
     }
 
-    private function syncTags()
+    private function syncTags(): void
     {
         dispatch_now($this->syncTagsAndTopicsJob);
     }
 
-    private function createAdminUser()
+    private function createAdminUser(): void
     {
         $user = ($this->createUserAction)->__invoke('brent@stitcher.io', bcrypt('secret'));
 

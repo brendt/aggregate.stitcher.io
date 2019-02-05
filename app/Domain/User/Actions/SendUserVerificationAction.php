@@ -18,7 +18,7 @@ final class SendUserVerificationAction
         $this->mailer = $mailer;
     }
 
-    public function __invoke(User $user)
+    public function __invoke(User $user): void
     {
         $user->verification_token = $this->generateVerificationToken($user->email);
 

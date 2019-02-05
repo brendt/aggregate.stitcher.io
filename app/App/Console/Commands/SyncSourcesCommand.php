@@ -23,7 +23,7 @@ final class SyncSourcesCommand extends Command
         $this->syncSourceAction = $syncSourceAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $sources = Source::whereActive()->get();
 

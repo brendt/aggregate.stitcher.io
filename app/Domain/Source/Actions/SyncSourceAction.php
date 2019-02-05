@@ -42,7 +42,7 @@ final class SyncSourceAction
         return $this;
     }
 
-    public function __invoke(Source $source)
+    public function __invoke(Source $source): void
     {
         /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection */
         $tags = Tag::all();

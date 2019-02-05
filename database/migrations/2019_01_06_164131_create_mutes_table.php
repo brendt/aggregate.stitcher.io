@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMutesTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('mutes', function (Blueprint $table) {
+        Schema::create('mutes', function (Blueprint $table): void {
             $table->increments('id');
             $table->uuid('uuid')->unique();
 

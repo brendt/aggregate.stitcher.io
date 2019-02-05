@@ -73,7 +73,7 @@
             "envoy run deploy-code"
         ],
         "format" : [
-            "vendor/bin/php-cs-fixer fix"
+            "vendor/bin/php-cs-fixer fix --allow-risky=yes"
         ],
         "post-root-package-install" : [
             "php -r \"file_exists('.env') || copy('.env.example', '.env');\""

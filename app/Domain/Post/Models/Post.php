@@ -23,7 +23,7 @@ class Post extends Model
         'view_count' => 'integer',
     ];
 
-    public static function boot()
+    public static function boot(): void
     {
         parent::boot();
 

@@ -11,7 +11,7 @@ class MockMailer extends Mailer
         // Nothing needed
     }
 
-    public function send($view, array $data = [], $callback = null)
+    public function send($view, array $data = [], $callback = null): void
     {
         return;
     }

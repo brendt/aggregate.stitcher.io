@@ -33,12 +33,12 @@ final class SourcesPlaybook extends Playbook
         ];
     }
 
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run(InputInterface $input, OutputInterface $output): void
     {
         $this->createSources($output);
     }
 
-    private function createSources(OutputInterface $output)
+    private function createSources(OutputInterface $output): void
     {
         $email = 'brent@stitcher.io';
 

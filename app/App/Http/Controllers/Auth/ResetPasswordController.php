@@ -19,7 +19,7 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    protected function resetPassword(User $user, $password)
+    protected function resetPassword(User $user, $password): void
     {
         $resetPasswordAction = new ResetPasswordAction();
 

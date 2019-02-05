@@ -23,9 +23,9 @@ class Source extends Model implements Filterable, Muteable
         'is_active' => 'boolean',
     ];
 
-    public static function boot()
+    public static function boot(): void
     {
-        self::creating(function (Source $source) {
+        self::creating(function (Source $source): void {
             if ($source->website === null) {
                 $source->website = parse_url($source->url, PHP_URL_HOST);
             }

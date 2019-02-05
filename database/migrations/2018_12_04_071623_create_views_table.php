@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateViewsTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('views', function (Blueprint $table) {
+        Schema::create('views', function (Blueprint $table): void {
             $table->increments('id');
             $table->uuid('uuid')->unique();
 

@@ -8,7 +8,7 @@ use Laravel\Horizon\HorizonApplicationServiceProvider;
 
 class HorizonServiceProvider extends HorizonApplicationServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         parent::boot();
 
@@ -17,7 +17,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         // Horizon::routeSlackNotificationsTo('slack-webhook-url', '#channel');
     }
 
-    protected function gate()
+    protected function gate(): void
     {
         Gate::define('viewHorizon', function ($user) {
             return in_array($user->email, [
@@ -26,7 +26,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         });
     }
 
-    public function register()
+    public function register(): void
     {
         //
     }

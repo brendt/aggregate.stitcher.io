@@ -26,7 +26,7 @@ class SyncTagsAndTopicsJob
         $this->syncTagAction = $syncTagAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $definition = Yaml::parse(file_get_contents(base_path('app/tags.yaml')));
 

@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
     ];
 
-    protected function schedule(Schedule $schedule)
+    protected function schedule(Schedule $schedule): void
     {
         $schedule
             ->command(SyncSourcesCommand::class)
@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
             ->withoutOverlapping();
     }
 
-    protected function commands()
+    protected function commands(): void
     {
         $this->load(__DIR__ . '/Commands');
     }

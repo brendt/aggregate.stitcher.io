@@ -13,21 +13,21 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected $namespace = '';
 
-    public function boot()
+    public function boot(): void
     {
         $this->mapBindings();
 
         parent::boot();
     }
 
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
     }
 
-    protected function mapBindings()
+    protected function mapBindings(): void
     {
         Route::bind('post', function (string $uuid): Post {
             return Post::whereUuid($uuid)->firstOrFail();
@@ -46,14 +46,14 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
 
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')

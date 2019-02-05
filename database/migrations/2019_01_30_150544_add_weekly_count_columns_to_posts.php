@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Schema;
 
 class AddWeeklyCountColumnsToPosts extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->unsignedInteger('view_count_weekly')
                 ->default(0)
                 ->after('view_count');

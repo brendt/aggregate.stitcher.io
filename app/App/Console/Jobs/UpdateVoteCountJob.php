@@ -22,7 +22,7 @@ class UpdateVoteCountJob implements ShouldQueue
         $this->updateVoteCountAction = $updateVoteCountAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $posts = Post::all();
 

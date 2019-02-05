@@ -12,7 +12,7 @@ final class SyncPostCountCommand extends Command
 
     protected $description = 'Sync post count statistics';
 
-    public function handle()
+    public function handle(): void
     {
         dispatch(app(UpdateViewCountJob::class));
 

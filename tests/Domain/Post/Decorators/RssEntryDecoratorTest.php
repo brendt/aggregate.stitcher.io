@@ -11,7 +11,7 @@ class RssEntryDecoratorTest extends TestCase
     /** @var \Tests\Factories\RssEntryDecoratorFactory */
     private $factory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -21,7 +21,7 @@ class RssEntryDecoratorTest extends TestCase
     }
 
     /** @test */
-    public function content_encoded_can_be_parsed()
+    public function content_encoded_can_be_parsed(): void
     {
         $entry = $this->factory->create(
             <<<XML
@@ -39,7 +39,7 @@ XML
     }
 
     /** @test */
-    public function content_can_be_parsed()
+    public function content_can_be_parsed(): void
     {
         $entry = $this->factory->create(
             <<<XML
@@ -56,7 +56,7 @@ XML
     }
 
     /** @test */
-    public function description_can_be_parsed()
+    public function description_can_be_parsed(): void
     {
         $entry = $this->factory->create(
             <<<XML
@@ -72,7 +72,7 @@ XML
     }
 
     /** @test */
-    public function summary_can_be_parsed()
+    public function summary_can_be_parsed(): void
     {
         $entry = $this->factory->create(
             <<<XML
@@ -87,7 +87,7 @@ XML
     }
 
     /** @test */
-    public function tags_can_be_parsed()
+    public function tags_can_be_parsed(): void
     {
         foreach (Tag::all() as $tag) {
             $keyword = collect($tag->keywords)->random();
@@ -106,7 +106,7 @@ XML
     }
 
     /** @test */
-    public function tags_from_categories()
+    public function tags_from_categories(): void
     {
         $entry = $this->factory->create(
             <<<XML

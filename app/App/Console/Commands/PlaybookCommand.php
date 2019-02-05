@@ -16,7 +16,7 @@ final class PlaybookCommand extends Command
 
     protected $ranDefinitions = [];
 
-    public function handle()
+    public function handle(): void
     {
         if (app()->environment() !== 'local') {
             $this->error('This command can only be run in the local environment!');
@@ -45,14 +45,14 @@ final class PlaybookCommand extends Command
         $this->runPlaybook($playbookDefinition);
     }
 
-    protected function migrate()
+    protected function migrate(): void
     {
         $this->info('Clearing the database');
 
         $this->call('migrate:fresh');
     }
 
-    protected function runPlaybook(PlaybookDefinition $definition)
+    protected function runPlaybook(PlaybookDefinition $definition): void
     {
         foreach ($definition->playbook->before() as $before) {
             $this->runPlaybook(
@@ -130,7 +130,7 @@ final class PlaybookCommand extends Command
         return new PlaybookDefinition($className);
     }
 
-    protected function infoRunning(Playbook $playbook, int $i)
+    protected function infoRunning(Playbook $playbook, int $i): void
     {
         $playbookName = get_class($playbook);
 

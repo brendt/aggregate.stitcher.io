@@ -10,7 +10,7 @@ use Tests\TestCase;
 class SourceTest extends TestCase
 {
     /** @test */
-    public function test_scope_where_not_muted()
+    public function test_scope_where_not_muted(): void
     {
         /** @var \Domain\User\Models\User $user */
         $user = factory(User::class)->create();

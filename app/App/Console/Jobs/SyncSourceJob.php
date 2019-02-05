@@ -26,7 +26,7 @@ class SyncSourceJob implements ShouldQueue
         $this->source = $source;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->syncSourceAction->__invoke($this->source);
     }
