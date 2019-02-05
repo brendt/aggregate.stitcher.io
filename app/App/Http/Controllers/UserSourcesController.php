@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\SourceRequest;
 use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Actions\CreateSourceAction;
-use Domain\Source\DTO\SourceData;
 use Domain\Source\Actions\DeleteSourceAction;
 use Domain\Source\Actions\UpdateSourceAction;
+use Domain\Source\DTO\SourceData;
 use Domain\User\Models\User;
 
 class UserSourcesController

@@ -2,9 +2,9 @@
 
 use App\Console\Jobs\UpdateViewCountJob;
 use App\Console\Jobs\UpdateVoteCountJob;
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class AddWeeklyCountColumnsToPosts extends Migration
 {

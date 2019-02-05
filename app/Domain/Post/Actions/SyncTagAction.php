@@ -3,7 +3,6 @@
 namespace Domain\Post\Actions;
 
 use Domain\Post\DTO\TagData;
-use Domain\Post\Actions\UpdateTagAction;
 use Domain\Post\Models\Tag;
 
 final class SyncTagAction

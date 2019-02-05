@@ -21,7 +21,7 @@ final class CreateUserAction
             'email' => $email,
             'password' => $password_hash,
             'verification_token' => $this->sendUserVerificationAction
-                ->generateVerificationToken($email)
+                ->generateVerificationToken($email),
         ]);
 
         ($this->sendUserVerificationAction)->__invoke($user);

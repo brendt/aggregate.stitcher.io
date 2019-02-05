@@ -2,9 +2,9 @@
 
 namespace Domain\Source\Actions;
 
-use Domain\Post\DTO\PostData;
 use Domain\Post\Actions\CreatePostAction;
 use Domain\Post\Actions\UpdatePostAction;
+use Domain\Post\DTO\PostData;
 use Domain\Post\Models\Tag;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;

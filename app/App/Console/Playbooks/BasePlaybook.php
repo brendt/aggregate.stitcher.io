@@ -5,7 +5,6 @@ namespace App\Console\Playbooks;
 use App\Console\Jobs\SyncTagsAndTopicsJob;
 use App\Console\Playbook;
 use Domain\User\Actions\CreateUserAction;
-use Domain\User\Models\User;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
