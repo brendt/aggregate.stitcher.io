@@ -37,5 +37,6 @@ return PhpCsFixer\Config::create()
             ],
         ],
         'void_return' => true,
+        'visibility_required' => [ "property", "method" ],
     ])
     ->setFinder($finder);
