@@ -3,7 +3,7 @@
 namespace Tests\Domain\Mute;
 
 use Domain\Mute\Actions\MuteAction;
-use Domain\Mute\Events\UnmuteAction;
+use Domain\Mute\Actions\UnmuteAction;
 use Domain\Mute\Models\Mute;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;

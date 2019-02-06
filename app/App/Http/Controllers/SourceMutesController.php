@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Domain\Mute\Actions\MuteAction;
-use Domain\Mute\Events\UnmuteAction;
+use Domain\Mute\Actions\UnmuteAction;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 

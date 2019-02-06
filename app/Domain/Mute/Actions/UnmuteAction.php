@@ -1,6 +1,6 @@
 <?php
 
-namespace Domain\Mute\Events;
+namespace Domain\Mute\Actions;
 
 use Domain\Mute\Models\Mute;
 use Domain\Mute\Muteable;
