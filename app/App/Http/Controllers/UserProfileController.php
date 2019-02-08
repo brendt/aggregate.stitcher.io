@@ -22,6 +22,6 @@ class UserProfileController
     ): RedirectResponse {
         $changePasswordAction($user, $request->input('password'));
 
-        return redirect()->back()->with('success', 'Votre mot de passe a bien été modifé');
+        return redirect()->back();
     }
 }
