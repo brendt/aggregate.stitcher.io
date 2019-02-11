@@ -7,6 +7,7 @@ use App\Http\ViewModels\ProfileViewModel;
 use Domain\User\Actions\ChangePasswordAction;
 use Domain\User\Models\User;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Hash;
 
 class UserProfileController
 {
@@ -20,7 +21,8 @@ class UserProfileController
         ProfileRequest $request,
         ChangePasswordAction $changePasswordAction
     ): RedirectResponse {
-        $changePasswordAction($user, $request->input('password'));
+        $newPassword = Hash::make($request->input('password'));
+        $changePasswordAction($user, $newPassword);
 
         return redirect()->back();
     }
