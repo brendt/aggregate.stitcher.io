@@ -9,6 +9,7 @@ use Domain\Post\Models\Tag;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;
 use Support\Rss\Reader;
+use Zend\Feed\Exception\RuntimeException;
 use Zend\Feed\Reader\Entry\EntryInterface;
 
 final class SyncSourceAction
