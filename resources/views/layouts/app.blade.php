@@ -60,13 +60,13 @@
                             </li>
                         @endif
                         <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
-                                {{ __('Log out') }}
+                            <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
+                                {{ __('Profile') }}
                             </a>
                         </li>
                         <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
-                                {{ __('Profile') }}
+                            <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
+                                {{ __('Log out') }}
                             </a>
                         </li>
                     @else
