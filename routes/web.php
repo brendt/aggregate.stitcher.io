@@ -47,6 +47,9 @@ Route::middleware('auth')->prefix('profile')->group(function () {
         Route::get('sources', [UserSourcesController::class, 'index']);
         Route::post('sources', [UserSourcesController::class, 'update']);
         Route::post('sources/delete', [UserSourcesController::class, 'delete']);
+
+        Route::get('profile', [\App\Http\Controllers\UserProfileController::class, 'index']);
+        Route::post('profile', [\App\Http\Controllers\UserProfileController::class, 'update']);
     });
 
     Route::post('posts/{post}/add-vote', [VotesController::class, 'store']);

@@ -64,6 +64,11 @@
                                 {{ __('Log out') }}
                             </a>
                         </li>
+                        <li class="mb-3">
+                            <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
+                                {{ __('Profile') }}
+                            </a>
+                        </li>
                     @else
                         <li class="mb-3">
                             <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}">
