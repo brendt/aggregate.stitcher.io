@@ -16,3 +16,4 @@ vendor
 yarn-error.log
 !public/vendor
 aggregate
+package-lock.json
