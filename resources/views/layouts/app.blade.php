@@ -30,77 +30,71 @@
                     <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
                     <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
                 </header>
-                <ul class="text-sm sticky" style="bottom: 1rem">
-                    <li class="mb-3">
-                        <a href="{{ action([\App\Http\Controllers\PostsController::class, 'index']) }}">
-                            {{ __('All posts') }}
-                        </a>
+                <ul class="text-sm text-grey-darker sticky" style="bottom: 1rem">
+                    <li class="mb-2">
+                        <active-link :href="action([\App\Http\Controllers\PostsController::class, 'index'])">
+                            {{ __('Feed') }}
+                        </active-link>
                     </li>
                     @if(current_user())
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
                                 {{ __('My content') }}
-                            </a>
+                            </active-link>
                         </li>
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\UserMutesController::class, 'index']) }}">
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\UserMutesController::class, 'index'])">
                                 {{ __('Mutes') }}
-                            </a>
+                            </active-link>
                         </li>
-                        @if(current_user()->isAdmin())
-                            <li class="mb-3">
-                                <a href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
-                                    {{ __('Admin') }}
-                                </a>
-                            </li>
-                            <li class="mb-3">
-                                <a href="/horizon" target="_blank" rel="noopener noreferrer">
-                                    {{ __('Horizon') }}
-                                </a>
-                            </li>
-                        @endif
-                        <li class="mb-3">
+                        <li class="mb-2">
                             <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
                                 {{ __('Profile') }}
                             </a>
                         </li>
-                        <li class="mb-3">
+                        <li>
                             <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
                                 {{ __('Log out') }}
                             </a>
                         </li>
+                        @if(current_user()->isAdmin())
+                            <li class="mt-6 mb-2">
+                                <active-link :href="action([\App\Http\Controllers\AdminSourcesController::class, 'index'])">
+                                    {{ __('Admin') }}
+                                </active-link>
+                            </li>
+                            <li>
+                                <active-link href="/horizon" target="_blank" rel="noopener noreferrer">
+                                    {{ __('Horizon') }}
+                                </active-link>
+                            </li>
+                        @endif
                     @else
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'login']) }}">
-                                <i class="fas fa-sign-in-alt w-6 opacity-75"></i> {{ __('Log in') }}
-                            </a>
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\Auth\LoginController::class, 'login'])">
+                                {{ __('Log in') }}
+                            </active-link>
                         </li>
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">
-                                <i class="fas fa-user-plus w-6 opacity-75"></i> {{ __('Register') }}
-                            </a>
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'register'])">
+                                {{ __('Register') }}
+                            </active-link>
                         </li>
                     @endif
 
                     @if(! current_user())
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
-                                <i class="fas fa-plus-circle w-6 opacity-75"></i> {{ __('Submit your blog') }}
-                            </a>
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])">
+                                {{ __('Submit your blog') }}
+                            </active-link>
                         </li>
                     @elseif(! current_user()->getPrimarySource())
-                        <li class="mb-3">
-                            <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}">
-                                <i class="fas fa-pencil-alt w-6 opacity-75"></i> {{ __('Submit your blog') }}
-                            </a>
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
+                                {{ __('Submit your blog') }}
+                            </active-link>
                         </li>
                     @endif
-
-                    <li>
-                        <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
-                            <i class="fas fa-bug w-6 opacity-75"></i> {{ __('Report an issue') }}
-                        </a>
-                    </li>
                 </ul>
             </nav>
 
@@ -113,20 +107,25 @@
     </div>
 
     <footer class="pt-4 bg-black text-grey text-sm">
-        <div class="w-full max-w-lg ml-16">
-            <div class="w-2/3 ml-auto">
-                <span>
+        <div class="max-w-lg ml-16">
+            <ul class="flex w-2/3 ml-auto">
+                <li>
                     &copy; {{ now()->format('Y') }}
                     <a href="https://stitcher.io" target="_blank" rel="noopener noreferrer">
                         stitcher.io
                     </a>
-                </span>
-                <span class="ml-6">
+                </li>
+                <li class="ml-6">
                     <a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">
                         Privacy &amp; disclaimer
                     </a>
+                </li>
+                <li class="ml-6">
+                    <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
+                        {{ __('Report an issue') }}
+                    </a>
                 </span>
-            </div>
+            </ul>
         </div>
     </footer>
 

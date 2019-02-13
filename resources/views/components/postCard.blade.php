@@ -18,9 +18,9 @@
             </a>
         </p>
 
-        <p class="text-grey-dark text-sm">
+        <div class="text-grey-darker text-sm">
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
-            –
+            on
             {{ $post->relative_date }}
 
             @if ($post->view_count > 0)
@@ -31,7 +31,16 @@
                     {{ __(':view_count views', ['view_count' => $post->view_count]) }}
                 @endif
             @endif
-        </p>
+
+            @if ($user)
+                @if(! $user->hasMuted($post->source))
+                    –
+                    <post-button :action="$post->source->getMuteUrl()" :inline="true">
+                        {{ __('Mute source') }}
+                    </post-button>
+                @endif
+            @endif
+        </div>
 
         <div class="flex items-baseline mt-2">
             @if($post->tags->isNotEmpty())
@@ -40,22 +49,6 @@
                         <tag :tag="$tag" class="mr-1/2"></tag>
                     @endforeach
                 </p>
-            @endif
-
-            @if ($user)
-                @if(! $user->hasMuted($post->source))
-                    <post-button
-                        :action="$post->source->getMuteUrl()"
-                    >
-                        <span class="
-                            underline
-                            text-grey text-sm
-                            hover:no-underline
-                        ">
-                            {{ __('Mute source') }}
-                        </span>
-                    </post-button>
-                @endif
             @endif
         </div>
     </div>

@@ -2,7 +2,7 @@
     /** @var \Illuminate\Pagination\LengthAwarePaginator $paginator */
 @endphp
 
-<nav class="text-sm text-grey-dark leading-normal pt-2 flex items-center justify-between w-full">
+<nav class="text-sm text-grey-darker leading-normal pt-2 flex items-center justify-between w-full">
     <div>
         @if($paginator->previousPageUrl())
             <a
