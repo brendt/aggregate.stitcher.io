@@ -15,10 +15,6 @@
             :last="$loop->last"
         ></post-card>
     @endforeach
-
-    @if($posts->isEmpty())
-        {{ __('Nothing to see here!') }}
-    @endif
 </section>
 
 {{ $posts->render() }}

@@ -1,6 +1,7 @@
 <form
     action="{{ $action }}"
     method="post"
+    @if(isset($inline) && $inline) class="inline-block" @endif
 >
     @csrf
 

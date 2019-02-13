@@ -9,8 +9,8 @@
     'title' => $title,
 ])
     <div class="flex items-baseline justify-between">
-        <nav class="text-sm text-grey-dark leading-normal pt-2 h-12 flex items-center justify-between border-b border-grey-lighter w-full">
-            <ul class="flex">
+        <nav class="text-sm text-grey-darker leading-normal pt-2 h-12 flex items-center justify-between border-b border-grey-lighter w-full">
+            <ul class="flex w-full">
                 <li class="mr-6">
                     <active-link
                         :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
@@ -32,15 +32,11 @@
                         {{ __('Top this week') }}
                     </active-link>
                 </li>
-            </ul>
-
-            <ul>
-                <li>
+                <li class="ml-auto">
                     <a
                         href="{{ action([\App\Http\Controllers\GuestSourcesController::class, 'index']) }}"
-                        class="text-green"
                     >
-                        {{ __('Suggest a blog') }}
+                        <i class="far fa-lightbulb mr-2"></i>{{ __('Suggest a blog') }}
                     </a>
                 </li>
             </ul>

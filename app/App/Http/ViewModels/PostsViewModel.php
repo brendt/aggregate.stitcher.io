@@ -109,7 +109,6 @@ final class PostsViewModel extends ViewModel
 
     public function donationIndex(): int
     {
-        return 4;
-//        return rand(4, $this->posts->count() - 4);
+        return rand(4, $this->posts->count() - 4);
     }
 }
