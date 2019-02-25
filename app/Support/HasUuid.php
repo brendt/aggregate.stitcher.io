@@ -16,8 +16,6 @@ trait HasUuid
             }
 
             $model->uuid = Uuid::uuid4();
-
-            return $model;
         });
     }
 
