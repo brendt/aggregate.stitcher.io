@@ -24,7 +24,7 @@ startDeployment
 cloneRepository
 runComposer
 runYarn
-generateAssets
+#generateAssets
 updateSymlinks
 optimizeInstallation
 backupDatabase
