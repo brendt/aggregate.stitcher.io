@@ -12,6 +12,7 @@ use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 use Support\Filterable;
 use Support\HasUuid;
 
@@ -21,6 +22,7 @@ class Source extends Model implements Filterable, Muteable
 
     protected $casts = [
         'is_active' => 'boolean',
+        'is_validated' => 'boolean',
     ];
 
     public static function boot(): void
@@ -47,6 +49,27 @@ class Source extends Model implements Filterable, Muteable
     public function scopeWhereActive(Builder $builder): Builder
     {
         return $builder->where('is_active', true);
+    }
+
+    public function getBaseUrl(): string
+    {
+        [$scheme, $host] = array_values(parse_url($this->url));
+
+        return "{$scheme}://{$host}";
+    }
+
+    public function setUrlAttribute(string $url): void
+    {
+        if (! Str::startsWith($url, ['http://', 'https://'])) {
+            $url = 'http://' . $url;
+        }
+
+        $this->attributes['url'] = $url;
+    }
+
+    public function scopeWhereNotValidated(Builder $builder): Builder
+    {
+        return $builder->where('is_validated', false);
     }
 
     public function getPostByUrl(string $url): ?Post

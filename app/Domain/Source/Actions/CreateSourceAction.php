@@ -10,11 +10,17 @@ use Illuminate\Mail\Mailer;
 
 final class CreateSourceAction
 {
+    /** @var \Domain\Source\Actions\ValidateSourceAction */
+    private $validateSourceAction;
+
     /** @var \Illuminate\Mail\Mailer */
     private $mailer;
 
-    public function __construct(Mailer $mailer)
-    {
+    public function __construct(
+        ValidateSourceAction $validateSourceAction,
+        Mailer $mailer
+    ) {
+        $this->validateSourceAction = $validateSourceAction;
         $this->mailer = $mailer;
     }
 
@@ -25,6 +31,10 @@ final class CreateSourceAction
             'url' => $sourceData->url,
             'is_active' => $sourceData->is_active,
         ]);
+
+        $this->validateSourceAction
+            ->onQueue()
+            ->execute($source);
 
         $this->notifyAboutNewSource($source);
 

@@ -41,6 +41,11 @@
                         {{ __('Name') }}
                     </sort-link>
                 </th>
+                <th>
+                    <sort-link name="is_validated">
+                        {{ __('Feed') }}
+                    </sort-link>
+                </th>
                 <th class="text-right">
                     <sort-link name="post_count">
                         {{ __('Posts') }}
@@ -89,7 +94,17 @@
                                 {{ __('Filtered') }}
                             </a>
                         </div>
-
+                    </td>
+                    <td>
+                        @if ($source->is_validated)
+                            <a href="{{ $source->url }}" target="_blank" rel="noopener noreferrer" class="link">
+                                {{ $source->url }}
+                            </a>
+                        @else
+                            <span class="text-red">
+                                {{ __('Feed validation pending') }}
+                            </span>
+                        @endif
                     </td>
                     <td class="text-right">
                         {{ $source->post_count }}
@@ -102,7 +117,7 @@
                             <span class="text-green font-bold">
                                 {{ __('Active') }}
                             </span>
-                        @else
+                        @elseif($source->is_validated)
                             <post-button
                                 class="button button-small button-green"
                                 :action="action([\App\Http\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
@@ -110,8 +125,6 @@
                                 {{ __('Activate') }}
                             </post-button>
                         @endif
-
-                        <br>
 
                         <a
                             href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"

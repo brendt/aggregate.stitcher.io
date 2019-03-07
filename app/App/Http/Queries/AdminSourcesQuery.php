@@ -24,6 +24,8 @@ class AdminSourcesQuery extends QueryBuilder
         $this->allowedSorts([
             'post_count',
             'created_at',
+
+            'is_validated',
             'url',
         ]);
 
