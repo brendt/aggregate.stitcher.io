@@ -126,6 +126,8 @@ return [
 
     'analytics_id' => env('ANALYTICS_ID'),
 
+    'page_cache' => env('PAGE_CACHE', true),
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

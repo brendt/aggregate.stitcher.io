@@ -20,6 +20,10 @@ final class PageCacheMiddleware
 
     public function handle(Request $request, Closure $next)
     {
+        if (config('app.page_cache') === false) {
+            return $next($request);
+        }
+
         try {
             return $this->pageCache->resolve($next, $request);
         } catch (Exception $exception) {

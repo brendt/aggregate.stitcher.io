@@ -14,6 +14,7 @@ use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
+use Spatie\QueryString\QueryString;
 
 class PostsController
 {
@@ -125,6 +126,8 @@ class PostsController
             $request->user()
         ));
 
-        return redirect()->to($post->url);
+        $queryString = (new QueryString($post->url))->enable('ref', 'aggregate.stitcher.io');
+
+        return redirect()->to((string) $queryString);
     }
 }
