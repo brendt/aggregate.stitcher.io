@@ -47,7 +47,7 @@ final class PageCache
             $tags = ['page_cache'];
 
             if ($user) {
-                $tags = "page_cache::{$user->id}";
+                $tags[] = "page_cache::{$user->id}";
             }
 
             $this->cache = Cache::tags($tags)->setDefaultCacheTime($this->defaultCacheTime);
