@@ -20,7 +20,7 @@ final class UpdatePostAction
                 $post->title,
                 $post->teaser,
                 $post->tags->pluck('id'),
-                $post->date_created,
+                $post->date_created->format('Y-m-d H:i'),
             ]));
 
         $post->fill($postData->except('date_created', 'tag_ids')->toArray());
