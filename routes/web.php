@@ -6,10 +6,8 @@ use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\DisclaimerController;
 use App\Http\Controllers\GuestSourcesController;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\PrivacyController;
 use App\Http\Controllers\SourceMutesController;
 use App\Http\Controllers\TagMutesController;
 use App\Http\Controllers\TopicsController;
@@ -76,14 +74,6 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
     Route::post('sources', [AdminSourcesController::class, 'store']);
 });
-
-Route::get('/', [PostsController::class, 'index']);
-Route::get('latest', [PostsController::class, 'latest']);
-Route::get('top', [PostsController::class, 'top']);
-Route::get('/topic/{topic}', [PostsController::class, 'topic']);
-Route::get('/tag/{tag}', [PostsController::class, 'tag']);
-Route::get('/source/{sourceByWebsite}', [PostsController::class, 'source']);
-Route::get('/privacy', PrivacyController::class);
 
 Route::get('suggest-blog', [GuestSourcesController::class, 'index']);
 Route::post('suggest-blog', [GuestSourcesController::class, 'store']);
