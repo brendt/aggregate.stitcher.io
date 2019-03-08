@@ -53,7 +53,7 @@ final class PageCache
     {
         $this->cache->flush();
 
-        Log::debug("Cache flushed");
+        Log::debug('Cache flushed');
     }
 
     public function serialize(Response $response): string
