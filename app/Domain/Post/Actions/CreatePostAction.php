@@ -3,6 +3,7 @@
 namespace Domain\Post\Actions;
 
 use Domain\Post\DTO\PostData;
+use Domain\Post\Events\PostChangedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;
 use Domain\Source\Models\Source;
@@ -25,5 +26,7 @@ final class CreatePostAction
         $source->post_count = $source->posts()->count();
 
         $source->save();
+
+        event(PostChangedEvent::create($post));
     }
 }
