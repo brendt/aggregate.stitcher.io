@@ -4,7 +4,6 @@ namespace App\Subscribers;
 
 use Domain\Post\Events\PostChangedEvent;
 use Illuminate\Events\Dispatcher;
-use Illuminate\Support\Facades\Log;
 use Support\PageCache\PageCache;
 
 final class PostSubscriber
@@ -19,8 +18,6 @@ final class PostSubscriber
 
     public function onPostChange(PostChangedEvent $postChangedEvent): void
     {
-        Log::debug("Post changed: {$postChangedEvent->post->uuid}: " . json_encode($postChangedEvent->fields));
-
         $this->pageCache->flush();
     }
 
