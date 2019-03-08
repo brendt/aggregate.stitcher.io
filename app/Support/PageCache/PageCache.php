@@ -52,6 +52,8 @@ final class PageCache
     public function flush(): void
     {
         $this->cache->flush();
+
+        Log::debug("Cache flushed");
     }
 
     public function serialize(Response $response): string
