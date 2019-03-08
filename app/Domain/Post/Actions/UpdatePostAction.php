@@ -35,6 +35,6 @@ final class UpdatePostAction
             ->whereNotIn('tag_id', $postData->tag_ids)
             ->delete();
 
-        event(PostChangedEvent::create($post));
+        event(PostChangedEvent::create($post, $postData->toArray()));
     }
 }

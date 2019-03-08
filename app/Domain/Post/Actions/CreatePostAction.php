@@ -27,6 +27,6 @@ final class CreatePostAction
 
         $source->save();
 
-        event(PostChangedEvent::create($post));
+        event(PostChangedEvent::create($post, $postData->toArray()));
     }
 }

@@ -10,10 +10,14 @@ class PostChangedEvent extends DataTransferObject
     /** @var \Domain\Post\Models\Post */
     public $post;
 
-    public static function create(Post $post)
+    /** @var array */
+    public $fields;
+
+    public static function create(Post $post, array $fields)
     {
         return new self([
             'post' => $post,
+            'fields' => $fields,
         ]);
     }
 }
