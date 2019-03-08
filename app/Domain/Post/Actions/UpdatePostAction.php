@@ -6,7 +6,6 @@ use Domain\Post\DTO\PostData;
 use Domain\Post\Events\PostChangedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;
-use Log;
 
 final class UpdatePostAction
 {
@@ -15,13 +14,6 @@ final class UpdatePostAction
         if (! $postData->hasChanges($post)) {
             return;
         }
-
-        Log::debug("Original post data: " . json_encode([
-                $post->title,
-                $post->teaser,
-                $post->tags->pluck('id'),
-                $post->date_created->format('Y-m-d H:i'),
-            ]));
 
         $post->fill($postData->except('date_created', 'tag_ids')->toArray());
 
