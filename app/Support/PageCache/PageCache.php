@@ -21,12 +21,36 @@ final class PageCache
     /** @var int */
     private $defaultCacheTime = 10;
 
-    public function __construct(Request $request)
+    public static function flush(?User $user = null): void
     {
-        $this->key = $this->makeCacheKey($request, current_user());
+        $tags = $user ? ["page_cache::{$user->id}"] : ['page_cache'];
 
         try {
-            $this->cache = Cache::tags(['page_cache'])->setDefaultCacheTime($this->defaultCacheTime);
+            Cache::tags($tags)->flush();
+
+            Log::debug("Cache flushed for tags " . json_encode($tags));
+        } catch (Exception $exception) {
+            Cache::flush();
+
+            Log::debug("Cache flushed");
+        }
+
+    }
+
+    public function __construct(Request $request)
+    {
+        $user = current_user();
+
+        $this->key = $this->makeCacheKey($request, $user);
+
+        try {
+            $tags = ['page_cache'];
+
+            if ($user) {
+                $tags = "page_cache::{$user->id}";
+            }
+
+            $this->cache = Cache::tags($tags)->setDefaultCacheTime($this->defaultCacheTime);
         } catch (Exception $exception) {
             $this->cache = Cache::setDefaultCacheTime($this->defaultCacheTime);
         }
@@ -47,13 +71,6 @@ final class PageCache
         }
 
         return $this->unserialize($payload);
-    }
-
-    public function flush(): void
-    {
-        $this->cache->flush();
-
-        Log::debug('Cache flushed');
     }
 
     public function serialize(Response $response): string
