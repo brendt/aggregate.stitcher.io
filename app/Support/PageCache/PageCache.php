@@ -34,7 +34,6 @@ final class PageCache
 
             Log::debug("Cache flushed");
         }
-
     }
 
     public function __construct(Request $request)
@@ -81,7 +80,7 @@ final class PageCache
     public function unserialize(string $payload): Response
     {
         return response($payload, Response::HTTP_OK, [
-            'X-Page-Cached' => 'true'
+            'X-Page-Cached' => 'true',
         ]);
     }
 

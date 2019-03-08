@@ -14,7 +14,7 @@ final class ValidateSourceAction
     /** @var array|\Closure[] */
     private $formatters;
 
-    public function execute(Source $source)
+    public function execute(Source $source): void
     {
         $host = parse_url($source->url, PHP_URL_HOST);
 

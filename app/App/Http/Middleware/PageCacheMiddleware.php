@@ -11,7 +11,7 @@ use Support\PageCache\PageCache;
 final class PageCacheMiddleware
 {
     /** @var \Support\PageCache\PageCache */
-    protected $pageCache;
+    private $pageCache;
 
     public function __construct(PageCache $pageCache)
     {

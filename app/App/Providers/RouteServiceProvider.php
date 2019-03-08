@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware([
             'web',
-            PageCacheMiddleware::class
+            PageCacheMiddleware::class,
         ])
             ->group(base_path('routes/web_cached.php'));
 
