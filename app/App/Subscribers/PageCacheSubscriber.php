@@ -4,6 +4,7 @@ namespace App\Subscribers;
 
 use Domain\Mute\Events\MuteChangedEvent;
 use Domain\Post\Events\PostChangedEvent;
+use Domain\Source\Events\SourceDeletedEvent;
 use Domain\User\Events\ChangeForUserEvent;
 use Illuminate\Events\Dispatcher;
 use Support\PageCache\PageCache;
@@ -24,6 +25,11 @@ final class PageCacheSubscriber
     {
         $dispatcher->listen(
             PostChangedEvent::class,
+            self::class . "@flushCache"
+        );
+
+        $dispatcher->listen(
+            SourceDeletedEvent::class,
             self::class . "@flushCache"
         );
 
