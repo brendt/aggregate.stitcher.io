@@ -32,7 +32,13 @@
                 </header>
                 <ul class="text-sm text-grey-darker sticky" style="bottom: 1rem">
                     <li class="mb-2">
-                        <active-link :href="action([\App\Http\Controllers\PostsController::class, 'index'])">
+                        <active-link
+                            :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
+                            :other="[
+                                action([\App\Http\Controllers\PostsController::class, 'latest']),
+                                action([\App\Http\Controllers\PostsController::class, 'top']),
+                            ]"
+                        >
                             {{ __('Feed') }}
                         </active-link>
                     </li>

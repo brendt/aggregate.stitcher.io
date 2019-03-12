@@ -18,13 +18,13 @@
                         {{ __('All') }}
                     </active-link>
                 </li>
-                <li class="mr-6">
-                    <active-link
-                        :href="action([\App\Http\Controllers\PostsController::class, 'latest'])"
-                    >
-                        {{ __('Latest') }}
-                    </active-link>
-                </li>
+                {{--<li class="mr-6">--}}
+                    {{--<active-link--}}
+                        {{--:href="action([\App\Http\Controllers\PostsController::class, 'latest'])"--}}
+                    {{-->--}}
+                        {{--{{ __('Latest') }}--}}
+                    {{--</active-link>--}}
+                {{--</li>--}}
                 <li class="mr-6">
                     <active-link
                         :href="action([\App\Http\Controllers\PostsController::class, 'top'])"
