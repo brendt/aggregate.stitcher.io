@@ -2,6 +2,23 @@
     --content-line-height: 1.5em;
 }
 
+.content h2 {
+    font-size: 1.2em;
+    font-weight: lighter;
+}
+
+.content em {
+    font-style: italic;
+}
+
+.content a {
+    text-decoration: underline;
+}
+
+.content a:hover {
+    text-decoration: none;
+}
+
 .content p {
     margin: .8em 0;
     line-height: var(--content-line-height);

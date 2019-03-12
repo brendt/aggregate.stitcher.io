@@ -7,7 +7,7 @@ use Domain\Mute\Actions\UnmuteAction;
 use Domain\Post\Models\Tag;
 use Domain\User\Models\User;
 
-class TagMutesController
+final class TagMutesController
 {
     public function store(
         User $user,

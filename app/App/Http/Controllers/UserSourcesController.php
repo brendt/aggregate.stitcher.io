@@ -10,7 +10,7 @@ use Domain\Source\Actions\UpdateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\User\Models\User;
 
-class UserSourcesController
+final class UserSourcesController
 {
     public function index(User $user)
     {

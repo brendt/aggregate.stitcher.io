@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Domain\User\Models\User;
 
-class UserMutesController
+final class UserMutesController
 {
     public function index(User $user)
     {

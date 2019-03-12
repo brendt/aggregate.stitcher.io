@@ -8,7 +8,7 @@ use Domain\User\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 
-class ResetPasswordController extends Controller
+final class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 

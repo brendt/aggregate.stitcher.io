@@ -7,7 +7,7 @@ use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 
-class GuestSourcesController
+final class GuestSourcesController
 {
     public function index()
     {

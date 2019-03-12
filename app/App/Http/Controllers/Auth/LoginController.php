@@ -7,7 +7,7 @@ use App\Http\Controllers\PostsController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 
-class LoginController extends Controller
+final class LoginController extends Controller
 {
     use AuthenticatesUsers;
 

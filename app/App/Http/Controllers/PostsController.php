@@ -16,7 +16,7 @@ use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
 use Spatie\QueryString\QueryString;
 
-class PostsController
+final class PostsController
 {
     public function index(
         PostIndexRequest $request,

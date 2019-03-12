@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-class LogoutController
+final class LogoutController
 {
     public function logout()
     {

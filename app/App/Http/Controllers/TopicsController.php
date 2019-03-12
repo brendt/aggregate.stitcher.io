@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Queries\TopicIndexQuery;
 
-class TopicsController
+final class TopicsController
 {
     public function index(TopicIndexQuery $query)
     {

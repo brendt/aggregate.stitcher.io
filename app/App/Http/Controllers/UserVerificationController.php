@@ -7,7 +7,7 @@ use Domain\User\Actions\VerifyUserAction;
 use Domain\User\Models\User;
 use Illuminate\Http\Response;
 
-class UserVerificationController
+final class UserVerificationController
 {
     public function verify(
         User $user,

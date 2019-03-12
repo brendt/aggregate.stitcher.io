@@ -14,7 +14,7 @@ use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 
-class AdminSourcesController
+final class AdminSourcesController
 {
     public function index(
         Request $request,

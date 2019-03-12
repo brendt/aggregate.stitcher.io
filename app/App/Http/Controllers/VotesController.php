@@ -10,7 +10,7 @@ use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
 use Illuminate\Http\Request;
 
-class VotesController
+final class VotesController
 {
     public function store(
         Request $request,

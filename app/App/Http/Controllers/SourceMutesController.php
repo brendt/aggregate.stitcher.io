@@ -7,7 +7,7 @@ use Domain\Mute\Actions\UnmuteAction;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 
-class SourceMutesController
+final class SourceMutesController
 {
     public function store(
         User $user,

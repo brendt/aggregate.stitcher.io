@@ -9,7 +9,7 @@ use Domain\User\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Hash;
 
-class UserProfileController
+final class UserProfileController
 {
     public function index(User $user)
     {

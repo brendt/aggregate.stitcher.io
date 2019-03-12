@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+final class RegisterController extends Controller
 {
     use RegistersUsers;
 
