@@ -30,6 +30,7 @@
                     <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
                     <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
                 </header>
+
                 <ul class="text-sm text-grey-darker sticky" style="bottom: 1rem">
                     <li class="mb-2">
                         <active-link
@@ -42,6 +43,31 @@
                             {{ __('Feed') }}
                         </active-link>
                     </li>
+
+                    @if (! current_user())
+                        <li class="mb-2">
+                            <active-link
+                                :href="action(\App\Http\Controllers\AboutController::class)"
+                                class="block"
+                            >
+                                {{ __('What is this?') }}
+                            </active-link>
+                        </li>
+                    @endif
+
+                    @if(! current_user())
+                        <li class="mb-2">
+                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
+                                {{ __('Submit your blog') }}
+                            </a>
+                        </li>
+                    @elseif(! current_user()->getPrimarySource())
+                        <li class="mb-2">
+                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
+                                {{ __('Submit your blog') }}
+                            </active-link>
+                        </li>
+                    @endif
                     @if(current_user())
                         <li class="mb-2">
                             <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
@@ -84,20 +110,6 @@
                         <li class="mb-2">
                             <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'register'])">
                                 {{ __('Register') }}
-                            </active-link>
-                        </li>
-                    @endif
-
-                    @if(! current_user())
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])">
-                                {{ __('Submit your blog') }}
-                            </active-link>
-                        </li>
-                    @elseif(! current_user()->getPrimarySource())
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
-                                {{ __('Submit your blog') }}
                             </active-link>
                         </li>
                     @endif
