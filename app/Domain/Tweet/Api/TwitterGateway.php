@@ -3,6 +3,7 @@
 namespace Domain\Tweet\Api;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Domain\Tweet\Models\Tweet;
 use Illuminate\Support\Facades\Log;
 
 final class TwitterGateway
@@ -15,12 +16,12 @@ final class TwitterGateway
         $this->client = $client;
     }
 
-    public function tweet(string $status)
+    public function tweet(Tweet $tweet)
     {
-        Log::debug("Tweeted: {$status}");
+        Log::debug("Tweeted: {$tweet->status}");
 
         return $this->client->post('statuses/update', [
-            'status' => $status,
+            'status' => $tweet->status,
         ]);
     }
 }

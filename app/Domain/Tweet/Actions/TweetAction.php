@@ -2,6 +2,7 @@
 
 namespace Domain\Tweet\Actions;
 
+use App\Console\Jobs\TweetJob;
 use Domain\Tweet\Api\TwitterGateway;
 use Domain\Tweet\Models\Tweet;
 use Domain\Tweet\Tweetable;
@@ -18,10 +19,12 @@ final class TweetAction
 
     public function execute(Tweetable $tweetable): void
     {
-        $status = $tweetable->getTwitterStatus();
+        $tweet = Tweet::createForTweetable($tweetable);
 
-        Tweet::createForTweetable($tweetable, $status);
-
-        $this->gateway->tweet($status);
+        if (config('queue.default') === 'redis') {
+            dispatch(new TweetJob($tweet));
+        } else {
+            $this->gateway->tweet($tweet);
+        }
     }
 }

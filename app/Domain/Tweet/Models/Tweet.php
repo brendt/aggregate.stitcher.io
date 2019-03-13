@@ -8,12 +8,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Tweet extends Model
 {
-    public static function createForTweetable(Tweetable $tweetable, string $status): Tweet
+    public static function createForTweetable(Tweetable $tweetable): Tweet
     {
         return self::create([
             'tweetable_type' => $tweetable->getMorphClass(),
             'tweetable_id' => $tweetable->getKey(),
-            'status' => $status,
+            'status' => $tweetable->getTwitterStatus(),
         ]);
     }
 
