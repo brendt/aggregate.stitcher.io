@@ -21,10 +21,6 @@ final class TweetAction
     {
         $tweet = Tweet::createForTweetable($tweetable);
 
-        if (config('queue.default') === 'redis') {
-            dispatch(new TweetJob($tweet));
-        } else {
-            $this->gateway->tweet($tweet);
-        }
+        dispatch(new TweetJob($tweet));
     }
 }
