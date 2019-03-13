@@ -3,7 +3,6 @@
 namespace Domain\Post\Actions;
 
 use Domain\Post\DTO\PostData;
-use Domain\Post\Events\PostEvent;
 use Domain\Post\Events\PostUpdatedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+use Domain\Tweet\Api\FakeTwitterOAuth;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
@@ -51,6 +53,19 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Reader::class, function () {
             return new RssReader();
+        });
+
+        $this->app->bind(TwitterOAuth::class, function () {
+            if (config('services.twitter.fake')) {
+                return new FakeTwitterOAuth();
+            }
+
+            return new TwitterOAuth(
+                config('services.twitter.consumer_key'),
+                config('services.twitter.consumer_secret'),
+                config('services.twitter.access_token'),
+                config('services.twitter.access_token_secret')
+            );
         });
     }
 }

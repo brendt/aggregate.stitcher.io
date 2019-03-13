@@ -2,9 +2,12 @@
 
 namespace Domain\Post\Models;
 
+use App\Http\Controllers\PostsController;
 use Domain\Model;
 use Domain\Post\Query\PostQueryBuilder;
 use Domain\Source\Models\Source;
+use Domain\Tweet\HasTweets;
+use Domain\Tweet\Tweetable;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -13,9 +16,9 @@ use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Support\HasUuid;
 
-class Post extends Model
+class Post extends Model implements Tweetable
 {
-    use HasUuid;
+    use HasUuid, HasTweets;
 
     protected $casts = [
         'date_created' => 'datetime',
@@ -174,5 +177,12 @@ class Post extends Model
         $newTagIds = collect($tagIds)->sort()->values()->toArray();
 
         return $ownTagIds !== $newTagIds;
+    }
+
+    public function getTwitterStatus(): string
+    {
+        $url = action([PostsController::class, 'show'], $this);
+
+        return "\"{$this->title}\": {$url}";
     }
 }

@@ -4,7 +4,6 @@ namespace Domain\Post\Actions;
 
 use Domain\Post\DTO\PostData;
 use Domain\Post\Events\PostCreatedEvent;
-use Domain\Post\Events\PostEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;
 use Domain\Source\Models\Source;

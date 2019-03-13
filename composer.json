@@ -5,6 +5,7 @@
     "type" : "project",
     "require" : {
         "php": ">=7.1.0",
+        "abraham/twitteroauth": "^1.0",
         "barryvdh/laravel-debugbar": "^3.0",
         "bugsnag/bugsnag-laravel": "^2.6",
         "doctrine/dbal": "^2.6",
