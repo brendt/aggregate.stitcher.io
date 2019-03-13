@@ -5,7 +5,7 @@ namespace Domain\Post\Events;
 use Domain\Post\Models\Post;
 use Spatie\DataTransferObject\DataTransferObject;
 
-class PostChangedEvent extends DataTransferObject
+abstract class PostEvent extends DataTransferObject
 {
     /** @var \Domain\Post\Models\Post */
     public $post;
@@ -15,7 +15,7 @@ class PostChangedEvent extends DataTransferObject
 
     public static function create(Post $post, array $fields)
     {
-        return new self([
+        return new static([
             'post' => $post,
             'fields' => $fields,
         ]);

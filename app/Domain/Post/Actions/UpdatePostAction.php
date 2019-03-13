@@ -3,7 +3,8 @@
 namespace Domain\Post\Actions;
 
 use Domain\Post\DTO\PostData;
-use Domain\Post\Events\PostChangedEvent;
+use Domain\Post\Events\PostEvent;
+use Domain\Post\Events\PostUpdatedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;
 
@@ -35,6 +36,6 @@ final class UpdatePostAction
             ->whereNotIn('tag_id', $postData->tag_ids)
             ->delete();
 
-        event(PostChangedEvent::create($post, $postData->toArray()));
+        event(PostUpdatedEvent::create($post, $postData->toArray()));
     }
 }
