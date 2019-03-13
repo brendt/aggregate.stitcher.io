@@ -8,7 +8,7 @@ use Illuminate\Events\Dispatcher;
 
 final class TweetSubscriber
 {
-    private const VIEW_THRESHOLD = 10;
+    private const VIEW_THRESHOLD = 5;
 
     /** @var \Domain\Tweet\Actions\TweetAction */
     private $tweetAction;

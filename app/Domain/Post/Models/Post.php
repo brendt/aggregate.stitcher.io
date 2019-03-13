@@ -183,6 +183,6 @@ class Post extends Model implements Tweetable
     {
         $url = action([PostsController::class, 'show'], $this);
 
-        return "\"{$this->title}\": {$url}";
+        return "{$this->title}: {$url}";
     }
 }
