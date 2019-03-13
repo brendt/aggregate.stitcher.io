@@ -26,10 +26,11 @@ final class TweetJob implements ShouldQueue
     {
         $lastTweet = Tweet::query()
             ->where('id', '<>', $this->tweet->id)
-            ->orderByDesc('created_at')
+            ->whereNotNull('sent_at')
+            ->orderByDesc('sent_at')
             ->first();
 
-        if ($lastTweet && $lastTweet->created_at->diffInMinutes(now()) < 60) {
+        if ($lastTweet && $lastTweet->sent_at->diffInMinutes(now()) < 120) {
             dispatch(new TweetJob($this->tweet))
                 ->delay(now()->addMinutes(30));
 
