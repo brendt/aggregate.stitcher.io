@@ -20,6 +20,8 @@ final class TwitterGateway
     {
         Log::debug("Tweeted: {$tweet->status}");
 
+        $tweet->markAsSent();
+
         return $this->client->post('statuses/update', [
             'status' => $tweet->status,
         ]);

@@ -8,6 +8,10 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Tweet extends Model
 {
+    protected $casts = [
+        'sent_at' => 'datetime',
+    ];
+
     public static function createForTweetable(Tweetable $tweetable): Tweet
     {
         return self::create([
@@ -25,5 +29,14 @@ class Tweet extends Model
     public function getTweetable(): Tweetable
     {
         return $this->tweetable;
+    }
+
+    public function markAsSent(): Tweet
+    {
+        $this->sent_at = now();
+
+        $this->save();
+
+        return $this;
     }
 }
