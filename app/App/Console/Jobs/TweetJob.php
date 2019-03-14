@@ -30,7 +30,7 @@ final class TweetJob implements ShouldQueue
             ->orderByDesc('sent_at')
             ->first();
 
-        if ($lastTweet && $lastTweet->sent_at->diffInMinutes(now()) < 120) {
+        if ($lastTweet && $lastTweet->sent_at->diffInMinutes(now()) < 180) {
             dispatch(new TweetJob($this->tweet))
                 ->delay(now()->addMinutes(30));
 
