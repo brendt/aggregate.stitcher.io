@@ -25,6 +25,7 @@
 <body class="bg-black p-3 min-h-screen flex flex-col" style="min-width: 60rem">
     <div class="bg-white flex-1 flex pb-8">
         <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-16 flex pt-8">
+
             <nav class="{{ $fullWidth ?? null ? '' : 'w-1/3' }} pr-12 flex flex-col justify-between relative">
                 <header class="h-12 pt-2 flex items-center mb-8 sticky pin-t" style="padding-bottom: 0.375rem">
                     <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
@@ -116,7 +117,23 @@
                 </ul>
             </nav>
 
-            {{-- @include('flash::message') --}}
+            @if(flash()->message)
+                <div class="
+                        {{ flash()->class }}
+                        absolute
+                        pin-r pin-t
+                        mt-4
+                        text-black
+                        border-red
+                        border-2
+                        p-2 pt-3
+                        cursor-pointer
+                    "
+                     onclick="this.classList.add('hidden')"
+                >
+                    {{ flash()->message }}
+                </div>
+            @endif
 
             <div class="flex-1">
                 {{ $slot ?? null }}
