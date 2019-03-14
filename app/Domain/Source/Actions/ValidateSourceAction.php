@@ -20,7 +20,10 @@ final class ValidateSourceAction
 
         $feedUrls = $this->getFormats($host);
 
-        $feedUrls[] = $source->url;
+        array_unshift(
+            $feedUrls,
+            parse_url($source->url, PHP_URL_HOST) . parse_url($source->url, PHP_URL_PATH)
+        );
 
         $scheme = parse_url($source->url, PHP_URL_SCHEME);
 
