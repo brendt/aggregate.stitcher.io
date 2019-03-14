@@ -18,13 +18,12 @@ class AdminSourcesQuery extends QueryBuilder
 
         $this->allowedFilters([
             Filter::exact('is_active'),
-            Filter::custom('search', new FuzzyFilter('website', 'url')),
+            Filter::custom('search', new FuzzyFilter('website', 'url', 'twitter_handle')),
         ]);
 
         $this->allowedSorts([
             'post_count',
             'created_at',
-
             'is_validated',
             'url',
         ]);

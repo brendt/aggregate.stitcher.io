@@ -27,13 +27,15 @@ final class UserSourcesController
     ) {
         $primarySource = $user->getPrimarySource();
 
+        $sourceData = SourceData::fromRequest($request, $primarySource);
+
         if (! $primarySource) {
-            $createSourceAction($user, SourceData::fromRequest($request));
+            $createSourceAction($user, $sourceData);
 
             return redirect()->action([self::class, 'index']);
         }
 
-        $updateSourceAction($primarySource, SourceData::fromRequest($request, $primarySource));
+        $updateSourceAction($primarySource, $sourceData);
 
         return redirect()->action([self::class, 'index']);
     }

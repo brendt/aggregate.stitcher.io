@@ -25,4 +25,9 @@ class SourceViewModel extends ViewModel
     {
         return optional($this->source())->url;
     }
+
+    public function twitterHandle(): ?string
+    {
+        return optional($this->source())->twitter_handle;
+    }
 }

@@ -29,6 +29,7 @@ final class CreateSourceAction
         $source = Source::create([
             'user_id' => $user ? $user->id : null,
             'url' => $sourceData->url,
+            'twitter_handle' => $sourceData->twitter_handle,
             'is_active' => $sourceData->is_active,
         ]);
 

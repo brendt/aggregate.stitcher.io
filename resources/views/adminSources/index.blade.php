@@ -78,7 +78,7 @@
                                 inline-block
                                 mt-1
                             "
-                            href="http://{{ $source->website }}"
+                            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $source) }}"
                         >{{ $source->website }}</a>
 
                         <div class="mt-2">

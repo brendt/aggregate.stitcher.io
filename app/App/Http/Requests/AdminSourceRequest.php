@@ -10,8 +10,8 @@ class AdminSourceRequest extends SourceRequest
             'url' => [
                 'required',
                 'string',
-                'unique:sources,url',
             ],
+            'twitter_handle' => 'nullable|string',
         ];
     }
 }

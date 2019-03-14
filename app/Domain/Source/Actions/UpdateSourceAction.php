@@ -14,6 +14,7 @@ final class UpdateSourceAction
         }
 
         $source->url = $sourceData->url;
+        $source->twitter_handle = $sourceData->twitter_handle;
 
         $source->save();
     }

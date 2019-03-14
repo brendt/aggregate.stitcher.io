@@ -19,7 +19,13 @@ class SourceRequest extends Request
                 'string',
                 new UniqueSourceRule($primarySource ? $primarySource->id : null),
             ],
+            'twitter_handle' => 'nullable|string',
         ];
+    }
+
+    public function getTwitterHandle(): ?string
+    {
+        return $this->get('twitter_handle');
     }
 
     public function getSourceUrl(): string

@@ -25,6 +25,12 @@
             :initial-value="$url"
         ></text-field>
 
+        <text-field
+            name="twitter_handle"
+            :label="__('Twitter handle (optional)')"
+            :initial-value="$twitterHandle"
+        ></text-field>
+
         @if($source && $source->isInactive())
             <p class="mt-3 text-green">
                 {{ __("Your source is inactive at the moment. You'll recieve an email when it's activated.") }}
@@ -40,7 +46,7 @@
         <post-button
             :action="action([\App\Http\Controllers\UserSourcesController::class, 'delete'])"
             class="
-                mt-2
+                mt-2 p-2
                 button
                 bg-red text-white
                 hover:bg-white hover:text-red

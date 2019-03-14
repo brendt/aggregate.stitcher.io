@@ -6,10 +6,14 @@ use App\Console\Jobs\SyncSourceJob;
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
 use App\Http\Requests\Request;
+use App\Http\Requests\SourceRequest;
+use App\Http\ViewModels\AdminSourceViewModel;
+use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
 use Domain\Source\Actions\SyncSourceAction;
+use Domain\Source\Actions\UpdateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
@@ -27,6 +31,23 @@ final class AdminSourcesController
             'currentUrl' => $request->url(),
             'currentSearchQuery' => $request->get('filter')['search'] ?? null,
         ]);
+    }
+
+    public function edit(Source $source)
+    {
+        $viewModel = new AdminSourceViewModel($source);
+
+        return $viewModel->view('adminSources.form');
+    }
+
+    public function update(
+        AdminSourceRequest $sourceRequest,
+        Source $source,
+        UpdateSourceAction $updateSourceAction
+    ) {
+        $updateSourceAction($source, SourceData::fromRequest($sourceRequest, $source));
+
+        return redirect()->back();
     }
 
     public function activate(
