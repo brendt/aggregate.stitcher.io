@@ -27,7 +27,7 @@
         <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-16 flex pt-8">
 
             <nav class="{{ $fullWidth ?? null ? '' : 'w-1/3' }} pr-12 flex flex-col justify-between relative">
-                <header class="h-12 pt-2 flex items-center mb-8 sticky pin-t" style="padding-bottom: 0.375rem">
+                <header class="h-12 py-2 flex items-center mb-8 sticky pin-t">
                     <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
                     <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
                 </header>
@@ -141,7 +141,7 @@
         </div>
     </div>
 
-    <footer class="pt-4 bg-black text-grey text-sm">
+    <footer class="pt-4 bg-black text-grey-dark text-sm">
         <div class="max-w-lg ml-16">
             <ul class="flex w-2/3 ml-auto">
                 <li>
