@@ -1,10 +1,7 @@
 <div>
     <div class="flex items-center justify-between mb-1">
         @isset($label)
-            <label for="{{ $name }}" class="
-            mr-2
-            text-right
-        ">
+            <label for="{{ $name }}" class="mr-2">
                 {{ $label }}
             </label>
         @endisset

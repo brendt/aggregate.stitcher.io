@@ -17,104 +17,110 @@
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
     {{--<link rel="stylesheet" href="{{ mix('css/vendor.css') }}" media="none" onload="this.media='all'">--}}
     <link href="https://fonts.googleapis.com/css?family=Hind:400,700|Volkhov:700" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
     <script defer src="{{ mix('js/app.js') }}"></script>
 </head>
-<body class="bg-black p-3 min-h-screen flex flex-col" style="min-width: 60rem">
+<body class="bg-black md:p-3 min-h-screen flex flex-col">
     <div class="bg-white flex-1 flex pb-8">
-        <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-16 flex pt-8">
+        <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-8 md:mx-16 md:flex pt-4 md:pt-8">
 
-            <nav class="{{ $fullWidth ?? null ? '' : 'w-1/3' }} pr-12 flex flex-col justify-between relative">
-                <header class="h-12 py-2 flex items-center mb-8 sticky pin-t">
+            <nav class="{{ $fullWidth ?? null ? '' : 'md:w-1/3' }} md:pr-12 flex md:flex-col items-start justify-between relative">
+                <header class="h-12 mt:py-2 md:mb-8 flex items-center md:sticky pin-t">
                     <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
                     <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
                 </header>
 
-                <ul class="text-sm text-grey-darker sticky" style="bottom: 1rem">
-                    <li class="mb-2">
-                        <active-link
-                            :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
-                            :other="[
-                                action([\App\Http\Controllers\PostsController::class, 'latest']),
-                                action([\App\Http\Controllers\PostsController::class, 'top']),
-                            ]"
-                        >
-                            {{ __('Feed') }}
-                        </active-link>
-                    </li>
-
-                    @if (! current_user())
+                <div class="md:sticky md:b-4 mt-4 text-right md:text-left mb-8 md:mb-0">
+                    <button class="menu-toggle flex ml-auto focus:outline-none">
+                        <i class="text-lg fas fa-bars mr-2"></i>
+                        <span class="block uppercase text-sm font-bold" style="transform: translateY(3px)">Menu</span>
+                    </button>
+                    <ul class="menu text-sm text-grey-darker hidden md:block mt-4">
                         <li class="mb-2">
                             <active-link
-                                :href="action(\App\Http\Controllers\AboutController::class)"
-                                class="block"
+                                :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
+                                :other="[
+                                    action([\App\Http\Controllers\PostsController::class, 'latest']),
+                                    action([\App\Http\Controllers\PostsController::class, 'top']),
+                                ]"
                             >
-                                {{ __('What is this?') }}
+                                {{ __('Feed') }}
                             </active-link>
                         </li>
-                    @endif
 
-                    @if(! current_user())
-                        <li class="mb-2">
-                            <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
-                                {{ __('Submit your blog') }}
-                            </a>
-                        </li>
-                    @elseif(! current_user()->getPrimarySource())
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
-                                {{ __('Submit your blog') }}
-                            </active-link>
-                        </li>
-                    @endif
-                    @if(current_user())
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
-                                {{ __('My content') }}
-                            </active-link>
-                        </li>
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\UserMutesController::class, 'index'])">
-                                {{ __('Mutes') }}
-                            </active-link>
-                        </li>
-                        <li class="mb-2">
-                            <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
-                                {{ __('Profile') }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
-                                {{ __('Log out') }}
-                            </a>
-                        </li>
-                        @if(current_user()->isAdmin())
-                            <li class="mt-6 mb-2">
-                                <active-link :href="action([\App\Http\Controllers\AdminSourcesController::class, 'index'])">
-                                    {{ __('Admin') }}
-                                </active-link>
-                            </li>
-                            <li>
-                                <active-link href="/horizon" target="_blank" rel="noopener noreferrer">
-                                    {{ __('Horizon') }}
+                        @if (! current_user())
+                            <li class="mb-2">
+                                <active-link
+                                    :href="action(\App\Http\Controllers\AboutController::class)"
+                                    class="block"
+                                >
+                                    {{ __('What is this?') }}
                                 </active-link>
                             </li>
                         @endif
-                    @else
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\Auth\LoginController::class, 'login'])">
-                                {{ __('Log in') }}
-                            </active-link>
-                        </li>
-                        <li class="mb-2">
-                            <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'register'])">
-                                {{ __('Register') }}
-                            </active-link>
-                        </li>
-                    @endif
-                </ul>
+
+                        @if(! current_user())
+                            <li class="mb-2">
+                                <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
+                                    {{ __('Submit your blog') }}
+                                </a>
+                            </li>
+                        @elseif(! current_user()->getPrimarySource())
+                            <li class="mb-2">
+                                <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
+                                    {{ __('Submit your blog') }}
+                                </active-link>
+                            </li>
+                        @endif
+                        @if(current_user())
+                            <li class="mb-2">
+                                <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
+                                    {{ __('My content') }}
+                                </active-link>
+                            </li>
+                            <li class="mb-2">
+                                <active-link :href="action([\App\Http\Controllers\UserMutesController::class, 'index'])">
+                                    {{ __('Mutes') }}
+                                </active-link>
+                            </li>
+                            <li class="mb-2">
+                                <a href="{{ action([\App\Http\Controllers\UserProfileController::class, 'index']) }}">
+                                    {{ __('Profile') }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ action([\App\Http\Controllers\Auth\LogoutController::class, 'logout']) }}">
+                                    {{ __('Log out') }}
+                                </a>
+                            </li>
+                            @if(current_user()->isAdmin())
+                                <li class="mt-6 mb-2">
+                                    <active-link :href="action([\App\Http\Controllers\AdminSourcesController::class, 'index'])">
+                                        {{ __('Admin') }}
+                                    </active-link>
+                                </li>
+                                <li>
+                                    <active-link href="/horizon" target="_blank" rel="noopener noreferrer">
+                                        {{ __('Horizon') }}
+                                    </active-link>
+                                </li>
+                            @endif
+                        @else
+                            <li class="mb-2">
+                                <active-link :href="action([\App\Http\Controllers\Auth\LoginController::class, 'login'])">
+                                    {{ __('Log in') }}
+                                </active-link>
+                            </li>
+                            <li class="mb-2">
+                                <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'register'])">
+                                    {{ __('Register') }}
+                                </active-link>
+                            </li>
+                        @endif
+                    </ul>
+                </div>
             </nav>
 
             @if(flash()->message)
@@ -141,21 +147,21 @@
         </div>
     </div>
 
-    <footer class="pt-4 bg-black text-grey-dark text-sm">
-        <div class="max-w-lg ml-16">
-            <ul class="flex w-2/3 ml-auto">
-                <li>
+    <footer class="pt-6 md:pt-4 pb-4 md:pb-0 bg-black text-grey-dark text-sm">
+        <div class="max-w-lg mx-8 md:mx-16">
+            <ul class="flex flex-wrap md:w-2/3 ml-auto">
+                <li class="w-full md:w-auto mb-2 md:mb-0 md:mr-6">
                     &copy; {{ now()->format('Y') }}
                     <a href="https://stitcher.io" target="_blank" rel="noopener noreferrer">
                         stitcher.io
                     </a>
                 </li>
-                <li class="ml-6">
+                <li class="mr-3 md:mr-6">
                     <a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">
                         Privacy &amp; disclaimer
                     </a>
                 </li>
-                <li class="ml-6">
+                <li>
                     <a href="https://github.com/brendt/aggregate.stitcher.io/issues" target="_blank" rel="noopener noreferrer">
                         {{ __('Report an issue') }}
                     </a>
