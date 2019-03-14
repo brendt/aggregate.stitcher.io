@@ -1,7 +1,7 @@
 <div>
-    <div class="flex items-center justify-between mb-1">
+    <div class="sm:flex items-center justify-between mb-4 sm:mb-1">
         @isset($label)
-            <label for="{{ $name }}" class="mr-2">
+            <label for="{{ $name }}" class="block w-full mb-1 sm:mb-0 mr-2">
                 {{ $label }}
             </label>
         @endisset
@@ -15,7 +15,7 @@
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
-            class="outline-none p-2 rounded-sm bg-grey-lighter"
+            class="block w-full outline-none p-2 rounded-sm bg-grey-lighter"
         >
     </div>
     <div class="flex justify-end">

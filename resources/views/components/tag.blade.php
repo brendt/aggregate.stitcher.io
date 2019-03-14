@@ -7,7 +7,5 @@
     class="tag {{ $class ?? null }} {{ filter_active('tag', $tag) ? 'active' : null }}"
     style="--tag-color: {{ $tag->color }}"
 >
-    <span class="tag-inner">
-        {{ $tag->name }}
-    </span>
+    {{ $tag->name }}
 </a>

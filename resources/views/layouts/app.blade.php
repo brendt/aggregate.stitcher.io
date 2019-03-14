@@ -41,7 +41,7 @@
                 </header>
 
                 <div class="md:sticky md:b-4 mt-4 text-right md:text-left mb-8 md:mb-0">
-                    <button class="menu-toggle flex ml-auto focus:outline-none">
+                    <button class="menu-toggle flex md:hidden ml-auto focus:outline-none">
                         <i class="text-lg fas fa-bars mr-2"></i>
                         <span class="block uppercase text-sm font-bold" style="transform: translateY(3px)">Menu</span>
                     </button>

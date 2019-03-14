@@ -18,7 +18,7 @@
             </a>
         </p>
 
-        <div class="text-grey-darker text-sm">
+        <div class="text-grey-darkest text-sm">
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
             {{ $post->relative_date }}
@@ -42,11 +42,11 @@
             @endif
         </div>
 
-        <div class="flex items-baseline mt-2">
+        <div class="flex items-baseline mt-3">
             @if($post->tags->isNotEmpty())
                 <p class="text-sm mr-2">
                     @foreach ($post->tags as $tag)
-                        <tag :tag="$tag" class="mr-1/2"></tag>
+                        <tag :tag="$tag" class="mr-2"></tag>
                     @endforeach
                 </p>
             @endif
