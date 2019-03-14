@@ -20,7 +20,7 @@
 
         <div class="text-grey-darker text-sm">
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
-            on
+            –
             {{ $post->relative_date }}
 
             @if ($post->view_count > 0)
