@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2db2e5dd6dc98272fac0c0d84217f2c4",
+    "content-hash": "3f3779d3a554b4f26fa55599fd611c27",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -3229,16 +3229,16 @@
         },
         {
             "name": "spatie/laravel-flash",
-            "version": "0.0.2",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-flash.git",
-                "reference": "db341009d9e019149a487a0031f873f9a0068906"
+                "reference": "5a82a0fec29f12cba8c57844257b384c32f993ad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-flash/zipball/db341009d9e019149a487a0031f873f9a0068906",
-                "reference": "db341009d9e019149a487a0031f873f9a0068906",
+                "url": "https://api.github.com/repos/spatie/laravel-flash/zipball/5a82a0fec29f12cba8c57844257b384c32f993ad",
+                "reference": "5a82a0fec29f12cba8c57844257b384c32f993ad",
                 "shasum": ""
             },
             "require": {
@@ -3275,7 +3275,7 @@
                 "laravel-flash",
                 "spatie"
             ],
-            "time": "2019-03-14T11:09:22+00:00"
+            "time": "2019-03-14T11:59:30+00:00"
         },
         {
             "name": "spatie/laravel-query-builder",
@@ -8093,6 +8093,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
+        "spatie/laravel-flash": 20,
         "spatie/query-string": 20,
         "barryvdh/laravel-ide-helper": 20
     },
