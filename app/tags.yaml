@@ -18,6 +18,8 @@ tags:
       - composer
       - phpstorm
       - language-php
+      - algorithms
+      - algorithm
 
   frontend:
     color: '#CCA3C7'
