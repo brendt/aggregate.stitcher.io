@@ -2,7 +2,6 @@
 
 namespace Domain\Tweet\Actions;
 
-use App\Console\Jobs\TweetJob;
 use Domain\Tweet\Api\TwitterGateway;
 use Domain\Tweet\Models\Tweet;
 use Domain\Tweet\Tweetable;
@@ -21,6 +20,6 @@ final class TweetAction
     {
         $tweet = Tweet::createForTweetable($tweetable);
 
-        dispatch(new TweetJob($tweet));
+        $this->gateway->tweet($tweet);
     }
 }

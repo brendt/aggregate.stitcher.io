@@ -116,6 +116,11 @@ class Post extends Model implements Tweetable
         });
     }
 
+    public function scopeWhereNotTweeted(Builder $builder): Builder
+    {
+        return $builder->orWhereDoesntHave('tweets');
+    }
+
     public function getTagById(int $tagId): ?Tag
     {
         foreach ($this->tags as $tag) {
@@ -186,10 +191,10 @@ class Post extends Model implements Tweetable
         $status = trim($this->title);
 
         if ($this->source->twitter_handle) {
-            $status .= " by {$this->source->twitter_handle} ";
+            $status .= " by {$this->source->twitter_handle}";
         }
 
-        $status .= $url;
+        $status .= " {$url}";
 
         return $status;
     }
