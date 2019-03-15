@@ -23,6 +23,7 @@ class Source extends Model implements Filterable, Muteable
     protected $casts = [
         'is_active' => 'boolean',
         'is_validated' => 'boolean',
+        'validation_failed_at' => 'datetime',
     ];
 
     public static function boot(): void
@@ -130,5 +131,14 @@ class Source extends Model implements Filterable, Muteable
         }
 
         return false;
+    }
+
+    public function markAsInvalid(): Source
+    {
+        $this->validation_failed_at = now();
+
+        $this->save();
+
+        return $this;
     }
 }

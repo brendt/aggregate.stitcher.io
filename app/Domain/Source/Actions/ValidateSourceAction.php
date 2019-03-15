@@ -44,6 +44,8 @@ final class ValidateSourceAction
                 continue;
             }
         }
+
+        $source->markAsInvalid();
     }
 
     private function getFormats(string $host): array

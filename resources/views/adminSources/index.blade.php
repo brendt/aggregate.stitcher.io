@@ -96,13 +96,17 @@
                         </div>
                     </td>
                     <td>
-                        @if ($source->is_validated)
+                        @if($source->is_validated)
                             <a href="{{ $source->url }}" target="_blank" rel="noopener noreferrer" class="link">
                                 {{ $source->url }}
                             </a>
-                        @else
+                        @elseif($source->validation_failed_at)
                             <span class="text-red">
-                                {{ __('Feed validation pending') }}
+                                {{ __('No valid RSS found') }}
+                            </span>
+                        @else
+                            <span class="text-grey-darker">
+                                {{ __('Feed validation pending…') }}
                             </span>
                         @endif
                     </td>
