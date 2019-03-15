@@ -121,8 +121,6 @@ php artisan backup:run
 {{ logMessage("🙈  Migrating database...") }}
 cd {{ $newReleaseDir }};
 php artisan migrate --force;
-
-php artisan sync:tags
 @endtask
 
 @task('blessNewRelease', ['on' => 'remote'])
