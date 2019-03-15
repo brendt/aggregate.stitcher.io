@@ -2,7 +2,7 @@
     /** @var \Domain\Source\Models\Source $source */
 @endphp
 
-@component('layouts.app', [
+@component('layouts.admin', [
     'title' => $source->getName(),
 ])
     <heading>

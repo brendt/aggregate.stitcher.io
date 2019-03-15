@@ -6,17 +6,16 @@
             </label>
         @endisset
 
-        <input
+        <textarea
             id="{{ $name }}"
             type="{{ $type ?? 'text' }}"
             name="{{ $name }}"
-            value="{{ $value ?? old($name) ?? $initialValue ?? null }}"
 
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
-            class="block w-full outline-none p-2 rounded-sm bg-grey-lighter"
-        >
+            class="block w-full outline-none p-2 rounded-sm bg-grey-lighter h-32"
+        >{{ $value ?? old($name) ?? $initialValue ?? null }}</textarea>
     </div>
     <div class="flex justify-end">
         @if ($errors->has($name))

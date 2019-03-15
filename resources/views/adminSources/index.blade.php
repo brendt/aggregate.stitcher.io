@@ -3,35 +3,17 @@
     /** @var \Domain\Source\Models\Source[]|\Illuminate\Pagination\LengthAwarePaginator $sources */
 @endphp
 
-@component('layouts.app', [
+@component('layouts.admin', [
     'title' => __('Sources'),
-    'fullWidth' => true,
 ])
-    <heading>{{ __('Sources') }}</heading>
+    <div class="flex justify-between">
+        <heading>{{ __('Sources') }}</heading>
 
-    <form
-        action="{{ $currentUrl }}"
-        method="GET"
-        class="flex items-bottom justify-start mt-4"
-    >
-        <text-field
-            name="filter[search]"
-            label=""
-            :value="$currentSearchQuery"
-        ></text-field>
-
-        <submit-button class="ml-4 button-small">
-            {{ __('Search') }}
-        </submit-button>
-
-        @if($currentSearchQuery)
-            <div class="ml-4 pt-2">
-                <a href="{{ $currentUrl }}" class="link">
-                    {{ __('Clear search') }}
-                </a>
-            </div>
-        @endif
-    </form>
+        <search-field
+            :current-url="$currentUrl"
+            :current-search-query="$currentSearchQuery"
+        ></search-field>
+    </div>
 
     <table class="table mt-4">
         <thead>
@@ -72,9 +54,7 @@
                     <td>
                         <a
                             class="
-                                underline
-                                hover:no-underline
-                                text-grey-darker
+                                link
                                 inline-block
                                 mt-1
                             "
@@ -83,12 +63,12 @@
 
                         <div class="mt-2">
                             <a
-                                class="underline hover:no-underline"
+                                class="link text-grey-darker"
                                 href="{{ $source->url }}"
                             >
                                 {{ __('RSS') }}</a>&nbsp;–
                             <a
-                                class="underline hover:no-underline"
+                                class="link text-grey-darker"
                                 href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
                             >
                                 {{ __('Filtered') }}

@@ -133,6 +133,8 @@
 
             @if(flash()->message)
                 <div class="
+                        z-50
+                        bg-white
                         {{ flash()->class }}
                         absolute
                         pin-r pin-t

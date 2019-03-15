@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminSourcesController;
+use App\Http\Controllers\AdminTagsController;
+use App\Http\Controllers\AdminTopicsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -66,15 +68,37 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 });
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('sources', [AdminSourcesController::class, 'index']);
-    Route::get('sources/{source}', [AdminSourcesController::class, 'edit']);
-    Route::get('sources/{source}/delete', [AdminSourcesController::class, 'confirmDelete']);
+    Route::prefix('sources')->group(function () {
+        Route::get('/', [AdminSourcesController::class, 'index']);
+        Route::get('/{source}', [AdminSourcesController::class, 'edit']);
+        Route::get('/{source}/delete', [AdminSourcesController::class, 'confirmDelete']);
 
-    Route::post('sources/{source}', [AdminSourcesController::class, 'update']);
-    Route::post('sources/{source}/activate', [AdminSourcesController::class, 'activate']);
-    Route::post('sources/{source}/delete', [AdminSourcesController::class, 'delete']);
+        Route::post('/{source}', [AdminSourcesController::class, 'update']);
+        Route::post('/{source}/activate', [AdminSourcesController::class, 'activate']);
+        Route::post('/{source}/delete', [AdminSourcesController::class, 'delete']);
 
-    Route::post('sources', [AdminSourcesController::class, 'store']);
+        Route::post('/', [AdminSourcesController::class, 'store']);
+    });
+
+    Route::prefix('tags')->group(function () {
+        Route::get('/', [AdminTagsController::class, 'index']);
+
+        Route::get('/new', [AdminTagsController::class, 'create']);
+        Route::post('/', [AdminTagsController::class, 'store']);
+
+        Route::get('/{tag}', [AdminTagsController::class, 'edit']);
+        Route::post('/{tag}', [AdminTagsController::class, 'update']);
+    });
+
+    Route::prefix('topics')->group(function () {
+        Route::get('/', [AdminTopicsController::class, 'index']);
+
+        Route::get('/new', [AdminTopicsController::class, 'create']);
+        Route::post('/', [AdminTopicsController::class, 'store']);
+
+        Route::get('/{topic}', [AdminTopicsController::class, 'edit']);
+        Route::post('/{topic}', [AdminTopicsController::class, 'update']);
+    });
 });
 
 Route::get('suggest-blog', [GuestSourcesController::class, 'index']);

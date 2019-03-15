@@ -3,9 +3,8 @@
     /** @var \Domain\Source\Models\Source[]|\Illuminate\Pagination\LengthAwarePaginator $sources */
 @endphp
 
-@component('layouts.app', [
+@component('layouts.admin', [
     'title' => __('Delete source'),
-    'fullWidth' => true,
 ])
     <heading>{{ __("Delete source {$source->website}?") }}</heading>
 

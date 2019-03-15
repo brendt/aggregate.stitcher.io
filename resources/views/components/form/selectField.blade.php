@@ -6,17 +6,22 @@
             </label>
         @endisset
 
-        <input
+        <select
             id="{{ $name }}"
-            type="{{ $type ?? 'text' }}"
             name="{{ $name }}"
-            value="{{ $value ?? old($name) ?? $initialValue ?? null }}"
 
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
             class="block w-full outline-none p-2 rounded-sm bg-grey-lighter"
         >
+            @foreach ($options as $value => $name)
+                <option
+                    value="{{ $value }}"
+                    {{ ($initialValue ?? null) === $value ? 'selected' : null }}
+                >{{ $name }}</option>
+            @endforeach
+        </select>
     </div>
     <div class="flex justify-end">
         @if ($errors->has($name))

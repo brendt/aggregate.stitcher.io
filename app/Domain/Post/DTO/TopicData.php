@@ -2,6 +2,7 @@
 
 namespace Domain\Post\DTO;
 
+use App\Http\Requests\AdminTopicRequest;
 use Domain\Post\Models\Topic;
 use Spatie\DataTransferObject\DataTransferObject;
 
@@ -14,6 +15,13 @@ class TopicData extends DataTransferObject
         string $name
     ): TopicData {
         return new self(compact('name'));
+    }
+
+    public static function fromRequest(AdminTopicRequest $adminTopicRequest): TopicData
+    {
+        return new self([
+            'name' => $adminTopicRequest->get('name'),
+        ]);
     }
 
     public function hasChanges(Topic $topic): bool
