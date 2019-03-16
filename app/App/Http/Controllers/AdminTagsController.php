@@ -46,7 +46,7 @@ class AdminTagsController
 
         flash('Tag created!');
 
-        return action([self::class, 'edit'], $tag);
+        return redirect()->action([self::class, 'edit'], $tag->slug);
     }
 
     public function update(

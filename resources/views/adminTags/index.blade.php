@@ -49,6 +49,21 @@
                 </tr>
             @endforeach
         </tbody>
+
+        <tfoot>
+            <tr>
+                <td></td>
+                <td></td>
+                <td class="text-right">
+                    <a
+                        href="{{ action([\App\Http\Controllers\AdminTagsController::class, 'create']) }}"
+                        class="button"
+                    >
+                        {{ __('New tag') }}
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     {{ $tags->render() }}

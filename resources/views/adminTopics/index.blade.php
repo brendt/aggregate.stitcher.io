@@ -43,6 +43,20 @@
                 </tr>
             @endforeach
         </tbody>
+
+        <tfoot>
+            <tr>
+                <td></td>
+                <td class="text-right">
+                    <a
+                        href="{{ action([\App\Http\Controllers\AdminTopicsController::class, 'create']) }}"
+                        class="button"
+                    >
+                        {{ __('New topic') }}
+                    </a>
+                </td>
+            </tr>
+        </tfoot>
     </table>
 
     {{ $topics->render() }}

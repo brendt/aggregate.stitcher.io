@@ -7,9 +7,9 @@ use Domain\Post\Models\Topic;
 
 final class CreateTopicAction
 {
-    public function __invoke(TopicData $topicData): void
+    public function __invoke(TopicData $topicData): Topic
     {
-        Topic::create([
+        return Topic::create([
             'name' => $topicData->name,
         ]);
     }

@@ -46,7 +46,7 @@ class AdminTopicsController
 
         flash('Topic created!');
 
-        return action([self::class, 'edit'], $topic);
+        return redirect()->action([self::class, 'edit'], $topic->slug);
     }
 
     public function update(

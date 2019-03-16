@@ -22,7 +22,7 @@
         <select-field
             name="topic_id"
             :label="__('Topic')"
-            :initial-value="$tag->topic_id"
+            :initial-value="$tag ? $tag->topic_id : null"
             :options="$topicOptions"
         ></select-field>
 
