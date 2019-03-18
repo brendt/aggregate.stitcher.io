@@ -5,6 +5,11 @@
     border-collapse: collapse;
 }
 
+.table-truncate th,
+.table-truncate td {
+    @apply truncate;
+}
+
 .table tbody tr {
     border-top-width: 1px;
     @apply .border-grey-lighter;

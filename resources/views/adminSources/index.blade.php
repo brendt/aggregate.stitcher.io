@@ -15,7 +15,7 @@
         ></search-field>
     </div>
 
-    <table class="table mt-4">
+    <table class="table mt-4 table-truncate">
         <thead>
             <tr>
                 <th>
