@@ -70,6 +70,7 @@ final class ValidateSourceAction
             "{$host}/blog/index",
             "{$host}/blog/atom",
             "{$host}/blog/rss",
+            "{$host}/blog/feed.atom",
 
             "feed.{$host}",
             "rss.{$host}",
