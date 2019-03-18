@@ -11,6 +11,11 @@ class GuestSourceRequest extends SourceRequest
                 'required',
                 'string',
             ],
+            'topic_ids[]' => [
+                'nullable',
+                'numeric',
+                'exists:topics,id'
+            ],
         ];
     }
 }

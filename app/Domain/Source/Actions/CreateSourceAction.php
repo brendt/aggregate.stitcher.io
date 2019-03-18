@@ -10,6 +10,9 @@ use Illuminate\Mail\Mailer;
 
 final class CreateSourceAction
 {
+    /** @var \Domain\Source\Actions\ResolveTopicsAction */
+    private $resolveTopicsAction;
+
     /** @var \Domain\Source\Actions\ValidateSourceAction */
     private $validateSourceAction;
 
@@ -17,9 +20,11 @@ final class CreateSourceAction
     private $mailer;
 
     public function __construct(
+        ResolveTopicsAction $resolveTopicsAction,
         ValidateSourceAction $validateSourceAction,
         Mailer $mailer
     ) {
+        $this->resolveTopicsAction = $resolveTopicsAction;
         $this->validateSourceAction = $validateSourceAction;
         $this->mailer = $mailer;
     }
@@ -32,6 +37,8 @@ final class CreateSourceAction
             'twitter_handle' => $sourceData->twitter_handle,
             'is_active' => $sourceData->is_active,
         ]);
+
+        $this->resolveTopicsAction->execute($source, $sourceData);
 
         $this->validateSourceAction
             ->onQueue()

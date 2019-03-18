@@ -27,6 +27,13 @@
             :initial-value="$twitterHandle"
         ></text-field>
 
+        <checkboxes-field
+            name="topic_ids[]"
+            :label="__('Topics')"
+            :options="$topicOptions"
+            :initial-values="$topics"
+        ></checkboxes-field>
+
         <submit-button class="mt-3">
             {{ __('Save') }}
         </submit-button>

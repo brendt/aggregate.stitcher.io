@@ -6,6 +6,7 @@ use Domain\Post\Actions\CreatePostAction;
 use Domain\Post\Actions\UpdatePostAction;
 use Domain\Post\DTO\PostData;
 use Domain\Post\Models\Tag;
+use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;
 use Support\Rss\Reader;
@@ -44,8 +45,10 @@ final class SyncSourceAction
 
     public function __invoke(Source $source): void
     {
-        /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection */
-        $tags = Tag::all();
+        /** @var \Domain\Post\Models\Tag[]|\Illuminate\Database\Eloquent\Collection $tags */
+        $tags = $source->hasTopics()
+            ? $source->getTopicTags()
+            : Tag::all();
 
         $feed = $this->reader->import($source->url);
 

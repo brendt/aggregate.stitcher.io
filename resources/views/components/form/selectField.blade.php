@@ -13,7 +13,9 @@
             {{ ($required ?? null) ? 'required' : '' }}
             {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
-            class="block w-full outline-none p-2 rounded-sm bg-grey-lighter"
+            class="
+                appearance-none block w-full outline-none p-2 rounded-sm bg-grey-lighter
+            "
         >
             @foreach ($options as $value => $name)
                 <option

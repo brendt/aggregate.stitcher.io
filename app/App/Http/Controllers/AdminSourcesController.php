@@ -6,7 +6,7 @@ use App\Console\Jobs\SyncSourceJob;
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
 use App\Http\Requests\Request;
-use App\Http\Requests\SourceRequest;
+use App\Http\Requests\UserSourceRequest;
 use App\Http\ViewModels\AdminSourceViewModel;
 use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Actions\ActivateSourceAction;

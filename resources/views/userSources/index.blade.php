@@ -31,6 +31,13 @@
             :initial-value="$twitterHandle"
         ></text-field>
 
+        <select-field
+            name="topic_ids[]"
+            :label="__('This blog is about')"
+            :options="$topicOptions"
+            :initial-value="$primaryTopicId"
+        ></select-field>
+
         @if($source && $source->isInactive())
             <p class="mt-3 text-green">
                 {{ __("Your source is inactive at the moment. You'll recieve an email when it's activated.") }}

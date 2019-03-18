@@ -8,10 +8,13 @@ use Domain\Model;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\Topic;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Support\Filterable;
 use Support\HasUuid;
@@ -45,6 +48,23 @@ class Source extends Model implements Filterable, Muteable
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function sourceTopics(): HasMany
+    {
+        return $this->hasMany(SourceTopic::class);
+    }
+
+    public function topics(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Topic::class,
+            SourceTopic::class,
+            'source_id',
+            'id',
+            'id',
+            'topic_id'
+        );
     }
 
     public function scopeWhereActive(Builder $builder): Builder
@@ -140,5 +160,25 @@ class Source extends Model implements Filterable, Muteable
         $this->save();
 
         return $this;
+    }
+
+    public function hasTopics(): bool
+    {
+        return $this->topics->isNotEmpty();
+    }
+
+    /**
+     * @return \Illuminate\Support\Collection|\Domain\Post\Models\Tag[]
+     */
+    public function getTopicTags(): Collection
+    {
+        return $this->topics->flatMap(function (Topic $topic) {
+            return $topic->tags;
+        });
+    }
+
+    public function getPrimaryTopic(): ?Topic
+    {
+        return $this->topics->first();
     }
 }

@@ -3,6 +3,7 @@
 namespace Domain\Source\DTO;
 
 use App\Http\Requests\SourceRequest;
+use App\Http\Requests\UserSourceRequest;
 use Domain\Source\Models\Source;
 use Spatie\DataTransferObject\DataTransferObject;
 
@@ -17,6 +18,9 @@ final class SourceData extends DataTransferObject
     /** @var bool */
     public $is_active;
 
+    /** @var int[] */
+    public $topic_ids = [];
+
     public static function fromRequest(
         SourceRequest $request,
         ?Source $source = null
@@ -24,7 +28,10 @@ final class SourceData extends DataTransferObject
         return new self([
             'url' => $request->getSourceUrl(),
             'is_active' => $source->is_active ?? false,
-            'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle())
+            'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
+            'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
+                return (int) $id;
+            })->toArray(),
         ]);
     }
 
@@ -32,7 +39,8 @@ final class SourceData extends DataTransferObject
     {
         return
             $source->url !== $this->url
-            || $source->twitter_handle !== $this->twitter_handle;
+            || $source->twitter_handle !== $this->twitter_handle
+            || $source->topics->pluck('id') !== $this->topic_ids;
     }
 
     private static function formatTwitterHandle(?string $twitterHandle): ?string

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\GuestSourceRequest;
+use App\Http\ViewModels\GuestSourceViewModel;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
@@ -11,7 +12,7 @@ final class GuestSourcesController
 {
     public function index()
     {
-        return view('guestSources.form');
+        return (new GuestSourceViewModel())->view('guestSources.form');
     }
 
     public function store(

@@ -5,12 +5,14 @@
         {{ __('Suggest a blog') }}
     </h1>
 
-    <p>
-        {{ __('
-            Do you know a good blog that definitely should be added on aggregate?
-            Leave your suggestion here!
-        ') }}
-    </p>
+    <div class="content">
+        <p>
+            {{ __('
+                Do you know of a good blog that definitely should be added on aggregate?
+                Leave your suggestion here!
+            ') }}
+        </p>
+    </div>
 
     <form-component
         :action="action([\App\Http\Controllers\GuestSourcesController::class, 'store'])"
@@ -18,9 +20,15 @@
     >
         <text-field
             name="url"
-            :label="__('RSS feed URL')"
+            :label="__('Blog URL')"
             autofocus
         ></text-field>
+
+        <select-field
+            name="topic_ids[]"
+            :label="__('This blog is about')"
+            :options="$topicOptions"
+        ></select-field>
 
         <div class="flex justify-between items-center mt-2">
             <submit-button>

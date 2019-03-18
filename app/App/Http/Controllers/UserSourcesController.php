@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SourceRequest;
+use App\Http\Requests\UserSourceRequest;
 use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
@@ -20,7 +20,7 @@ final class UserSourcesController
     }
 
     public function update(
-        SourceRequest $request,
+        UserSourceRequest $request,
         User $user,
         CreateSourceAction $createSourceAction,
         UpdateSourceAction $updateSourceAction
