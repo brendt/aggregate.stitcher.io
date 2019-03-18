@@ -13,8 +13,8 @@ class AdminSourcesQuery extends QueryBuilder
     public function __construct(Request $request)
     {
         $query = Source::query()
-            ->join('source_topics', 'source_topics.source_id', '=', 'sources.id')
-            ->join('topics', 'topics.id', '=', 'source_topics.topic_id')
+            ->leftJoin('source_topics', 'source_topics.source_id', '=', 'sources.id')
+            ->leftJoin('topics', 'topics.id', '=', 'source_topics.topic_id')
             ->select('sources.*')
             ->distinct();
 
