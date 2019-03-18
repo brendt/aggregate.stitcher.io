@@ -28,6 +28,9 @@
                         {{ __('Feed') }}
                     </sort-link>
                 </th>
+                <th class="">
+                    {{ __('Topics') }}
+                </th>
                 <th class="text-right">
                     <sort-link name="post_count">
                         {{ __('Posts') }}
@@ -89,6 +92,9 @@
                                 {{ __('Feed validation pending…') }}
                             </span>
                         @endif
+                    </td>
+                    <td>
+                        {{ $source->topics->implode('name', ', ') }}
                     </td>
                     <td class="text-right">
                         {{ $source->post_count }}
