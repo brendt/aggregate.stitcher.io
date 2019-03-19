@@ -23,8 +23,8 @@
         </ajax-button>
     @else
         <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
-            <span class="vote-count">{{ $post->vote_count ?: null }}</span>
             <upvote-icon></upvote-icon>
+            <span class="vote-count ml-1 text-sm">{{ $post->vote_count ?: null }}</span>
         </a>
     @endif
 </div>
