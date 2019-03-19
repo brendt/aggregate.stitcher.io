@@ -1,4 +1,4 @@
-<div>
+<div class="ml-1">
     @if ($user)
         <ajax-button
             :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
@@ -6,12 +6,9 @@
             class="delete-vote-button mt-1/2"
             title="Remove your upvote"
         >
-            <span class="vote-count mr-1 text-sm">
-                @if($post->vote_count)
-                    {{ $post->vote_count }}
-                @endif
-            </span>
             <upvote-icon/>
+
+            <span class="vote-count ml-1 text-sm" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count }}</span>
         </ajax-button>
 
         <ajax-button
@@ -20,12 +17,9 @@
             class="add-vote-button mt-1/2"
             title="Show your support, give an upvote"
         >
-            <span class="vote-count mr-1 text-sm">
-                @if($post->vote_count)
-                    {{ $post->vote_count }}
-                @endif
-            </span>
             <upvote-icon/>
+
+            <span class="vote-count mr-1 text-sm" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count }}</span>
         </ajax-button>
     @else
         <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">

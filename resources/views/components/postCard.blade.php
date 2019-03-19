@@ -47,7 +47,7 @@
 
         <div class="flex items-baseline mt-3">
             @if($post->tags->isNotEmpty())
-                <p class="text-sm mr-2">
+                <p class="text-sm">
                     @foreach ($post->tags as $tag)
                         <tag :tag="$tag" class="mr-2"></tag>
                     @endforeach

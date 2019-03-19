@@ -15,3 +15,13 @@
             </g>
         </g>
 </svg>
+
+{{--<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" style="margin-top:-4px;" viewBox="0 0 24 24">--}}
+    {{--<path--}}
+        {{--@isset($color)--}}
+            {{--style="--upvote-icon-color: {{ $color }}"--}}
+        {{--@endisset--}}
+        {{--class="upvote-icon"--}}
+        {{--d="M17 22v2h-10v-2h10zm0-4h-10v2h10v-2zm-10-7v5h10v-5h6l-11-11-11 11h6z"/>--}}
+        {{--d="M7 11h-6l11-11 11 11h-6v13h-10z"/>--}}
+{{--</svg>--}}
