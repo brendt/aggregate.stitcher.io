@@ -47,7 +47,7 @@ const actionButtonHandlers = {
     updateVote(data) {
         const uuid = data.post_uuid;
         const postVote = document.querySelector(`#post-vote-${uuid}`);
-        const voteCounter = postVote.querySelector('.vote-count');
+        const voteCounters = postVote.querySelectorAll('.vote-count');
 
         if (data.voted_for) {
             postVote.classList.add('voted-for');
@@ -55,7 +55,11 @@ const actionButtonHandlers = {
             postVote.classList.remove('voted-for');
         }
 
-        voteCounter.innerHTML = data.vote_count;
+        for (let voteCounter of voteCounters) {
+            voteCounter.innerHTML = data.vote_count === 0
+                ? ''
+                : data.vote_count;
+        }
     },
 };
 

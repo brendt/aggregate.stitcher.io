@@ -9,6 +9,9 @@
         class="ajax-button {{ $class ?? '' }}"
         style="{{ $style ?? null }}"
         data-done="{!! $dataDone ?? '() => {};' !!}"
+        @isset($title)
+            title="{{ $title }}"
+        @endisset
     >
         {{ $slot }}
     </button>

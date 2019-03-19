@@ -5,7 +5,7 @@
 
 <article
     id="post-vote-{{ $post->uuid }}"
-    class="w-full flex items-center py-8 border-b border-grey-lighter"
+    class="post-card w-full flex items-center py-8 border-b border-grey-lighter {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
 >
     <div class="flex-1">
         <p class="mb-2">
@@ -16,6 +16,7 @@
             >
                 {{ $post->title }}
             </a>
+
         </p>
 
         <div class="text-grey-darkest text-sm">
@@ -32,14 +33,16 @@
                 @endif
             @endif
 
-            @if ($user)
-                @if(! $user->hasMuted($post->source))
-                    –
-                    <post-button :action="$post->source->getMuteUrl()" :inline="true">
-                        {{ __('Mute source') }}
-                    </post-button>
+            <div class="post-actions">
+                @if ($user)
+                    @if(! $user->hasMuted($post->source))
+                        –
+                        <post-button :action="$post->source->getMuteUrl()" :inline="true">
+                            {{ __('Mute source') }}
+                        </post-button>
+                    @endif
                 @endif
-            @endif
+            </div>
         </div>
 
         <div class="flex items-baseline mt-3">
@@ -50,8 +53,8 @@
                     @endforeach
                 </p>
             @endif
+
+            <post-vote :user="$user" :post="$post"></post-vote>
         </div>
     </div>
-
-    {{--<post-vote :user="$user" :post="$post"></post-vote>--}}
 </article>

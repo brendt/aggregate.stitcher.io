@@ -2,6 +2,7 @@
 
 namespace Domain\Post\Actions;
 
+use Domain\Post\Events\VoteCreatedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
@@ -18,10 +19,12 @@ final class AddVoteAction
 
     public function __invoke(Post $post, User $user): void
     {
-        Vote::create([
+        $vote = Vote::create([
             'user_id' => $user->id,
             'post_id' => $post->id,
         ]);
+
+        event(VoteCreatedEvent::new($vote));
 
         $this->updateVoteCountAction->__invoke($post->refresh());
     }

@@ -60,6 +60,15 @@ final class PageCache
         $payload = $this->cache->get($this->key);
 
         if (! $payload) {
+            /** @var \Illuminate\Http\Response $response */
+            $response = $next($request);
+
+            if (! $response->isSuccessful()) {
+                Log::debug("Cache miss on {$this->key} because of unsuccessful response");
+
+                return $response;
+            }
+
             $payload = $this->serialize($next($request));
 
             $this->cache->put($this->key, $payload, 60 * $this->defaultCacheTime);

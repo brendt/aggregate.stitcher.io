@@ -5,6 +5,8 @@ namespace App\Subscribers;
 use Domain\Mute\Events\MuteChangedEvent;
 use Domain\Post\Events\PostCreatedEvent;
 use Domain\Post\Events\PostUpdatedEvent;
+use Domain\Post\Events\VoteCreatedEvent;
+use Domain\Post\Events\VoteRemovedEvent;
 use Domain\Source\Events\SourceDeletedEvent;
 use Domain\User\Events\ChangeForUserEvent;
 use Illuminate\Events\Dispatcher;
@@ -36,6 +38,8 @@ final class PageCacheSubscriber
         $dispatcher->listen(
             [
                 MuteChangedEvent::class,
+                VoteCreatedEvent::class,
+                VoteRemovedEvent::class,
             ],
             self::class . "@flushUserCache"
         );

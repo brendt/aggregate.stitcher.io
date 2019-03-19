@@ -2,6 +2,7 @@
 
 namespace Domain\Post\Actions;
 
+use Domain\Post\Events\VoteRemovedEvent;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Vote;
 use Domain\User\Models\User;
@@ -22,6 +23,8 @@ final class RemoveVoteAction
             ->whereUser($user)
             ->wherePost($post)
             ->delete();
+
+        event(VoteRemovedEvent::new($user, $post));
 
         $this->updateVoteCountAction->__invoke($post->refresh());
     }
