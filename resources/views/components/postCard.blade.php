@@ -41,6 +41,14 @@
                             {{ __('Mute source') }}
                         </post-button>
                     @endif
+                    @if($user->isAdmin() && ! $post->hasBeenTweeted())
+                        –
+                        <ajax-button
+                            :action="$post->getAdminTweetUrl()"
+                        >
+                            {{ __('Tweet') }}
+                        </ajax-button>
+                    @endif
                 @endif
             </div>
         </div>

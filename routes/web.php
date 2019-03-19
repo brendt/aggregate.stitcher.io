@@ -99,6 +99,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
         Route::get('/{topic}', [AdminTopicsController::class, 'edit']);
         Route::post('/{topic}', [AdminTopicsController::class, 'update']);
     });
+
+    Route::post('posts/{post}/tweet', \App\Http\Controllers\PostTweetController::class);
 });
 
 Route::get('suggest-blog', [GuestSourcesController::class, 'index']);

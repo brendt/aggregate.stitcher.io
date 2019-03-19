@@ -5,9 +5,12 @@ namespace Domain\Tweet\Actions;
 use Domain\Tweet\Api\TwitterGateway;
 use Domain\Tweet\Models\Tweet;
 use Domain\Tweet\Tweetable;
+use Spatie\QueueableAction\QueueableAction;
 
 final class TweetAction
 {
+    use QueueableAction;
+
     /** @var \Domain\Tweet\Api\TwitterGateway */
     private $gateway;
 

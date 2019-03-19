@@ -5,6 +5,11 @@
 
 .post-actions {
     display: none;
+    /*display: inline-block;*/
+}
+
+.post-actions form {
+    display:inline-block;
 }
 
 .post-card:hover .post-actions {
