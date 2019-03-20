@@ -11,6 +11,12 @@
         </a>
     </heading>
 
+    @if($viewsPerDay->isNotEmpty())
+        <div class="mt-2">
+            <views-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></views-chart>
+        </div>
+    @endif
+
     <form-component
         class="mt-2"
         :action="action([\App\Http\Controllers\AdminSourcesController::class, 'update'], $source)"

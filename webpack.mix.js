@@ -5,6 +5,7 @@ require('laravel-mix-purgecss');
 mix
     .js('resources/js/app.js', 'public/js/app.js')
     .postCss('resources/css/app.css', 'public/css/app.css')
+    .copy('node_modules/chart.js/dist/Chart.js', 'public/js/chart.js')
 
     .version()
 
