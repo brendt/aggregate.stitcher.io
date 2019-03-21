@@ -45,7 +45,7 @@ final class AdminSourcesController
         Source $source,
         UpdateSourceAction $updateSourceAction
     ) {
-        $updateSourceAction($source, SourceData::fromRequest($sourceRequest, $source));
+        $updateSourceAction($source, SourceData::fromAdminRequest($sourceRequest));
 
         return redirect()->back();
     }

@@ -2,6 +2,7 @@
 
 namespace Domain\Source\DTO;
 
+use App\Http\Requests\AdminSourceRequest;
 use App\Http\Requests\SourceRequest;
 use App\Http\Requests\UserSourceRequest;
 use Domain\Source\Models\Source;
@@ -18,6 +19,9 @@ final class SourceData extends DataTransferObject
     /** @var bool */
     public $is_active;
 
+    /** @var bool */
+    public $is_validated;
+
     /** @var int[] */
     public $topic_ids = [];
 
@@ -28,6 +32,21 @@ final class SourceData extends DataTransferObject
         return new self([
             'url' => $request->getSourceUrl(),
             'is_active' => $source->is_active ?? false,
+            'is_validated' => $source->is_validated ?? false,
+            'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
+            'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
+                return (int) $id;
+            })->toArray(),
+        ]);
+    }
+
+    public static function fromAdminRequest(
+        AdminSourceRequest $request
+    ): SourceData {
+        return new self([
+            'url' => $request->getSourceUrl(),
+            'is_active' => (bool) $request->get('is_active'),
+            'is_validated' => (bool) $request->get('is_validated'),
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
             'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
                 return (int) $id;
@@ -39,8 +58,11 @@ final class SourceData extends DataTransferObject
     {
         return
             $source->url !== $this->url
+            || $source->is_active !== $this->is_active
+            || $source->is_validated !== $this->is_validated
             || $source->twitter_handle !== $this->twitter_handle
-            || $source->topics->pluck('id') !== $this->topic_ids;
+            || $source->topics->pluck('id') !== $this->topic_ids
+            ;
     }
 
     private static function formatTwitterHandle(?string $twitterHandle): ?string

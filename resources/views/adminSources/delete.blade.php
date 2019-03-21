@@ -13,12 +13,12 @@
             :action="action([\App\Http\Controllers\AdminSourcesController::class, 'delete'], $source)"
             class="flex items-baseline"
         >
-            <submit-button class="ml-4 button-small bg-red-dark">
+            <submit-button class="button-small bg-red-dark">
                 {{ __('Yes, delete') }}
             </submit-button>
 
             <a
-                href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}"
+                href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $source->uuid) }}"
                 class="ml-3"
             >
                 {{ __('Cancel') }}

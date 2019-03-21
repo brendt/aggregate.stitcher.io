@@ -23,6 +23,8 @@ final class UpdateSourceAction
 
         $source->url = $sourceData->url;
         $source->twitter_handle = $sourceData->twitter_handle;
+        $source->is_active = $sourceData->is_active;
+        $source->is_validated = $sourceData->is_validated;
 
         $source->save();
 

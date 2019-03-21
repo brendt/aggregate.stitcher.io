@@ -6,10 +6,27 @@
     'title' => $source->getName(),
 ])
     <heading>
-        <a href="http://{{ $source->website }}" target="_blank" rel="noopener noreferrer">
-            {{ $source->getName() }}
-        </a>
+        {{ $source->getName() }}
     </heading>
+
+    <div class="mt-2">
+        <a
+            class="link text-grey-darker"
+            href="http://{{ $source->website }}"
+        >
+            {{ __('Website') }}</a>&nbsp;–
+        <a
+            class="link text-grey-darker"
+            href="{{ $source->url }}"
+        >
+            {{ __('RSS') }}</a>&nbsp;–
+        <a
+            class="link text-grey-darker"
+            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
+        >
+            {{ __('Filtered') }}
+        </a>
+    </div>
 
     @if($viewsPerDay->isNotEmpty())
         <div class="mt-2">
@@ -18,34 +35,62 @@
     @endif
 
     <form-component
-        class="mt-2"
+        class="mt-8"
         :action="action([\App\Http\Controllers\AdminSourcesController::class, 'update'], $source)"
     >
-        <text-field
-            name="url"
-            :label="__('RSS url')"
-            :initial-value="$url"
-        ></text-field>
+        <div class="w-3/5">
+            <text-field
+                name="url"
+                :label="__('RSS url')"
+                :initial-value="$url"
+            ></text-field>
 
-        <text-field
-            name="twitter_handle"
-            :label="__('Twitter handle (optional)')"
-            :initial-value="$twitterHandle"
-        ></text-field>
+            <text-field
+                name="twitter_handle"
+                :label="__('Twitter handle (optional)')"
+                :initial-value="$twitterHandle"
+            ></text-field>
 
-        <checkboxes-field
-            name="topic_ids[]"
-            :label="__('Topics')"
-            :options="$topicOptions"
-            :initial-values="$topics"
-        ></checkboxes-field>
+            <checkboxes-field
+                class="mt-2"
+                name="topic_ids[]"
+                :label="__('Topics')"
+                :options="$topicOptions"
+                :initial-values="$topics"
+            ></checkboxes-field>
 
-        <submit-button class="mt-3">
-            {{ __('Save') }}
-        </submit-button>
+            <checkbox-field
+                name="is_active"
+                :label="__('Is active')"
+                :initial-value="$isActive"
+            ></checkbox-field>
 
-        <a class="ml-2" href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
-            {{ __('Back') }}
-        </a>
+            <checkbox-field
+                name="is_validated"
+                :label="__('Is validated')"
+                :initial-value="$isValidated"
+            ></checkbox-field>
+        </div>
+
+        <div class="flex justify-between items-center mt-4">
+            <div>
+                <submit-button class="mt-3">
+                    {{ __('Save') }}
+                </submit-button>
+
+                <a class="ml-2" href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
+                    {{ __('Back') }}
+                </a>
+            </div>
+
+            <div>
+                <a
+                    href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
+                    class="ml-2 text-red font-bold"
+                >
+                    {{ __('Delete') }}
+                </a>
+            </div>
+        </div>
     </form-component>
 @endcomponent

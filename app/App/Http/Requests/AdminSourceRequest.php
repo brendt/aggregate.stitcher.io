@@ -13,6 +13,8 @@ class AdminSourceRequest extends SourceRequest
             ],
             'twitter_handle' => 'nullable|string',
             'topics' => 'array',
+            'is_active' => 'boolean',
+            'is_validated' => 'boolean',
         ];
     }
 }

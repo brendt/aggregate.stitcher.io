@@ -52,6 +52,16 @@ class AdminSourceViewModel extends ViewModel
             ->toArray();
     }
 
+    public function isValidated(): bool
+    {
+        return $this->source->is_validated;
+    }
+
+    public function isActive(): bool
+    {
+        return $this->source->is_active;
+    }
+
     public function viewsPerDay(): Collection
     {
         $day = now()->subMonth();

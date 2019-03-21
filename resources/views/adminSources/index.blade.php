@@ -6,8 +6,17 @@
 @component('layouts.admin', [
     'title' => __('Sources'),
 ])
-    <div class="flex justify-between">
-        <heading>{{ __('Sources') }}</heading>
+    <div class="flex justify-between items-baseline">
+        <heading class="mt-0">{{ __('Sources') }}</heading>
+
+        <div>
+            <filter-button
+                name="is_active"
+                value="0"
+            >
+                {{ __('Inactive sources') }}
+            </filter-button>
+        </div>
 
         <search-field
             :current-url="$currentUrl"
@@ -41,13 +50,7 @@
                         {{ __('Date created') }}
                     </sort-link>
                 </th>
-                <th class="text-right">
-                    <filter-button
-                        name="is_active"
-                        value="0"
-                    >
-                        {{ __('Inactive sources') }}
-                    </filter-button>
+                <th>
                 </th>
             </tr>
         </thead>
@@ -63,20 +66,6 @@
                             "
                             href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $source) }}"
                         >{{ $source->website }}</a>
-
-                        <div class="mt-2">
-                            <a
-                                class="link text-grey-darker"
-                                href="{{ $source->url }}"
-                            >
-                                {{ __('RSS') }}</a>&nbsp;–
-                            <a
-                                class="link text-grey-darker"
-                                href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
-                            >
-                                {{ __('Filtered') }}
-                            </a>
-                        </div>
                     </td>
                     <td>
                         @if($source->is_validated)
@@ -115,13 +104,6 @@
                                 {{ __('Activate') }}
                             </post-button>
                         @endif
-
-                        <a
-                            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
-                            class="mt-2 block"
-                        >
-                            {{ __('Delete') }}
-                        </a>
                     </td>
                 </tr>
             @endforeach
