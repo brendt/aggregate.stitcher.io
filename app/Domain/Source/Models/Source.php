@@ -181,4 +181,26 @@ class Source extends Model implements Filterable, Muteable
     {
         return $this->topics->first();
     }
+
+    public function getHost(): string
+    {
+        $scheme = parse_url($this->url, PHP_URL_SCHEME) ?? 'http';
+
+        $host = parse_url($this->url, PHP_URL_HOST);
+
+        return "{$scheme}://{$host}";
+    }
+
+    public function getFullPath(string $path): string
+    {
+        $host = $this->getHost();
+
+        if (Str::startsWith($path, $host)) {
+            return $path;
+        }
+
+        $path = ltrim($path, '/');
+
+        return "{$host}/{$path}";
+    }
 }

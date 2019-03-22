@@ -204,4 +204,9 @@ class Post extends Model implements Tweetable
     {
         return action(PostTweetController::class, $this);
     }
+
+    public function getFullUrl(): string
+    {
+        return $this->source->getFullPath($this->url);
+    }
 }

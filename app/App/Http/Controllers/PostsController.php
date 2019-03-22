@@ -126,7 +126,7 @@ final class PostsController
             $request->user()
         ));
 
-        $queryString = (new QueryString($post->url))->enable('ref', 'aggregate.stitcher.io');
+        $queryString = (new QueryString($post->getFullUrl()))->enable('ref', 'aggregate.stitcher.io');
 
         return redirect()->to((string) $queryString);
     }
