@@ -18,6 +18,7 @@ class ExceptionHandler extends BaseExceptionHandler
 
     public function report(Exception $exception): void
     {
+        \Log::error($exception->getMessage());
         parent::report($exception);
     }
 
