@@ -131,7 +131,7 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 
-sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
 sudo supervisorctl restart all
 @endtask
 
@@ -163,5 +163,5 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 sudo supervisorctl restart all
-sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
 @endtask
