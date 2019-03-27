@@ -6,9 +6,7 @@ use App\Console\Jobs\SyncSourceJob;
 use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
 use App\Http\Requests\Request;
-use App\Http\Requests\UserSourceRequest;
 use App\Http\ViewModels\AdminSourceViewModel;
-use App\Http\ViewModels\SourceViewModel;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
@@ -57,6 +55,15 @@ final class AdminSourcesController
     ) {
         $activateSourceAction($source);
 
+        dispatch_now(new SyncSourceJob($syncSourceAction, $source));
+
+        return redirect()->back();
+    }
+
+    public function sync(
+        Source $source,
+        SyncSourceAction $syncSourceAction
+    ) {
         dispatch_now(new SyncSourceJob($syncSourceAction, $source));
 
         return redirect()->back();

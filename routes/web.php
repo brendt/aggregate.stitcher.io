@@ -75,6 +75,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
 
         Route::post('/{source}', [AdminSourcesController::class, 'update']);
         Route::post('/{source}/activate', [AdminSourcesController::class, 'activate']);
+        Route::post('/{source}/sync', [AdminSourcesController::class, 'sync']);
         Route::post('/{source}/delete', [AdminSourcesController::class, 'delete']);
 
         Route::post('/', [AdminSourcesController::class, 'store']);

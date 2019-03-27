@@ -29,7 +29,7 @@
     </div>
 
     @if($viewsPerDay->isNotEmpty())
-        <div class="mt-2">
+        <div class="mt-2 lg-max:hidden">
             <views-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></views-chart>
         </div>
     @endif
@@ -82,15 +82,31 @@
                     {{ __('Back') }}
                 </a>
             </div>
-
-            <div>
-                <a
-                    href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
-                    class="ml-2 text-red font-bold"
-                >
-                    {{ __('Delete') }}
-                </a>
-            </div>
         </div>
     </form-component>
+
+    <div class="md:flex md:justify-end">
+        @if(!$source->is_active)
+            <post-button
+                class="text-green font-bold py-4 md:px-3"
+                :action="action([\App\Http\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
+            >
+                {{ __('Activate') }}
+            </post-button>
+        @else
+            <post-button
+                class="font-bold py-4 md:px-3"
+                :action="action([\App\Http\Controllers\AdminSourcesController::class, 'sync'], $source->uuid)"
+            >
+                {{ __('Sync now') }}
+            </post-button>
+        @endif
+
+        <a
+            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
+            class="md:ml-2 text-red font-bold py-4 md:px-3"
+        >
+            {{ __('Delete') }}
+        </a>
+    </div>
 @endcomponent

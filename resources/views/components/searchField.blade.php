@@ -1,23 +1,27 @@
 <form
     action="{{ $currentUrl }}"
     method="GET"
-    class="flex mt-4"
+    class="md:flex mt-4"
 >
+    <div class="md:hidden">
+        <label for="filter[search]">{{ __('Search:') }}</label>
+    </div>
+
     <text-field
         name="filter[search]"
         label=""
         :value="$currentSearchQuery"
     ></text-field>
 
-    <submit-button class="ml-4 button-small">
-        {{ __('Search') }}
-    </submit-button>
+    <div>
+        <submit-button class="md:ml-4 button-small">
+            {{ __('Search') }}
+        </submit-button>
 
-    @if($currentSearchQuery)
-        <div class="ml-4 pt-2">
-            <a href="{{ $currentUrl }}" class="link">
+        @if($currentSearchQuery)
+            <a href="{{ $currentUrl }}" class="ml-2 link">
                 {{ __('Clear search') }}
             </a>
-        </div>
-    @endif
+        @endif
+    </div>
 </form>

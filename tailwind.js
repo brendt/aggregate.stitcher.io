@@ -104,6 +104,9 @@ module.exports = {
     'md': '768px',
     'lg': '992px',
     'xl': '1200px',
+    'sm-max': {'max': '767px'},
+    'md-max': {'max': '991px'},
+    'lg-max': {'max': '1199px'},
   },
 
 

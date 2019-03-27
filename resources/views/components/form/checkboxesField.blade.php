@@ -3,9 +3,9 @@
         <div class="mb-2 mt-2">{{ $label }}</div>
     @endisset
 
-    <div class="flex flex-wrap justify-end w-3/5">
+    <div class="md:flex md:flex-wrap md:justify-end md:w-3/5">
         @foreach ($options as $key => $optionLabel)
-            <div class="w-2/5 {{ $itemClass ?? null }}">
+            <div class="md:w-2/5 {{ $itemClass ?? null }}">
                 <input
                     type="checkbox"
                     name="{{ $name }}"

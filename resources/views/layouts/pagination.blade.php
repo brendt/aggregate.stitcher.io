@@ -22,7 +22,7 @@
                 rel="prev"
                 aria-label="@lang('pagination.previous')"
             >
-                {{ __('Older') }}
+                {{ __('More') }}
             </a>
         @endif
     </div>
