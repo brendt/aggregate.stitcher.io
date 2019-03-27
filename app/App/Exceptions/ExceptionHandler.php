@@ -23,8 +23,6 @@ class ExceptionHandler extends BaseExceptionHandler
 
     public function render($request, Exception $exception)
     {
-        \Log::error($exception->getMessage());
-
         return parent::render($request, $exception);
     }
 }
