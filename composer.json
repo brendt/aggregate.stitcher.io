@@ -7,7 +7,7 @@
         "php": ">=7.1.0",
         "abraham/twitteroauth": "^1.0",
         "barryvdh/laravel-debugbar": "^3.0",
-        "bugsnag/bugsnag-laravel": "^2.6",
+        "bugsnag/bugsnag-laravel": "^2.0",
         "doctrine/dbal": "^2.6",
         "fideloper/proxy": "~4.0",
         "guzzlehttp/guzzle": "^6.3",

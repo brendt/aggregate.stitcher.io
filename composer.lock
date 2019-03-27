@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "85f0eee6e1222e680de22ce3c34e4059",
+    "content-hash": "5e2e0fdef516c60c1896fd5b5e4111b4",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -5383,26 +5383,26 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "5439781e7cee37f0ea18ad659da903024c9cade7"
+                "reference": "9ef14f83be22adf950f92a2ddb705d6331475d1c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/5439781e7cee37f0ea18ad659da903024c9cade7",
-                "reference": "5439781e7cee37f0ea18ad659da903024c9cade7",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/9ef14f83be22adf950f92a2ddb705d6331475d1c",
+                "reference": "9ef14f83be22adf950f92a2ddb705d6331475d1c",
                 "shasum": ""
             },
             "require": {
                 "barryvdh/reflection-docblock": "^2.0.6",
                 "composer/composer": "^1.6",
-                "illuminate/console": "^5.5,<5.8",
-                "illuminate/filesystem": "^5.5,<5.8",
-                "illuminate/support": "^5.5,<5.8",
+                "illuminate/console": "^5.5,<5.9",
+                "illuminate/filesystem": "^5.5,<5.9",
+                "illuminate/support": "^5.5,<5.9",
                 "php": ">=7"
             },
             "require-dev": {
                 "doctrine/dbal": "~2.3",
-                "illuminate/config": "^5.1,<5.8",
-                "illuminate/view": "^5.1,<5.8",
+                "illuminate/config": "^5.1,<5.9",
+                "illuminate/view": "^5.1,<5.9",
                 "phpro/grumphp": "^0.14",
                 "phpunit/phpunit": "4.*",
                 "scrutinizer/ocular": "~1.1",
@@ -5449,7 +5449,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2018-12-19T12:13:32+00:00"
+            "time": "2019-03-27T04:56:31+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
