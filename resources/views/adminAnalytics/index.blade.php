@@ -71,7 +71,7 @@
                     </tbody>
                 </table>
 
-                <h3 class="font-bold mt-2 mb-1">{{ __('Sources') }}</h3>
+                <h3 class="font-bold mt-4 mb-1">{{ __('Sources') }}</h3>
 
                 <table class="table thin">
                     <tbody>
@@ -90,7 +90,7 @@
                     </tbody>
                 </table>
 
-                <h3 class="font-bold mt-2 mb-1">{{ __('Posts') }}</h3>
+                <h3 class="font-bold mt-4 mb-1">{{ __('Posts') }}</h3>
 
                 <table class="table thin">
                     <tbody>
