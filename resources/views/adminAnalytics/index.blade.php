@@ -64,6 +64,10 @@
                             <td>{{ __('Avg. Views / Post') }}</td>
                             <td class="text-right">{{ $averageViewsPerPost }}</td>
                         </tr>
+                        <tr>
+                            <td>{{ __('Avg. Views / Day') }}</td>
+                            <td class="text-right">{{ $averageViewsPerDay }}</td>
+                        </tr>
                     </tbody>
                 </table>
 
@@ -82,6 +86,10 @@
                         <tr>
                             <td>{{ __('Avg. Votes / Post') }}</td>
                             <td class="text-right">{{ $averageVotesPerPost }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ __('Avg. Votes / Day') }}</td>
+                            <td class="text-right">{{ $averageVotesPerDay }}</td>
                         </tr>
                     </tbody>
                 </table>

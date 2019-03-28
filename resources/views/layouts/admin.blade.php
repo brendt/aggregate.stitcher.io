@@ -2,7 +2,7 @@
     'title' => $title ?? null,
     'fullWidth' => true,
 ])
-    <nav class="bg-grey-lighter p-3 flex">
+    <nav class="bg-grey-lighter p-3 pt-4 flex">
         <active-link
             :href="action([\App\Http\Controllers\AdminAnalyticsController::class, 'index'])"
         >{{ __('Analytics') }}</active-link>

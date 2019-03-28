@@ -90,6 +90,24 @@ final class AdminAnalyticsViewModel extends ViewModel
         return round($this->totalVoteCount / $this->totalPostCount, 3);
     }
 
+    public function averageViewsPerDay(): int
+    {
+        $viewCount = View::query()
+            ->where('created_at', '>=' , now()->subDays(30))
+            ->count();
+
+        return $viewCount / 31;
+    }
+
+    public function averageVotesPerDay(): float
+    {
+        $voteCount = Vote::query()
+            ->where('created_at', '>=' , now()->subDays(30))
+            ->count();
+
+        return round($voteCount / 31, 3);
+    }
+
     public function viewsPerDay(): Collection
     {
         $period = Period::make(now()->subDays(30), now());
