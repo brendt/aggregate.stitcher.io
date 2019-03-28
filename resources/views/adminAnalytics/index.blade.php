@@ -61,11 +61,11 @@
                             <td class="text-right">{{ $totalVoteCount }}</td>
                         </tr>
                         <tr>
-                            <td>{{ __('Avg. Views / Day') }}</td>
+                            <td>{{ __('Avg. Views / Day (Last month)') }}</td>
                             <td class="text-right">{{ $averageViewsPerDay }}</td>
                         </tr>
                         <tr>
-                            <td>{{ __('Avg. Votes / Day') }}</td>
+                            <td>{{ __('Avg. Votes / Day (Last month)') }}</td>
                             <td class="text-right">{{ $averageVotesPerDay }}</td>
                         </tr>
                     </tbody>
