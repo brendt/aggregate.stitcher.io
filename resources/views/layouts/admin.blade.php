@@ -4,7 +4,12 @@
 ])
     <nav class="bg-grey-lighter p-3 flex">
         <active-link
+            :href="action([\App\Http\Controllers\AdminAnalyticsController::class, 'index'])"
+        >{{ __('Analytics') }}</active-link>
+
+        <active-link
             :href="action([\App\Http\Controllers\AdminSourcesController::class, 'index'])"
+            class="ml-2"
         >{{ __('Sources') }}</active-link>
 
         <active-link

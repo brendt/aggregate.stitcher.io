@@ -7,6 +7,7 @@ use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;
+use Spatie\Period\Period;
 use Spatie\ViewModels\ViewModel;
 
 class AdminSourceViewModel extends ViewModel
@@ -64,49 +65,27 @@ class AdminSourceViewModel extends ViewModel
 
     public function viewsPerDay(): Collection
     {
-        $day = now()->subMonth();
+        $period = Period::make(now()->subDays(30), now());
 
-        $views = View::whereSource($this->source)
-            ->where('created_at', '>', $day->toDateTimeString())
+        /** @var \Domain\Post\Collections\ViewCollection $views */
+        $views = View::query()
+            ->whereSource($this->source)
+            ->where('created_at', '>', $period->getStart())
             ->get();
 
-        $data = collect([]);
-
-        while ($day <= now()) {
-            $data[$day->toDateString()] = 0;
-
-            $day->addDay();
-        }
-
-        /** @var \Domain\Post\Models\View $view */
-        foreach ($views as $view) {
-            $data[$view->created_at->toDateString()] += 1;
-        }
-
-        return $data;
+        return $views->spreadForPeriod($period);
     }
 
     public function votesPerDay(): Collection
     {
-        $day = now()->subMonth();
+        $period = Period::make(now()->subDays(30), now());
 
-        $votes = Vote::whereSource($this->source)
-            ->where('created_at', '>', $day->toDateTimeString())
+        /** @var \Domain\Post\Collections\VoteCollection $votes */
+        $votes = Vote::query()
+            ->whereSource($this->source)
+            ->where('created_at', '>', $period->getStart())
             ->get();
 
-        $data = collect([]);
-
-        while ($day <= now()) {
-            $data[$day->toDateString()] = 0;
-
-            $day->addDay();
-        }
-
-        /** @var \Domain\Post\Models\Vote $vote */
-        foreach ($votes as $vote) {
-            $data[$vote->created_at->toDateString()] += 1;
-        }
-
-        return $data;
+        return $votes->spreadForPeriod($period);
     }
 }

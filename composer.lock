@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5e2e0fdef516c60c1896fd5b5e4111b4",
+    "content-hash": "22f58aacd78ba77e7ff87e6f5c60807e",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -3607,6 +3607,54 @@
             "time": "2019-02-28T09:47:44+00:00"
         },
         {
+            "name": "spatie/period",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/period.git",
+                "reference": "40f1f986023a3ad0eeabbcecc8175ad83ba590a4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/period/zipball/40f1f986023a3ad0eeabbcecc8175ad83ba590a4",
+                "reference": "40f1f986023a3ad0eeabbcecc8175ad83ba590a4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.0",
+                "nesbot/carbon": "^2.6",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Period\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Complex period comparisons",
+            "homepage": "https://github.com/spatie/period",
+            "keywords": [
+                "period",
+                "spatie"
+            ],
+            "time": "2019-02-01T13:05:08+00:00"
+        },
+        {
             "name": "spatie/query-string",
             "version": "dev-master",
             "source": {
@@ -5508,16 +5556,16 @@
     "packages-dev": [
         {
             "name": "barryvdh/laravel-ide-helper",
-            "version": "dev-master",
+            "version": "v2.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/barryvdh/laravel-ide-helper.git",
-                "reference": "9ef14f83be22adf950f92a2ddb705d6331475d1c"
+                "reference": "39c148ad4273f5b8c49d0a363ddbc0462f1f2eec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/9ef14f83be22adf950f92a2ddb705d6331475d1c",
-                "reference": "9ef14f83be22adf950f92a2ddb705d6331475d1c",
+                "url": "https://api.github.com/repos/barryvdh/laravel-ide-helper/zipball/39c148ad4273f5b8c49d0a363ddbc0462f1f2eec",
+                "reference": "39c148ad4273f5b8c49d0a363ddbc0462f1f2eec",
                 "shasum": ""
             },
             "require": {
@@ -5578,7 +5626,7 @@
                 "phpstorm",
                 "sublime"
             ],
-            "time": "2019-03-27T04:56:31+00:00"
+            "time": "2019-03-26T10:38:22+00:00"
         },
         {
             "name": "barryvdh/reflection-docblock",
@@ -8315,8 +8363,7 @@
     "minimum-stability": "stable",
     "stability-flags": {
         "spatie/laravel-flash": 20,
-        "spatie/query-string": 20,
-        "barryvdh/laravel-ide-helper": 20
+        "spatie/query-string": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

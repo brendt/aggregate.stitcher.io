@@ -3,6 +3,7 @@
 namespace Domain\Post\Models;
 
 use Domain\Model;
+use Domain\Post\Collections\VoteCollection;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,6 +13,11 @@ use Support\HasUuid;
 class Vote extends Model
 {
     use HasUuid;
+
+    public function newCollection(array $models = [])
+    {
+        return new VoteCollection($models);
+    }
 
     public function user(): BelongsTo
     {

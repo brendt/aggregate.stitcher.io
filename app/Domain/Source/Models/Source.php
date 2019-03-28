@@ -9,6 +9,7 @@ use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Topic;
+use Domain\Source\QueryBuilders\SourceQueryBuilder;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -38,6 +39,11 @@ class Source extends Model implements Filterable, Muteable
         });
 
         parent::boot();
+    }
+
+    public function newEloquentBuilder($query)
+    {
+        return new SourceQueryBuilder($query);
     }
 
     public function user(): BelongsTo
@@ -202,5 +208,10 @@ class Source extends Model implements Filterable, Muteable
         $path = ltrim($path, '/');
 
         return "{$host}/{$path}";
+    }
+
+    public function getAdminUrl(): string
+    {
+        return action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $this);
     }
 }

@@ -30,7 +30,7 @@
 
     @if($viewsPerDay->isNotEmpty())
         <div class="mt-2 lg-max:hidden">
-            <views-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></views-chart>
+            <source-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></source-chart>
         </div>
     @endif
 

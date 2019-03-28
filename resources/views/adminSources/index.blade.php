@@ -15,8 +15,6 @@
         ></search-field>
     </div>
 
-
-
     <div class="md-max:mt-2">
         <filter-button
             name="is_active"
@@ -67,7 +65,7 @@
                                 inline-block
                                 mt-1
                             "
-                            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $source) }}"
+                            href="{{ $source->getAdminUrl() }}"
                         >{{ $source->website }}</a>
                     </td>
                     <td class="md-max:hidden">

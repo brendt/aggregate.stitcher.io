@@ -27,6 +27,7 @@
         "spatie/laravel-queueable-action": "^0.0.2",
         "spatie/laravel-tail": "^3.0",
         "spatie/laravel-view-models": "^1.1",
+        "spatie/period": "^1.1",
         "spatie/query-string": "dev-master",
         "symfony/yaml": "^4.2",
         "themsaid/laravel-mail-preview": "^2.0",
@@ -34,7 +35,7 @@
         "zendframework/zend-http": "^2.8"
     },
     "require-dev" : {
-        "barryvdh/laravel-ide-helper" : "dev-master",
+        "barryvdh/laravel-ide-helper" : "^2.6.2",
         "beyondcode/laravel-dump-server" : "~1.0",
         "filp/whoops" : "~2.0",
         "friendsofphp/php-cs-fixer" : "^2.4",
