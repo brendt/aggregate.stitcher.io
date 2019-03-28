@@ -48,48 +48,59 @@
             </table>
 
             <div class="py-3 px-4 bg-grey-lighter mt-4">
-                <h3 class="font-bold mt-1 mb-1">{{ __('Views') }}</h3>
+                <h3 class="font-bold mt-1 mb-1">{{ __('General') }}</h3>
 
                 <table class="table thin">
                     <tbody>
                         <tr>
-                            <td>{{ __('Total view count') }}</td>
+                            <td>{{ __('Total Views') }}</td>
                             <td class="text-right">{{ $totalViewCount }}</td>
                         </tr>
                         <tr>
-                            <td>{{ __('Avg. Views / Source') }}</td>
-                            <td class="text-right">{{ $averageViewsPerSource }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ __('Avg. Views / Post') }}</td>
-                            <td class="text-right">{{ $averageViewsPerPost }}</td>
+                            <td>{{ __('Total Votes') }}</td>
+                            <td class="text-right">{{ $totalVoteCount }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Views / Day') }}</td>
                             <td class="text-right">{{ $averageViewsPerDay }}</td>
                         </tr>
+                        <tr>
+                            <td>{{ __('Avg. Votes / Day') }}</td>
+                            <td class="text-right">{{ $averageVotesPerDay }}</td>
+                        </tr>
                     </tbody>
                 </table>
 
-                <h3 class="font-bold mt-4 mb-1">{{ __('Votes') }}</h3>
+                <h3 class="font-bold mt-2 mb-1">{{ __('Sources') }}</h3>
 
                 <table class="table thin">
                     <tbody>
                         <tr>
-                            <td>{{ __('Total vote count') }}</td>
-                            <td class="text-right">{{ $totalVoteCount }}</td>
+                            <td>{{ __('Avg. Views / Source') }}</td>
+                            <td class="text-right">{{ $averageViewsPerSource }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Source') }}</td>
                             <td class="text-right">{{ $averageVotesPerSource }}</td>
                         </tr>
                         <tr>
-                            <td>{{ __('Avg. Votes / Post') }}</td>
-                            <td class="text-right">{{ $averageVotesPerPost }}</td>
+                            <td>{{ __('Avg. Posts / Source') }}</td>
+                            <td class="text-right">{{ $averagePostsPerSource }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3 class="font-bold mt-2 mb-1">{{ __('Posts') }}</h3>
+
+                <table class="table thin">
+                    <tbody>
+                        <tr>
+                            <td>{{ __('Avg. Views / Post') }}</td>
+                            <td class="text-right">{{ $averageViewsPerPost }}</td>
                         </tr>
                         <tr>
-                            <td>{{ __('Avg. Votes / Day') }}</td>
-                            <td class="text-right">{{ $averageVotesPerDay }}</td>
+                            <td>{{ __('Avg. Votes / Post') }}</td>
+                            <td class="text-right">{{ $averageVotesPerPost }}</td>
                         </tr>
                     </tbody>
                 </table>

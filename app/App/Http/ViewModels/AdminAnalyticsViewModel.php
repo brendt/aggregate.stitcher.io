@@ -108,6 +108,11 @@ final class AdminAnalyticsViewModel extends ViewModel
         return round($voteCount / 31, 3);
     }
 
+    public function averagePostsPerSource(): int
+    {
+        return $this->totalPostCount / $this->totalSourceCount;
+    }
+
     public function viewsPerDay(): Collection
     {
         $period = Period::make(now()->subDays(30), now());
