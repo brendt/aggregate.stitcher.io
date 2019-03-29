@@ -26,6 +26,15 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        Relation::morphMap([
+            'source' => Source::class,
+            'post' => Post::class,
+            'tag' => Tag::class,
+            'view' => View::class,
+            'topic' => Topic::class,
+            'vote' => Vote::class,
+        ]);
+
         /** @var \Spatie\BladeX\BladeX $bladeX */
         $bladeX = $this->app->get(BladeX::class);
 
@@ -36,15 +45,6 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         LengthAwarePaginator::defaultView('layouts.pagination');
-
-        Relation::morphMap([
-            'source' => Source::class,
-            'post' => Post::class,
-            'tag' => Tag::class,
-            'view' => View::class,
-            'topic' => Topic::class,
-            'vote' => Vote::class,
-        ]);
     }
 
     public function register(): void

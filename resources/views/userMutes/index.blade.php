@@ -15,6 +15,9 @@
     <table class="table">
         <tbody>
             @foreach ($mutes as $mute)
+                @if(!$mute->getMuteable())
+                    @continue
+                @endif
                 <tr>
                     <td>
                         @if($mute->getMuteable() instanceof \Domain\Post\Models\Tag)
