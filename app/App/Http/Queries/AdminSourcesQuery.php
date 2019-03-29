@@ -16,6 +16,7 @@ class AdminSourcesQuery extends QueryBuilder
             ->leftJoin('source_topics', 'source_topics.source_id', '=', 'sources.id')
             ->leftJoin('topics', 'topics.id', '=', 'source_topics.topic_id')
             ->select('sources.*')
+            ->with('errorLogs')
             ->distinct();
 
         parent::__construct($query, $request);

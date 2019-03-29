@@ -6,8 +6,8 @@ use Domain\Post\Actions\CreatePostAction;
 use Domain\Post\Actions\UpdatePostAction;
 use Domain\Post\DTO\PostData;
 use Domain\Post\Models\Tag;
-use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
+use Exception;
 use Illuminate\Support\Collection;
 use Support\Rss\Reader;
 use Zend\Feed\Reader\Entry\EntryInterface;
@@ -50,7 +50,13 @@ final class SyncSourceAction
             ? $source->getTopicTags()
             : Tag::all();
 
-        $feed = $this->reader->import($source->url);
+        try {
+            $feed = $this->reader->import($source->url);
+        } catch (Exception $exception) {
+            $source->logException($exception);
+
+            return;
+        }
 
         /** @var \Zend\Feed\Reader\Entry\EntryInterface $entry */
         foreach ($feed as $entry) {

@@ -60,13 +60,25 @@
                     <td class="md-max:w-full">
                         <a
                             class="
-                                w-full
                                 link
                                 inline-block
                                 mt-1
                             "
                             href="{{ $source->getAdminUrl() }}"
                         >{{ $source->website }}</a>
+
+                        @php
+                            $errorsLastWeek = $source->getErrorLogs()->lastWeek();
+                        @endphp
+
+                        @if($errorsLastWeek->isNotEmpty())
+                             <a
+                                 href="{{ action([\App\Http\Controllers\AdminErrorLogController::class, 'index'], ['type' => $source->getMorphClass(), 'id' => $source->getKey()]) }}"
+                                 class="text-sm text-red"
+                             >
+                                 {{ $errorsLastWeek->count() }} {{ \Illuminate\Support\Str::plural('error', $errorsLastWeek->count()) }} last week
+                             </a>
+                        @endif
                     </td>
                     <td class="md-max:hidden">
                         @if($source->is_validated)

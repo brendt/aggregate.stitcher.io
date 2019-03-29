@@ -3,7 +3,14 @@
 namespace App\Providers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Domain\Post\Models\Post;
+use Domain\Post\Models\Tag;
+use Domain\Post\Models\Topic;
+use Domain\Post\Models\View;
+use Domain\Post\Models\Vote;
+use Domain\Source\Models\Source;
 use Domain\Tweet\Api\FakeTwitterOAuth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
@@ -29,6 +36,15 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         LengthAwarePaginator::defaultView('layouts.pagination');
+
+        Relation::morphMap([
+            'source' => Source::class,
+            'post' => Post::class,
+            'tag' => Tag::class,
+            'view' => View::class,
+            'topic' => Topic::class,
+            'vote' => Vote::class,
+        ]);
     }
 
     public function register(): void

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAnalyticsController;
+use App\Http\Controllers\AdminErrorLogController;
 use App\Http\Controllers\AdminSourcesController;
 use App\Http\Controllers\AdminTagsController;
 use App\Http\Controllers\AdminTopicsController;
@@ -70,6 +71,8 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
     Route::get('/analytics', [AdminAnalyticsController::class, 'index']);
+
+    Route::get('/error-log/{type}/{id}', [AdminErrorLogController::class, 'index']);
 
     Route::prefix('sources')->group(function () {
         Route::get('/', [AdminSourcesController::class, 'index']);

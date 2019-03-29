@@ -22,7 +22,7 @@ final class AdminSourcesController
         Request $request,
         AdminSourcesQuery $query
     ) {
-        $sources = $query->paginate();
+        $sources = $query->paginate(40);
 
         return view('adminSources.index', [
             'sources' => $sources,

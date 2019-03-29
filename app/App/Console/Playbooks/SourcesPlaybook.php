@@ -55,6 +55,7 @@ final class SourcesPlaybook extends Playbook
             ($this->createSourceAction)->__invoke($user, new SourceData([
                 'url' => $url,
                 'is_active' => true,
+                'is_validated' => true,
             ]));
 
             $output->writeln("- Created source {$url}");

@@ -4,6 +4,9 @@ namespace Domain\Source\Models;
 
 use App\Http\Controllers\SourceMutesController;
 use Carbon\Carbon;
+use Domain\Log\Collections\ErrorLogCollection;
+use Domain\Log\Loggable;
+use Domain\Log\Models\ErrorLog;
 use Domain\Model;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
@@ -11,16 +14,18 @@ use Domain\Post\Models\Post;
 use Domain\Post\Models\Topic;
 use Domain\Source\QueryBuilders\SourceQueryBuilder;
 use Domain\User\Models\User;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Support\Filterable;
 use Support\HasUuid;
 
-class Source extends Model implements Filterable, Muteable
+class Source extends Model implements Filterable, Muteable, Loggable
 {
     use HasUuid, HasMutes;
 
@@ -71,6 +76,11 @@ class Source extends Model implements Filterable, Muteable
             'id',
             'topic_id'
         );
+    }
+
+    public function errorLogs(): MorphMany
+    {
+        return $this->morphMany(ErrorLog::class, 'loggable');
     }
 
     public function scopeWhereActive(Builder $builder): Builder
@@ -213,5 +223,15 @@ class Source extends Model implements Filterable, Muteable
     public function getAdminUrl(): string
     {
         return action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $this);
+    }
+
+    public function getErrorLogs(): ErrorLogCollection
+    {
+        return $this->errorLogs;
+    }
+
+    public function logException(Exception $exception): ErrorLog
+    {
+        return ErrorLog::createFromException($exception, $this);
     }
 }
