@@ -9,7 +9,7 @@ class AddValidationFailedAtToSources extends Migration
     public function up()
     {
         Schema::table('sources', function (Blueprint $table) {
-            $table->boolean('validation_failed_at')->after('is_validated')->nullable();
+            $table->dateTime('validation_failed_at')->after('is_validated')->nullable();
         });
     }
 }
