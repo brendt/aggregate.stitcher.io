@@ -37,6 +37,11 @@ final class PostsViewModel extends ViewModel
         $this->user = $user;
     }
 
+    public function showLandingPage(): bool
+    {
+        return true;
+    }
+
     public function withTitle(string $title): PostsViewModel
     {
         $this->title = $title;

@@ -7,7 +7,22 @@
 
 @component('layouts.app', [
     'title' => $title,
+    'showLandingPage' => $showLandingPage ?? null
 ])
+    <div class="border-primary border-b-2 text-black pt-1 pb-8 mb-6">
+        <h1 class="font-serif text-primary text-4xl font-bold">Aggregate: community driven content</h1>
+
+        <div class="font-serif mt-6 text-lg leading-normal">
+            <p>
+                Aggregate will search the web for quality content so you don't have to.
+            </p>
+
+            <p>
+                Are you a content creator? <a href="" class="link">Submit your feed</a>.
+            </p>
+        </div>
+    </div>
+
     <div class="flex items-baseline justify-between">
         <nav class="text-sm text-grey-darker leading-normal md:pt-2 h-12 flex items-center justify-between border-t md:border-t-0 border-b border-grey-lighter w-full">
             <ul class="flex w-full">

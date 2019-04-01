@@ -36,8 +36,10 @@
 
             <nav class="{{ $fullWidth ?? null ? '' : 'md:w-1/3' }} md:pr-12 flex md:flex-col items-start justify-between relative">
                 <header class="h-12 mt:py-2 md:mb-8 flex items-center md:sticky pin-t">
-                    <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
-                    <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
+                    @if(!isset($showLandingPage))
+                        <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
+                        <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
+                    @endif
                 </header>
 
                 <div class="md:sticky md:b-4 mt-4 text-right md:text-left mb-8 md:mb-0">

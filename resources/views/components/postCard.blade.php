@@ -33,6 +33,12 @@
                 @endif
             @endif
 
+            @if($post->tags->isEmpty())
+                <div class="inline ml-1">
+                    <post-vote :user="$user" :post="$post"></post-vote>
+                </div>
+            @endif
+
             <div class="post-actions">
                 @if ($user)
                     @if(! $user->hasMuted($post->source))
@@ -60,9 +66,11 @@
                         <tag :tag="$tag" class="mr-2"></tag>
                     @endforeach
                 </p>
-            @endif
 
-            <post-vote :user="$user" :post="$post"></post-vote>
+                <div class="ml-1">
+                    <post-vote :user="$user" :post="$post"></post-vote>
+                </div>
+            @endif
         </div>
     </div>
 </article>
