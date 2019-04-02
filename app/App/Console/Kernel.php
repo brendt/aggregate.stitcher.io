@@ -17,8 +17,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule
             ->command(SyncSourcesCommand::class)
-            ->everyMinute()
-            ->withoutOverlapping(60);
+            ->hourly();
 
         $schedule
             ->command(SyncPostCountCommand::class)
