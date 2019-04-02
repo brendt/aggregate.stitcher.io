@@ -1,6 +1,7 @@
 <form
     action="{{ $action }}"
     method="post"
+    class="{{ $formClass ?? null }}"
 >
     @csrf
 

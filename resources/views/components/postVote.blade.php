@@ -3,6 +3,7 @@
         :action="action([\App\Http\Controllers\VotesController::class, 'delete'], $post)"
         data-done="updateVote"
         class="delete-vote-button mt-1/2"
+        form-class="inline"
         title="Remove your upvote"
     >
         <upvote-icon/>
@@ -14,6 +15,7 @@
         :action="action([\App\Http\Controllers\VotesController::class, 'store'], $post)"
         data-done="updateVote"
         class="add-vote-button mt-1/2"
+        form-class="inline"
         title="Show your support, give an upvote"
     >
         <upvote-icon/>
