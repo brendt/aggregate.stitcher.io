@@ -46,7 +46,7 @@ final class PostsController
         $viewModel = (new PostsViewModel($posts, $request->user()))
             ->withTopicSlug($request->getTopicSlug())
             ->withTagSlug($request->getTagSlug())
-            ->withTitle(__('All'))
+            ->withTitle(__('Discover'))
             ->view('posts.index');
 
         return $viewModel;

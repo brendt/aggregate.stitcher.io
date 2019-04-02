@@ -18,7 +18,7 @@
                             action([\App\Http\Controllers\PostsController::class, 'all'])
                         ]"
                     >
-                        {{ __('All') }}
+                        {{ __('Discover') }}
                     </active-link>
                 </li>
                 <li class="mr-6">

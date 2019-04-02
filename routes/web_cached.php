@@ -4,7 +4,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\PrivacyController;
 
-Route::get('/all', [PostsController::class, 'all']);
+Route::get('/discover', [PostsController::class, 'all']);
 Route::get('latest', [PostsController::class, 'latest']);
 Route::get('top', [PostsController::class, 'top']);
 Route::get('topic/{topic}', [PostsController::class, 'topic']);
