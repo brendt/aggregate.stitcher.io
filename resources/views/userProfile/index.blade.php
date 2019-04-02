@@ -1,12 +1,9 @@
-@component('layouts.app', [
+@component('layouts.user', [
     'title' => __('My profile')
 ])
-
     <heading>{{ __('Edit my Profile') }}</heading>
 
-
-    <form-component :action="action([\App\Http\Controllers\UserProfileController::class, 'update'])">
-
+    <form-component :action="action([\App\Http\Controllers\UserProfileController::class, 'update'])" class="mt-4">
         <text-field
             name="password"
             type="password"

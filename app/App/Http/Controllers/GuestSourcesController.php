@@ -12,6 +12,12 @@ final class GuestSourcesController
 {
     public function index()
     {
+        $user = current_user();
+
+        if ($user) {
+            return redirect()->action([UserSourcesController::class, 'index']);
+        }
+
         return (new GuestSourceViewModel())->view('guestSources.form');
     }
 

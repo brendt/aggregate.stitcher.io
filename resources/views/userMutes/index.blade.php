@@ -3,7 +3,7 @@
     /** @var \Domain\Mute\Models\Mute[] $mutes */
 @endphp
 
-@component('layouts.app', [
+@component('layouts.user', [
     'title' => __('Mutes'),
 ])
     <heading>Mutes</heading>

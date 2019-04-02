@@ -3,7 +3,7 @@
 ])
     <div class="content">
         <h1 class="font-title text-2xl mt-4 mb-8">
-            {{ __('Suggest a blog') }}
+            {{ __('Suggest a feed') }}
         </h1>
 
         <p>

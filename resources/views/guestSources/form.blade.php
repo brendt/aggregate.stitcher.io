@@ -2,15 +2,21 @@
     'title' => __('Make a suggestion'),
 ])
     <h1 class="font-title text-2xl mt-4 mb-8">
-        {{ __('Suggest a blog') }}
+        {{ __('Suggest a feed') }}
     </h1>
 
     <div class="content">
         <p>
-            {{ __('
-                Do you know of a good blog that definitely should be added on aggregate?
-                Leave your suggestion here!
-            ') }}
+            Are you a content creator yourself?
+            Here's a few things you should know before adding your feed on aggregate:
+        </p>
+
+        <content-disclaimer></content-disclaimer>
+
+        <p>
+            If you'd like to make full use of the platform,
+            it's recommended to <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">register an account</a> before adding your feed.
+            If you want to suggest a blog anonymously, you can use the form below.
         </p>
     </div>
 
@@ -20,11 +26,17 @@
     >
         <text-field
             name="url"
-            :label="__('Blog URL')"
+            :label="__('URL')"
             autofocus
         ></text-field>
 
+        <small>
+            Don't worry about finding the correct RSS url,
+            we'll find it for you as long as you provide an existing URL to a blog.
+        </small>
+
         <select-field
+            class="mt-2"
             name="topic_ids[]"
             :label="__('This blog is about')"
             :options="$topicOptions"
@@ -32,7 +44,7 @@
 
         <div class="flex justify-between items-center mt-2">
             <submit-button>
-                {{ __('Make suggestion!') }}
+                {{ __('Submit') }}
             </submit-button>
         </div>
     </form-component>

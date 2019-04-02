@@ -1,5 +1,6 @@
 .content {
     --content-line-height: 1.5em;
+    @apply .mt-6 .leading-normal;
 }
 
 .content h2 {

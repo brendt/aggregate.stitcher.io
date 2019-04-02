@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\PostsController;
 use App\Http\Middleware\PageCacheMiddleware;
+use App\Http\Middleware\RedirectToUserFeedMiddleware;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
@@ -54,6 +56,14 @@ class RouteServiceProvider extends ServiceProvider
             PageCacheMiddleware::class,
         ])
             ->group(base_path('routes/web_cached.php'));
+
+        Route::middleware([
+            'web',
+            RedirectToUserFeedMiddleware::class,
+            PageCacheMiddleware::class,
+        ])->group(function () {
+            Route::get('/', [PostsController::class, 'index']);
+        });
 
         Route::middleware('web')
             ->group(base_path('routes/web.php'));

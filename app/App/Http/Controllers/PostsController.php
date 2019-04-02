@@ -20,6 +20,23 @@ final class PostsController
 {
     public function index(
         PostIndexRequest $request,
+        TopPostsQuery $query
+    ) {
+        $posts = $query->paginate(5);
+
+        $posts->appends($request->except('page'));
+
+        $viewModel = (new PostsViewModel($posts, $request->user()))
+            ->withTopicSlug($request->getTopicSlug())
+            ->withTagSlug($request->getTagSlug())
+            ->withTitle(__('All'))
+            ->view('home.index');
+
+        return $viewModel;
+    }
+
+    public function all(
+        PostIndexRequest $request,
         AllPostsQuery $query
     ) {
         $posts = $query->paginate();

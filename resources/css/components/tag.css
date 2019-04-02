@@ -3,17 +3,17 @@
     cursor: pointer;
     display: inline-flex;
     align-items: center;
+    --badge-size: 8px;
+    --tag-color: #fff;
 }
 
 .tag:before {
-    --size: 8px;
-
     content: '';
-    width: var(--size);
-    height: var(--size);
+    width: var(--badge-size);
+    height: var(--badge-size);
     margin-right: 0.4em;
     transform: translateY(-1px);
     display: inline-block;
     background-color: var(--tag-color);
-    border-radius: 3px;
+    border-radius: 4px;
 }

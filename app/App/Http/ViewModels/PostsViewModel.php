@@ -29,17 +29,18 @@ final class PostsViewModel extends ViewModel
     /** @var string|null */
     private $sourceWebsite;
 
+    /** @var Tag|null */
+    private $tag;
+
+    /** @var Topic|null */
+    private $topic;
+
     public function __construct(
         LengthAwarePaginator $posts,
         ?User $user = null
     ) {
         $this->posts = $posts;
         $this->user = $user;
-    }
-
-    public function showLandingPage(): bool
-    {
-        return true;
     }
 
     public function withTitle(string $title): PostsViewModel
@@ -53,12 +54,20 @@ final class PostsViewModel extends ViewModel
     {
         $this->topicSlug = $topicSlug;
 
+        if ($this->topicSlug) {
+            $this->topic = Topic::whereSlug($this->topicSlug)->first();
+        }
+
         return $this;
     }
 
     public function withTagSlug(?string $tagSlug): PostsViewModel
     {
         $this->tagSlug = $tagSlug;
+
+        if ($this->tagSlug) {
+            $this->tag = Tag::whereSlug($this->tagSlug)->first();
+        }
 
         return $this;
     }
@@ -73,6 +82,11 @@ final class PostsViewModel extends ViewModel
     public function user(): ?User
     {
         return $this->user;
+    }
+
+    public function tag(): ?Tag
+    {
+        return $this->tag;
     }
 
     public function posts(): LengthAwarePaginator

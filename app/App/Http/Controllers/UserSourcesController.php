@@ -40,6 +40,13 @@ final class UserSourcesController
         return redirect()->action([self::class, 'index']);
     }
 
+    public function confirmDelete(User $user)
+    {
+        return view('userSources.delete', [
+            'source' => $user->getPrimarySource(),
+        ]);
+    }
+
     public function delete(
         User $user,
         DeleteSourceAction $deleteSourceAction
