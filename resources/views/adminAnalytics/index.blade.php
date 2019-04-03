@@ -36,10 +36,10 @@
                                     {{ $source->getName() }}
                                 </a>
                             </td>
-                            <td class="text-right">
+                            <td class="text-right font-mono">
                                 {{ $source->view_count }}
                             </td>
-                            <td class="text-right">
+                            <td class="text-right font-mono">
                                 {{ $source->vote_count }}
                             </td>
                         </tr>
@@ -54,19 +54,19 @@
                     <tbody>
                         <tr>
                             <td>{{ __('Total Views') }}</td>
-                            <td class="text-right">{{ $totalViewCount }}</td>
+                            <td class="text-right font-mono">{{ $totalViewCount }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Total Votes') }}</td>
-                            <td class="text-right">{{ $totalVoteCount }}</td>
+                            <td class="text-right font-mono">{{ $totalVoteCount }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Views / Day (Last month)') }}</td>
-                            <td class="text-right">{{ $averageViewsPerDay }}</td>
+                            <td class="text-right font-mono">{{ $averageViewsPerDay }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Day (Last month)') }}</td>
-                            <td class="text-right">{{ $averageVotesPerDay }}</td>
+                            <td class="text-right font-mono">{{ $averageVotesPerDay }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -77,15 +77,15 @@
                     <tbody>
                         <tr>
                             <td>{{ __('Avg. Views / Source') }}</td>
-                            <td class="text-right">{{ $averageViewsPerSource }}</td>
+                            <td class="text-right font-mono">{{ $averageViewsPerSource }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Source') }}</td>
-                            <td class="text-right">{{ $averageVotesPerSource }}</td>
+                            <td class="text-right font-mono">{{ $averageVotesPerSource }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Posts / Source') }}</td>
-                            <td class="text-right">{{ $averagePostsPerSource }}</td>
+                            <td class="text-right font-mono">{{ $averagePostsPerSource }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -96,11 +96,11 @@
                     <tbody>
                         <tr>
                             <td>{{ __('Avg. Views / Post') }}</td>
-                            <td class="text-right">{{ $averageViewsPerPost }}</td>
+                            <td class="text-right font-mono">{{ $averageViewsPerPost }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Post') }}</td>
-                            <td class="text-right">{{ $averageVotesPerPost }}</td>
+                            <td class="text-right font-mono">{{ $averageVotesPerPost }}</td>
                         </tr>
                     </tbody>
                 </table>
