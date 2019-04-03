@@ -4,7 +4,7 @@
 ])
     <nav class="bg-grey-lighter p-3 pt-4 flex">
         <active-link
-            :href="action([\App\Http\Controllers\AdminAnalyticsController::class, 'index'])"
+            :href="action([\App\Http\Controllers\AdminAnalyticsController::class, 'index'], ['sort' => '-view_count'])"
         >{{ __('Analytics') }}</active-link>
 
         <active-link
