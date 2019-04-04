@@ -17,12 +17,12 @@
                         <th>{{ __('Source') }}</th>
                         <th class="text-right">
                             <sort-link name="view_count">
-                                {{ __('View count') }}
+                                {{ __('Views') }}
                             </sort-link>
                         </th>
                         <th class="text-right">
                             <sort-link name="vote_count">
-                                {{ __('Vote count') }}
+                                {{ __('Votes') }}
                             </sort-link>
                         </th>
                     </tr>
@@ -76,8 +76,8 @@
                 <table class="table thin">
                     <tbody>
                         <tr>
-                            <td>{{ __('Avg. Views / Source') }}</td>
-                            <td class="text-right font-mono text-sm">{{ $averageViewsPerSource }}</td>
+                            <td>{{ __('Avg. Views / Source (Last month)') }}</td>
+                            <td class="text-right font-mono text-sm">{{ $averageViewsPerSourcePerMonth }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Source') }}</td>
