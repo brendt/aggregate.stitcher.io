@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Str;
 use Support\HasUuid;
 
 class Post extends Model implements Tweetable
@@ -207,6 +208,10 @@ class Post extends Model implements Tweetable
 
     public function getFullUrl(): string
     {
+        if (Str::startsWith($this->url, 'http')) {
+            return $this->url;
+        }
+
         return $this->source->getFullPath($this->url);
     }
 }
