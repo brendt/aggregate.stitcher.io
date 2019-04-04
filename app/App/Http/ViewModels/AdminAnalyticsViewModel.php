@@ -98,7 +98,7 @@ final class AdminAnalyticsViewModel extends ViewModel
             return $total + $data->count;
         }, 0);
 
-        return round($totalViews / count($countPerSource), 3);
+        return round($totalViews / count($countPerSource));
     }
 
     public function averageViewsPerPost(): float
