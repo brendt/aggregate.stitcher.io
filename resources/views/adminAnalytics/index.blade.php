@@ -77,7 +77,7 @@
                     <tbody>
                         <tr>
                             <td>{{ __('Avg. Views / Source (Last month)') }}</td>
-                            <td class="text-right font-mono text-sm">{{ $averageViewsPerSourcePerMonth }}</td>
+                            <td class="text-right font-mono text-sm">{{ $averageViewsPerSourceLastMonth }}</td>
                         </tr>
                         <tr>
                             <td>{{ __('Avg. Votes / Source') }}</td>
@@ -112,8 +112,20 @@
                 <source-chart :views-per-day="$viewsPerDay" height="175"></source-chart>
             </div>
 
-            <div class="mt-2 lg-max:hidden">
-                <source-chart :votes-per-day="$votesPerDay" height="175"></source-chart>
+            <div class="flex">
+                <div class="mt-2 lg-max:hidden">
+                    <source-chart :votes-per-day="$votesPerDay" height="300"></source-chart>
+                </div>
+
+                <div class="mt-2 lg-max:hidden">
+                    <line-chart
+                        :data="$averageViewsPerSourcePerMonth"
+                        label="Average views per month"
+                        background-color="rgba(135, 149, 10, .2)"
+                        border-color="rgba(135, 149, 10, 1)"
+                        height="300"
+                    ></line-chart>
+                </div>
             </div>
         </div>
 

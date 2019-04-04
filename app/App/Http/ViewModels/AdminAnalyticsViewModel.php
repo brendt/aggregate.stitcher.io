@@ -78,7 +78,7 @@ final class AdminAnalyticsViewModel extends ViewModel
         return round($this->totalViewCount / $this->totalSourceCount);
     }
 
-    public function averageViewsPerSourcePerMonth(): float
+    public function averageViewsPerSourceLastMonth(): float
     {
         $date = now()->subDays(30)->toDateTimeString();
 
@@ -99,6 +99,34 @@ final class AdminAnalyticsViewModel extends ViewModel
         }, 0);
 
         return round($totalViews / count($countPerSource));
+    }
+
+    public function averageViewsPerSourcePerMonth(): array
+    {
+        $countsPerMonth = collect(DB::select(<<<SQL
+            SELECT COUNT(*) AS count, DATE_FORMAT(views.created_at, "%Y-%m") as month, sources.id
+            
+            FROM views
+                INNER JOIN posts ON posts.id = views.post_id
+                INNER JOIN sources ON sources.id = posts.source_id
+                
+            GROUP BY 
+                DATE_FORMAT(views.created_at, "%Y-%m"),
+                sources.id
+        SQL));
+
+        $averagePerMonth = $countsPerMonth->groupBy('month');
+
+        /** @var \Illuminate\Support\Collection $perMonth */
+        foreach ($averagePerMonth as $month => $perMonth) {
+            $totalPerMonth = $perMonth->reduce(function (int $total, $data) {
+                return $total + $data->count;
+            }, 0);
+
+            $averagePerMonth[$month] = round($totalPerMonth / $perMonth->count());
+        }
+
+        return $averagePerMonth->toArray();
     }
 
     public function averageViewsPerPost(): float
