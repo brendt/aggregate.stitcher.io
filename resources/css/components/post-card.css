@@ -15,7 +15,3 @@
 .post-card:hover .post-actions {
     display: inline-block;
 }
-
-.vote-count[data-vote-count="0"] {
-    display: none;
-}

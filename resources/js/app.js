@@ -56,7 +56,7 @@ const actionButtonHandlers = {
         }
 
         for (let voteCounter of voteCounters) {
-            voteCounter.innerHTML = data.vote_count;
+            voteCounter.innerHTML = data.vote_count > 0 ? data.vote_count : 'vote';
             voteCounter.setAttribute('data-vote-count', data.vote_count);
         }
     },
