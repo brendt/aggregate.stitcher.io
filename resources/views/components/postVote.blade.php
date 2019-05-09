@@ -25,6 +25,6 @@
 @else
     <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
         <upvote-icon></upvote-icon>
-        <span class="vote-count ml-1 text-sm">{{ $post->vote_count ?: null }}</span>
+        <span class="vote-count ml-1 text-sm text-grey-dark">{{ $post->vote_count ?: 'vote' }}</span>
     </a>
 @endif
