@@ -208,10 +208,12 @@ class Post extends Model implements Tweetable
 
     public function getFullUrl(): string
     {
-        if (Str::startsWith($this->url, 'http')) {
-            return $this->url;
+        $url = trim($this->url);
+
+        if (Str::startsWith($url, 'http')) {
+            return $url;
         }
 
-        return $this->source->getFullPath($this->url);
+        return $this->source->getFullPath($url);
     }
 }
