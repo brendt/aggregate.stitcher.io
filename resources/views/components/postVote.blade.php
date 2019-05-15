@@ -8,7 +8,7 @@
     >
         <upvote-icon/>
 
-        <span class="vote-count ml-1 text-sm text-grey-dark" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count }}</span>
+        <span class="vote-count ml-1 text-sm text-grey-darkest" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count }}</span>
     </ajax-button>
 
     <ajax-button
@@ -20,11 +20,11 @@
     >
         <upvote-icon/>
 
-        <span class="vote-count mr-1 text-sm text-grey-dark" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count ?: 'vote' }}</span>
+        <span class="vote-count mr-1 text-sm text-grey-darkest" data-vote-count="{{ $post->vote_count }}">{{ $post->vote_count ?: 'vote' }}</span>
     </ajax-button>
 @else
     <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
         <upvote-icon></upvote-icon>
-        <span class="vote-count ml-1 text-sm text-grey-dark">{{ $post->vote_count ?: 'vote' }}</span>
+        <span class="vote-count ml-1 text-sm text-grey-darkest">{{ $post->vote_count ?: 'vote' }}</span>
     </a>
 @endif
