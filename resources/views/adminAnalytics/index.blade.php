@@ -112,20 +112,18 @@
                 <source-chart :views-per-day="$viewsPerDay" height="175"></source-chart>
             </div>
 
-            <div class="flex">
-                <div class="mt-2 lg-max:hidden">
-                    <source-chart :votes-per-day="$votesPerDay" height="300"></source-chart>
-                </div>
+            <div class="mt-2 lg-max:hidden">
+                <line-chart
+                    :data="$averageViewsPerSourcePerMonth"
+                    label="Average views per month"
+                    background-color="rgba(135, 149, 10, .2)"
+                    border-color="rgba(135, 149, 10, 1)"
+                    height="175"
+                ></line-chart>
+            </div>
 
-                <div class="mt-2 lg-max:hidden">
-                    <line-chart
-                        :data="$averageViewsPerSourcePerMonth"
-                        label="Average views per month"
-                        background-color="rgba(135, 149, 10, .2)"
-                        border-color="rgba(135, 149, 10, 1)"
-                        height="300"
-                    ></line-chart>
-                </div>
+            <div class="mt-2 lg-max:hidden">
+                <source-chart :votes-per-day="$votesPerDay" height="175"></source-chart>
             </div>
         </div>
 
