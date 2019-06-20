@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Rules\UniqueSourceRule;
+use App\Rules\SupportedLanguage;
 
 class SourceRequest extends Request
 {
@@ -19,6 +20,11 @@ class SourceRequest extends Request
                 'string',
                 new UniqueSourceRule($primarySource ? $primarySource->id : null),
             ],
+            'language' => [
+                'string',
+                'nullable',
+                new SupportedLanguage(),
+            ]
         ];
     }
 }

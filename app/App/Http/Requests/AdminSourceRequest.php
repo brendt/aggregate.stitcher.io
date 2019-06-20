@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\SupportedLanguage;
+
 class AdminSourceRequest extends SourceRequest
 {
     public function rules(): array
@@ -11,6 +13,11 @@ class AdminSourceRequest extends SourceRequest
                 'required',
                 'string',
                 'unique:sources,url',
+            ],
+            'language' => [
+                'string',
+                'nullable',
+                new SupportedLanguage(),
             ],
         ];
     }
