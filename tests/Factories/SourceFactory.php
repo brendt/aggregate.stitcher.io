@@ -34,7 +34,7 @@ final class SourceFactory
             return User::whereEmail($this->email)->first();
         });
 
-        event(new CreateSourceEvent($this->url, $user->uuid, true));
+        event(new CreateSourceEvent($this->url, null, $user->uuid, true));
 
         return Source::whereUrl($this->url)->first();
     }

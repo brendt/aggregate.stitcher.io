@@ -3,7 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Rules\UniqueSourceRule;
-use App\Rules\SupportedLanguage;
+use App\Http\Rules\SupportedLanguage;
 
 class SourceRequest extends Request
 {

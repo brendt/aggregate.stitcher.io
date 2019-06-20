@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\SupportedLanguage;
+use App\Http\Rules\SupportedLanguage;
 
 class AdminSourceRequest extends SourceRequest
 {
