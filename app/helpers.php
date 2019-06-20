@@ -96,3 +96,8 @@ function is_link_active(string $href): bool
 
     return  $uriPath === $hrefPath;
 }
+
+function get_supported_languages(): array
+{
+    return json_decode(file_get_contents(base_path('app/languages.json')), true);
+}
