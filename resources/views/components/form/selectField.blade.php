@@ -12,7 +12,6 @@
         <select
                 id="{{ $name }}"
                 name="{{ $name }}"
-                value="{{ $value ?? old($name) ?? $initialValue ?? null }}"
 
                 {{ ($required ?? null) ? 'required' : '' }}
                 {{ ($autofocus ?? null) ? 'autofocus' : '' }}

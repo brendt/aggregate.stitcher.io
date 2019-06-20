@@ -34,6 +34,6 @@ class UpdateSourceEvent extends DataTransferObject implements ShouldBeStored
 
     public function hasChanges(Source $source): bool
     {
-        return $source->url !== $this->url;
+        return $source->url !== $this->url || $source->language !== $this->language;
     }
 }

@@ -45,6 +45,11 @@
                     </sort-link>
                 </th>
                 <th class="text-right">
+                    <sort-link name="language">
+                        {{ __('Language') }}
+                    </sort-link>
+                </th>
+                <th class="text-right">
                     <sort-link name="post_count">
                         {{ __('Posts') }}
                     </sort-link>
@@ -85,6 +90,9 @@
                             "
                             href="{{ $source->website }}"
                         >{{ $source->website }}</a>
+                    </td>
+                    <td class="text-right">
+                        {{ get_language($source->language, 'name') }}
                     </td>
                     <td class="text-right">
                         {{ $source->post_count }}
