@@ -5,6 +5,7 @@ use Faker\Factory;
 use Faker\Generator;
 use Spatie\QueryString\QueryString;
 use Support\Filterable;
+use Illuminate\Support\Facades\Cache;
 
 function locale()
 {
@@ -99,5 +100,7 @@ function is_link_active(string $href): bool
 
 function get_supported_languages(): array
 {
-    return json_decode(file_get_contents(base_path('app/languages.json')), true);
+    return Cache::remember('support_languages', 60 * 24, function() {
+        return json_decode(file_get_contents(base_path('app/languages.json')), true);
+    });
 }
