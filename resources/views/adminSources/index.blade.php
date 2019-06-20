@@ -19,6 +19,17 @@
                 :label="__('RSS url')"
             ></text-field>
 
+            <div class="ml-3">
+                <select-field
+                        name="language"
+                        :label="__('Language')"
+                >
+                    @foreach(get_supported_languages() as $code => $language)
+                        <option value="{{ $code }}">{{ $language['native'] }}</option>
+                    @endforeach
+                </select-field>
+            </div>
+
             <submit-button class="ml-4 button-small">
                 {{ __('Add source') }}
             </submit-button>

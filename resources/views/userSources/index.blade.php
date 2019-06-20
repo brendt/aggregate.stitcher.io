@@ -25,6 +25,16 @@
             :initial-value="$url"
         ></text-field>
 
+        <select-field
+            name="language"
+            :label="__('Language')"
+            :initial-value="$language"
+        >
+            @foreach(get_supported_languages() as $code => $language)
+                <option value="{{ $code }}">{{ $language['native'] }}</option>
+            @endforeach
+        </select-field>
+
         @if($source && $source->isInactive())
             <p class="mt-3 text-green">
                 {{ __("Your source is inactive at the moment. You'll recieve an email when it's activated.") }}

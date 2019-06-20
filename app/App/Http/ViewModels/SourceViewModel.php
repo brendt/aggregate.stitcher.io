@@ -25,4 +25,9 @@ class SourceViewModel extends ViewModel
     {
         return optional($this->source())->url;
     }
+
+    public function language(): ?string
+    {
+        return optional($this->source())->language;
+    }
 }
