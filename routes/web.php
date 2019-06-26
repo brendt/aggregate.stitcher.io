@@ -7,7 +7,6 @@ use App\Http\Controllers\AdminTagsController;
 use App\Http\Controllers\AdminTopicsController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\GuestSourcesController;
@@ -21,7 +20,6 @@ use App\Http\Controllers\UserVerificationController;
 use App\Http\Controllers\VotesController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\VerifiedUserMiddleware;
-use Illuminate\Http\Response;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);
@@ -33,13 +31,7 @@ Route::post('password/email', [ForgotPasswordController::class, 'sendResetLinkEm
 Route::get('password/reset/{token}', [ResetPasswordController::class, 'showResetForm'])->name('password.reset');
 Route::post('password/reset', [ResetPasswordController::class, 'reset'])->name('password.update');
 
-Route::get('rss', function () {
-    return new Response(
-        file_get_contents(storage_path('mock/rss.xml')),
-        200,
-        ['Content-Type' => 'application/xml']
-    );
-});
+Route::feeds();
 
 Route::middleware('auth')->prefix('profile')->group(function () {
 

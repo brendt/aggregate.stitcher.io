@@ -16,9 +16,11 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Str;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 use Support\HasUuid;
 
-class Post extends Model implements Tweetable
+class Post extends Model implements Tweetable, Feedable
 {
     use HasUuid, HasTweets;
 
@@ -215,5 +217,16 @@ class Post extends Model implements Tweetable
         }
 
         return $this->source->getFullPath($url);
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id($this->id)
+            ->title($this->title)
+            ->summary($this->teaser)
+            ->updated($this->updated_at)
+            ->link($this->getFullUrl())
+            ->author($this->source->website);
     }
 }
