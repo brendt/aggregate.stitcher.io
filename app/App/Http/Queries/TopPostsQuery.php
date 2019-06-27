@@ -9,7 +9,7 @@ class TopPostsQuery extends PostsQuery
 {
     public function __construct(Request $request)
     {
-        $query = Post::query()->orderByDesc('view_count_weekly');
+        $query = Post::query()->orderByDesc('popularity_index');
 
         parent::__construct($query, $request);
     }

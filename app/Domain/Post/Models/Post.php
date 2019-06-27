@@ -125,6 +125,11 @@ class Post extends Model implements Tweetable, Feedable
         return $builder->orWhereDoesntHave('tweets');
     }
 
+    public function scopeWithActivePopularityIndex(Builder $builder): Builder
+    {
+        return $builder->where('popularity_index', '>=', 0);
+    }
+
     public function getTagById(int $tagId): ?Tag
     {
         foreach ($this->tags as $tag) {
@@ -228,5 +233,14 @@ class Post extends Model implements Tweetable, Feedable
             ->updated($this->updated_at)
             ->link($this->getFullUrl())
             ->author($this->source->website);
+    }
+
+    public function savePopularityIndex(int $popularityIndex): Post
+    {
+        $this->popularity_index = $popularityIndex;
+
+        $this->save();
+
+        return $this;
     }
 }

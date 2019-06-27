@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SyncPopularityIndexCommand;
 use App\Console\Commands\SyncPostCountCommand;
 use App\Console\Commands\SyncSourcesCommand;
 use App\Console\Commands\TweetPostCommand;
@@ -29,6 +30,10 @@ class Kernel extends ConsoleKernel
                 ->command(TweetPostCommand::class)
                 ->dailyAt($hour);
         }
+
+        $schedule
+            ->command(SyncPopularityIndexCommand::class)
+            ->daily();
     }
 
     protected function commands(): void
