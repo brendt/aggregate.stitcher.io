@@ -24,12 +24,18 @@ final class SyncPopularityAction
             return $post->savePopularityIndex(-1);
         }
 
-        $ageIndex = round($post->created_at->diffInDays(now()) / 5);
+        $ageIndex = -1 * ($post->created_at->diffInDays(now()) / 6);
 
-        $viewIndex = $post->view_count_weekly / $this->averageViewCount;
+        $viewIndex = $post->view_count / $this->averageViewCount;
 
-        $voteIndex = $post->vote_count;
+        $voteIndex = $post->vote_count * 1.5;
 
-        return $post->savePopularityIndex($ageIndex + $viewIndex + $voteIndex);
+        $popularityIndex = ($ageIndex + $viewIndex + $voteIndex) * 100;
+
+        if ($popularityIndex < 0) {
+            $popularityIndex = 0;
+        }
+
+        return $post->savePopularityIndex($popularityIndex);
     }
 }
