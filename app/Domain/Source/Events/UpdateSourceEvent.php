@@ -18,7 +18,7 @@ class UpdateSourceEvent extends DataTransferObject implements ShouldBeStored
     /** @var string|null */
     public $language;
 
-    public function __construct(string $source_uuid, string $url, ?string $language)
+    public function __construct(string $source_uuid, string $url, ?string $language = null)
     {
         $this->source_uuid = $source_uuid;
         $this->url = $url;

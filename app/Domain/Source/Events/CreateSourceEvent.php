@@ -20,11 +20,11 @@ class CreateSourceEvent extends DataTransferObject implements ShouldBeStored
     /** @var bool */
     public $is_active;
 
-    public function __construct(string $url, ?string $language, string $user_uuid, bool $is_active = false)
+    public function __construct(string $url, string $user_uuid, ?string $language = null, bool $is_active = false)
     {
         $this->url = $url;
-        $this->language = $language;
         $this->user_uuid = $user_uuid;
+        $this->language = $language;
         $this->is_active = $is_active;
     }
 
