@@ -10,13 +10,13 @@
         @endisset
 
         <select
-                id="{{ $name }}"
-                name="{{ $name }}"
+            id="{{ $name }}"
+            name="{{ $name }}"
 
-                {{ ($required ?? null) ? 'required' : '' }}
-                {{ ($autofocus ?? null) ? 'autofocus' : '' }}
+            {{ ($required ?? null) ? 'required' : '' }}
+            {{ ($autofocus ?? null) ? 'autofocus' : '' }}
 
-                class="outline-none p-2 rounded-sm bg-grey-lighter w-100"
+            class="outline-none p-2 rounded-sm bg-grey-lighter w-100"
         >
             <option value></option>
             {{ $slot }}
