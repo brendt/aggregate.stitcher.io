@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Rules\SupportedLanguage;
+use App\Http\Rules\SupportedLanguageRule;
 
 class AdminSourceRequest extends SourceRequest
 {
@@ -17,7 +17,7 @@ class AdminSourceRequest extends SourceRequest
             'language' => [
                 'string',
                 'nullable',
-                new SupportedLanguage(),
+                new SupportedLanguageRule(),
             ],
         ];
     }

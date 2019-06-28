@@ -5,7 +5,7 @@ namespace App\Http\Rules;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Arr;
 
-class SupportedLanguage implements Rule
+class SupportedLanguageRule implements Rule
 {
     public function __construct()
     {

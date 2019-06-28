@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Rules\SupportedLanguageRule;
 use App\Http\Rules\UniqueSourceRule;
-use App\Http\Rules\SupportedLanguage;
 
 class SourceRequest extends Request
 {
@@ -23,8 +23,8 @@ class SourceRequest extends Request
             'language' => [
                 'string',
                 'nullable',
-                new SupportedLanguage(),
-            ]
+                new SupportedLanguageRule(),
+            ],
         ];
     }
 }
