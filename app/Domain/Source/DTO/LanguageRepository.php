@@ -4,15 +4,23 @@ namespace Domain\Source\DTO;
 
 use Exception;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 
 final class LanguageRepository
 {
     /** @var Language[] */
     private $languages;
 
+    /**
+     * LanguageRepository constructor.
+     * @param string $path
+     * @throws Exception
+     */
     public function __construct(string $path)
     {
-        $contents = @file_get_contents($path);
+        $contents = Cache::remember("languages_contents:{$path}", 60 * 24, function () use ($path) {
+            return @file_get_contents($path);
+        });
 
         if (! $contents) {
             throw new Exception('Languages file not found');

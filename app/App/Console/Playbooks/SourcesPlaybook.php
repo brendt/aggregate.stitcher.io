@@ -37,7 +37,7 @@ final class SourcesPlaybook extends Playbook
                 return User::whereEmail($email)->first();
             });
 
-            event(new CreateSourceEvent($url, null, $user->uuid, true));
+            event(new CreateSourceEvent($url, $user->uuid, null, true));
 
             $output->writeln("- Created source {$url}");
         }
