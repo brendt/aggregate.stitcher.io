@@ -21,6 +21,7 @@ class Source extends Model implements Filterable, Muteable
 
     protected $casts = [
         'is_active' => 'boolean',
+        // @TODO: Cast language property to be `Language` object
     ];
 
     public static function boot()

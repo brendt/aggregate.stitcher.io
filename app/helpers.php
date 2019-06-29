@@ -97,25 +97,3 @@ function is_link_active(string $href): bool
 
     return  $uriPath === $hrefPath;
 }
-
-function get_supported_languages(): array
-{
-    return Cache::remember('support_languages', 60 * 24, function() {
-        return json_decode(file_get_contents(base_path('app/languages.json')), true);
-    });
-}
-
-function get_language(?string $language, string $key): ?string
-{
-    if(is_null($language)) {
-        return null;
-    }
-
-    $supportedLanguage = get_supported_languages();
-
-    if(!isset($supportedLanguage[$language][$key])) {
-        return null;
-    }
-
-    return $supportedLanguage[$language][$key];
-}

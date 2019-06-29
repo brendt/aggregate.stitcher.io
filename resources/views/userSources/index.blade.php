@@ -29,8 +29,8 @@
             name="language"
             :label="__('Language')"
         >
-            @foreach(get_supported_languages() as $key => $value)
-                <option value="{{ $key }}" {{ $language === $key ? 'selected' : '' }}>{{ $value['native'] }}</option>
+            @foreach($languages as $lang)
+                <option value="{{ $lang->getCode() }}" {{ $language === $lang->getCode() ? 'selected' : '' }}>{{ $lang->getNative() }}</option>
             @endforeach
         </select-field>
 

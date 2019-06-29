@@ -30,6 +30,6 @@ class CreateSourceEvent extends DataTransferObject implements ShouldBeStored
 
     public static function fromRequest(SourceRequest $request): CreateSourceEvent
     {
-        return new self($request->get('url'), $request->get('language'), $request->user()->uuid);
+        return new self($request->get('url'), $request->get('language'));
     }
 }

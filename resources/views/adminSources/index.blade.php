@@ -24,8 +24,8 @@
                         name="language"
                         :label="__('Language')"
                 >
-                    @foreach(get_supported_languages() as $code => $language)
-                        <option value="{{ $code }}">{{ $language['native'] }}</option>
+                    @foreach($languageRepository->all() as $lang)
+                        <option value="{{ $lang->getCode() }}" {{ old('language') === $lang->getCode() ? 'selected' : '' }}>{{ $lang->getNative() }}</option>
                     @endforeach
                 </select-field>
             </div>
@@ -92,7 +92,9 @@
                         >{{ $source->website }}</a>
                     </td>
                     <td class="text-right">
-                        {{ get_language($source->language, 'name') }}
+                        @if($source->language !== null)
+                            {{ $languageRepository->find($source->language)->getName() }}
+                        @endif
                     </td>
                     <td class="text-right">
                         {{ $source->post_count }}
