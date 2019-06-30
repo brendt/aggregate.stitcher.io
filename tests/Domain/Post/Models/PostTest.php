@@ -159,7 +159,7 @@ class PostTest extends TestCase
     }
 
     /** @test */
-    public function can_be_converted_to_feed_item()
+    public function can_be_converted_to_feed_item(): void
     {
         /** @var \Domain\Source\Models\Source $source */
         $source = factory(Source::class)->create();
