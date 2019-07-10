@@ -227,7 +227,7 @@ class Post extends Model implements Tweetable, Feedable
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()
-            ->id($this->id)
+            ->id($this->uuid)
             ->title($this->title)
             ->summary($this->teaser)
             ->updated($this->updated_at)
