@@ -33,7 +33,7 @@ class ProfileViewModel extends ViewModel
             [null => ''],
             $this->languageRepository->all()
                 ->reject(function (Language $language) {
-                    return array_key_exists($language->code, $this->user->languages);
+                    return $this->user->getLanguages()[$language->code] ?? false;
                 })
                 ->mapWithKeys(function (Language $language) {
                     return [$language->code => $language->name];
