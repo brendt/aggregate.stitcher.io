@@ -130,6 +130,20 @@ class Post extends Model implements Tweetable, Feedable
         return $builder->where('popularity_index', '>=', 0);
     }
 
+    public function scopeWhereLanguage(Builder $builder, string $language): Builder
+    {
+        return $builder->whereHas('source', function (Builder $builder) use ($language) {
+            return $builder->where('language', $language);
+        });
+    }
+
+    public function scopeWhereLanguageIn(Builder $builder, array $languages): Builder
+    {
+        return $builder->whereHas('source', function (Builder $builder) use ($languages) {
+            return $builder->whereIn('language', $languages);
+        });
+    }
+
     public function getTagById(int $tagId): ?Tag
     {
         foreach ($this->tags as $tag) {
