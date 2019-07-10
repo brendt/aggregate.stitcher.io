@@ -11,9 +11,11 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\GuestSourcesController;
 use App\Http\Controllers\PostsController;
+use App\Http\Controllers\PostTweetController;
 use App\Http\Controllers\SourceMutesController;
 use App\Http\Controllers\TagMutesController;
 use App\Http\Controllers\TopicsController;
+use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSourcesController;
 use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\UserVerificationController;
@@ -41,8 +43,10 @@ Route::middleware('auth')->prefix('profile')->group(function () {
         Route::get('sources/delete', [UserSourcesController::class, 'confirmDelete']);
         Route::post('sources/delete', [UserSourcesController::class, 'delete']);
 
-        Route::get('profile', [\App\Http\Controllers\UserProfileController::class, 'index']);
-        Route::post('profile', [\App\Http\Controllers\UserProfileController::class, 'update']);
+        Route::get('edit', [UserProfileController::class, 'index']);
+        Route::post('edit/password', [UserProfileController::class, 'updatePassword']);
+        Route::post('edit/languages', [UserProfileController::class, 'addLanguage']);
+        Route::get('edit/languages/remove', [UserProfileController::class, 'removeLanguage']);
     });
 
     Route::post('posts/{post}/add-vote', [VotesController::class, 'store']);
@@ -98,7 +102,7 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
         Route::post('/{topic}', [AdminTopicsController::class, 'update']);
     });
 
-    Route::post('posts/{post}/tweet', \App\Http\Controllers\PostTweetController::class);
+    Route::post('posts/{post}/tweet', PostTweetController::class);
 });
 
 Route::get('suggest-blog', [GuestSourcesController::class, 'index']);

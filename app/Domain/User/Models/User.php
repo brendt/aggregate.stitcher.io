@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Support\HasUuid;
 
 class User extends BaseUser
@@ -35,6 +36,7 @@ class User extends BaseUser
         'allow_emails' => 'boolean',
         'must_reset_password' => 'boolean',
         'password_updated_at' => 'datetime',
+        'languages' => 'array',
     ];
 
     public function sources(): HasMany
@@ -108,5 +110,10 @@ class User extends BaseUser
     public function isAdmin(): bool
     {
         return $this->is_admin === true;
+    }
+
+    public function getLanguages(): Collection
+    {
+        return collect((array) $this->languages);
     }
 }

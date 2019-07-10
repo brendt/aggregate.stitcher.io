@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -137,7 +138,7 @@ class Post extends Model implements Tweetable, Feedable
         });
     }
 
-    public function scopeWhereLanguageIn(Builder $builder, array $languages): Builder
+    public function scopeWhereLanguageIn(Builder $builder, Collection $languages): Builder
     {
         return $builder->whereHas('source', function (Builder $builder) use ($languages) {
             return $builder->whereIn('language', $languages);
