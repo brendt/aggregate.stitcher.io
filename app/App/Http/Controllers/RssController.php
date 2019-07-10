@@ -13,9 +13,12 @@ final class RssController
         Request $request,
         LastMonthPostsQuery $query
     ): Collection {
-        $tags = (array) $request->get('tags', $request->get('tag'));
+        $tags = collect((array) $request->get('tags', $request->get('tag')))
+            ->flatMap(function (string $tag) {
+                return explode(',', $tag);
+            });
 
-        if ($tags !== null) {
+        if ($tags->isNotEmpty()) {
             $tagCollection = Tag::whereIn('slug', $tags)->get();
 
             $query->whereTags($tagCollection);
