@@ -15,6 +15,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Support\Carbon;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -128,6 +129,20 @@ class Post extends Model implements Tweetable, Feedable
     public function scopeWithActivePopularityIndex(Builder $builder): Builder
     {
         return $builder->where('popularity_index', '>=', 0);
+    }
+
+    public function scopeWhereLanguage(Builder $builder, string $language): Builder
+    {
+        return $builder->whereHas('source', function (Builder $builder) use ($language) {
+            return $builder->where('language', $language);
+        });
+    }
+
+    public function scopeWhereLanguageIn(Builder $builder, Collection $languages): Builder
+    {
+        return $builder->whereHas('source', function (Builder $builder) use ($languages) {
+            return $builder->whereIn('language', $languages);
+        });
     }
 
     public function getTagById(int $tagId): ?Tag

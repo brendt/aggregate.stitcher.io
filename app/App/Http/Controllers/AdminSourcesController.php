@@ -7,6 +7,7 @@ use App\Http\Queries\AdminSourcesQuery;
 use App\Http\Requests\AdminSourceRequest;
 use App\Http\Requests\Request;
 use App\Http\ViewModels\AdminSourceViewModel;
+use Domain\Language\LanguageRepository;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
@@ -31,9 +32,9 @@ final class AdminSourcesController
         ]);
     }
 
-    public function edit(Source $source)
+    public function edit(Source $source, LanguageRepository $languageRepository)
     {
-        $viewModel = new AdminSourceViewModel($source);
+        $viewModel = new AdminSourceViewModel($source, $languageRepository);
 
         return $viewModel->view('adminSources.form');
     }

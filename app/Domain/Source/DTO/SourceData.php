@@ -24,6 +24,9 @@ final class SourceData extends DataTransferObject
     /** @var int[] */
     public $topic_ids = [];
 
+    /** @var string|null */
+    public $language;
+
     public static function fromRequest(
         SourceRequest $request,
         ?Source $source = null
@@ -32,6 +35,7 @@ final class SourceData extends DataTransferObject
             'url' => $request->getSourceUrl(),
             'is_active' => $source->is_active ?? false,
             'is_validated' => $source->is_validated ?? false,
+            'language' => $request->get('language'),
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
             'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
                 return (int) $id;
@@ -46,6 +50,7 @@ final class SourceData extends DataTransferObject
             'url' => $request->getSourceUrl(),
             'is_active' => (bool) $request->get('is_active'),
             'is_validated' => (bool) $request->get('is_validated'),
+            'language' => $request->get('language'),
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
             'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
                 return (int) $id;
@@ -59,9 +64,9 @@ final class SourceData extends DataTransferObject
             $source->url !== $this->url
             || $source->is_active !== $this->is_active
             || $source->is_validated !== $this->is_validated
+            || $source->language !== $this->language
             || $source->twitter_handle !== $this->twitter_handle
-            || $source->topics->pluck('id') !== $this->topic_ids
-            ;
+            || $source->topics->pluck('id') !== $this->topic_ids;
     }
 
     private static function formatTwitterHandle(?string $twitterHandle): ?string

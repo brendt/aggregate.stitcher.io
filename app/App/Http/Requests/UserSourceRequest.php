@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Rules\SupportedLanguageRule;
 use App\Http\Rules\UniqueSourceRule;
 
 class UserSourceRequest extends SourceRequest
@@ -24,6 +25,11 @@ class UserSourceRequest extends SourceRequest
                 'nullable',
                 'numeric',
                 'exists:topics,id'
+            ],
+            'language' => [
+                'string',
+                'nullable',
+                app(SupportedLanguageRule::class),
             ],
         ];
     }

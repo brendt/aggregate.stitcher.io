@@ -11,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 abstract class PostsQuery extends QueryBuilder
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post
+     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
      * @var \Illuminate\Http\Request $request
      */
     public function __construct(Builder $query, Request $request)
@@ -26,10 +26,15 @@ abstract class PostsQuery extends QueryBuilder
             ->distinct()
             ->select('posts.*');
 
+        /** @var \Domain\User\Models\User $user */
         $user = $request->user();
 
         if ($user) {
             $query->whereNotMuted($user);
+
+            if ($user->getLanguages()->isNotEmpty()) {
+                $query->whereLanguageIn($user->getLanguages());
+            }
         }
 
         parent::__construct($query, $request);
@@ -38,6 +43,7 @@ abstract class PostsQuery extends QueryBuilder
             ->allowedSorts(['date_created'])
             ->allowedFilters([
                 Filter::exact('tag', 'tags.slug'),
+                Filter::exact('language', 'source.language'),
                 Filter::exact('topic', 'topics.slug'),
                 Filter::exact('source', 'sources.website'),
                 Filter::custom('unread', new UnreadFilter($user)),

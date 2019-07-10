@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Rules\SupportedLanguageRule;
+
 class GuestSourceRequest extends SourceRequest
 {
     public function rules(): array
@@ -15,6 +17,11 @@ class GuestSourceRequest extends SourceRequest
                 'nullable',
                 'numeric',
                 'exists:topics,id'
+            ],
+            'language' => [
+                'string',
+                'nullable',
+                app(SupportedLanguageRule::class),
             ],
         ];
     }

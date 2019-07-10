@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewModels;
 
+use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Topic;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
@@ -10,14 +11,18 @@ use Illuminate\Support\Collection;
 use Spatie\Period\Period;
 use Spatie\ViewModels\ViewModel;
 
-class AdminSourceViewModel extends ViewModel
+final class AdminSourceViewModel extends ViewModel
 {
     /** @var \Domain\Source\Models\Source */
-    protected $source;
+    private $source;
 
-    public function __construct(Source $source)
+    /** @var \Domain\Language\LanguageRepository */
+    private $languageRepository;
+
+    public function __construct(Source $source, LanguageRepository $languageRepository)
     {
         $this->source = $source;
+        $this->languageRepository = $languageRepository;
     }
 
     public function source(): ?Source
@@ -87,5 +92,15 @@ class AdminSourceViewModel extends ViewModel
             ->get();
 
         return $votes->spreadForPeriod($period);
+    }
+
+    public function language(): ?string
+    {
+        return optional($this->source())->language;
+    }
+
+    public function languageOptions(): array
+    {
+        return (new LanguageViewModel($this->languageRepository))->languageOptions();
     }
 }
