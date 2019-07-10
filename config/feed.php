@@ -6,7 +6,7 @@ return [
     'feeds' => [
         'main' => [
             'items' => [
-                vsprintf('%s@%s', [RssController::class, 'feed'])
+                RssController::class . '@feed',
             ],
             'url' => '/rss',
             'title' => 'aggregate.stitcher.io',

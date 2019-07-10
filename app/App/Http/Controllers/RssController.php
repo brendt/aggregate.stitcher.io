@@ -13,9 +13,11 @@ final class RssController
         Request $request,
         LastMonthPostsQuery $query
     ): Collection {
-        $tags = $request->get('tag');
+        $tags = (array) $request->get('tags', $request->get('tag'));
+
         if ($tags !== null) {
             $tagCollection = Tag::whereIn('slug', $tags)->get();
+
             $query->whereTags($tagCollection);
         }
 
