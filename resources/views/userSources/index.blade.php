@@ -46,6 +46,14 @@
             :initial-value="$primaryTopicId"
         ></select-field>
 
+        <select-field
+            class="mt-2"
+            name="language"
+            :label="__('Language (optional)')"
+            :options="$languageOptions"
+            :initial-value="$language"
+        ></select-field>
+
         @if($source && $source->isInactive())
             <p class="mt-3 text-green">
                 {{ __("Your source is inactive at the moment. You'll receive an email when it's activated.") }}

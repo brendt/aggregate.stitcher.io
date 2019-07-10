@@ -36,6 +36,7 @@ final class CreateSourceAction
             'url' => $sourceData->url,
             'twitter_handle' => $sourceData->twitter_handle,
             'is_active' => $sourceData->is_active,
+            'language' => $sourceData->language,
         ]);
 
         $this->resolveTopicsAction->execute($source, $sourceData);

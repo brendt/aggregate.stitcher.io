@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\UserSourceRequest;
 use App\Http\ViewModels\SourceViewModel;
+use Domain\Language\LanguageRepository;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;
 use Domain\Source\Actions\UpdateSourceAction;
@@ -12,9 +13,9 @@ use Domain\User\Models\User;
 
 final class UserSourcesController
 {
-    public function index(User $user)
+    public function index(User $user, LanguageRepository $languageRepository)
     {
-        $viewModel = new SourceViewModel($user);
+        $viewModel = new SourceViewModel($user, $languageRepository);
 
         return $viewModel->view('userSources.index');
     }

@@ -51,6 +51,13 @@
                 :initial-value="$twitterHandle"
             ></text-field>
 
+            <select-field
+                name="language"
+                :label="__('Language')"
+                :initial-value="$language"
+                :options="$languageOptions"
+            ></select-field>
+
             <checkboxes-field
                 class="mt-2"
                 name="topic_ids[]"

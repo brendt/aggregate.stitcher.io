@@ -42,6 +42,13 @@
             :options="$topicOptions"
         ></select-field>
 
+        <select-field
+            class="mt-2"
+            name="language"
+            :label="__('Language (optional)')"
+            :options="$languageOptions"
+        ></select-field>
+
         <div class="flex justify-between items-center mt-2">
             <submit-button>
                 {{ __('Submit') }}

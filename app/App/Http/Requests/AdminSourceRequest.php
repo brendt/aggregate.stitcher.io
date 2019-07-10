@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Rules\SupportedLanguageRule;
+
 class AdminSourceRequest extends SourceRequest
 {
     public function rules(): array
@@ -15,6 +17,11 @@ class AdminSourceRequest extends SourceRequest
             'topics' => 'array',
             'is_active' => 'boolean',
             'is_validated' => 'boolean',
+            'language' => [
+                'string',
+                'nullable',
+                app(SupportedLanguageRule::class),
+            ],
         ];
     }
 }

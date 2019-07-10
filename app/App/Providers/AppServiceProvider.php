@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Abraham\TwitterOAuth\TwitterOAuth;
+use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
@@ -82,6 +83,10 @@ class AppServiceProvider extends ServiceProvider
                 config('services.twitter.access_token'),
                 config('services.twitter.access_token_secret')
             );
+        });
+
+        $this->app->singleton(LanguageRepository::class, function () {
+            return new LanguageRepository(__DIR__ . '/../../languages.json');
         });
     }
 }
