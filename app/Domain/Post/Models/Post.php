@@ -42,6 +42,10 @@ class Post extends Model implements Tweetable, Feedable
 
             return $post;
         });
+
+        self::saving(function (Post $post) {
+            $post->language = $post->source->language;
+        });
     }
 
     public function source(): BelongsTo
@@ -133,16 +137,12 @@ class Post extends Model implements Tweetable, Feedable
 
     public function scopeWhereLanguage(Builder $builder, string $language): Builder
     {
-        return $builder->whereHas('source', function (Builder $builder) use ($language) {
-            return $builder->where('language', $language);
-        });
+        return $builder->where('posts.language', $language);
     }
 
     public function scopeWhereLanguageIn(Builder $builder, Collection $languages): Builder
     {
-        return $builder->whereHas('source', function (Builder $builder) use ($languages) {
-            return $builder->whereIn('language', $languages);
-        });
+        return $builder->whereIn('posts.language', $languages);
     }
 
     public function getTagById(int $tagId): ?Tag
