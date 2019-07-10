@@ -43,7 +43,7 @@ abstract class PostsQuery extends QueryBuilder
             ->allowedSorts(['date_created'])
             ->allowedFilters([
                 Filter::exact('tag', 'tags.slug'),
-                Filter::exact('language', 'source.language'),
+                Filter::exact('language', 'posts.language'),
                 Filter::exact('topic', 'topics.slug'),
                 Filter::exact('source', 'sources.website'),
                 Filter::custom('unread', new UnreadFilter($user)),
