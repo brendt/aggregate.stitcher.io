@@ -1,14 +1,19 @@
 .tag {
-    background-color: var(--tag-color);
-    border-radius: 2px;
-    color: white;
+    @apply text-grey-darkest;
     cursor: pointer;
-    display: inline-block;
-    padding: 0.2em 0.5em 0.1em 0.5em;
-    transform: translateY(-0.05em) skew(-15deg);
+    display: inline-flex;
+    align-items: center;
+    --badge-size: 8px;
+    --tag-color: #fff;
 }
 
-.tag-inner {
+.tag:before {
+    content: '';
+    width: var(--badge-size);
+    height: var(--badge-size);
+    margin-right: 0.4em;
+    transform: translateY(-1px);
     display: inline-block;
-    transform: skew(15deg);
+    background-color: var(--tag-color);
+    border-radius: 4px;
 }

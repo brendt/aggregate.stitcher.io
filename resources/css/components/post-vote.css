@@ -14,12 +14,12 @@
     display: inline-block;
 }
 
-.heart-icon {
-    --heart-icon-color: #8795a1;
+.upvote-icon {
+    --upvote-icon-color: #8795a1;
 
-    fill: var(--heart-icon-color);
+    fill: var(--upvote-icon-color);
 }
 
-.voted-for .heart-icon {
-    --heart-icon-color: var(--red);
+.voted-for .upvote-icon {
+    --upvote-icon-color: var(--red);
 }

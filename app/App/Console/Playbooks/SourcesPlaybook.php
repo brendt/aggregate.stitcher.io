@@ -3,14 +3,29 @@
 namespace App\Console\Playbooks;
 
 use App\Console\Playbook;
-use Domain\Source\Events\CreateSourceEvent;
-use Domain\User\Events\CreateUserEvent;
+use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\DTO\SourceData;
+use Domain\User\Actions\CreateUserAction;
 use Domain\User\Models\User;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 final class SourcesPlaybook extends Playbook
 {
+    /** @var \Domain\User\Actions\CreateUserAction */
+    private $createUserAction;
+
+    /** @var \Domain\Source\Actions\CreateSourceAction */
+    private $createSourceAction;
+
+    public function __construct(
+        CreateUserAction $createUserAction,
+        CreateSourceAction $createSourceAction
+    ) {
+        $this->createUserAction = $createUserAction;
+        $this->createSourceAction = $createSourceAction;
+    }
+
     public function before(): array
     {
         return [
@@ -18,26 +33,30 @@ final class SourcesPlaybook extends Playbook
         ];
     }
 
-    public function run(InputInterface $input, OutputInterface $output)
+    public function run(InputInterface $input, OutputInterface $output): void
     {
         $this->createSources($output);
     }
 
-    private function createSources(OutputInterface $output)
+    private function createSources(OutputInterface $output): void
     {
+        $email = 'brent@stitcher.io';
+
         $sources = [
-            'https://stitcher.io/rss' => 'brent@stitcher.io',
-            'https://sebastiandedeyne.com/feed' => 'info@sebastiandedeyne.com',
+            'https://stitcher.io/rss',
+            'https://sebastiandedeyne.com/feed',
         ];
 
-        foreach ($sources as $url => $email) {
+        foreach ($sources as $url) {
             $user = User::whereEmail($email)->firstOr(function () use ($email) {
-                event(CreateUserEvent::create($email, bcrypt('secret')));
-
-                return User::whereEmail($email)->first();
+                return $this->createUserAction->__invoke($email, bcrypt('secret'));
             });
 
-            event(new CreateSourceEvent($url, $user->uuid, true));
+            ($this->createSourceAction)->__invoke($user, new SourceData([
+                'url' => $url,
+                'is_active' => true,
+                'is_validated' => true,
+            ]));
 
             $output->writeln("- Created source {$url}");
         }

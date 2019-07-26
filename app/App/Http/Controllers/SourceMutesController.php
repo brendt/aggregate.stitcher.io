@@ -2,23 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use Domain\Mute\Events\MuteEvent;
-use Domain\Mute\Events\UnmuteEvent;
+use Domain\Mute\Actions\MuteAction;
+use Domain\Mute\Actions\UnmuteAction;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 
-class SourceMutesController
+final class SourceMutesController
 {
-    public function store(User $user, Source $source)
-    {
-        event(MuteEvent::make($user, $source));
+    public function store(
+        User $user,
+        Source $source,
+        MuteAction $muteAction
+    ) {
+        $muteAction($user, $source);
 
         return redirect()->back();
     }
 
-    public function delete(User $user, Source $source)
-    {
-        event(UnmuteEvent::make($user, $source));
+    public function delete(
+        User $user,
+        Source $source,
+        UnmuteAction $unmuteAction
+    ) {
+        $unmuteAction($user, $source);
 
         return redirect()->back();
     }

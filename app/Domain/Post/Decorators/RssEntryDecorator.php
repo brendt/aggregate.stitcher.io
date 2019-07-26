@@ -5,7 +5,6 @@ namespace Domain\Post\Decorators;
 use Carbon\Carbon;
 use ErrorException;
 use Illuminate\Support\Collection;
-use SimpleXMLElement;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
 class RssEntryDecorator extends AbstractEntry
@@ -31,6 +30,10 @@ class RssEntryDecorator extends AbstractEntry
 
     public function createdAt(): ?Carbon
     {
+        if ($this->decoratedEntry->getDateCreated()) {
+            return Carbon::make($this->decoratedEntry->getDateCreated());
+        }
+
         $date = $this->data['datecreated']
             ?? $this->data['datemodified']
             ?? null;
@@ -58,7 +61,7 @@ class RssEntryDecorator extends AbstractEntry
             return mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES");
         }, $title);
 
-        return $title;
+        return html_entity_decode($title);
     }
 
     public function url(): string
@@ -129,7 +132,7 @@ class RssEntryDecorator extends AbstractEntry
             $tags[] = $value;
         }
 
-        return collect($tags);
+        return collect($tags)->unique()->slice(0, 2);
     }
 
     private function tagsByCategory(array $categories): Collection
@@ -144,7 +147,7 @@ class RssEntryDecorator extends AbstractEntry
             }
         }
 
-        return collect($foundTags);
+        return collect($foundTags)->keys();
     }
 
     private function tagsByContent(string $searchContent): Collection
@@ -163,7 +166,7 @@ class RssEntryDecorator extends AbstractEntry
             }
         }
 
-        $threshold = 2;
+        $threshold = 1;
 
         return collect($foundTags)
             ->map(function (array $keywords) {

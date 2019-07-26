@@ -5,11 +5,20 @@
         {{ __('Register') }}
     </h1>
 
-    <p class="mb-8 leading-normal">
-        {{ __("By registering an account, you'll be able to vote for posts and submit your own blog.") }}
-    </p>
+    <div class="content">
+        <p>
+            By registering you'll be able to fine-tune the feed to your wishes.
+            You're able to vote for posts you like and mute feeds you're not interested in.
+        </p>
 
-    <form-component :action="route('register')">
+        <p>
+            You're also able to submit your own feed, which will then show up on aggregate.
+            Do you want to know more about how aggregate works before registering?
+            You can read about it <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" target="_blank" rel="noopener noreferrer">here</a>.
+        </p>
+    </div>
+
+    <form-component :action="route('register')" class="mt-8">
         <email-field
             name="email"
             :label="__('Email')"

@@ -2,52 +2,63 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\SourceRequest;
+use App\Http\Requests\UserSourceRequest;
 use App\Http\ViewModels\SourceViewModel;
-use Domain\Source\Events\CreateSourceEvent;
-use Domain\Source\Events\DeleteSourceEvent;
-use Domain\Source\Events\UpdateSourceEvent;
+use Domain\Language\LanguageRepository;
+use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\Actions\DeleteSourceAction;
+use Domain\Source\Actions\UpdateSourceAction;
+use Domain\Source\DTO\SourceData;
 use Domain\User\Models\User;
 
-class UserSourcesController
+final class UserSourcesController
 {
-    public function index(User $user)
+    public function index(User $user, LanguageRepository $languageRepository)
     {
-        $viewModel = new SourceViewModel($user);
+        $viewModel = new SourceViewModel($user, $languageRepository);
 
         return $viewModel->view('userSources.index');
     }
 
-    public function update(SourceRequest $request, User $user)
-    {
+    public function update(
+        UserSourceRequest $request,
+        User $user,
+        CreateSourceAction $createSourceAction,
+        UpdateSourceAction $updateSourceAction
+    ) {
         $primarySource = $user->getPrimarySource();
 
+        $sourceData = SourceData::fromRequest($request, $primarySource);
+
         if (! $primarySource) {
-            event(CreateSourceEvent::fromRequest($request));
+            $createSourceAction($user, $sourceData);
 
             return redirect()->action([self::class, 'index']);
         }
 
-        $updateSourceEvent = UpdateSourceEvent::fromRequest($primarySource, $request);
-
-        if ($updateSourceEvent->hasChanges($primarySource)) {
-            event($updateSourceEvent);
-        }
-
-        flash(__("Saved"));
+        $updateSourceAction($primarySource, $sourceData);
 
         return redirect()->action([self::class, 'index']);
     }
 
-    public function delete(User $user)
+    public function confirmDelete(User $user)
     {
+        return view('userSources.delete', [
+            'source' => $user->getPrimarySource(),
+        ]);
+    }
+
+    public function delete(
+        User $user,
+        DeleteSourceAction $deleteSourceAction
+    ) {
         $primarySource = $user->getPrimarySource();
 
         if (! $primarySource) {
             return redirect()->action([self::class, 'index']);
         }
 
-        event(DeleteSourceEvent::create($primarySource));
+        $deleteSourceAction($primarySource);
 
         return redirect()->action([self::class, 'index']);
     }

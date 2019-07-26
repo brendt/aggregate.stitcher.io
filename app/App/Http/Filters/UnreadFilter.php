@@ -9,7 +9,7 @@ use Spatie\QueryBuilder\Filters\Filter;
 final class UnreadFilter implements Filter
 {
     /** @var \Domain\User\Models\User */
-    protected $user;
+    private $user;
 
     public function __construct(?User $user)
     {

@@ -30,7 +30,7 @@ class RssEntryDecoratorFactory
      xmlns:atom="http://www.w3.org/2005/Atom" version="2.0" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
         <title>test</title>
-        $content
+        ${content}
     </channel>
 </rss>
 XML

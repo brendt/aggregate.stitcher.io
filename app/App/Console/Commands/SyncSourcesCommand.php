@@ -7,7 +7,7 @@ use Domain\Source\Actions\SyncSourceAction;
 use Domain\Source\Models\Source;
 use Illuminate\Console\Command;
 
-class SyncSourcesCommand extends Command
+final class SyncSourcesCommand extends Command
 {
     /** @var \Domain\Source\Actions\SyncSourceAction */
     protected $syncSourceAction;
@@ -23,7 +23,7 @@ class SyncSourcesCommand extends Command
         $this->syncSourceAction = $syncSourceAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $sources = Source::whereActive()->get();
 

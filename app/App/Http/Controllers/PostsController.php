@@ -2,20 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Console\Jobs\PostViewedJob;
 use App\Http\Queries\AllPostsQuery;
 use App\Http\Queries\LatestPostsQuery;
+use App\Http\Queries\TopPostsQuery;
 use App\Http\Requests\PostIndexRequest;
 use App\Http\ViewModels\PostsViewModel;
-use Domain\Post\Events\AddViewEvent;
+use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
+use Spatie\QueryString\QueryString;
 
-class PostsController
+final class PostsController
 {
     public function index(
+        PostIndexRequest $request,
+        TopPostsQuery $query
+    ) {
+        $posts = $query->paginate(5);
+
+        $posts->appends($request->except('page'));
+
+        $viewModel = (new PostsViewModel($posts, $request->user()))
+            ->withTopicSlug($request->getTopicSlug())
+            ->withTagSlug($request->getTagSlug())
+            ->withTitle(__('All'))
+            ->view('home.index');
+
+        return $viewModel;
+    }
+
+    public function all(
         PostIndexRequest $request,
         AllPostsQuery $query
     ) {
@@ -26,7 +46,7 @@ class PostsController
         $viewModel = (new PostsViewModel($posts, $request->user()))
             ->withTopicSlug($request->getTopicSlug())
             ->withTagSlug($request->getTagSlug())
-            ->withTitle(__('All'))
+            ->withTitle(__('Discover'))
             ->view('posts.index');
 
         return $viewModel;
@@ -44,6 +64,23 @@ class PostsController
             ->withTopicSlug($request->getTopicSlug())
             ->withTagSlug($request->getTagSlug())
             ->withTitle(__('Latest'))
+            ->view('posts.index');
+
+        return $viewModel;
+    }
+
+    public function top(
+        PostIndexRequest $request,
+        TopPostsQuery $query
+    ) {
+        $posts = $query->paginate();
+
+        $posts->appends($request->except('page'));
+
+        $viewModel = (new PostsViewModel($posts, $request->user()))
+            ->withTopicSlug($request->getTopicSlug())
+            ->withTagSlug($request->getTagSlug())
+            ->withTitle(__('Top this week'))
             ->view('posts.index');
 
         return $viewModel;
@@ -97,10 +134,17 @@ class PostsController
 
     public function show(
         Request $request,
-        Post $post
+        Post $post,
+        AddViewAction $addViewAction
     ) {
-        event(AddViewEvent::create($post, $request->user()));
+        dispatch(new PostViewedJob(
+            $addViewAction,
+            $post,
+            $request->user()
+        ));
 
-        return redirect()->to($post->url);
+        $queryString = (new QueryString($post->getFullUrl()))->enable('ref', 'aggregate.stitcher.io');
+
+        return redirect()->to((string) $queryString);
     }
 }

@@ -16,7 +16,7 @@ function onAjaxButtonClick(e) {
 
     request.open('POST', action, true);
 
-    request.onload = function () {
+    request.onload = function() {
         if (request.status < 200 || request.status >= 400) {
             // TODO
             return;
@@ -29,23 +29,25 @@ function onAjaxButtonClick(e) {
         callback(data);
     }.bind(this);
 
-    request.onerror = function () {
+    request.onerror = function() {
         // TODO
-    }
+    };
 
     request.setRequestHeader('content-type', 'application/json');
     request.setRequestHeader('accept', 'application/json');
 
-    request.send(JSON.stringify({
-        '_token': token,
-    }));
+    request.send(
+        JSON.stringify({
+            _token: token,
+        })
+    );
 }
 
 const actionButtonHandlers = {
     updateVote(data) {
         const uuid = data.post_uuid;
         const postVote = document.querySelector(`#post-vote-${uuid}`);
-        const voteCounter = postVote.querySelector('.vote-count');
+        const voteCounters = postVote.querySelectorAll('.vote-count');
 
         if (data.voted_for) {
             postVote.classList.add('voted-for');
@@ -53,6 +55,16 @@ const actionButtonHandlers = {
             postVote.classList.remove('voted-for');
         }
 
-        voteCounter.innerHTML = data.vote_count;
+        for (let voteCounter of voteCounters) {
+            voteCounter.innerHTML = data.vote_count > 0 ? data.vote_count : 'vote';
+            voteCounter.setAttribute('data-vote-count', data.vote_count);
+        }
     },
-}
+};
+
+const menu = document.querySelector('.menu');
+const menuToggle = document.querySelector('.menu-toggle');
+
+menuToggle.addEventListener('click', function() {
+    menu.classList.toggle('hidden');
+});

@@ -2,6 +2,11 @@
 
 @import './bootstrap.css';
 @import './components/*';
-@import './utilities/*';
+
+@responsive {
+    .b-4 {
+        bottom: 1rem;
+    }
+}
 
 @tailwind utilities;

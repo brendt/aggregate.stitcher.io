@@ -3,7 +3,7 @@
     /** @var \Domain\Mute\Models\Mute[] $mutes */
 @endphp
 
-@component('layouts.app', [
+@component('layouts.user', [
     'title' => __('Mutes'),
 ])
     <heading>Mutes</heading>
@@ -15,6 +15,9 @@
     <table class="table">
         <tbody>
             @foreach ($mutes as $mute)
+                @if(!$mute->getMuteable())
+                    @continue
+                @endif
                 <tr>
                     <td>
                         @if($mute->getMuteable() instanceof \Domain\Post\Models\Tag)

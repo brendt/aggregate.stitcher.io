@@ -30,9 +30,17 @@ return [
     ],
 
     'stripe' => [
-        'model' => App\Models\User::class,
+        'model' => \Domain\User\Models\User::class,
         'key' => env('STRIPE_KEY'),
         'secret' => env('STRIPE_SECRET'),
     ],
+
+    'twitter' => [
+        'fake' => env('TWITTER_FAKE', false),
+        'consumer_key' => env('TWITTER_CONSUMER_KEY'),
+        'consumer_secret' => env('TWITTER_CONSUMER_SECRET'),
+        'access_token' => env('TWITTER_ACCESS_TOKEN'),
+        'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
+    ]
 
 ];

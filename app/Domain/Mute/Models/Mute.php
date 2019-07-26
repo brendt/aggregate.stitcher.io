@@ -55,7 +55,7 @@ class Mute extends Model
             && $this->muteable_uuid === $muteable->getUuid();
     }
 
-    public function getMuteable(): Muteable
+    public function getMuteable(): ?Muteable
     {
         return $this->muteable;
     }

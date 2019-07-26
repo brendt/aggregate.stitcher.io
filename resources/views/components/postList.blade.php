@@ -1,11 +1,14 @@
 @php
     /** @var \Domain\Post\Models\Post[] $posts */
     /** @var \Domain\User\Models\User $user */
+
+    $showDonation = $showDonation ?? true;
+    $showPagination = $showPagination ?? true;
 @endphp
 
 <section>
     @foreach($posts as $post)
-        @if ($loop->index === $donationIndex)
+        @if ($showDonation && $loop->index === $donationIndex)
             <donation-card></donation-card>
         @endif
 
@@ -15,10 +18,8 @@
             :last="$loop->last"
         ></post-card>
     @endforeach
-
-    @if($posts->isEmpty())
-        {{ __('Nothing to see here!') }}
-    @endif
 </section>
 
-{{ $posts->render() }}
+@if($showPagination)
+    {{ $posts->render() }}
+@endif

@@ -122,9 +122,12 @@ return [
 
     'log' => env('APP_LOG', 'daily'),
 
-    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+//    'log_level' => env('APP_LOG_LEVEL', 'debug'),
+    'log_level' => 'debug',
 
     'analytics_id' => env('ANALYTICS_ID'),
+
+    'page_cache' => env('PAGE_CACHE', true),
 
     /*
     |--------------------------------------------------------------------------

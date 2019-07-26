@@ -3,12 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Domain\User\Events\ResetPasswordEvent;
+use Domain\User\Actions\ResetPasswordAction;
 use Domain\User\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
 
-class ResetPasswordController extends Controller
+final class ResetPasswordController extends Controller
 {
     use ResetsPasswords;
 
@@ -19,9 +19,11 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    protected function resetPassword(User $user, $password)
+    protected function resetPassword(User $user, $password): void
     {
-        event(ResetPasswordEvent::create($user, Hash::make($password)));
+        $resetPasswordAction = new ResetPasswordAction();
+
+        $resetPasswordAction($user, Hash::make($password));
 
         $this->guard()->login($user);
     }

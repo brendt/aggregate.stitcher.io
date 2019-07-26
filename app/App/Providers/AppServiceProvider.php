@@ -2,6 +2,16 @@
 
 namespace App\Providers;
 
+use Abraham\TwitterOAuth\TwitterOAuth;
+use Domain\Language\LanguageRepository;
+use Domain\Post\Models\Post;
+use Domain\Post\Models\Tag;
+use Domain\Post\Models\Topic;
+use Domain\Post\Models\View;
+use Domain\Post\Models\Vote;
+use Domain\Source\Models\Source;
+use Domain\Tweet\Api\FakeTwitterOAuth;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
@@ -15,8 +25,17 @@ use Support\Rss\RssReader;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
+        Relation::morphMap([
+            'source' => Source::class,
+            'post' => Post::class,
+            'tag' => Tag::class,
+            'view' => View::class,
+            'topic' => Topic::class,
+            'vote' => Vote::class,
+        ]);
+
         /** @var \Spatie\BladeX\BladeX $bladeX */
         $bladeX = $this->app->get(BladeX::class);
 
@@ -29,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
         LengthAwarePaginator::defaultView('layouts.pagination');
     }
 
-    public function register()
+    public function register(): void
     {
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
         $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
@@ -51,6 +70,23 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Reader::class, function () {
             return new RssReader();
+        });
+
+        $this->app->bind(TwitterOAuth::class, function () {
+            if (config('services.twitter.fake')) {
+                return new FakeTwitterOAuth();
+            }
+
+            return new TwitterOAuth(
+                config('services.twitter.consumer_key'),
+                config('services.twitter.consumer_secret'),
+                config('services.twitter.access_token'),
+                config('services.twitter.access_token_secret')
+            );
+        });
+
+        $this->app->singleton(LanguageRepository::class, function () {
+            return new LanguageRepository(__DIR__ . '/../../languages.json');
         });
     }
 }

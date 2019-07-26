@@ -2,25 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use Domain\User\Events\ResendVerificationEvent;
-use Domain\User\Events\VerifyUserEvent;
+use Domain\User\Actions\SendUserVerificationAction;
+use Domain\User\Actions\VerifyUserAction;
 use Domain\User\Models\User;
 use Illuminate\Http\Response;
 
-class UserVerificationController
+final class UserVerificationController
 {
-    public function verify(User $user, string $verificationToken)
-    {
+    public function verify(
+        User $user,
+        string $verificationToken,
+        VerifyUserAction $verifyUserAction
+    ) {
         abort_unless($user->verification_token === $verificationToken, Response::HTTP_NOT_FOUND);
 
-        event(new VerifyUserEvent($user->uuid, $verificationToken));
+        $verifyUserAction($user);
 
         return redirect()->action([UserSourcesController::class, 'index']);
     }
 
-    public function resend(User $user)
-    {
-        event(new ResendVerificationEvent($user->uuid));
+    public function resend(
+        User $user,
+        SendUserVerificationAction $sendUserVerificationAction
+    ) {
+        $sendUserVerificationAction($user);
 
         return redirect()->back();
     }

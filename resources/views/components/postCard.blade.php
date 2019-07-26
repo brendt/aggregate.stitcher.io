@@ -5,7 +5,7 @@
 
 <article
     id="post-vote-{{ $post->uuid }}"
-    class="w-full flex items-center py-8 border-b border-grey-lighter"
+    class="post-card w-full flex items-center py-8 border-b border-grey-lighter {{ $user && $user->votedFor($post) ? 'voted-for' : null }}"
 >
     <div class="flex-1">
         <p class="mb-2">
@@ -16,46 +16,61 @@
             >
                 {{ $post->title }}
             </a>
+
         </p>
 
-        <p class="text-grey-dark text-sm">
+        <div class="text-grey-darkest text-sm">
             <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
             {{ $post->relative_date }}
-            –
-            @if ($post->view_count === 1)
-                {{ __(':view_count view', ['view_count' => $post->view_count]) }}
-            @else
-                {{ __(':view_count views', ['view_count' => $post->view_count]) }}
-            @endif
-        </p>
 
-        <div class="flex items-baseline mt-2">
+            @if ($post->view_count > 0)
+                –
+                @if ($post->view_count === 1)
+                    {{ __(':view_count view', ['view_count' => $post->view_count]) }}
+                @else
+                    {{ __(':view_count views', ['view_count' => $post->view_count]) }}
+                @endif
+            @endif
+
+            @if($post->tags->isEmpty())
+                <div class="inline ml-1">
+                    <post-vote :user="$user" :post="$post"></post-vote>
+                </div>
+            @endif
+
+            <div class="post-actions">
+                @if ($user)
+                    @if(! $user->hasMuted($post->source))
+                        –
+                        <post-button :action="$post->source->getMuteUrl()" :inline="true">
+                            {{ __('Mute source') }}
+                        </post-button>
+                    @endif
+                    @if($user->isAdmin() && ! $post->hasBeenTweeted())
+                        –
+                        <ajax-button
+                            :action="$post->getAdminTweetUrl()"
+                        >
+                            {{ __('Tweet') }}
+                        </ajax-button>
+                    @endif
+                @endif
+            </div>
+        </div>
+
+        <div class="flex items-baseline mt-3">
             @if($post->tags->isNotEmpty())
-                <p class="text-sm mr-2">
+                <p class="text-sm">
                     @foreach ($post->tags as $tag)
-                        <tag :tag="$tag" class="mr-1/2"></tag>
+                        <tag :tag="$tag" class="mr-2"></tag>
                     @endforeach
                 </p>
-            @endif
 
-            @if ($user)
-                @if(! $user->hasMuted($post->source))
-                    <post-button
-                        :action="$post->source->getMuteUrl()"
-                    >
-                        <span class="
-                            underline
-                            text-grey text-sm
-                            hover:no-underline
-                        ">
-                            {{ __('Mute source') }}
-                        </span>
-                    </post-button>
-                @endif
+                <div class="ml-1">
+                    <post-vote :user="$user" :post="$post"></post-vote>
+                </div>
             @endif
         </div>
     </div>
-
-    {{--<post-vote :user="$user" :post="$post"></post-vote>--}}
 </article>

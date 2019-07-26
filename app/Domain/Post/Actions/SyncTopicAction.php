@@ -2,31 +2,35 @@
 
 namespace Domain\Post\Actions;
 
-use Domain\Post\Events\CreateTopicEvent;
-use Domain\Post\Events\UpdateTopicEvent;
+use Domain\Post\DTO\TopicData;
 use Domain\Post\Models\Topic;
 
-class SyncTopicAction
+final class SyncTopicAction
 {
+    /** @var \Domain\Post\Actions\CreateTopicAction */
+    private $createTopicAction;
+
+    /** @var \Domain\Post\Actions\UpdateTopicAction */
+    private $updateTopicAction;
+
+    public function __construct(
+        CreateTopicAction $createTopicAction,
+        UpdateTopicAction $updateTopicAction
+    ) {
+        $this->createTopicAction = $createTopicAction;
+        $this->updateTopicAction = $updateTopicAction;
+    }
+
     public function __invoke(string $name): void
     {
         $existingTopic = Topic::whereName($name)->first();
 
         if ($existingTopic) {
-            $event = UpdateTopicEvent::new(
-                $existingTopic,
-                $name
-            );
-
-            if ($event->hasChanges($existingTopic)) {
-                event($event);
-            }
+            $this->updateTopicAction->__invoke($existingTopic, TopicData::new($name));
 
             return;
         }
 
-        event(CreateTopicEvent::new(
-            $name
-        ));
+        $this->createTopicAction->__invoke(TopicData::new($name));
     }
 }

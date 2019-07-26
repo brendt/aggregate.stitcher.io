@@ -5,15 +5,11 @@ namespace Domain\Post\DTO;
 use Domain\Post\Decorators\RssEntryDecorator;
 use Domain\Post\Models\Post;
 use Illuminate\Support\Collection;
-use Ramsey\Uuid\Uuid;
 use Spatie\DataTransferObject\DataTransferObject;
 use Zend\Feed\Reader\Entry\AbstractEntry;
 
 class PostData extends DataTransferObject
 {
-    /** @var string */
-    public $uuid;
-
     /** @var string */
     public $url;
 
@@ -31,8 +27,6 @@ class PostData extends DataTransferObject
 
     public function __construct(array $parameters)
     {
-        $parameters['uuid'] = $parameters['uuid'] ?? (string) Uuid::uuid4();
-
         parent::__construct($parameters);
     }
 
@@ -60,7 +54,6 @@ class PostData extends DataTransferObject
     public function fillable(): array
     {
         return $this->only(
-            'uuid',
             'url',
             'title',
             'date_created',
@@ -72,9 +65,6 @@ class PostData extends DataTransferObject
     {
         return $post->title !== $this->title
             || $post->teaser !== $this->teaser
-            || (
-                collect($this->tag_ids)->sort()->values()->toArray()
-                    !== $post->tags->pluck('id')->toArray()
-            );
+            || $post->hasDifferentTags($this->tag_ids);
     }
 }

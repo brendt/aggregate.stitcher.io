@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreatePostsTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table): void {
             $table->increments('id');
             $table->uuid('uuid')->unique();
 

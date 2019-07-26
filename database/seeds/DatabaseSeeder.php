@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
         return $this;
     }
 
-    public function run()
+    public function run(): void
     {
         throw new RuntimeException("Cannot run seeders this way, please use `artisan playbook:run {playbook} {--clean}`");
     }

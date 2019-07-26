@@ -11,10 +11,10 @@ $donationLink = 'https://www.patreon.com/brendt';
     <section class="leading-normal">
         <p class="mb-2">
             {!! __("
-                We're not relying on ads to keep aggregate.stitcher.io free.
-                Bills need to be paid though.
+                I'm not relying on ads to keep aggregate free.
+                Bills have to be paid though.
                 If you enjoy reading, or if this project helps your blog grow,
-                we want to ask you to consider <a class=\"link\" href=\":donationLink\">donating through Patreon</a>.
+                I want to ask you to consider <a class=\"link\" href=\":donationLink\">donating through Patreon</a>.
             ", [
                 'donationLink' => $donationLink,
             ]) !!}

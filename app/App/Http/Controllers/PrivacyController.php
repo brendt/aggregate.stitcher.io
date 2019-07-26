@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Support\Markdown;
 
-class PrivacyController
+final class PrivacyController
 {
     public function __invoke(Markdown $markdown)
     {

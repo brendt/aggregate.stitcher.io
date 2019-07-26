@@ -90,7 +90,7 @@ yarn --frozen-lockfile
 @task('generateAssets', ['on' => 'remote'])
 {{ logMessage("🌅  Generating assets...") }}
 cd {{ $newReleaseDir }};
-yarn run production --progress false
+yarn run production
 @endtask
 
 @task('updateSymlinks', ['on' => 'remote'])
@@ -121,8 +121,6 @@ php artisan backup:run
 {{ logMessage("🙈  Migrating database...") }}
 cd {{ $newReleaseDir }};
 php artisan migrate --force;
-
-php artisan sync:tags
 @endtask
 
 @task('blessNewRelease', ['on' => 'remote'])
@@ -133,7 +131,7 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 
-sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
 sudo supervisorctl restart all
 @endtask
 
@@ -165,5 +163,5 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 sudo supervisorctl restart all
-sudo service php7.2-fpm restart
+sudo service php7.3-fpm restart
 @endtask

@@ -4,13 +4,12 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\PostsController;
-use Domain\User\Events\CreateUserEvent;
-use Domain\User\Models\User;
+use Domain\User\Actions\CreateUserAction;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class RegisterController extends Controller
+final class RegisterController extends Controller
 {
     use RegistersUsers;
 
@@ -29,17 +28,15 @@ class RegisterController extends Controller
         ]);
     }
 
-    public function register(Request $request)
-    {
+    public function register(
+        Request $request,
+        CreateUserAction $createUserAction
+    ) {
         $this->validator($request->all())->validate();
 
         $data = $request->all();
 
-        $createUserEvent = CreateUserEvent::create($data['email'], bcrypt($data['password']));
-
-        event($createUserEvent);
-
-        $user = User::whereUuid($createUserEvent->user_uuid)->firstOrFail();
+        $user = $createUserAction($data['email'], bcrypt($data['password']));
 
         $this->guard()->login($user);
 

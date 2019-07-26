@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\PostsController;
+use App\Http\Middleware\PageCacheMiddleware;
+use App\Http\Middleware\RedirectToUserFeedMiddleware;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
@@ -13,21 +16,21 @@ class RouteServiceProvider extends ServiceProvider
 {
     protected $namespace = '';
 
-    public function boot()
+    public function boot(): void
     {
         $this->mapBindings();
 
         parent::boot();
     }
 
-    public function map()
+    public function map(): void
     {
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
     }
 
-    protected function mapBindings()
+    protected function mapBindings(): void
     {
         Route::bind('post', function (string $uuid): Post {
             return Post::whereUuid($uuid)->firstOrFail();
@@ -46,14 +49,27 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    protected function mapWebRoutes()
+    protected function mapWebRoutes(): void
     {
+        Route::middleware([
+            'web',
+            PageCacheMiddleware::class,
+        ])
+            ->group(base_path('routes/web_cached.php'));
+
+        Route::middleware([
+            'web',
+            RedirectToUserFeedMiddleware::class,
+            PageCacheMiddleware::class,
+        ])->group(function () {
+            Route::get('/', [PostsController::class, 'index']);
+        });
+
         Route::middleware('web')
-            ->namespace($this->namespace)
             ->group(base_path('routes/web.php'));
     }
 
-    protected function mapApiRoutes()
+    protected function mapApiRoutes(): void
     {
         Route::prefix('api')
             ->middleware('api')

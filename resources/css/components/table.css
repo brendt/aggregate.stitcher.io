@@ -1,8 +1,12 @@
 .table {
     display: table;
     width: 100%;
-    table-layout: fixed;
     border-collapse: collapse;
+}
+
+.table-truncate th,
+.table-truncate td {
+    @apply truncate;
 }
 
 .table tbody tr {
@@ -13,6 +17,21 @@
 .table td {
     padding-top: .5em;
     padding-bottom: .5em;
+}
+
+.table.thin td {
+    padding-top: .2em;
+    padding-bottom: .2em;
+}
+
+.table.padding tr th:first-child,
+.table.padding tr td:first-child {
+    padding-left: .5em;
+}
+
+.table.padding tr th:last-child,
+.table.padding tr td:last-child {
+    padding-right: .5em;
 }
 
 .table th {

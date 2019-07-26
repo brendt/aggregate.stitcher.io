@@ -3,6 +3,8 @@
 namespace Domain\Post\Models;
 
 use Domain\Model;
+use Domain\Post\Collections\VoteCollection;
+use Domain\Source\Models\Source;
 use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -11,6 +13,11 @@ use Support\HasUuid;
 class Vote extends Model
 {
     use HasUuid;
+
+    public function newCollection(array $models = [])
+    {
+        return new VoteCollection($models);
+    }
 
     public function user(): BelongsTo
     {
@@ -30,5 +37,12 @@ class Vote extends Model
     public function scopeWherePost(Builder $builder, Post $post): Builder
     {
         return $builder->where('post_id', $post->id);
+    }
+
+    public function scopeWhereSource(Builder $builder, Source $source): Builder
+    {
+        return $builder->whereHas('post', function (Builder $builder) use ($source) {
+            return $builder->where('source_id', $source->id);
+        });
     }
 }

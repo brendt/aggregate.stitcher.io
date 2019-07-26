@@ -1,5 +1,25 @@
 .content {
     --content-line-height: 1.5em;
+    @apply .mt-6 .leading-normal;
+}
+
+.content h2 {
+    font-size: 1.3em;
+    font-weight: lighter;
+    margin-bottom: 0.3em;
+    margin-top: 1em;
+}
+
+.content em {
+    font-style: italic;
+}
+
+.content a {
+    text-decoration: underline;
+}
+
+.content a:hover {
+    text-decoration: none;
 }
 
 .content p {

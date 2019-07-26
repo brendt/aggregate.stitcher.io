@@ -2,23 +2,20 @@
 
 namespace App\Http\Requests;
 
-use App\Http\Rules\UniqueSourceRule;
-
-class SourceRequest extends Request
+abstract class SourceRequest extends Request
 {
-    public function rules(): array
+    public function getTopicIds(): array
     {
-        /** @var \Domain\User\Models\User $user */
-        $user = $this->user();
+        return $this->get('topic_ids', []);
+    }
 
-        $primarySource = $user->getPrimarySource();
+    public function getTwitterHandle(): ?string
+    {
+        return $this->get('twitter_handle');
+    }
 
-        return [
-            'url' => [
-                'required',
-                'string',
-                new UniqueSourceRule($primarySource ? $primarySource->id : null),
-            ],
-        ];
+    public function getSourceUrl(): string
+    {
+        return $this->get('url');
     }
 }

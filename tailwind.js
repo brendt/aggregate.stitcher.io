@@ -57,6 +57,7 @@ let colors = {
   'red': 'var(--red)',
   'red-dark': 'var(--red-dark)',
   'green': 'var(--green)',
+  'green-dark': 'var(--green-dark)',
   'yellow': 'var(--yellow)',
   'primary': 'var(--primary)',
 }
@@ -103,6 +104,9 @@ module.exports = {
     'md': '768px',
     'lg': '992px',
     'xl': '1200px',
+    'sm-max': {'max': '767px'},
+    'md-max': {'max': '991px'},
+    'lg-max': {'max': '1199px'},
   },
 
 
@@ -144,15 +148,12 @@ module.exports = {
       'sans-serif',
     ],
     'serif': [
-      'Constantia',
-      'Lucida Bright',
-      'Lucidabright',
-      'Lucida Serif',
-      'Lucida',
-      'DejaVu Serif',
-      'Bitstream Vera Serif',
-      'Liberation Serif',
-      'Georgia',
+      'Garamond',
+      'Baskerville',
+      'Baskerville Old Face',
+      'Hoefler Text',
+      'Times',
+      'Times New Roman',
       'serif',
     ],
     'mono': [

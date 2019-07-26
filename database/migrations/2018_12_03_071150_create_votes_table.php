@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateVotesTable extends Migration
 {
-    public function up()
+    public function up(): void
     {
-        Schema::create('votes', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table): void {
             $table->increments('id');
             $table->uuid('uuid')->unique();
 

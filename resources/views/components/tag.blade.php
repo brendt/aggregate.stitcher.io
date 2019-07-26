@@ -3,11 +3,9 @@
 @endphp
 
 <a
-    href="{{ filter('tag', $tag) }}"
+    href="{{ action([\App\Http\Controllers\PostsController::class, 'tag'], $tag->slug) }}"
     class="tag {{ $class ?? null }} {{ filter_active('tag', $tag) ? 'active' : null }}"
     style="--tag-color: {{ $tag->color }}"
 >
-    <span class="tag-inner">
-        {{ $tag->name }}
-    </span>
+    {{ $tag->name }}
 </a>

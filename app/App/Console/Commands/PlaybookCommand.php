@@ -6,38 +6,53 @@ use App\Console\Playbook;
 use App\Console\PlaybookDefinition;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use Symfony\Component\Console\Question\Question;
 
-class PlaybookCommand extends Command
+final class PlaybookCommand extends Command
 {
-    protected $signature = 'playbook:run {playbook} {--clean}';
+    protected $signature = 'playbook:run {playbook?}';
 
     protected $description = 'Setup the database against a predefined playbook';
 
     protected $ranDefinitions = [];
 
-    public function handle()
+    public function handle(): void
     {
         if (app()->environment() !== 'local') {
             $this->error('This command can only be run in the local environment!');
         }
 
-        if ($this->option('clean')) {
-            $this->migrate();
+        $playbookName = $this->argument('playbook');
+
+        if (! $playbookName) {
+            $availablePlaybooks = $this->getAvailablePlaybooks();
+
+            $this->comment('Choose a playbook: ' . PHP_EOL);
+
+            foreach ($availablePlaybooks as $availablePlaybook) {
+                $this->comment("- {$availablePlaybook}");
+            }
+
+            $this->comment('');
+
+            $playbookName = $this->askPlaybookName($availablePlaybooks);
         }
 
-        $playbookDefinition = $this->resolvePlaybookDefinition($this->argument('playbook'));
+        $playbookDefinition = $this->resolvePlaybookDefinition($playbookName);
+
+        $this->migrate();
 
         $this->runPlaybook($playbookDefinition);
     }
 
-    protected function migrate()
+    protected function migrate(): void
     {
         $this->info('Clearing the database');
 
         $this->call('migrate:fresh');
     }
 
-    protected function runPlaybook(PlaybookDefinition $definition)
+    protected function runPlaybook(PlaybookDefinition $definition): void
     {
         foreach ($definition->playbook->before() as $before) {
             $this->runPlaybook(
@@ -66,6 +81,36 @@ class PlaybookCommand extends Command
         }
     }
 
+    protected function askPlaybookName(array $availablePlaybooks): string
+    {
+        $helper = $this->getHelper('question');
+
+        $question = new Question('');
+
+        $question->setAutocompleterValues($availablePlaybooks);
+
+        $playbookName = (string) $helper->ask($this->input, $this->output, $question);
+
+        if (! $playbookName) {
+            $this->error('Please choose a playbook');
+
+            return $this->askPlaybookName($availablePlaybooks);
+        }
+
+        return $playbookName;
+    }
+
+    protected function getAvailablePlaybooks(): array
+    {
+        $files = scandir(__DIR__ . '/../Playbooks');
+
+        unset($files[0], $files[1]);
+
+        return array_map(function (string $file) {
+            return str_replace('.php', '', $file);
+        }, $files);
+    }
+
     protected function resolvePlaybookDefinition($class): PlaybookDefinition
     {
         if ($class instanceof PlaybookDefinition) {
@@ -85,7 +130,7 @@ class PlaybookCommand extends Command
         return new PlaybookDefinition($className);
     }
 
-    protected function infoRunning(Playbook $playbook, int $i)
+    protected function infoRunning(Playbook $playbook, int $i): void
     {
         $playbookName = get_class($playbook);
 

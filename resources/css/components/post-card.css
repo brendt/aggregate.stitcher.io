@@ -2,3 +2,16 @@
 .post-link.viewed {
     color: var(--grey-darker);
 }
+
+.post-actions {
+    display: none;
+    /*display: inline-block;*/
+}
+
+.post-actions form {
+    display:inline-block;
+}
+
+.post-card:hover .post-actions {
+    display: inline-block;
+}
