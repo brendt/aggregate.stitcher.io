@@ -94,7 +94,8 @@ class Post extends Model implements Tweetable, Feedable
         return $builder
             ->distinct()
             ->join('sources', 'sources.id', '=', 'posts.source_id')
-            ->where('sources.is_active', true);
+            ->where('sources.is_active', true)
+            ->where('posts.is_validated', true);
     }
 
     public function scopeWhereUnread(Builder $builder, User $user): Builder
