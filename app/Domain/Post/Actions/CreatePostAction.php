@@ -13,9 +13,7 @@ use Zend\Http\Response;
 
 final class CreatePostAction
 {
-    /**
-     * @var \Zend\Http\Client
-     */
+    /** @var \Zend\Http\Client */
     private $httpClient;
 
     public function __construct(Client $httpClient)
