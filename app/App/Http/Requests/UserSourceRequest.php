@@ -24,7 +24,7 @@ class UserSourceRequest extends SourceRequest
             'topic_ids[]' => [
                 'nullable',
                 'numeric',
-                'exists:topics,id'
+                'exists:topics,id',
             ],
             'language' => [
                 'string',

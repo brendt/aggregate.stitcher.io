@@ -18,9 +18,11 @@ final class LanguageViewModel extends ViewModel
 
     public function languageOptions(): array
     {
-        return array_merge([
+        return array_merge(
+            [
             null => '-',
-        ], $this->languageRepository->all()
+        ],
+            $this->languageRepository->all()
             ->mapWithKeys(function (Language $language) {
                 return [$language->code => $language->name];
             })

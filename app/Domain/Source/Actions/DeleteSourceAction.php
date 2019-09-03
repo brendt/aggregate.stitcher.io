@@ -10,7 +10,7 @@ final class DeleteSourceAction
 {
     public function __invoke(Source $source): void
     {
-        $source->mutes->each(function (Mute $mute) {
+        $source->mutes->each(function (Mute $mute): void {
             $mute->delete();
         });
 

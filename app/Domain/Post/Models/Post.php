@@ -43,7 +43,7 @@ class Post extends Model implements Tweetable, Feedable
             return $post;
         });
 
-        self::saving(function (Post $post) {
+        self::saving(function (Post $post): void {
             $post->language = $post->source->language;
         });
     }

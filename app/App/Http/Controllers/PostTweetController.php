@@ -11,7 +11,7 @@ class PostTweetController
     public function __invoke(
         Post $post,
         TweetAction $tweetAction
-    ) {
+    ): void {
         abort_if($post->hasBeenTweeted(), Response::HTTP_BAD_REQUEST, 'Post has been tweeted before.');
 
         $tweetAction

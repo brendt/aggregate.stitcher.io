@@ -26,7 +26,7 @@ class ErrorLog extends Model
         return new ErrorLogCollection($models);
     }
 
-    public function loggable()
+    public function loggable(): void
     {
         $this->morphTo();
     }

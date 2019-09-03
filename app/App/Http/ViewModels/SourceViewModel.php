@@ -6,7 +6,6 @@ use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
-use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
 
 final class SourceViewModel extends ViewModel

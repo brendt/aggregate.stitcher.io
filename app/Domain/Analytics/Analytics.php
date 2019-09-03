@@ -68,7 +68,7 @@ final class Analytics
             INNER JOIN posts ON posts.id = views.post_id
             INNER JOIN sources ON sources.id = posts.source_id
             
-            WHERE views.created_at > "$date"
+            WHERE views.created_at > "${date}"
             
             GROUP BY sources.website
         SQL);

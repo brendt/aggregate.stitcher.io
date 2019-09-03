@@ -33,7 +33,7 @@ class RssEntryDecoratorTest extends TestCase
     <content:encoded>match</content:encoded>
 </item>
 XML
-);
+        );
 
         $this->assertEquals('match', $entry->getContent());
     }
@@ -50,7 +50,7 @@ XML
     <content>match</content>
 </item>
 XML
-);
+        );
 
         $this->assertEquals('match', $entry->getContent());
     }
@@ -66,7 +66,7 @@ XML
     <description>match</description>
 </item>
 XML
-);
+        );
 
         $this->assertEquals('match', $entry->getContent());
     }
@@ -81,7 +81,7 @@ XML
     <summary>match</summary>
 </item>
 XML
-);
+        );
 
         $this->assertEquals('match', $entry->getContent());
     }

@@ -12,13 +12,13 @@ class AddIsValidatedColumnToPosts extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('posts', function (Blueprint $table): void {
             $table->boolean('is_validated')->default(false);
         });
 
-        Post::all()->each(function (Post $post) {
+        Post::all()->each(function (Post $post): void {
             $post->is_validated = true;
 
             $post->save();
