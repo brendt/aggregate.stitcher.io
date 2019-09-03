@@ -8,7 +8,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class AddMorphMap extends Migration
 {
-    public function up()
+    public function up(): void
     {
         $map = collect(Relation::$morphMap)
             ->mapWithKeys(function ($class, $name) {
@@ -16,21 +16,21 @@ class AddMorphMap extends Migration
             });
 
         ErrorLog::all()
-            ->each(function (ErrorLog $errorLog) use ($map) {
+            ->each(function (ErrorLog $errorLog) use ($map): void {
                 $errorLog->loggable_type = $map[$errorLog->loggable_type] ?? $errorLog->loggable_type;
 
                 $errorLog->save();
             });
 
         Mute::all()
-            ->each(function (Mute $mute) use ($map) {
+            ->each(function (Mute $mute) use ($map): void {
                 $mute->muteable_type = $map[$mute->muteable_type] ?? $mute->muteable_type;
 
                 $mute->save();
             });
 
         Tweet::all()
-            ->each(function (Tweet $tweet) use ($map) {
+            ->each(function (Tweet $tweet) use ($map): void {
                 $tweet->tweetable_type = $map[$tweet->tweetable_type] ?? $tweet->tweetable_type;
 
                 $tweet->save();

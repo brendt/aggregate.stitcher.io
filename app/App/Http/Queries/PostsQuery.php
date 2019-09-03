@@ -11,7 +11,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 abstract class PostsQuery extends QueryBuilder
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
+     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post
      * @var \Illuminate\Http\Request $request
      */
     public function __construct(Builder $query, Request $request)

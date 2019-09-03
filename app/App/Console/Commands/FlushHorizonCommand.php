@@ -21,7 +21,7 @@ class FlushHorizonCommand extends Command
         $this->redis = $redis;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->redis->connection('horizon')->flushdb();
     }

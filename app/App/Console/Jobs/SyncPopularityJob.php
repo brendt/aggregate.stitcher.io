@@ -22,7 +22,7 @@ final class SyncPopularityJob implements ShouldQueue
         $this->syncPopularityAction = $syncPopularityAction;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $posts = Post::withActivePopularityIndex()->get();
 

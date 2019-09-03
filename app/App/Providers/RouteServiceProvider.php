@@ -61,7 +61,7 @@ class RouteServiceProvider extends ServiceProvider
             'web',
             RedirectToUserFeedMiddleware::class,
             PageCacheMiddleware::class,
-        ])->group(function () {
+        ])->group(function (): void {
             Route::get('/', [PostsController::class, 'index']);
         });
 

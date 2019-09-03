@@ -43,7 +43,7 @@ class Post extends Model implements Tweetable, Feedable
             return $post;
         });
 
-        self::saving(function (Post $post) {
+        self::saving(function (Post $post): void {
             $post->language = $post->source->language;
         });
     }
@@ -95,7 +95,8 @@ class Post extends Model implements Tweetable, Feedable
             ->distinct()
             ->join('sources', 'sources.id', '=', 'posts.source_id')
             ->where('sources.is_active', true)
-            ->where('posts.is_validated', true);
+//            ->where('posts.is_validated', true)
+            ;
     }
 
     public function scopeWhereUnread(Builder $builder, User $user): Builder
