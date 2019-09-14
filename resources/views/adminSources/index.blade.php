@@ -24,7 +24,7 @@
         </filter-button>
     </div>
 
-    <table class="table mt-4 table-truncate">
+    <table class="table mt-4 truncate">
         <thead class="md-max:hidden">
             <tr>
                 <th>
