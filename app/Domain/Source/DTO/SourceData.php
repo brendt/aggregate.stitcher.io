@@ -50,7 +50,7 @@ final class SourceData extends DataTransferObject
             'url' => $request->getSourceUrl(),
             'is_active' => (bool) $request->get('is_active'),
             'is_validated' => (bool) $request->get('is_validated'),
-            'language' => $request->get('language'),
+            'language' => $request->get('language') ?? 'en',
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
             'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
                 return (int) $id;
