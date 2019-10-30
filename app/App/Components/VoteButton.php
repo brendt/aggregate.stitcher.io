@@ -32,7 +32,7 @@ class VoteButton extends Component
     public function render()
     {
         return view('components.voteButton', [
-            'hasVoted' => $this->user->votedFor($this->post),
+            'hasVoted' => $this->user && $this->user->votedFor($this->post),
             'user' => $this->user,
             'post' => $this->post,
         ]);
