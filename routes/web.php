@@ -19,7 +19,6 @@ use App\Http\Controllers\UserProfileController;
 use App\Http\Controllers\UserSourcesController;
 use App\Http\Controllers\UserMutesController;
 use App\Http\Controllers\UserVerificationController;
-use App\Http\Controllers\VotesController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\VerifiedUserMiddleware;
 
@@ -48,9 +47,6 @@ Route::middleware('auth')->prefix('profile')->group(function () {
         Route::post('edit/languages', [UserProfileController::class, 'addLanguage']);
         Route::get('edit/languages/remove', [UserProfileController::class, 'removeLanguage']);
     });
-
-    Route::post('posts/{post}/add-vote', [VotesController::class, 'store']);
-    Route::post('posts/{post}/remove-vote', [VotesController::class, 'delete']);
 
     Route::post('sources/{source}/mute', [SourceMutesController::class, 'store']);
     Route::post('sources/{source}/unmute', [SourceMutesController::class, 'delete']);

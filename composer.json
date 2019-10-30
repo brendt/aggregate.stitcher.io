@@ -15,6 +15,7 @@
         "laravel/horizon": "^2.0",
         "laravel/tinker": "~1.0",
         "league/commonmark": "^0.18.1",
+        "livewire/livewire": "^0.3.17",
         "paquettg/php-html-parser": "^2.0",
         "pda/pheanstalk": "^3.1",
         "predis/predis": "^1.1",

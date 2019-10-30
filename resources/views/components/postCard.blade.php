@@ -35,7 +35,7 @@
 
             @if($post->tags->isEmpty())
                 <div class="inline ml-1">
-                    <post-vote :user="$user" :post="$post"></post-vote>
+                    @livewire('vote-button', $post->id)
                 </div>
             @endif
 
@@ -68,7 +68,7 @@
                 </p>
 
                 <div class="ml-1">
-                    <post-vote :user="$user" :post="$post"></post-vote>
+                    @livewire('vote-button', $post->id)
                 </div>
             @endif
         </div>
