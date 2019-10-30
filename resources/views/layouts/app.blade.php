@@ -29,6 +29,8 @@
 
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
     <script defer src="{{ mix('js/app.js') }}"></script>
+
+    @livewireAssets
 </head>
 <body class="bg-black md:p-3 min-h-screen flex flex-col">
     <div class="bg-white flex-1 flex pb-8">
