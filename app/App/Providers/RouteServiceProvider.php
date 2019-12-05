@@ -53,14 +53,14 @@ class RouteServiceProvider extends ServiceProvider
     {
         Route::middleware([
             'web',
-            PageCacheMiddleware::class,
+//            PageCacheMiddleware::class,
         ])
             ->group(base_path('routes/web_cached.php'));
 
         Route::middleware([
             'web',
             RedirectToUserFeedMiddleware::class,
-            PageCacheMiddleware::class,
+//            PageCacheMiddleware::class,
         ])->group(function (): void {
             Route::get('/', [PostsController::class, 'index']);
         });
