@@ -108,7 +108,7 @@ class Preloader
 }
 
 (new Preloader())
-    ->paths(__DIR__ . '/vendor/laravel')
+    ->paths(__DIR__ . '/vendor/laravel/framework/src/Illuminate/Mail')
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
