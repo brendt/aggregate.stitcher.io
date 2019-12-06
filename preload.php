@@ -113,7 +113,7 @@ class Preloader
 ////        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Broadcasting',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Cache',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Config',
-        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Container',
+//        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Container',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Contracts',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Cookie',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Database',
