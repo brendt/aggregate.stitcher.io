@@ -18,6 +18,7 @@ class LastMonthPostQueryTest extends TestCase
         factory(Post::class, 2)->create([
             'date_created' => Carbon::make('-1 week'),
         ]);
+
         factory(Post::class)->create([
             'date_created' => Carbon::make('-2 months'),
         ]);

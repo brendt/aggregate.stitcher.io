@@ -173,7 +173,7 @@ class PostTest extends TestCase
 
         $this->assertInstanceOf(Feedable::class, $post);
         $this->assertInstanceOf(FeedItem::class, $feedItem);
-        $this->assertEquals($post->id, $feedItem->id);
+        $this->assertEquals($post->uuid, $feedItem->id);
         $this->assertEquals($post->title, $feedItem->title);
         $this->assertEquals($post->teaser, $feedItem->summary);
         $this->assertEquals($post->updated_at, $feedItem->updated);

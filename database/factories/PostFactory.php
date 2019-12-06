@@ -14,6 +14,7 @@ $factory->define(Post::class, function () {
         'url' => faker()->url,
         'title' => faker()->title,
         'date_created' => now(),
+        'is_validated' => true,
         'teaser' => faker()->randomElement(
             [faker()->text(), '']
         ),
