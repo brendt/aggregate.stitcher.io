@@ -110,6 +110,7 @@ class Preloader
 (new Preloader())
     ->paths(__DIR__ . '/vendor/laravel')
     ->ignore(
+        \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
         \Illuminate\Log\LogManager::class,
         \Illuminate\Http\Testing\File::class,
