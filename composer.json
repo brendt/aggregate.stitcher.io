@@ -8,6 +8,7 @@
         "abraham/twitteroauth": "^1.0",
         "barryvdh/laravel-debugbar": "^3.0",
         "bugsnag/bugsnag-laravel": "^2.0",
+        "clarification/sparkpost-laravel-driver": "^1.2",
         "doctrine/dbal": "^2.6",
         "facade/ignition": "^1.13",
         "fideloper/proxy": "~4.0",

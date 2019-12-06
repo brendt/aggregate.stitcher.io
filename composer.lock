@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3cff7fcc01ef6939dbf22c0238d76a67",
+    "content-hash": "4af2ed129764f9446c8b663756339a6e",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -360,6 +360,58 @@
                 "time"
             ],
             "time": "2019-11-30T02:33:19+00:00"
+        },
+        {
+            "name": "clarification/sparkpost-laravel-driver",
+            "version": "1.2.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/clarification/sparkpost-laravel-driver.git",
+                "reference": "85ba3c5f996fc3adc08ded5f3f849108eb2c5673"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/clarification/sparkpost-laravel-driver/zipball/85ba3c5f996fc3adc08ded5f3f849108eb2c5673",
+                "reference": "85ba3c5f996fc3adc08ded5f3f849108eb2c5673",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": ">=5.0",
+                "illuminate/container": ">=5.0",
+                "swiftmailer/swiftmailer": "~5.1||~6.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Clarification\\MailDrivers\\Sparkpost\\SparkpostServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Clarification\\MailDrivers\\Sparkpost\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Robin Lidbetter",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Sparkpost mail driver for Laravel",
+            "homepage": "http://clarification.io",
+            "keywords": [
+                "driver",
+                "laravel",
+                "mail",
+                "sparkpost"
+            ],
+            "time": "2019-09-26T17:03:11+00:00"
         },
         {
             "name": "composer/ca-bundle",
