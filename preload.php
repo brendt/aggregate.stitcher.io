@@ -109,6 +109,9 @@ class Preloader
 
 (new Preloader())
     ->paths(
+        __DIR__ . '/app',
+
+//        __DIR__ . '/vendor/laravel',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Auth',
 ////        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Broadcasting',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Cache',
