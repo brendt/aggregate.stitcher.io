@@ -22,10 +22,8 @@ function current_user(): ?User
 }
 
 /**
- * @param string $name
  * @param \Support\Filterable|string|null $filterValue
  *
- * @return \Spatie\QueryString\QueryString
  */
 function filter(string $name, $filterValue = null): QueryString
 {
@@ -41,10 +39,8 @@ function filter(string $name, $filterValue = null): QueryString
 }
 
 /**
- * @param string $name
  * @param \Support\Filterable|string|null $filterValue
  *
- * @return bool
  */
 function filter_active(string $name, $filterValue = null): bool
 {
