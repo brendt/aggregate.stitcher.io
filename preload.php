@@ -130,7 +130,7 @@ class Preloader
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Pipeline',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Queue',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Redis',
-//        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Routing',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Routing',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Session',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Support',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Translation',
