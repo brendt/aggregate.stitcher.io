@@ -101,30 +101,19 @@ class Post extends Model implements Tweetable, Feedable
 
     public function scopeWhereUnread(Builder $builder, User $user): Builder
     {
-        return $builder->whereDoesntHave('views', function (Builder $builder) use ($user) {
-            return $builder->where('user_id', $user->id);
-        });
+        return $builder->whereDoesntHave('views', fn(Builder $builder) => $builder->where('user_id', $user->id));
     }
 
     public function scopeWhereNotMuted(Builder $builder, User $user): Builder
     {
         return $builder
-            ->whereDoesntHave('source', function (Builder $builder) use ($user) {
-                /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Source\Models\Source $builder */
-                return $builder->whereMuted($user);
-            })
-            ->whereDoesntHave('tags', function (Builder $builder) use ($user) {
-                /** @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Tag $builder */
-                return $builder->whereMuted($user);
-            });
+            ->whereDoesntHave('source', fn(Builder $builder) => $builder->whereMuted($user))
+            ->whereDoesntHave('tags', fn(Builder $builder) => $builder->whereMuted($user));
     }
 
     public function scopeWhereTopic(Builder $builder, Topic $topic): Builder
     {
-        return $builder->whereHas('tags', function (Builder $builder) use ($topic) {
-            /** @var \Domain\Post\Models\Tag $builder */
-            return $builder->whereTopic($topic);
-        });
+        return $builder->whereHas('tags', fn(Builder $builder) => $builder->whereTopic($topic));
     }
 
     public function scopeWhereNotTweeted(Builder $builder): Builder

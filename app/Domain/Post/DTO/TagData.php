@@ -35,9 +35,7 @@ class TagData extends DataTransferObject
         return new self([
             'name' => $adminTagRequest->get('name'),
             'color' => $adminTagRequest->get('color'),
-            'keywords' => array_map(function (string $keyword) {
-                return trim($keyword);
-            }, explode(',', $adminTagRequest->get('keywords'))),
+            'keywords' => array_map(fn(string $keyword) => trim($keyword), explode(',', $adminTagRequest->get('keywords'))),
             'topic' => Topic::findOrFail($adminTagRequest->get('topic_id')),
         ]);
     }

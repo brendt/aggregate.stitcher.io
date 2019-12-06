@@ -3,6 +3,8 @@
 namespace Tests\Factories;
 
 use Domain\Source\Actions\CreateSourceAction;
+use Domain\Source\Actions\ResolveTopicsAction;
+use Domain\Source\Actions\ValidateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
@@ -38,11 +40,16 @@ final class SourceFactory
             ]);
         });
 
-        return (new CreateSourceAction(new MockMailer()))->__invoke(
+        return (new CreateSourceAction(
+            new ResolveTopicsAction(),
+            new ValidateSourceAction(),
+            new MockMailer())
+        )->__invoke(
             $user,
             new SourceData([
                 'url' => $this->url,
                 'is_active' => true,
+                'is_validated' => true,
             ])
         );
     }

@@ -1,5 +1,7 @@
 <?php
 
+use Auth;
+use Illuminate\Http\Request;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;
@@ -84,7 +86,7 @@ function clear_filter(string $name): string
 
 function is_link_active(string ...$hrefs): bool
 {
-    $request = app(\Illuminate\Http\Request::class);
+    $request = app(Request::class);
 
     $uriPath = parse_url($request->getUri(), PHP_URL_PATH) ?? '/';
 

@@ -48,9 +48,7 @@ final class SourcesPlaybook extends Playbook
         ];
 
         foreach ($sources as $url) {
-            $user = User::whereEmail($email)->firstOr(function () use ($email) {
-                return $this->createUserAction->__invoke($email, bcrypt('secret'));
-            });
+            $user = User::whereEmail($email)->firstOr(fn() => $this->createUserAction->__invoke($email, bcrypt('secret')));
 
             ($this->createSourceAction)->__invoke($user, new SourceData([
                 'url' => $url,

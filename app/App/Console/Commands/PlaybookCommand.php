@@ -106,9 +106,7 @@ final class PlaybookCommand extends Command
 
         unset($files[0], $files[1]);
 
-        return array_map(function (string $file) {
-            return str_replace('.php', '', $file);
-        }, $files);
+        return array_map(fn(string $file) => str_replace('.php', '', $file), $files);
     }
 
     protected function resolvePlaybookDefinition($class): PlaybookDefinition

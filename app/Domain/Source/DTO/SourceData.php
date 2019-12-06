@@ -37,9 +37,7 @@ final class SourceData extends DataTransferObject
             'is_validated' => $source->is_validated ?? false,
             'language' => $request->get('language'),
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
-            'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
-                return (int) $id;
-            })->toArray(),
+            'topic_ids' => collect($request->getTopicIds())->filter()->map(fn($id) => (int) $id)->toArray(),
         ]);
     }
 
@@ -52,9 +50,7 @@ final class SourceData extends DataTransferObject
             'is_validated' => (bool) $request->get('is_validated'),
             'language' => $request->get('language'),
             'twitter_handle' => self::formatTwitterHandle($request->getTwitterHandle()),
-            'topic_ids' => collect($request->getTopicIds())->filter()->map(function ($id) {
-                return (int) $id;
-            })->toArray(),
+            'topic_ids' => collect($request->getTopicIds())->filter()->map(fn($id) => (int) $id)->toArray(),
         ]);
     }
 

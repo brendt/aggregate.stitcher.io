@@ -43,18 +43,14 @@ final class AdminSourceViewModel extends ViewModel
     public function topics(): array
     {
         return $this->source->topics
-            ->mapWithKeys(function (Topic $topic) {
-                return [$topic->id => $topic->name];
-            })
+            ->mapWithKeys(fn(Topic $topic) => [$topic->id => $topic->name])
             ->toArray();
     }
 
     public function topicOptions(): array
     {
         return Topic::all()
-            ->mapWithKeys(function (Topic $topic) {
-                return [$topic->id => $topic->name];
-            })
+            ->mapWithKeys(fn(Topic $topic) => [$topic->id => $topic->name])
             ->toArray();
     }
 

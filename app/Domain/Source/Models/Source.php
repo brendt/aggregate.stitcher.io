@@ -2,6 +2,7 @@
 
 namespace Domain\Source\Models;
 
+use App\Http\Controllers\AdminSourcesController;
 use App\Http\Controllers\SourceMutesController;
 use Carbon\Carbon;
 use Domain\Log\Collections\ErrorLogCollection;
@@ -188,9 +189,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
      */
     public function getTopicTags(): Collection
     {
-        return $this->topics->flatMap(function (Topic $topic) {
-            return $topic->tags;
-        });
+        return $this->topics->flatMap(fn(Topic $topic) => $topic->tags);
     }
 
     public function getPrimaryTopic(): ?Topic
@@ -222,7 +221,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
 
     public function getAdminUrl(): string
     {
-        return action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $this);
+        return action([AdminSourcesController::class, 'edit'], $this);
     }
 
     public function getErrorLogs(): ErrorLogCollection

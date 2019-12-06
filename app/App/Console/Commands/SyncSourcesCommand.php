@@ -28,9 +28,7 @@ final class SyncSourcesCommand extends Command
         $sources = Source::whereActive()->get();
 
         if ($this->argument('url')) {
-            $sources = $sources->filter(function (Source $source) {
-                return $source->url === $this->argument('url');
-            });
+            $sources = $sources->filter(fn(Source $source) => $source->url === $this->argument('url'));
         }
 
         if ($this->option('filter')) {
@@ -38,9 +36,7 @@ final class SyncSourcesCommand extends Command
 
             $this->syncSourceAction->setFilterUrl($filterUrl);
 
-            $sources = $sources->filter(function (Source $source) use ($filterUrl) {
-                return $source->website === parse_url($filterUrl, PHP_URL_HOST);
-            });
+            $sources = $sources->filter(fn(Source $source) => $source->website === parse_url($filterUrl, PHP_URL_HOST));
         }
 
         foreach ($sources as $source) {

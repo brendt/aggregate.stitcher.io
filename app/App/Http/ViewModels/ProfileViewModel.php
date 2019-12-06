@@ -32,12 +32,8 @@ class ProfileViewModel extends ViewModel
         return array_merge(
             [null => ''],
             $this->languageRepository->all()
-                ->reject(function (Language $language) {
-                    return $this->user->getLanguages()[$language->code] ?? false;
-                })
-                ->mapWithKeys(function (Language $language) {
-                    return [$language->code => $language->name];
-                })
+                ->reject(fn(Language $language) => $this->user->getLanguages()[$language->code] ?? false)
+                ->mapWithKeys(fn(Language $language) => [$language->code => $language->name])
                 ->toArray()
         );
     }
@@ -45,8 +41,6 @@ class ProfileViewModel extends ViewModel
     public function languages(): Collection
     {
         return collect($this->user->languages)
-            ->map(function (string $language) {
-                return $this->languageRepository->find($language);
-            });
+            ->map(fn(string $language) => $this->languageRepository->find($language));
     }
 }

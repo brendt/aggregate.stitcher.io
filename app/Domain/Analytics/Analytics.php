@@ -73,9 +73,7 @@ final class Analytics
             GROUP BY sources.website
         SQL);
 
-        $totalViews = array_reduce($countPerSource, function (int $total, $data) {
-            return $total + $data->count;
-        }, 0);
+        $totalViews = array_reduce($countPerSource, fn(int $total, $data) => $total + $data->count, 0);
 
         return round($totalViews / count($countPerSource));
     }
@@ -98,9 +96,7 @@ final class Analytics
 
         /** @var \Illuminate\Support\Collection $perMonth */
         foreach ($averagePerMonth as $month => $perMonth) {
-            $totalPerMonth = $perMonth->reduce(function (int $total, $data) {
-                return $total + $data->count;
-            }, 0);
+            $totalPerMonth = $perMonth->reduce(fn(int $total, $data) => $total + $data->count, 0);
 
             $averagePerMonth[$month] = round($totalPerMonth / $perMonth->count());
         }

@@ -40,9 +40,7 @@ final class SourceViewModel extends ViewModel
     public function topicOptions(): array
     {
         return Topic::all()
-            ->mapWithKeys(function (Topic $topic) {
-                return [$topic->id => $topic->name];
-            })
+            ->mapWithKeys(fn(Topic $topic) => [$topic->id => $topic->name])
             ->prepend(__('-'), null)
             ->toArray();
     }

@@ -44,9 +44,7 @@ class AdminTagViewModel extends ViewModel
     public function topicOptions(): array
     {
         return Topic::all()
-            ->mapWithKeys(function (Topic $topic) {
-                return [$topic->id => $topic->name];
-            })
+            ->mapWithKeys(fn(Topic $topic) => [$topic->id => $topic->name])
             ->toArray();
     }
 

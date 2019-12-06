@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Psr\Log\LoggerInterface;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Post;
@@ -50,7 +51,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->alias('bugsnag.multi', \Psr\Log\LoggerInterface::class);
+        $this->app->alias('bugsnag.multi', LoggerInterface::class);
 
         $this->app->singleton(QueryString::class, function () {
             /** @var \Illuminate\Http\Request $request */
@@ -67,9 +68,7 @@ class AppServiceProvider extends ServiceProvider
             return new Markdown($convertor);
         });
 
-        $this->app->singleton(Reader::class, function () {
-            return new RssReader();
-        });
+        $this->app->singleton(Reader::class, fn() => new RssReader());
 
         $this->app->bind(TwitterOAuth::class, function () {
             if (config('services.twitter.fake')) {
@@ -84,8 +83,6 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton(LanguageRepository::class, function () {
-            return new LanguageRepository(__DIR__ . '/../../languages.json');
-        });
+        $this->app->singleton(LanguageRepository::class, fn() => new LanguageRepository(__DIR__ . '/../../languages.json'));
     }
 }
