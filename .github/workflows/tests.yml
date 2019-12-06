@@ -1,0 +1,67 @@
+name: Tests (PHP)
+
+on: [push]
+
+jobs:
+    tests:
+        name: Tests
+        runs-on: ubuntu-latest
+        #        container:
+        #            image: spatie/github-actions:php7.4
+
+        steps:
+            -   uses: actions/checkout@v1
+
+            -   name: Setup PHP
+                uses: shivammathur/setup-php@v1
+                with:
+                    php-version: '7.4'
+                    extension-csv: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+                    coverage: none
+
+            -   name: Cache composer dependencies
+                uses: actions/cache@v1
+                with:
+                    path: vendor
+                    key: composer-v1-${{ hashFiles('composer.lock') }}
+
+            -   name: Run composer install
+                run: composer install -n --prefer-dist
+                env:
+                    APP_ENV: testing
+
+            -   name: Cache yarn dependencies
+                uses: actions/cache@v1
+                with:
+                    path: node_modules
+                    key: yarn-v2-${{ hashFiles('yarn.lock') }}
+
+            -   name: Run yarn
+                run: yarn && yarn dev
+
+            -   name: Prepare Laravel Application
+                run: |
+                    cp .env.example .env
+                    php artisan key:generate
+
+            -   name: Create sqlite database
+                run: touch db.sqlite
+
+            -   name: Run tests
+                run: ./vendor/bin/phpunit --stop-on-error
+                env:
+                    APP_ENV: testing
+                    CACHE_DRIVER: array
+                    SESSION_DRIVER: file
+                    DB_CONNECTION: sqlite
+                    DB_DATABASE: db.sqlite
+                    QUEUE_CONNECTION: sync
+                    DEBUGBAR_ENABLED: false
+                    DB_PREVENT_LAZY_LOADING: false
+
+            -   name: Upload artifacts
+                uses: actions/upload-artifact@master
+                with:
+                    name: Logs
+                    path: ./storage/logs
+
