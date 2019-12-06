@@ -108,7 +108,7 @@ class Preloader
 }
 
 (new Preloader())
-    ->paths(__DIR__ . '/vendor/laravel/framework/src/Illuminate')
+    ->paths(__DIR__ . '/vendor/laravel/framework/src/Illuminate/View')
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
