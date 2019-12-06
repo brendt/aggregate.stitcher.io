@@ -5,7 +5,7 @@ namespace App\Http\Queries;
 use App\Http\Filters\FuzzyFilter;
 use Domain\Source\Models\Source;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminSourcesQuery extends QueryBuilder
@@ -22,8 +22,8 @@ class AdminSourcesQuery extends QueryBuilder
         parent::__construct($query, $request);
 
         $this->allowedFilters([
-            Filter::exact('is_active'),
-            Filter::custom('search', new FuzzyFilter('website', 'url', 'twitter_handle', 'topics.name')),
+            AllowedFilter::exact('is_active'),
+            AllowedFilter::custom('search', new FuzzyFilter('website', 'url', 'twitter_handle', 'topics.name')),
         ]);
 
         $this->allowedSorts([

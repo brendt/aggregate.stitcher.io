@@ -14,8 +14,8 @@ final class SyncPopularityAction
 
     public function __construct(int $averageViewCount, int $averageVoteCount)
     {
-        $this->averageViewCount = $averageViewCount;
-        $this->averageVoteCount = $averageVoteCount;
+        $this->averageViewCount = $averageViewCount === 0 ? 1 : $averageViewCount;
+        $this->averageVoteCount = $averageVoteCount === 0 ? 1 : $averageVoteCount;
     }
 
     public function __invoke(Post $post): Post

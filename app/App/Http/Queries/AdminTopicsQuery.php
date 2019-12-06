@@ -5,7 +5,7 @@ namespace App\Http\Queries;
 use App\Http\Filters\FuzzyFilter;
 use Domain\Post\Models\Topic;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminTopicsQuery extends QueryBuilder
@@ -17,7 +17,7 @@ class AdminTopicsQuery extends QueryBuilder
         parent::__construct($query, $request);
 
         $this->allowedFilters([
-            Filter::custom('search', new FuzzyFilter(
+            AllowedFilter::custom('search', new FuzzyFilter(
                 'name'
             )),
         ]);

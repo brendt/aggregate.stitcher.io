@@ -8,7 +8,7 @@
             <a
                 href="{{ $paginator->previousPageUrl() }}"
                 rel="prev"
-                aria-label="@lang('pagination.previous')"
+                aria-label="Newer"
             >
                 {{ __('Newer') }}
             </a>
@@ -20,7 +20,7 @@
             <a
                 href="{{ $paginator->nextPageUrl() }}"
                 rel="prev"
-                aria-label="@lang('pagination.previous')"
+                aria-label="More"
             >
                 {{ __('More') }}
             </a>

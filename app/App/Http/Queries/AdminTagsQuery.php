@@ -5,7 +5,7 @@ namespace App\Http\Queries;
 use App\Http\Filters\FuzzyFilter;
 use Domain\Post\Models\Tag;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class AdminTagsQuery extends QueryBuilder
@@ -19,8 +19,8 @@ class AdminTagsQuery extends QueryBuilder
         parent::__construct($query, $request);
 
         $this->allowedFilters([
-            Filter::exact('topic_id'),
-            Filter::custom('search', new FuzzyFilter(
+            AllowedFilter::exact('topic_id'),
+            AllowedFilter::custom('search', new FuzzyFilter(
                 'keywords',
                 'tags.slug',
                 'topics.slug',

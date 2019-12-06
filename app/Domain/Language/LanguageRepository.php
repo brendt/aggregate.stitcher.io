@@ -13,7 +13,7 @@ final class LanguageRepository
     public function __construct(string $path)
     {
         /** @var \Illuminate\Support\Collection $contents */
-        $this->languages = Cache::remember("languages:{$path}", 60 * 24, function () use ($path) {
+        $this->languages = Cache::remember("languages:{$path}", 60 * 60 * 24, function () use ($path) {
             return collect(json_decode(file_get_contents($path), true))
                 ->mapWithKeys(function (array $data, string $code) {
                     return [$code => new Language($code, $data['name'], $data['native'])];

@@ -5,7 +5,7 @@ namespace App\Http\Queries;
 use App\Http\Filters\UnreadFilter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 abstract class PostsQuery extends QueryBuilder
@@ -42,11 +42,11 @@ abstract class PostsQuery extends QueryBuilder
         $this
             ->allowedSorts(['date_created'])
             ->allowedFilters([
-                Filter::exact('tag', 'tags.slug'),
-                Filter::exact('language', 'posts.language'),
-                Filter::exact('topic', 'topics.slug'),
-                Filter::exact('source', 'sources.website'),
-                Filter::custom('unread', new UnreadFilter($user)),
+                AllowedFilter::exact('tag', 'tags.slug'),
+                AllowedFilter::exact('language', 'posts.language'),
+                AllowedFilter::exact('topic', 'topics.slug'),
+                AllowedFilter::exact('source', 'sources.website'),
+                AllowedFilter::custom('unread', new UnreadFilter($user)),
             ])
             ->defaultSort('-date_created');
     }
