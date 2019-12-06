@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Domain\Post\DTO\PostData;
 use Domain\Post\Models\Post;
 use Illuminate\Console\Command;
 use Zend\Http\Client;
@@ -43,7 +42,6 @@ final class ValidateExistingPostsCommand extends Command
 
         $this->info('Done');
     }
-
 
     private function isValidated(string $url): bool
     {
