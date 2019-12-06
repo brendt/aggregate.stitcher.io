@@ -135,7 +135,7 @@ class Preloader
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Support',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Translation',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Validation',
-        __DIR__ . '/vendor/laravel/framework/src/Illuminate/View',
+//        __DIR__ . '/vendor/laravel/framework/src/Illuminate/View',
     )
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
