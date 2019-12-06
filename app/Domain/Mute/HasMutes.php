@@ -22,11 +22,11 @@ trait HasMutes
 
     public function scopeWhereNotMuted(Builder $builder, User $user): Builder
     {
-        return $builder->whereDoesntHave('mutes', fn(Builder $builder) => $builder->whereUser($user));
+        return $builder->whereDoesntHave('mutes', fn (Builder $builder) => $builder->whereUser($user));
     }
 
     public function scopeWhereMuted(Builder $builder, User $user): Builder
     {
-        return $builder->whereHas('mutes', fn(Builder $builder) => $builder->whereUser($user));
+        return $builder->whereHas('mutes', fn (Builder $builder) => $builder->whereUser($user));
     }
 }

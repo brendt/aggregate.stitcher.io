@@ -101,19 +101,19 @@ class Post extends Model implements Tweetable, Feedable
 
     public function scopeWhereUnread(Builder $builder, User $user): Builder
     {
-        return $builder->whereDoesntHave('views', fn(Builder $builder) => $builder->where('user_id', $user->id));
+        return $builder->whereDoesntHave('views', fn (Builder $builder) => $builder->where('user_id', $user->id));
     }
 
     public function scopeWhereNotMuted(Builder $builder, User $user): Builder
     {
         return $builder
-            ->whereDoesntHave('source', fn(Builder $builder) => $builder->whereMuted($user))
-            ->whereDoesntHave('tags', fn(Builder $builder) => $builder->whereMuted($user));
+            ->whereDoesntHave('source', fn (Builder $builder) => $builder->whereMuted($user))
+            ->whereDoesntHave('tags', fn (Builder $builder) => $builder->whereMuted($user));
     }
 
     public function scopeWhereTopic(Builder $builder, Topic $topic): Builder
     {
-        return $builder->whereHas('tags', fn(Builder $builder) => $builder->whereTopic($topic));
+        return $builder->whereHas('tags', fn (Builder $builder) => $builder->whereTopic($topic));
     }
 
     public function scopeWhereNotTweeted(Builder $builder): Builder

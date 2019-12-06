@@ -41,6 +41,6 @@ class View extends Model
 
     public function scopeWhereSource(Builder $builder, Source $source): Builder
     {
-        return $builder->whereHas('post', fn(Builder $builder) => $builder->where('source_id', $source->id));
+        return $builder->whereHas('post', fn (Builder $builder) => $builder->where('source_id', $source->id));
     }
 }

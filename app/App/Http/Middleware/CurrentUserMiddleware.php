@@ -9,7 +9,7 @@ class CurrentUserMiddleware
 {
     public function handle($request, Closure $next)
     {
-        app()->singleton(User::class, fn() => current_user());
+        app()->singleton(User::class, fn () => current_user());
 
         return $next($request);
     }

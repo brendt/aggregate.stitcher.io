@@ -23,7 +23,7 @@ final class LanguageViewModel extends ViewModel
             null => '-',
         ],
             $this->languageRepository->all()
-            ->mapWithKeys(fn(Language $language) => [$language->code => $language->name])
+            ->mapWithKeys(fn (Language $language) => [$language->code => $language->name])
             ->toArray()
         );
     }

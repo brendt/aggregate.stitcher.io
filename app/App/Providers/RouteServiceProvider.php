@@ -32,13 +32,13 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapBindings(): void
     {
-        Route::bind('post', fn(string $uuid): Post => Post::whereUuid($uuid)->firstOrFail());
+        Route::bind('post', fn (string $uuid): Post => Post::whereUuid($uuid)->firstOrFail());
 
-        Route::bind('topic', fn(string $slug): Topic => Topic::whereSlug($slug)->firstOrFail());
+        Route::bind('topic', fn (string $slug): Topic => Topic::whereSlug($slug)->firstOrFail());
 
-        Route::bind('tag', fn(string $slug): Tag => Tag::whereSlug($slug)->firstOrFail());
+        Route::bind('tag', fn (string $slug): Tag => Tag::whereSlug($slug)->firstOrFail());
 
-        Route::bind('sourceByWebsite', fn(string $website): Source => Source::whereWebsite($website)->firstOrFail());
+        Route::bind('sourceByWebsite', fn (string $website): Source => Source::whereWebsite($website)->firstOrFail());
     }
 
     protected function mapWebRoutes(): void

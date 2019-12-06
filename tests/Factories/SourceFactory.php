@@ -43,7 +43,8 @@ final class SourceFactory
         return (new CreateSourceAction(
             new ResolveTopicsAction(),
             new ValidateSourceAction(),
-            new MockMailer())
+            new MockMailer()
+        )
         )->__invoke(
             $user,
             new SourceData([

@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Psr\Log\LoggerInterface;
 use Abraham\TwitterOAuth\TwitterOAuth;
 use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Post;
@@ -18,6 +17,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\ServiceProvider;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
+use Psr\Log\LoggerInterface;
 use Spatie\BladeX\BladeX;
 use Spatie\QueryString\QueryString;
 use Support\Markdown;
@@ -68,7 +68,7 @@ class AppServiceProvider extends ServiceProvider
             return new Markdown($convertor);
         });
 
-        $this->app->singleton(Reader::class, fn() => new RssReader());
+        $this->app->singleton(Reader::class, fn () => new RssReader());
 
         $this->app->bind(TwitterOAuth::class, function () {
             if (config('services.twitter.fake')) {
@@ -83,6 +83,6 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton(LanguageRepository::class, fn() => new LanguageRepository(__DIR__ . '/../../languages.json'));
+        $this->app->singleton(LanguageRepository::class, fn () => new LanguageRepository(__DIR__ . '/../../languages.json'));
     }
 }

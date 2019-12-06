@@ -57,7 +57,7 @@ class RssEntryDecorator extends AbstractEntry
     {
         $title = $this->decoratedEntry->getTitle();
 
-        $title = preg_replace_callback("/(&#[0-9]+;)/", fn($match) => mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES"), $title);
+        $title = preg_replace_callback("/(&#[0-9]+;)/", fn ($match) => mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES"), $title);
 
         return html_entity_decode($title);
     }
@@ -167,13 +167,13 @@ class RssEntryDecorator extends AbstractEntry
         $threshold = 1;
 
         return collect($foundTags)
-            ->map(fn(array $keywords) => array_reduce($keywords, function (?int $sum, int $current) {
+            ->map(fn (array $keywords) => array_reduce($keywords, function (?int $sum, int $current) {
                 $sum ??= 0;
 
                 return $sum + $current;
             }))
-            ->filter(fn(int $count) => $count >= $threshold)
-            ->sortByDesc(fn(int $count) => $count)
+            ->filter(fn (int $count) => $count >= $threshold)
+            ->sortByDesc(fn (int $count) => $count)
             ->keys();
     }
 }

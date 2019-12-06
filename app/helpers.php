@@ -1,10 +1,10 @@
 <?php
 
 use Auth;
-use Illuminate\Http\Request;
 use Domain\User\Models\User;
 use Faker\Factory;
 use Faker\Generator;
+use Illuminate\Http\Request;
 use Spatie\QueryString\QueryString;
 use Support\Filterable;
 

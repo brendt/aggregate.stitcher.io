@@ -9,6 +9,6 @@ final class ErrorLogCollection extends Collection
 {
     public function lastWeek(): ErrorLogCollection
     {
-        return $this->filter(fn(ErrorLog $errorLog) => $errorLog->created_at > now()->subWeek());
+        return $this->filter(fn (ErrorLog $errorLog) => $errorLog->created_at > now()->subWeek());
     }
 }

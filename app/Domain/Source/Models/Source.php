@@ -189,7 +189,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
      */
     public function getTopicTags(): Collection
     {
-        return $this->topics->flatMap(fn(Topic $topic) => $topic->tags);
+        return $this->topics->flatMap(fn (Topic $topic) => $topic->tags);
     }
 
     public function getPrimaryTopic(): ?Topic
