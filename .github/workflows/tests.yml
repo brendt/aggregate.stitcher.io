@@ -30,14 +30,14 @@ jobs:
                 env:
                     APP_ENV: testing
 
-            -   name: Cache yarn dependencies
-                uses: actions/cache@v1
-                with:
-                    path: node_modules
-                    key: yarn-v2-${{ hashFiles('yarn.lock') }}
-
-            -   name: Run yarn
-                run: yarn && yarn dev
+#            -   name: Cache yarn dependencies
+#                uses: actions/cache@v1
+#                with:
+#                    path: node_modules
+#                    key: yarn-v2-${{ hashFiles('yarn.lock') }}
+#
+#            -   name: Run yarn
+#                run: yarn && yarn dev
 
             -   name: Prepare Laravel Application
                 run: |
