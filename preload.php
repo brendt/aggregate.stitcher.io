@@ -108,7 +108,35 @@ class Preloader
 }
 
 (new Preloader())
-    ->paths(__DIR__ . '/vendor/laravel/framework/src/Illuminate/View')
+    ->paths(
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Auth',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Broadcasting',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Cache',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Config',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Container',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Contracts',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Cookie',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Database',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Encryption',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Events',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Filesystem',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Foundation',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Hashing',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Http',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Log',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Mail',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Notifications',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Pagination',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Pipeline',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Queue',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Redis',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Routing',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Session',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Support',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Translation',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Validation',
+        __DIR__ . '/vendor/laravel/framework/src/Illuminate/View',
+    )
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
