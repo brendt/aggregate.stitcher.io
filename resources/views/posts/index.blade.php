@@ -13,9 +13,9 @@
             <ul class="flex w-full">
                 <li class="mr-6">
                     <active-link
-                        :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
+                        :href="action([\App\Feed\Controllers\PostsController::class, 'index'])"
                         :other="[
-                            action([\App\Http\Controllers\PostsController::class, 'all'])
+                            action([\App\Feed\Controllers\PostsController::class, 'all'])
                         ]"
                     >
                         {{ __('Discover') }}
@@ -23,7 +23,7 @@
                 </li>
                 <li class="mr-6">
                     <active-link
-                        :href="action([\App\Http\Controllers\PostsController::class, 'top'])"
+                        :href="action([\App\Feed\Controllers\PostsController::class, 'top'])"
                     >
                         {{ __('Top this week') }}
                     </active-link>

@@ -10,7 +10,7 @@
 
     <div class="mt-4">
         <form-component
-            :action="action([\App\Http\Controllers\AdminSourcesController::class, 'delete'], $source)"
+            :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'delete'], $source)"
             class="flex items-baseline"
         >
             <submit-button class="button-small bg-red-dark">

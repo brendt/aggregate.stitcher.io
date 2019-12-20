@@ -21,7 +21,7 @@
     </div>
 
     <form-component
-        :action="action([\App\Http\Controllers\GuestSourcesController::class, 'store'])"
+        :action="action([\App\User\Controllers\GuestSourcesController::class, 'store'])"
         class="mt-4"
     >
         <text-field

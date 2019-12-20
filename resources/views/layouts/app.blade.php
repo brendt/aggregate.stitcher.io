@@ -54,11 +54,11 @@
                     <ul class="menu text-sm text-grey-darker hidden md:block mt-4">
                         <li class="mb-2">
                             <active-link
-                                :href="action([\App\Http\Controllers\PostsController::class, 'index'])"
+                                :href="action([\App\Feed\Controllers\PostsController::class, 'index'])"
                                 :other="[
-                                    action([\App\Http\Controllers\PostsController::class, 'all']),
-                                    action([\App\Http\Controllers\PostsController::class, 'latest']),
-                                    action([\App\Http\Controllers\PostsController::class, 'top']),
+                                    action([\App\Feed\Controllers\PostsController::class, 'all']),
+                                    action([\App\Feed\Controllers\PostsController::class, 'latest']),
+                                    action([\App\Feed\Controllers\PostsController::class, 'top']),
                                 ]"
                             >
                                 {{ __('Feed') }}
@@ -73,7 +73,7 @@
                             </li>
                         @elseif(! current_user()->getPrimarySource())
                             <li class="mb-2">
-                                <active-link :href="action([\App\Http\Controllers\UserSourcesController::class, 'index'])">
+                                <active-link :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])">
                                     {{ __('Submit your feed') }}
                                 </active-link>
                             </li>
@@ -81,10 +81,10 @@
                         @if(current_user())
                             <li class="mb-2">
                                 <active-link
-                                    :href="action([\App\Http\Controllers\UserProfileController::class, 'index'])"
+                                    :href="action([\App\User\Controllers\UserProfileController::class, 'index'])"
                                     :other="[
-                                        action([\App\Http\Controllers\UserMutesController::class, 'index']),
-                                        action([\App\Http\Controllers\UserSourcesController::class, 'index']),
+                                        action([\App\User\Controllers\UserMutesController::class, 'index']),
+                                        action([\App\User\Controllers\UserSourcesController::class, 'index']),
                                     ]"
                                 >
                                     {{ __('Profile') }}
@@ -97,7 +97,7 @@
                             </li>
                             @if(current_user()->isAdmin())
                                 <li class="mt-6 mb-2">
-                                    <active-link :href="action([\App\Http\Controllers\AdminSourcesController::class, 'index'])">
+                                    <active-link :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])">
                                         {{ __('Admin') }}
                                     </active-link>
                                 </li>
@@ -109,12 +109,12 @@
                             @endif
                         @else
                             <li class="mb-2">
-                                <active-link :href="action([\App\Http\Controllers\Auth\LoginController::class, 'login'])">
+                                <active-link :href="action([\App\User\Controllers\LoginController::class, 'login'])">
                                     {{ __('Log in') }}
                                 </active-link>
                             </li>
                             <li class="mb-2">
-                                <active-link :href="action([\App\Http\Controllers\Auth\RegisterController::class, 'register'])">
+                                <active-link :href="action([\App\User\Controllers\RegisterController::class, 'register'])">
                                     {{ __('Register') }}
                                 </active-link>
                             </li>

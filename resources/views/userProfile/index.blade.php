@@ -26,7 +26,7 @@
         @endforeach
     </div>
 
-    <form-component :action="action([\App\Http\Controllers\UserProfileController::class, 'addLanguage'])" class="mt-4">
+    <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'addLanguage'])" class="mt-4">
         <select-field
             name="language"
             :label="__('New language')"
@@ -40,7 +40,7 @@
 
     <heading>{{ __('New password') }}</heading>
 
-    <form-component :action="action([\App\Http\Controllers\UserProfileController::class, 'updatePassword'])" class="mt-4">
+    <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'updatePassword'])" class="mt-4">
         <text-field
             name="password"
             type="password"

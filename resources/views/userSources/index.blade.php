@@ -18,7 +18,7 @@
 
     <form-component
         class="mt-8"
-        :action="action([\App\Http\Controllers\UserSourcesController::class, 'update'])"
+        :action="action([\App\User\Controllers\UserSourcesController::class, 'update'])"
     >
         <text-field
             name="url"

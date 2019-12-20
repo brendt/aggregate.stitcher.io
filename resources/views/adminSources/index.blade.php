@@ -112,7 +112,7 @@
                         @elseif($source->is_validated)
                             <post-button
                                 class="button button-small button-green"
-                                :action="action([\App\Http\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
+                                :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
                             >
                                 {{ __('Activate') }}
                             </post-button>
@@ -125,7 +125,7 @@
 
     <div class="mt-4">
         <form-component
-            :action="action([\App\Http\Controllers\AdminSourcesController::class, 'store'])"
+            :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'store'])"
             class="md:flex md:items-bottom md:justify-end"
         >
             <div class="md:hidden">

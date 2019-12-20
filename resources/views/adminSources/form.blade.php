@@ -36,7 +36,7 @@
 
     <form-component
         class="mt-8"
-        :action="action([\App\Http\Controllers\AdminSourcesController::class, 'update'], $source)"
+        :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'update'], $source)"
     >
         <div class="w-3/5">
             <text-field
@@ -96,14 +96,14 @@
         @if(!$source->is_active)
             <post-button
                 class="text-green font-bold py-4 md:px-3"
-                :action="action([\App\Http\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
+                :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
             >
                 {{ __('Activate') }}
             </post-button>
         @else
             <post-button
                 class="font-bold py-4 md:px-3"
-                :action="action([\App\Http\Controllers\AdminSourcesController::class, 'sync'], $source->uuid)"
+                :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'sync'], $source->uuid)"
             >
                 {{ __('Sync now') }}
             </post-button>

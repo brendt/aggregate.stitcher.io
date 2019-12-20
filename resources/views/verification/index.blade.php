@@ -8,7 +8,7 @@
     </p>
 
     <post-button
-        :action="action([\App\Http\Controllers\UserVerificationController::class, 'resend'])"
+        :action="action([\App\User\Controllers\UserVerificationController::class, 'resend'])"
         class="button mt-4"
     >
         {{ __('Resend the verification mail') }}
