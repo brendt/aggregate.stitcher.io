@@ -109,7 +109,7 @@ class Preloader
 
 (new Preloader())
     ->paths(
-        __DIR__ . '/app',
+//        __DIR__ . '/app',
 
 //        __DIR__ . '/vendor/laravel',
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/Auth',
@@ -141,6 +141,7 @@ class Preloader
 //        __DIR__ . '/vendor/laravel/framework/src/Illuminate/View',
     )
     ->ignore(
+        \Carbon\Traits\Date::class,
         \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
         \Illuminate\Log\LogManager::class,
