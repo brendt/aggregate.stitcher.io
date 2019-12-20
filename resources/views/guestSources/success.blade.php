@@ -11,7 +11,7 @@
                 Thanks for your suggestion! We'll review this RSS feed and add it if possible!
                 Meanwhile, you can read lots of good content <a href=\":url\" class=\"link\">here</a>.
             ", [
-                'url' => action([\App\Http\Controllers\PostsController::class, 'index'])
+                'url' => action([\App\Feed\Controllers\PostsController::class, 'index'])
             ]) !!}
         </p>
     </div>

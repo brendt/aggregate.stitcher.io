@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Http\Controllers\PostsController;
-use App\Http\Middleware\PageCacheMiddleware;
-use App\Http\Middleware\RedirectToUserFeedMiddleware;
+use App\Feed\Controllers\PostsController;
+use Support\Middleware\PageCacheMiddleware;
+use App\User\Middleware\RedirectToUserFeedMiddleware;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;

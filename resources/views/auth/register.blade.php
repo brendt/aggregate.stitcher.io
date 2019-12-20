@@ -14,7 +14,7 @@
         <p>
             You're also able to submit your own feed, which will then show up on aggregate.
             Do you want to know more about how aggregate works before registering?
-            You can read about it <a href="{{ action(\App\Http\Controllers\AboutController::class) }}" target="_blank" rel="noopener noreferrer">here</a>.
+            You can read about it <a href="{{ action(\App\Feed\Controllers\AboutController::class) }}" target="_blank" rel="noopener noreferrer">here</a>.
         </p>
     </div>
 
@@ -44,7 +44,7 @@
 
     <p class="mt-4 text-sm mt-8 text-grey-darker">
         {!! __('Already have an account? <a href=":register_url" class="link">Log in</a> instead.', [
-            'register_url' => action([\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])
+            'register_url' => action([\App\User\Controllers\LoginController::class, 'showLoginForm'])
         ]) !!}
     </p>
 @endcomponent

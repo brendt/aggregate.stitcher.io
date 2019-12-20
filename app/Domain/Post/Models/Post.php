@@ -2,8 +2,8 @@
 
 namespace Domain\Post\Models;
 
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\PostTweetController;
+use App\Feed\Controllers\PostsController;
+use App\Feed\Controllers\PostTweetController;
 use Domain\Model;
 use Domain\Post\Query\PostQueryBuilder;
 use Domain\Source\Models\Source;

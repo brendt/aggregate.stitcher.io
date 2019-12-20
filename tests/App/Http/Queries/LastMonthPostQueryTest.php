@@ -2,7 +2,7 @@
 
 namespace Tests\Domain\Post\Models;
 
-use App\Http\Queries\LastMonthPostsQuery;
+use App\Feed\Queries\LastMonthPostsQuery;
 use Carbon\Carbon;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\PostTag;

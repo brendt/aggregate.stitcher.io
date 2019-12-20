@@ -2,7 +2,7 @@
 
 namespace Domain\Post\DTO;
 
-use App\Http\Requests\AdminTagRequest;
+use App\Admin\Requests\AdminTagRequest;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
 use Spatie\DataTransferObject\DataTransferObject;

@@ -22,7 +22,7 @@
             {{ __('RSS') }}</a>&nbsp;–
         <a
             class="link text-grey-darker"
-            href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $source->website) }}"
+            href="{{ action([\App\Feed\Controllers\PostsController::class, 'source'], $source->website) }}"
         >
             {{ __('Filtered') }}
         </a>
@@ -85,7 +85,7 @@
                     {{ __('Save') }}
                 </submit-button>
 
-                <a class="ml-2" href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'index']) }}">
+                <a class="ml-2" href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'index']) }}">
                     {{ __('Back') }}
                 </a>
             </div>
@@ -110,7 +110,7 @@
         @endif
 
         <a
-            href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
+            href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'confirmDelete'], $source) }}"
             class="md:ml-2 text-red font-bold py-4 md:px-3"
         >
             {{ __('Delete') }}

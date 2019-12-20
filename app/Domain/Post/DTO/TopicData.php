@@ -2,7 +2,7 @@
 
 namespace Domain\Post\DTO;
 
-use App\Http\Requests\AdminTopicRequest;
+use App\Admin\Requests\AdminTopicRequest;
 use Domain\Post\Models\Topic;
 use Spatie\DataTransferObject\DataTransferObject;
 

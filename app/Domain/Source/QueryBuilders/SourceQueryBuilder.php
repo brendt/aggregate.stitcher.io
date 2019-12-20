@@ -2,7 +2,7 @@
 
 namespace Domain\Source\QueryBuilders;
 
-use App\Http\Requests\Request;
+use Support\Requests\Request;
 use Illuminate\Database\Eloquent\Builder;
 
 final class SourceQueryBuilder extends Builder

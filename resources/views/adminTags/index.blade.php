@@ -36,7 +36,7 @@
             @foreach ($tags as $tag)
                 <tr>
                     <td>
-                        <a href="{{ action([\App\Http\Controllers\AdminTagsController::class, 'edit'], $tag->slug) }}" class="link">
+                        <a href="{{ action([\App\Admin\Controllers\AdminTagsController::class, 'edit'], $tag->slug) }}" class="link">
                             {{ $tag->name }}
                         </a>
                     </td>
@@ -56,7 +56,7 @@
                 <td></td>
                 <td class="text-right">
                     <a
-                        href="{{ action([\App\Http\Controllers\AdminTagsController::class, 'create']) }}"
+                        href="{{ action([\App\Admin\Controllers\AdminTagsController::class, 'create']) }}"
                         class="button"
                     >
                         {{ __('New tag') }}

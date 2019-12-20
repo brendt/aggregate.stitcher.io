@@ -1,26 +1,26 @@
 <?php
 
-use App\Http\Controllers\AdminAnalyticsController;
-use App\Http\Controllers\AdminErrorLogController;
-use App\Http\Controllers\AdminSourcesController;
-use App\Http\Controllers\AdminTagsController;
-use App\Http\Controllers\AdminTopicsController;
-use App\Http\Controllers\Auth\ForgotPasswordController;
-use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\ResetPasswordController;
-use App\Http\Controllers\GuestSourcesController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\PostTweetController;
-use App\Http\Controllers\SourceMutesController;
-use App\Http\Controllers\TagMutesController;
-use App\Http\Controllers\TopicsController;
-use App\Http\Controllers\UserProfileController;
-use App\Http\Controllers\UserSourcesController;
-use App\Http\Controllers\UserMutesController;
-use App\Http\Controllers\UserVerificationController;
-use App\Http\Middleware\AdminMiddleware;
-use App\Http\Middleware\VerifiedUserMiddleware;
+use App\Admin\Controllers\AdminAnalyticsController;
+use App\Admin\Controllers\AdminErrorLogController;
+use App\Admin\Controllers\AdminSourcesController;
+use App\Admin\Controllers\AdminTagsController;
+use App\Admin\Controllers\AdminTopicsController;
+use App\User\Controllers\ForgotPasswordController;
+use App\User\Controllers\LoginController;
+use App\User\Controllers\RegisterController;
+use App\User\Controllers\ResetPasswordController;
+use App\User\Controllers\GuestSourcesController;
+use App\Feed\Controllers\PostsController;
+use App\Feed\Controllers\PostTweetController;
+use App\Feed\Controllers\SourceMutesController;
+use App\User\Controllers\TagMutesController;
+use App\Feed\Controllers\TopicsController;
+use App\User\Controllers\UserProfileController;
+use App\User\Controllers\UserSourcesController;
+use App\User\Controllers\UserMutesController;
+use App\User\Controllers\UserVerificationController;
+use App\Admin\Middleware\AdminMiddleware;
+use App\User\Middleware\VerifiedUserMiddleware;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('login', [LoginController::class, 'login']);

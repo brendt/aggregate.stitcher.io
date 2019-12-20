@@ -67,7 +67,7 @@
             </submit-button>
 
             @if($source)
-                <a href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'confirmDelete']) }}"
+                <a href="{{ action([\App\User\Controllers\UserSourcesController::class, 'confirmDelete']) }}"
                    class="
                 mt-2 p-2
                 leading-normal

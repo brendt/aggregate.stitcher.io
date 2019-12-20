@@ -20,3 +20,4 @@ package-lock.json
 .phpstorm.meta.php
 _ide_helper.php
 _ide_helper_models.php
+database/db.sqlite-journal

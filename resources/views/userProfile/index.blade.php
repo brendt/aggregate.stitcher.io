@@ -17,7 +17,7 @@
             <div class="mt-2">
                 {{ $language->name }}
                 <a
-                    href="{{ action([\App\Http\Controllers\UserProfileController::class, 'removeLanguage'], ['language' => $language->code]) }}"
+                    href="{{ action([\App\User\Controllers\UserProfileController::class, 'removeLanguage'], ['language' => $language->code]) }}"
                     class="text-red-dark font-bold"
                 >
                     X

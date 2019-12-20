@@ -2,14 +2,14 @@
 
 namespace App\Http;
 
-use App\Http\Middleware\Authenticate;
-use App\Http\Middleware\CheckForMaintenanceMode;
-use App\Http\Middleware\CurrentUserMiddleware;
-use App\Http\Middleware\EncryptCookies;
-use App\Http\Middleware\RedirectIfAuthenticated;
-use App\Http\Middleware\TrimStrings;
-use App\Http\Middleware\TrustProxies;
-use App\Http\Middleware\VerifyCsrfToken;
+use App\User\Middleware\Authenticate;
+use Support\Middleware\CheckForMaintenanceMode;
+use App\User\Middleware\CurrentUserMiddleware;
+use Support\Middleware\EncryptCookies;
+use App\User\Middleware\RedirectIfAuthenticated;
+use Support\Middleware\TrimStrings;
+use Support\Middleware\TrustProxies;
+use Support\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;

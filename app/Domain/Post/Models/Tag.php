@@ -2,7 +2,7 @@
 
 namespace Domain\Post\Models;
 
-use App\Http\Controllers\TagMutesController;
+use App\User\Controllers\TagMutesController;
 use Domain\Model;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;

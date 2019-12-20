@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Http\Controllers\UserVerificationController;
+use App\User\Controllers\UserVerificationController;
 use Domain\User\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;

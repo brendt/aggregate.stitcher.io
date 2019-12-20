@@ -22,7 +22,7 @@
             </submit-button>
 
             <a
-                href="{{ action([\App\Http\Controllers\UserSourcesController::class, 'index']) }}"
+                href="{{ action([\App\User\Controllers\UserSourcesController::class, 'index']) }}"
                 class="ml-3"
             >
                 {{ __('Cancel') }}

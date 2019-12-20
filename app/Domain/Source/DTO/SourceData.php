@@ -2,8 +2,8 @@
 
 namespace Domain\Source\DTO;
 
-use App\Http\Requests\AdminSourceRequest;
-use App\Http\Requests\SourceRequest;
+use App\Admin\Requests\AdminSourceRequest;
+use App\Feed\Requests\SourceRequest;
 use Domain\Source\Models\Source;
 use Spatie\DataTransferObject\DataTransferObject;
 

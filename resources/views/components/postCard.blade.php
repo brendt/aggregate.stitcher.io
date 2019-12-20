@@ -11,7 +11,7 @@
         <p class="mb-2">
             <a
                 class="text-xl font-bold font-title post-link {{ $user && $user->hasViewed($post) ? 'viewed' : '' }}"
-                href="{{ action([\App\Http\Controllers\PostsController::class, 'show'], $post) }}"
+                href="{{ action([\App\Feed\Controllers\PostsController::class, 'show'], $post) }}"
                 target="_blank" rel="noopener noreferrer"
             >
                 {{ $post->title }}
@@ -20,7 +20,7 @@
         </p>
 
         <div class="text-grey-darkest text-sm">
-            <a href="{{ action([\App\Http\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
+            <a href="{{ action([\App\Feed\Controllers\PostsController::class, 'source'], $post->source->website) }}" class="link">{{ $post->source->website }}</a>
             –
             {{ $post->relative_date }}
 

@@ -42,7 +42,7 @@
             {{ __('Save') }}
         </submit-button>
 
-        <a class="ml-2" href="{{ action([\App\Http\Controllers\AdminTagsController::class, 'index']) }}">
+        <a class="ml-2" href="{{ action([\App\Admin\Controllers\AdminTagsController::class, 'index']) }}">
             {{ __('Back') }}
         </a>
     </form-component>

@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\RssController;
+use App\Feed\Controllers\RssController;
 
 return [
     'feeds' => [

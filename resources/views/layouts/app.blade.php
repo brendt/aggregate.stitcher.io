@@ -67,7 +67,7 @@
 
                         @if(! current_user())
                             <li class="mb-2">
-                                <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm']) }}">
+                                <a href="{{ action([\App\User\Controllers\RegisterController::class, 'showRegistrationForm']) }}">
                                     {{ __('Submit your feed') }}
                                 </a>
                             </li>
@@ -91,7 +91,7 @@
                                 </active-link>
                             </li>
                             <li>
-                                <a href="{{ action([\App\Http\Controllers\Auth\LoginController::class, 'logout']) }}">
+                                <a href="{{ action([\App\User\Controllers\LoginController::class, 'logout']) }}">
                                     {{ __('Log out') }}
                                 </a>
                             </li>
@@ -159,7 +159,7 @@
                     </a>
                 </li>
                 <li class="mr-3 md:mr-6">
-                    <a href="{{ action(\App\Http\Controllers\PrivacyController::class) }}">
+                    <a href="{{ action(\App\User\Controllers\PrivacyController::class) }}">
                         Privacy &amp; disclaimer
                     </a>
                 </li>

@@ -19,7 +19,7 @@
             </p>
 
             <p class="mt-4">
-                Are you a content creator? <a class="link" href="{{ action([\App\Http\Controllers\GuestSourcesController::class, 'index']) }}">
+                Are you a content creator? <a class="link" href="{{ action([\App\User\Controllers\GuestSourcesController::class, 'index']) }}">
                     Submit your feed</a>.
             </p>
         </div>
@@ -34,7 +34,7 @@
     ></post-list>
 
     <div class="flex justify-center mt-8">
-        <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}" class="
+        <a href="{{ action([\App\User\Controllers\RegisterController::class, 'register']) }}" class="
             p-3 px-4
             leading-normal
             bg-primary text-white

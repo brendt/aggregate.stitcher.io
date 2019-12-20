@@ -73,7 +73,7 @@
 
                         @if($errorsLastWeek->isNotEmpty())
                              <a
-                                 href="{{ action([\App\Http\Controllers\AdminErrorLogController::class, 'index'], ['type' => $source->getMorphClass(), 'id' => $source->getKey()]) }}"
+                                 href="{{ action([\App\Admin\Controllers\AdminErrorLogController::class, 'index'], ['type' => $source->getMorphClass(), 'id' => $source->getKey()]) }}"
                                  class="text-sm text-red"
                              >
                                  {{ $errorsLastWeek->count() }} {{ \Illuminate\Support\Str::plural('error', $errorsLastWeek->count()) }} last week

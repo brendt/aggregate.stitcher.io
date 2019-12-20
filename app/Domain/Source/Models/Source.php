@@ -2,8 +2,8 @@
 
 namespace Domain\Source\Models;
 
-use App\Http\Controllers\AdminSourcesController;
-use App\Http\Controllers\SourceMutesController;
+use App\Admin\Controllers\AdminSourcesController;
+use App\Feed\Controllers\SourceMutesController;
 use Carbon\Carbon;
 use Domain\Log\Collections\ErrorLogCollection;
 use Domain\Log\Loggable;

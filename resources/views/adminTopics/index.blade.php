@@ -31,7 +31,7 @@
             @foreach ($topics as $topic)
                 <tr>
                     <td>
-                        <a href="{{ action([\App\Http\Controllers\AdminTopicsController::class, 'edit'], $topic->slug) }}" class="link">
+                        <a href="{{ action([\App\Admin\Controllers\AdminTopicsController::class, 'edit'], $topic->slug) }}" class="link">
                             {{ $topic->name }}
                         </a>
                     </td>
@@ -49,7 +49,7 @@
                 <td></td>
                 <td class="text-right">
                     <a
-                        href="{{ action([\App\Http\Controllers\AdminTopicsController::class, 'create']) }}"
+                        href="{{ action([\App\Admin\Controllers\AdminTopicsController::class, 'create']) }}"
                         class="button"
                     >
                         {{ __('New topic') }}

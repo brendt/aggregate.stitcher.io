@@ -15,7 +15,7 @@
 
         <p>
             If you'd like to make full use of the platform,
-            it's recommended to <a href="{{ action([\App\Http\Controllers\Auth\RegisterController::class, 'register']) }}">register an account</a> before adding your feed.
+            it's recommended to <a href="{{ action([\App\User\Controllers\RegisterController::class, 'register']) }}">register an account</a> before adding your feed.
             If you want to suggest a blog anonymously, you can use the form below.
         </p>
     </div>

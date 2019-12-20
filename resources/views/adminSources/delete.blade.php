@@ -18,7 +18,7 @@
             </submit-button>
 
             <a
-                href="{{ action([\App\Http\Controllers\AdminSourcesController::class, 'edit'], $source->uuid) }}"
+                href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'edit'], $source->uuid) }}"
                 class="ml-3"
             >
                 {{ __('Cancel') }}

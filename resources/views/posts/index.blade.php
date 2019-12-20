@@ -30,7 +30,7 @@
                 </li>
                 <li class="ml-auto">
                     <a
-                        href="{{ action([\App\Http\Controllers\GuestSourcesController::class, 'index']) }}"
+                        href="{{ action([\App\User\Controllers\GuestSourcesController::class, 'index']) }}"
                     >
                         <i class="far fa-lightbulb mr-2"></i>{{ __('Suggest a feed') }}
                     </a>

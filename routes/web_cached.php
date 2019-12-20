@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AboutController;
-use App\Http\Controllers\PostsController;
-use App\Http\Controllers\PrivacyController;
+use App\Feed\Controllers\AboutController;
+use App\Feed\Controllers\PostsController;
+use App\User\Controllers\PrivacyController;
 
 Route::get('/discover', [PostsController::class, 'all']);
 Route::get('latest', [PostsController::class, 'latest']);
