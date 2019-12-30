@@ -112,15 +112,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
 
     public function getPostByUrl(string $url): ?Post
     {
-        foreach ($this->posts as $post) {
-            if ($post->url !== $url) {
-                continue;
-            }
-
-            return $post;
-        }
-
-        return null;
+        return $this->posts->where('url', $url)->first();
     }
 
     public function getFilterValue(): string
@@ -155,19 +147,11 @@ class Source extends Model implements Filterable, Muteable, Loggable
 
     public function hasOtherPostOnSameDay(string $url, Carbon $date): bool
     {
-        foreach ($this->posts()->get() as $post) {
-            if ($post->url === $url) {
-                continue;
-            }
-
-            if (! $post->date_created->isSameDay($date)) {
-                continue;
-            }
-
-            return true;
-        }
-
-        return false;
+        return $this->posts()->get()
+            ->contains(function (Post $post) use ($url, $date) {
+                return $post->url === $url
+                    && $post->date_created->isSameDay($date);
+            });
     }
 
     public function markAsInvalid(): Source
