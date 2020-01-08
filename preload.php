@@ -113,8 +113,6 @@ class Preloader
         __DIR__ . '/vendor/laravel',
     )
     ->ignore(
-        \Nette\DI\Config\IAdapter::class,
-        \Carbon\Traits\Date::class,
         \PHPUnit\Framework\TestCase::class,
         \Illuminate\Filesystem\Cache::class,
         \Illuminate\Log\LogManager::class,
