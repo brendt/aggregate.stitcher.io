@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Feed\Controllers\PostsController;
-use Support\Middleware\PageCacheMiddleware;
 use App\User\Middleware\RedirectToUserFeedMiddleware;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
@@ -11,6 +10,7 @@ use Domain\Post\Models\Topic;
 use Domain\Source\Models\Source;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Support\Middleware\PageCacheMiddleware;
 
 class RouteServiceProvider extends ServiceProvider
 {

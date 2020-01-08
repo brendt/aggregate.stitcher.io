@@ -2,7 +2,6 @@
 
 namespace App\User\Controllers;
 
-use App\User\Controllers\UserSourcesController;
 use Domain\User\Actions\SendUserVerificationAction;
 use Domain\User\Actions\VerifyUserAction;
 use Domain\User\Models\User;

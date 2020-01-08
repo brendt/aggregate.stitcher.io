@@ -2,11 +2,10 @@
 
 namespace App\Admin\Controllers;
 
-use App\Console\Jobs\SyncSourceJob;
 use App\Admin\Queries\AdminSourcesQuery;
 use App\Admin\Requests\AdminSourceRequest;
-use Support\Requests\Request;
 use App\Admin\ViewModels\AdminSourceViewModel;
+use App\Console\Jobs\SyncSourceJob;
 use Domain\Language\LanguageRepository;
 use Domain\Source\Actions\ActivateSourceAction;
 use Domain\Source\Actions\CreateSourceAction;
@@ -16,6 +15,7 @@ use Domain\Source\Actions\UpdateSourceAction;
 use Domain\Source\DTO\SourceData;
 use Domain\Source\Models\Source;
 use Domain\User\Models\User;
+use Support\Requests\Request;
 
 final class AdminSourcesController
 {

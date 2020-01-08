@@ -2,7 +2,6 @@
 
 namespace App\Feed\Queries;
 
-use App\Feed\Queries\PostsQuery;
 use Carbon\Carbon;
 use Domain\Post\Models\Post;
 use Illuminate\Database\Eloquent\Collection;

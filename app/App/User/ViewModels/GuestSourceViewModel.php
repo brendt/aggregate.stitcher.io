@@ -2,7 +2,6 @@
 
 namespace App\User\ViewModels;
 
-use App\User\ViewModels\LanguageViewModel;
 use Domain\Language\LanguageRepository;
 use Domain\Post\Models\Topic;
 use Spatie\ViewModels\ViewModel;

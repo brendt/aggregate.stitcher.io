@@ -3,8 +3,8 @@
 namespace App\User\Requests;
 
 use App\Feed\Requests\SourceRequest;
-use Support\Rules\SupportedLanguageRule;
 use Domain\Source\Rules\UniqueSourceRule;
+use Support\Rules\SupportedLanguageRule;
 
 class UserSourceRequest extends SourceRequest
 {

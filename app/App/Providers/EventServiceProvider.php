@@ -2,8 +2,8 @@
 
 namespace App\Providers;
 
-use Support\PageCache\PageCacheSubscriber;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
+use Support\PageCache\PageCacheSubscriber;
 
 class EventServiceProvider extends ServiceProvider
 {

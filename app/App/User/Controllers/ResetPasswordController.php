@@ -2,11 +2,11 @@
 
 namespace App\User\Controllers;
 
-use Support\Controller;
 use Domain\User\Actions\ResetPasswordAction;
 use Domain\User\Models\User;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Support\Facades\Hash;
+use Support\Controller;
 
 final class ResetPasswordController extends Controller
 {

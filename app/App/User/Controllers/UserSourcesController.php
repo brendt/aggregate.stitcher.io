@@ -2,8 +2,8 @@
 
 namespace App\User\Controllers;
 
-use App\User\Requests\UserSourceRequest;
 use App\Feed\ViewModels\SourceViewModel;
+use App\User\Requests\UserSourceRequest;
 use Domain\Language\LanguageRepository;
 use Domain\Source\Actions\CreateSourceAction;
 use Domain\Source\Actions\DeleteSourceAction;

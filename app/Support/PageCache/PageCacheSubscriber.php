@@ -10,7 +10,6 @@ use Domain\Post\Events\VoteRemovedEvent;
 use Domain\Source\Events\SourceDeletedEvent;
 use Domain\User\Events\ChangeForUserEvent;
 use Illuminate\Events\Dispatcher;
-use Support\PageCache\PageCache;
 
 final class PageCacheSubscriber
 {

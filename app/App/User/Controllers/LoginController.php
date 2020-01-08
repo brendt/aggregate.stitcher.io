@@ -2,10 +2,10 @@
 
 namespace App\User\Controllers;
 
-use Support\Controller;
 use App\Feed\Controllers\PostsController;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Support\Controller;
 
 final class LoginController extends Controller
 {

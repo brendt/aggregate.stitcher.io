@@ -2,7 +2,6 @@
 
 namespace App\Feed\Queries;
 
-use App\Feed\Queries\PostsQuery;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;

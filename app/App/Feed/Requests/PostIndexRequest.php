@@ -2,8 +2,8 @@
 
 namespace App\Feed\Requests;
 
-use Support\Requests\Request;
 use Domain\Post\Models\Topic;
+use Support\Requests\Request;
 
 class PostIndexRequest extends Request
 {

@@ -3,13 +3,8 @@
 namespace App\Http;
 
 use App\User\Middleware\Authenticate;
-use Support\Middleware\CheckForMaintenanceMode;
 use App\User\Middleware\CurrentUserMiddleware;
-use Support\Middleware\EncryptCookies;
 use App\User\Middleware\RedirectIfAuthenticated;
-use Support\Middleware\TrimStrings;
-use Support\Middleware\TrustProxies;
-use Support\Middleware\VerifyCsrfToken;
 use Illuminate\Auth\Middleware\AuthenticateWithBasicAuth;
 use Illuminate\Auth\Middleware\Authorize;
 use Illuminate\Auth\Middleware\EnsureEmailIsVerified;
@@ -23,6 +18,11 @@ use Illuminate\Routing\Middleware\ThrottleRequests;
 use Illuminate\Routing\Middleware\ValidateSignature;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
+use Support\Middleware\CheckForMaintenanceMode;
+use Support\Middleware\EncryptCookies;
+use Support\Middleware\TrimStrings;
+use Support\Middleware\TrustProxies;
+use Support\Middleware\VerifyCsrfToken;
 
 class Kernel extends HttpKernel
 {

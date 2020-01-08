@@ -2,11 +2,11 @@
 
 namespace App\Admin\ViewModels;
 
-use Support\Requests\Request;
 use Domain\Analytics\Analytics;
 use Domain\Source\Models\Source;
 use Illuminate\Support\Collection;
 use Spatie\ViewModels\ViewModel;
+use Support\Requests\Request;
 
 final class AdminAnalyticsViewModel extends ViewModel
 {

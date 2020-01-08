@@ -2,12 +2,12 @@
 
 namespace App\User\Controllers;
 
-use Support\Controller;
 use App\Feed\Controllers\PostsController;
 use Domain\User\Actions\CreateUserAction;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Support\Controller;
 
 final class RegisterController extends Controller
 {

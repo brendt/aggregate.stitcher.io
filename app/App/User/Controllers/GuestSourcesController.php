@@ -2,7 +2,6 @@
 
 namespace App\User\Controllers;
 
-use App\User\Controllers\UserSourcesController;
 use App\User\Requests\GuestSourceRequest;
 use App\User\ViewModels\GuestSourceViewModel;
 use Domain\Language\LanguageRepository;

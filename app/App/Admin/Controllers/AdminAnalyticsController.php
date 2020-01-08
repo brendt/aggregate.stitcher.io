@@ -2,8 +2,8 @@
 
 namespace App\Admin\Controllers;
 
-use Support\Requests\Request;
 use App\Admin\ViewModels\AdminAnalyticsViewModel;
+use Support\Requests\Request;
 
 final class AdminAnalyticsController
 {
