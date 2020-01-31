@@ -16,7 +16,7 @@ class VoteButton extends Component
 
     protected RemoveVoteAction $removeVoteAction;
 
-    protected int $postId;
+    protected ?int $postId = null;
 
     protected int $voteCount;
 
@@ -41,6 +41,10 @@ class VoteButton extends Component
     public function toggleVote()
     {
         $post = Post::find($this->postId);
+
+        if (! $post) {
+            return;
+        }
 
         if ($this->user->votedFor($post)) {
             $this->removeVoteAction->__invoke($post, $this->user);
