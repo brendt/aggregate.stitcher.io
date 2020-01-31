@@ -67,7 +67,6 @@ class User extends BaseUser
     /**
      * @param Post|int $post
      *
-     * @return bool
      */
     public function votedFor($post): bool
     {
