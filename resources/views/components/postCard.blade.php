@@ -35,7 +35,7 @@
 
             @if($post->tags->isEmpty())
                 <div class="inline ml-1">
-                    @livewire('vote-button', $post->id)
+                    @livewire('vote-button', $post->id, $post->vote_count)
                 </div>
             @endif
 
@@ -68,7 +68,7 @@
                 </p>
 
                 <div class="ml-1">
-                    @livewire('vote-button', $post->id)
+                    @livewire('vote-button', $post->id, $post->vote_count)
                 </div>
             @endif
         </div>

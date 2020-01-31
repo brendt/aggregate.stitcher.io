@@ -64,10 +64,19 @@ class User extends BaseUser
         return $builder->where('is_admin', true);
     }
 
-    public function votedFor(Post $post): bool
+    /**
+     * @param Post|int $post
+     *
+     * @return bool
+     */
+    public function votedFor($post): bool
     {
+        $postId = $post instanceof Post
+            ? $post->id
+            : $post;
+
         foreach ($this->votes as $vote) {
-            if ($vote->post_id === $post->id) {
+            if ($vote->post_id === $postId) {
                 return true;
             }
         }

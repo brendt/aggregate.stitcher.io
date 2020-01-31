@@ -5,25 +5,25 @@ namespace App\Components;
 use Domain\Post\Actions\AddVoteAction;
 use Domain\Post\Actions\RemoveVoteAction;
 use Domain\Post\Models\Post;
+use Domain\User\Models\User;
 use Livewire\Component;
 
 class VoteButton extends Component
 {
-    /** @var \Domain\Post\Models\Post */
-    protected $post;
+    protected ?User $user = null;
 
-    /** @var \Domain\User\Models\User|null */
-    protected $user;
+    protected AddVoteAction $addVoteAction;
 
-    /** @var \Domain\Post\Actions\AddVoteAction */
-    protected $addVoteAction;
+    protected RemoveVoteAction $removeVoteAction;
 
-    /** @var \Domain\Post\Actions\RemoveVoteAction */
-    protected $removeVoteAction;
+    protected int $postId;
 
-    public function mount($postId)
+    protected int $voteCount;
+
+    public function mount($postId, $voteCount)
     {
-        $this->post = Post::find($postId);
+        $this->postId = $postId;
+        $this->voteCount = $voteCount;
         $this->user = current_user();
         $this->addVoteAction = app(AddVoteAction::class);
         $this->removeVoteAction = app(RemoveVoteAction::class);
@@ -32,19 +32,23 @@ class VoteButton extends Component
     public function render()
     {
         return view('components.voteButton', [
-            'hasVoted' => $this->user && $this->user->votedFor($this->post),
+            'hasVoted' => $this->user && $this->user->votedFor($this->postId),
             'user' => $this->user,
-            'post' => $this->post,
+            'voteCount' => $this->voteCount,
         ]);
     }
 
     public function toggleVote()
     {
-        if ($this->user->votedFor($this->post)) {
-            $this->removeVoteAction->__invoke($this->post, $this->user);
+        $post = Post::find($this->postId);
+
+        if ($this->user->votedFor($post)) {
+            $this->removeVoteAction->__invoke($post, $this->user);
         } else {
-            $this->addVoteAction->__invoke($this->post, $this->user);
+            $this->addVoteAction->__invoke($post, $this->user);
         }
+
+        $this->voteCount = $post->vote_count;
 
         $this->user->refresh();
     }
