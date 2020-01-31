@@ -12,11 +12,13 @@ class Preloader
 
     private array $fileMap;
 
+    private array $classMap;
+
     public function __construct(string ...$paths)
     {
         $this->paths = $paths;
-        $classMap = require __DIR__ . '/vendor/composer/autoload_classmap.php';
-        $this->fileMap = array_flip($classMap);
+        $this->classMap = require __DIR__ . '/vendor/composer/autoload_classmap.php';
+        $this->fileMap = array_flip($this->classMap);
     }
 
     public function paths(string ...$paths): Preloader
@@ -42,6 +44,8 @@ class Preloader
     public function load(): void
     {
         foreach ($this->paths as $path) {
+            $path = $this->classMap[$path] ?? $path;
+
             $this->loadPath(rtrim($path, '/'));
         }
 
@@ -109,8 +113,9 @@ class Preloader
 
 (new Preloader())
     ->paths(
-        __DIR__ . '/app',
-        __DIR__ . '/vendor/laravel',
+//        __DIR__ . '/app',
+//        __DIR__ . '/vendor/laravel',
+        ...require(__DIR__ . '/preload_map.php')
     )
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
@@ -120,4 +125,5 @@ class Preloader
         \Illuminate\Http\UploadedFile::class,
         \Illuminate\Support\Carbon::class,
         )
-    ->load();
+    ->load()
+;
