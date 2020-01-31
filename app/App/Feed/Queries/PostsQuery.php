@@ -22,7 +22,7 @@ abstract class PostsQuery extends QueryBuilder
             ->leftJoin('post_tags', 'post_tags.post_id', '=', 'posts.id')
             ->leftJoin('tags', 'tags.id', '=', 'post_tags.tag_id')
             ->leftJoin('topics', 'tags.topic_id', '=', 'topics.id')
-            ->with('tags', 'views', 'source')
+            ->with('tags', 'views', 'source', 'tweets')
             ->distinct()
             ->select('posts.*');
 
