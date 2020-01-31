@@ -113,9 +113,9 @@ class Preloader
 
 (new Preloader())
     ->paths(
-//        __DIR__ . '/app',
+        __DIR__ . '/app',
 //        __DIR__ . '/vendor/laravel',
-        ...require(__DIR__ . '/preload_map.php')
+//        ...require(__DIR__ . '/preload_map.php')
     )
     ->ignore(
         \PHPUnit\Framework\TestCase::class,
