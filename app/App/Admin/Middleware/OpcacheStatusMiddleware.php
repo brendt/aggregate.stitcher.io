@@ -17,7 +17,7 @@ final class OpcacheStatusMiddleware
         if (isset($opcacheStatus['preload_statistics'])) {
             ViewFacade::composer(
                 '*',
-                fn(View $view) => $view->with('preloadStatus', PreloadStatus::make(opcache_get_status()))
+                fn (View $view) => $view->with('preloadStatus', PreloadStatus::make(opcache_get_status()))
             );
         }
 
