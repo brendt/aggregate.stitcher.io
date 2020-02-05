@@ -5,6 +5,7 @@ use App\Admin\Controllers\AdminErrorLogController;
 use App\Admin\Controllers\AdminSourcesController;
 use App\Admin\Controllers\AdminTagsController;
 use App\Admin\Controllers\AdminTopicsController;
+use App\Admin\Middleware\OpcacheStatusMiddleware;
 use App\User\Controllers\ForgotPasswordController;
 use App\User\Controllers\LoginController;
 use App\User\Controllers\RegisterController;
@@ -60,7 +61,11 @@ Route::middleware('auth')->prefix('profile')->group(function () {
     Route::get('verify/{verificationToken}', [UserVerificationController::class, 'verify']);
 });
 
-Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
+Route::middleware([
+    'auth',
+    AdminMiddleware::class,
+    OpcacheStatusMiddleware::class,
+])->prefix('admin')->group(function () {
     Route::get('/analytics', [AdminAnalyticsController::class, 'index']);
 
     Route::get('/error-log/{type}/{id}', [AdminErrorLogController::class, 'index']);
