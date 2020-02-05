@@ -84,7 +84,13 @@ class Preloader
     {
         $class = $this->fileMap[$path] ?? null;
 
+        if (! $class) {
+            return;
+        }
+
         if ($this->shouldIgnore($class)) {
+            echo "[Preloader] Ignored `{$class}`" . PHP_EOL;
+
             return;
         }
 
@@ -97,7 +103,7 @@ class Preloader
 
     private function shouldIgnore(?string $name): bool
     {
-        if ($name === null) {
+        if (! $name) {
             return true;
         }
 
@@ -113,8 +119,8 @@ class Preloader
 
 (new Preloader())
     ->paths(
-//        __DIR__ . '/app',
-//        __DIR__ . '/vendor/laravel',
+        __DIR__ . '/app',
+        __DIR__ . '/vendor/laravel',
 //        ...require(__DIR__ . '/preload_map.php')
     )
     ->ignore(
@@ -124,6 +130,6 @@ class Preloader
         \Illuminate\Http\Testing\File::class,
         \Illuminate\Http\UploadedFile::class,
         \Illuminate\Support\Carbon::class,
+        'Illuminate\Foundation\Testing',
         )
-    ->load()
-;
+    ->load();
