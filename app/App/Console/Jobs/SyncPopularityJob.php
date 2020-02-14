@@ -9,6 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Support\PageCache\PageCache;
 
 final class SyncPopularityJob implements ShouldQueue
 {
@@ -29,5 +30,7 @@ final class SyncPopularityJob implements ShouldQueue
         foreach ($posts as $post) {
             ($this->syncPopularityAction)($post);
         }
+
+        PageCache::flush();
     }
 }
