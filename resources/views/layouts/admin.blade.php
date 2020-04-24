@@ -13,6 +13,11 @@
             >{{ __('Analytics') }}</active-link>
 
             <active-link
+                class="ml-4"
+                :href="action([\App\Admin\Controllers\AdminAnalyticsController::class, 'pageCache'])"
+            >{{ __('Analytics: page cache') }}</active-link>
+
+            <active-link
                 :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])"
                 class="ml-4"
             >{{ __('Sources') }}</active-link>

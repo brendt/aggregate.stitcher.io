@@ -67,6 +67,7 @@ Route::middleware([
     AdminStatusMiddleware::class,
 ])->prefix('admin')->group(function () {
     Route::get('/analytics', [AdminAnalyticsController::class, 'index']);
+    Route::get('/analytics/page-cache', [AdminAnalyticsController::class, 'pageCache']);
 
     Route::get('/error-log/{type}/{id}', [AdminErrorLogController::class, 'index']);
 
