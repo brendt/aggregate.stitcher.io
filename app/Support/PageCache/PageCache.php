@@ -20,7 +20,7 @@ final class PageCache
     private $cache;
 
     /** @var int */
-    private $defaultCacheTime = 600;
+    private $defaultCacheTime = 60 * 60 * 4;
 
     public static function flush(?User $user = null): void
     {
