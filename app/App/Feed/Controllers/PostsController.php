@@ -8,6 +8,7 @@ use App\Feed\Queries\LatestPostsQuery;
 use App\Feed\Queries\TopPostsQuery;
 use App\Feed\Requests\PostIndexRequest;
 use App\Feed\ViewModels\PostsViewModel;
+use App\User\ViewModels\UserInterestsViewModel;
 use Domain\Post\Actions\AddViewAction;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Tag;
@@ -39,6 +40,15 @@ final class PostsController
         PostIndexRequest $request,
         AllPostsQuery $query
     ) {
+        /** @var \Domain\User\Models\User|null $user */
+        $user = $request->user();
+
+        if ($user && $user->interests->isEmpty()) {
+            $viewModel = new UserInterestsViewModel($user);
+
+            return $viewModel->view('posts.noInterests');
+        }
+
         $posts = $query->paginate();
 
         $posts->appends($request->except('page'));

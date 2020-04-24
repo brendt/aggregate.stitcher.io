@@ -8,6 +8,12 @@
 ])
     <heading>Mutes</heading>
 
+    <div class="content">
+        <p>
+            Muted sourced will not be shown in your feed.
+        </p>
+    </div>
+
     @if(!count($mutes))
         <p class="mt-4">{{ __('You have no mutes configured.') }}</p>
     @endif

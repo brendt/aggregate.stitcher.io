@@ -5,11 +5,13 @@ namespace Domain\User\Models;
 use Domain\Mute\Models\Mute;
 use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\Topic;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Foundation\Auth\User as BaseUser;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Collection;
@@ -22,6 +24,7 @@ class User extends BaseUser
     protected $with = [
         'views',
         'votes',
+        'interests',
     ];
 
     protected $guarded = [];
@@ -57,6 +60,18 @@ class User extends BaseUser
     public function mutes(): HasMany
     {
         return $this->hasMany(Mute::class);
+    }
+
+    public function interests(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            Topic::class,
+            UserInterest::class,
+            'user_id',
+            'id',
+            'id',
+            'topic_id'
+        );
     }
 
     public function scopeWhereAdmin(Builder $builder): Builder

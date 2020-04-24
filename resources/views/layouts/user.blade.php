@@ -9,7 +9,12 @@
         <active-link
             :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])"
             class="ml-4"
-        >{{ __('My feed') }}</active-link>
+        >{{ __('My blog') }}</active-link>
+
+        <active-link
+            :href="action([\App\User\Controllers\UserInterestsController::class, 'index'])"
+            class="ml-4"
+        >{{ __('Interests') }}</active-link>
 
         <active-link
             :href="action([\App\User\Controllers\UserMutesController::class, 'index'])"

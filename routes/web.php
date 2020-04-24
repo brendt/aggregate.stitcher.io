@@ -16,6 +16,7 @@ use App\Feed\Controllers\PostTweetController;
 use App\Feed\Controllers\SourceMutesController;
 use App\User\Controllers\TagMutesController;
 use App\Feed\Controllers\TopicsController;
+use App\User\Controllers\UserInterestsController;
 use App\User\Controllers\UserProfileController;
 use App\User\Controllers\UserSourcesController;
 use App\User\Controllers\UserMutesController;
@@ -42,6 +43,9 @@ Route::middleware('auth')->prefix('profile')->group(function () {
         Route::post('sources', [UserSourcesController::class, 'update']);
         Route::get('sources/delete', [UserSourcesController::class, 'confirmDelete']);
         Route::post('sources/delete', [UserSourcesController::class, 'delete']);
+
+        Route::get('interests', [UserInterestsController::class, 'index']);
+        Route::post('interests', [UserInterestsController::class, 'update']);
 
         Route::get('edit', [UserProfileController::class, 'index']);
         Route::post('edit/password', [UserProfileController::class, 'updatePassword']);

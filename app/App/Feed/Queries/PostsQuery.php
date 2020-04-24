@@ -11,8 +11,8 @@ use Spatie\QueryBuilder\QueryBuilder;
 abstract class PostsQuery extends QueryBuilder
 {
     /**
-     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post
-     * @var \Illuminate\Http\Request
+     * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post $query
+     * @var \Illuminate\Http\Request $request
      */
     public function __construct(Builder $query, Request $request)
     {
@@ -34,6 +34,10 @@ abstract class PostsQuery extends QueryBuilder
 
             if ($user->getLanguages()->isNotEmpty()) {
                 $query->whereLanguageIn($user->getLanguages());
+            }
+
+            if ($user->interests->isNotEmpty()) {
+                $query->whereTopicIn($user->interests->pluck('id'));
             }
         }
 

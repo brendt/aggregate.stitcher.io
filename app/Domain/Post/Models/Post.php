@@ -116,6 +116,11 @@ class Post extends Model implements Tweetable, Feedable
         return $builder->whereHas('tags', fn (Builder $builder) => $builder->whereTopic($topic));
     }
 
+    public function scopeWhereTopicIn(Builder $builder, iterable $topicIds): Builder
+    {
+        return $builder->whereHas('tags', fn (Builder $builder) => $builder->whereIn('topic_id', $topicIds));
+    }
+
     public function scopeWhereNotTweeted(Builder $builder): Builder
     {
         return $builder->orWhereDoesntHave('tweets');
