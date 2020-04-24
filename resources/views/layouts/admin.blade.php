@@ -28,14 +28,24 @@
             >{{ __('Tags') }}</active-link>
         </div>
 
-        <div class="flex">
-                <span class="font-mono text-sm">
-                    @isset($preloadStatus)
-                        preloading enabled ({{$preloadStatus->classes_loaded}} classes, {{$preloadStatus->functions_loaded}} functions, {{$preloadStatus->memory_consumption}})
-                    @else
-                        preloading disabled
-                    @endisset
-                </span>
+        <div class="flex ">
+            <div class="font-mono text-sm ml-4">
+                <strong>pagecache</strong>
+                @isset($pageCacheEnabled)
+                    <span class="text-green">enabled</span>
+                @else
+                    <span class="text-red">disabled</span>
+                @endisset
+            </div>
+
+            <div class="font-mono text-sm ml-2">
+                <strong>preloading</strong>
+                @isset($preloadStatus)
+                    <span class="text-green">enabled</span> ({{$preloadStatus->classes_loaded}} classes, {{$preloadStatus->functions_loaded}} functions, {{$preloadStatus->memory_consumption}})
+                @else
+                    <span class="text-red">disabled</span>
+                @endisset
+            </div>
         </div>
     </nav>
 

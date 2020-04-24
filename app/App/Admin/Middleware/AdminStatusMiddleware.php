@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View as ViewFacade;
 use Illuminate\View\View;
 
-final class OpcacheStatusMiddleware
+final class AdminStatusMiddleware
 {
     public function handle(Request $request, Closure $next)
     {
@@ -18,6 +18,13 @@ final class OpcacheStatusMiddleware
             ViewFacade::composer(
                 '*',
                 fn (View $view) => $view->with('preloadStatus', PreloadStatus::make(opcache_get_status()))
+            );
+        }
+
+        if (config('app.page_cache')) {
+            ViewFacade::composer(
+                '*',
+                fn (View $view) => $view->with('pageCacheEnabled', true)
             );
         }
 
