@@ -18,7 +18,7 @@ class VoteButton extends Component
 
     protected ?int $postId = null;
 
-    protected int $voteCount;
+    protected int $voteCount = 0;
 
     public function mount($postId, $voteCount)
     {
