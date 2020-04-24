@@ -18,18 +18,18 @@ final class AdminPageCacheReportsModel extends ViewModel
     public function days()
     {
         return $this->pageCacheReports
-            ->map(fn(PageCacheReport $pageCacheReport) => $pageCacheReport->day->format('Y-m-d'));
+            ->map(fn (PageCacheReport $pageCacheReport) => $pageCacheReport->day->format('Y-m-d'));
     }
 
     public function hits()
     {
         return $this->pageCacheReports
-            ->map(fn(PageCacheReport $pageCacheReport) => $pageCacheReport->cache_hits);
+            ->map(fn (PageCacheReport $pageCacheReport) => $pageCacheReport->cache_hits);
     }
 
     public function misses()
     {
         return $this->pageCacheReports
-            ->map(fn(PageCacheReport $pageCacheReport) => $pageCacheReport->cache_misses);
+            ->map(fn (PageCacheReport $pageCacheReport) => $pageCacheReport->cache_misses);
     }
 }
