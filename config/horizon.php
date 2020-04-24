@@ -121,6 +121,14 @@ return [
                 'processes' => 10,
                 'tries' => 3,
             ],
+
+            'supervisor-2' => [
+                'connection' => 'redis',
+                'queue' => ['sync'],
+                'balance' => 'simple',
+                'processes' => 1,
+                'tries' => 1,
+            ],
         ],
 
         'local' => [
@@ -130,6 +138,14 @@ return [
                 'balance' => 'simple',
                 'processes' => 3,
                 'tries' => 3,
+            ],
+
+            'supervisor-2' => [
+                'connection' => 'redis',
+                'queue' => ['sync'],
+                'balance' => 'simple',
+                'processes' => 1,
+                'tries' => 1,
             ],
         ],
     ],

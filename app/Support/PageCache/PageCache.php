@@ -2,6 +2,7 @@
 
 namespace Support\PageCache;
 
+use App\Console\Jobs\PageCacheViewJob;
 use Closure;
 use Domain\User\Models\User;
 use Exception;
@@ -73,8 +74,12 @@ final class PageCache
 
             $this->cache->put($this->key, $payload, 60 * $this->defaultCacheTime);
 
+            dispatch(PageCacheViewJob::forRequest($request, false));
+
             Log::debug("Cache miss on {$this->key}");
         } else {
+            dispatch(PageCacheViewJob::forRequest($request, true));
+
             Log::debug("Cache hit on {$this->key}");
         }
 

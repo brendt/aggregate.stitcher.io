@@ -41,7 +41,7 @@
         "zendframework/zend-http": "^2.8"
     },
     "require-dev" : {
-        "barryvdh/laravel-ide-helper": "^2.6.2",
+        "barryvdh/laravel-ide-helper": "^2.7",
         "beyondcode/laravel-dump-server": "~1.0",
         "filp/whoops": "~2.0",
         "friendsofphp/php-cs-fixer": "^2.4",
