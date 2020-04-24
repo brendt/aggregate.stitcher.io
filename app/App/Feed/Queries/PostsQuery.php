@@ -12,7 +12,7 @@ abstract class PostsQuery extends QueryBuilder
 {
     /**
      * @var \Illuminate\Database\Eloquent\Builder|\Domain\Post\Models\Post
-     * @var \Illuminate\Http\Request $request
+     * @var \Illuminate\Http\Request
      */
     public function __construct(Builder $query, Request $request)
     {
