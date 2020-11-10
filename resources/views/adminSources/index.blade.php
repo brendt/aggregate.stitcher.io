@@ -7,48 +7,48 @@
     'title' => __('Sources'),
 ])
     <div class="md:flex md:justify-between md:items-baseline">
-        <heading class="mt-4 md:mt-0">{{ __('Sources') }}</heading>
+        <x-heading class="mt-4 md:mt-0">{{ __('Sources') }}</x-heading>
 
-        <search-field
+        <x-search-field
             :current-url="$currentUrl"
             :current-search-query="$currentSearchQuery"
-        ></search-field>
+        ></x-search-field>
     </div>
 
     <div class="md-max:mt-2">
-        <filter-button
+        <x-filter-button
             name="is_active"
             value="0"
         >
             {{ __('Show only inactive sources') }}
-        </filter-button>
+        </x-filter-button>
     </div>
 
     <table class="table mt-4 truncate">
         <thead class="md-max:hidden">
             <tr>
                 <th>
-                    <sort-link name="url">
+                    <x-sort-link name="url">
                         {{ __('Name') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th>
-                    <sort-link name="is_validated">
+                    <x-sort-link name="is_validated">
                         {{ __('Feed') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th>
                     {{ __('Topics') }}
                 </th>
                 <th class="text-right lg-max:hidden">
-                    <sort-link name="post_count">
+                    <x-sort-link name="post_count">
                         {{ __('Posts') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th class="text-right  lg-max:hidden">
-                    <sort-link name="created_at">
+                    <x-sort-link name="created_at">
                         {{ __('Date created') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th>
                 </th>
@@ -110,12 +110,12 @@
                                 {{ __('Active') }}
                             </span>
                         @elseif($source->is_validated)
-                            <post-button
+                            <x-post-button
                                 class="button button-small button-green"
                                 :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
                             >
                                 {{ __('Activate') }}
-                            </post-button>
+                            </x-post-button>
                         @endif
                     </td>
                 </tr>
@@ -132,19 +132,19 @@
                 <label for="url">{{ __('Source URL:') }}</label>
             </div>
 
-            <text-field
+            <x-text-field
                 name="url"
                 label=""
-            ></text-field>
+            ></x-text-field>
 
-            <submit-button class="md:ml-4 button-small">
+            <x-submit-button class="md:ml-4 button-small">
                 <span class="md:hidden">
                     {{ __('Add') }}
                 </span>
                 <span class="md-max:hidden">
                     {{ __('Add source') }}
                 </span>
-            </submit-button>
+            </x-submit-button>
         </form-component>
     </div>
 

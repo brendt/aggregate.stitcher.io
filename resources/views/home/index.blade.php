@@ -25,13 +25,13 @@
         </div>
     </div>
 
-    <post-list
+    <x-post-list
         :posts="$posts"
         :user="$user"
         :donation-index="$donationIndex"
         :show-pagination="false"
         :show-donation="false"
-    ></post-list>
+    ></x-post-list>
 
     <div class="flex justify-center mt-8">
         <a href="{{ action([\App\User\Controllers\RegisterController::class, 'register']) }}" class="

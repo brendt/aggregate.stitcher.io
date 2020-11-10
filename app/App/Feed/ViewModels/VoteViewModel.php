@@ -4,7 +4,7 @@ namespace App\Feed\ViewModels;
 
 use Domain\Post\Models\Post;
 use Domain\User\Models\User;
-use Spatie\BladeX\ViewModel;
+use Spatie\ViewModels\ViewModel;
 
 class VoteViewModel extends ViewModel
 {

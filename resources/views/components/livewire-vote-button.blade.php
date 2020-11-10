@@ -8,13 +8,17 @@
          "
          wire:click="toggleVote"
      >
-         <upvote-icon/>
+         <x-upvote-icon/>
 
-         <span class="vote-count ml-1 text-sm text-grey-darkest">{{ $voteCount ?: 'vote' }}</span>
+         @if ($voteCount)
+            <span class="vote-count ml-1 text-sm text-grey-darkest font-bold">{{ $voteCount }}</span>
+         @else
+            <span class="vote-count ml-1 text-sm text-red font-bold">vote</span>
+         @endif
      </button>
 @else
     <a href="{{ action([\App\User\Controllers\RegisterController::class, 'showRegistrationForm']) }}">
-        <upvote-icon></upvote-icon>
+        <x-upvote-icon></x-upvote-icon>
         <span class="vote-count ml-1 text-sm text-grey-darkest">{{ $voteCount ?: 'vote' }}</span>
     </a>
 @endif

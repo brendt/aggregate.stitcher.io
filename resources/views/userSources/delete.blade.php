@@ -6,7 +6,7 @@
 @component('layouts.admin', [
     'title' => __('Delete feed'),
 ])
-    <heading>{{ __("Are you sure you want to delete your feed?") }}</heading>
+    <x-heading>{{ __("Are you sure you want to delete your feed?") }}</x-heading>
 
     <div class="content">
         <p>All data related to your feed, views and votes will be removed.</p>
@@ -17,9 +17,9 @@
             :action="action([\App\User\Controllers\UserSourcesController::class, 'delete'], $source)"
             class="flex items-baseline"
         >
-            <submit-button class="button-small bg-red-dark">
+            <x-submit-button class="button-small bg-red-dark">
                 {{ __('Yes, delete') }}
-            </submit-button>
+            </x-submit-button>
 
             <a
                 href="{{ action([\App\User\Controllers\UserSourcesController::class, 'index']) }}"

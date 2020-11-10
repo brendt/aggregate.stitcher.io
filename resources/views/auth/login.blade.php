@@ -5,29 +5,29 @@
         {{ __('Login') }}
     </h1>
 
-    <form-component :action="route('login')">
-        <email-field
+    <x-form-component :action="route('login')">
+        <x-email-field
             name="email"
             :label="__('Email')"
             autofocus
-        ></email-field>
+        ></x-email-field>
 
-        <password-field
+        <x-password-field
             name="password"
             :label="__('Password')"
-        ></password-field>
+        ></x-password-field>
 
         <div class="flex justify-between items-center mt-2">
-            <checkbox-field
+            <x-checkbox-field
                 name="remember"
                 :label="__('Remember me')"
-            ></checkbox-field>
+            ></x-checkbox-field>
 
-            <submit-button>
+            <x-submit-button>
                 {{ __('Log in') }}
-            </submit-button>
+            </x-submit-button>
         </div>
-    </form-component>
+    </x-form-component>
 
     <p class="mt-4 text-sm mt-8 text-grey-darker">
         {!! __('Don\'t have an account? <a href=":register_url" class="link">Register</a> instead.', [

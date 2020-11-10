@@ -4,7 +4,7 @@ namespace App\User\ViewModels;
 
 use Domain\Language\Language;
 use Domain\Language\LanguageRepository;
-use Spatie\BladeX\ViewModel;
+use Spatie\ViewModels\ViewModel;
 
 final class LanguageViewModel extends ViewModel
 {

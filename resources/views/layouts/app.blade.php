@@ -30,7 +30,7 @@
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
     <script defer src="{{ mix('js/app.js') }}"></script>
 
-    @livewireAssets
+    @livewireStyles
 </head>
 <body class="bg-black md:p-3 min-h-screen flex flex-col">
     <div class="bg-white flex-1 flex pb-8">
@@ -53,7 +53,7 @@
                     </button>
                     <ul class="menu text-sm text-grey-darker hidden md:block mt-4">
                         <li class="mb-2">
-                            <active-link
+                            <x-active-link
                                 :href="action([\App\Feed\Controllers\PostsController::class, 'index'])"
                                 :other="[
                                     action([\App\Feed\Controllers\PostsController::class, 'all']),
@@ -62,7 +62,7 @@
                                 ]"
                             >
                                 {{ __('Feed') }}
-                            </active-link>
+                            </x-active-link>
                         </li>
 
                         @if(! current_user())
@@ -73,14 +73,14 @@
                             </li>
                         @elseif(! current_user()->getPrimarySource())
                             <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])">
+                                <x-active-link :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])">
                                     {{ __('Submit your feed') }}
-                                </active-link>
+                                </x-active-link>
                             </li>
                         @endif
                         @if(current_user())
                             <li class="mb-2">
-                                <active-link
+                                <x-active-link
                                     :href="action([\App\User\Controllers\UserProfileController::class, 'index'])"
                                     :other="[
                                         action([\App\User\Controllers\UserMutesController::class, 'index']),
@@ -88,7 +88,7 @@
                                     ]"
                                 >
                                     {{ __('Profile') }}
-                                </active-link>
+                                </x-active-link>
                             </li>
                             <li>
                                 <a href="{{ action([\App\User\Controllers\LoginController::class, 'logout']) }}">
@@ -97,26 +97,26 @@
                             </li>
                             @if(current_user()->isAdmin())
                                 <li class="mt-6 mb-2">
-                                    <active-link :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])">
+                                    <x-active-link :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])">
                                         {{ __('Admin') }}
-                                    </active-link>
+                                    </x-active-link>
                                 </li>
                                 <li>
-                                    <active-link href="/horizon" target="_blank" rel="noopener noreferrer">
+                                    <x-active-link href="/horizon" target="_blank" rel="noopener noreferrer">
                                         {{ __('Horizon') }}
-                                    </active-link>
+                                    </x-active-link>
                                 </li>
                             @endif
                         @else
                             <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\LoginController::class, 'login'])">
+                                <x-active-link :href="action([\App\User\Controllers\LoginController::class, 'login'])">
                                     {{ __('Log in') }}
-                                </active-link>
+                                </x-active-link>
                             </li>
                             <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\RegisterController::class, 'register'])">
+                                <x-active-link :href="action([\App\User\Controllers\RegisterController::class, 'register'])">
                                     {{ __('Register') }}
-                                </active-link>
+                                </x-active-link>
                             </li>
                         @endif
                     </ul>
@@ -185,5 +185,6 @@
 
         gtag('config', '{{ config('app.analytics_id') }}');
     </script>
+    @livewireScripts
 </body>
 </html>
