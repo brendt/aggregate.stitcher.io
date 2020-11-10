@@ -6,28 +6,28 @@
     </h1>
 
     <form-component :action="route('password.update')">
-        <email-field
+        <x-email-field
             name="email"
             :label="__('Email')"
             autofocus
-        ></email-field>
+        ></x-email-field>
 
-        <password-field
+        <x-password-field
             name="password"
             :label="__('Password')"
-        ></password-field>
+        ></x-password-field>
 
-        <password-field
+        <x-password-field
             name="password_confirmation"
             :label="__('Confirm your password')"
-        ></password-field>
+        ></x-password-field>
 
         <input type="hidden" name="token" value="{{ $token }}">
 
         <div class="flex justify-between items-center mt-2">
-            <submit-button>
+            <x-submit-button>
                 {{ __('Reset') }}
-            </submit-button>
+            </x-submit-button>
         </div>
     </form-component>
 @endcomponent

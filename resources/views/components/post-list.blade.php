@@ -8,15 +8,11 @@
 
 <section>
     @foreach($posts as $post)
-        @if ($showDonation && $loop->index === $donationIndex)
-            <donation-card></donation-card>
-        @endif
-
-        <post-card
+        <x-post-card
             :post="$post"
             :user="$user"
             :last="$loop->last"
-        ></post-card>
+        ></x-post-card>
     @endforeach
 </section>
 

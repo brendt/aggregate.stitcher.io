@@ -6,26 +6,26 @@
     'title' => __('Tags'),
 ])
     <div class="flex justify-between">
-        <heading>{{ __('Tags') }}</heading>
+        <x-heading>{{ __('Tags') }}</x-heading>
 
-        <search-field
+        <x-search-field
             :current-url="$currentUrl"
             :current-search-query="$currentSearchQuery"
-        ></search-field>
+        ></x-search-field>
     </div>
 
     <table class="table mt-4">
         <thead>
             <tr>
                 <th>
-                    <sort-link name="tags.name">
+                    <x-sort-link name="tags.name">
                         {{ __('Name') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th>
-                    <sort-link name="topics.name">
+                    <x-sort-link name="topics.name">
                         {{ __('Topic') }}
-                    </sort-link>
+                    </x-sort-link>
                 </th>
                 <th>
                     {{ __('Keywords') }}

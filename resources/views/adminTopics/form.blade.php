@@ -5,23 +5,23 @@
 @component('layouts.admin', [
     'title' => $topic ? $topic->name : 'New topic',
 ])
-    <heading>
+    <x-heading>
         {{ __('Topic') }}: {{ $topic ? $topic->name : 'New topic' }}
-    </heading>
+    </x-heading>
 
     <form-component
         class="mt-2"
         :action="$storeUrl"
     >
-        <text-field
+        <x-text-field
             name="name"
             :label="__('Name')"
             :initial-value="$name"
-        ></text-field>
+        ></x-text-field>
 
-        <submit-button class="mt-3">
+        <x-submit-button class="mt-3">
             {{ __('Save') }}
-        </submit-button>
+        </x-submit-button>
 
         <a class="ml-2" href="{{ action([\App\Admin\Controllers\AdminTopicsController::class, 'index']) }}">
             {{ __('Back') }}

@@ -19,26 +19,26 @@
     </div>
 
     <form-component :action="route('register')" class="mt-8">
-        <email-field
+        <x-email-field
             name="email"
             :label="__('Email')"
             autofocus
-        ></email-field>
+        ></x-email-field>
 
-        <password-field
+        <x-password-field
             name="password"
             :label="__('Password')"
-        ></password-field>
+        ></x-password-field>
 
-        <password-field
+        <x-password-field
             name="password_confirmation"
             :label="__('Repeat password')"
-        ></password-field>
+        ></x-password-field>
 
         <div class="flex justify-end items-center mt-2">
-            <submit-button>
+            <x-submit-button>
                 {{ __('Register') }}
-            </submit-button>
+            </x-submit-button>
         </div>
     </form-component>
 

@@ -7,7 +7,7 @@
 @component('layouts.admin', [
     'title' => __('Analytics'),
 ])
-    <heading>{{ __('Analytics') }}</heading>
+    <x-heading>{{ __('Analytics') }}</x-heading>
 
     <div class="flex flex-wrap mt-4">
         <div class="lg:w-1/2 lg:pr-4">
@@ -16,14 +16,14 @@
                     <tr>
                         <th>{{ __('Source') }}</th>
                         <th class="text-right">
-                            <sort-link name="view_count">
+                            <x-sort-link name="view_count">
                                 {{ __('Views') }}
-                            </sort-link>
+                            </x-sort-link>
                         </th>
                         <th class="text-right">
-                            <sort-link name="vote_count">
+                            <x-sort-link name="vote_count">
                                 {{ __('Votes') }}
-                            </sort-link>
+                            </x-sort-link>
                         </th>
                     </tr>
                 </thead>
@@ -109,21 +109,21 @@
 
         <div class="lg:w-1/2 lg:pl-4">
             <div class="mt-2 lg-max:hidden">
-                <source-chart :views-per-day="$viewsPerDay" height="175"></source-chart>
+                <x-source-chart :views-per-day="$viewsPerDay" height="175"></x-source-chart>
             </div>
 
             <div class="mt-2 lg-max:hidden">
-                <line-chart
+                <x-line-chart
                     :data="$averageViewsPerSourcePerMonth"
                     label="Average views per month"
                     background-color="rgba(135, 149, 10, .2)"
                     border-color="rgba(135, 149, 10, 1)"
                     height="175"
-                ></line-chart>
+                ></x-line-chart>
             </div>
 
             <div class="mt-2 lg-max:hidden">
-                <source-chart :votes-per-day="$votesPerDay" height="175"></source-chart>
+                <x-source-chart :votes-per-day="$votesPerDay" height="175"></x-source-chart>
             </div>
         </div>
 

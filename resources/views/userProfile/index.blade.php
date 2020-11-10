@@ -6,7 +6,7 @@
 @component('layouts.user', [
     'title' => __('My profile')
 ])
-    <heading>{{ __('Languages') }}</heading>
+    <x-heading>{{ __('Languages') }}</x-heading>
 
     <p class="mt-2">
         Specify which languages you want showing up in your feed.
@@ -27,35 +27,35 @@
     </div>
 
     <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'addLanguage'])" class="mt-4">
-        <select-field
+        <x-select-field
             name="language"
             :label="__('New language')"
             :options="$languageOptions"
-        ></select-field>
+        ></x-select-field>
 
-        <submit-button class="mt-3">
+        <x-submit-button class="mt-3">
             {{ __('Add language') }}
-        </submit-button>
+        </x-submit-button>
     </form-component>
 
-    <heading>{{ __('New password') }}</heading>
+    <x-heading>{{ __('New password') }}</x-heading>
 
     <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'updatePassword'])" class="mt-4">
-        <text-field
+        <x-text-field
             name="password"
             type="password"
             :label="__('New password')"
-        ></text-field>
+        ></x-text-field>
 
-        <text-field
+        <x-text-field
             name="password_confirmation"
             type="password"
             :label="__('Confirm new password')"
-        ></text-field>
+        ></x-text-field>
 
-        <submit-button class="mt-3">
+        <x-submit-button class="mt-3">
             {{ __('Save') }}
-        </submit-button>
+        </x-submit-button>
     </form-component>
 
 @endcomponent

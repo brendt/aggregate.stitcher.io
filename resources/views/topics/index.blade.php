@@ -5,9 +5,9 @@
 @component('layouts.app', [
     'title' => __('Topics'),
 ])
-    <heading>
+    <x-heading>
         {{ __('Topics') }}
-    </heading>
+    </x-heading>
 
     <nav class="mt-4">
         @foreach($topics as $topic)
