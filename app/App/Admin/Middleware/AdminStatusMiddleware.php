@@ -17,20 +17,20 @@ final class AdminStatusMiddleware
         if (isset($opcacheStatus['preload_statistics'])) {
             ViewFacade::composer(
                 '*',
-                fn(View $view) => $view->with('preloadStatus', PreloadStatus::make(opcache_get_status()))
+                fn (View $view) => $view->with('preloadStatus', PreloadStatus::make(opcache_get_status()))
             );
         }
 
         if (config('app.page_cache')) {
             ViewFacade::composer(
                 '*',
-                fn(View $view) => $view->with('pageCacheEnabled', true)
+                fn (View $view) => $view->with('pageCacheEnabled', true)
             );
         }
 
         ViewFacade::composer(
             '*',
-            fn(View $view) => $view->with('currentCommit', trim(shell_exec('git rev-parse HEAD')))
+            fn (View $view) => $view->with('currentCommit', trim(shell_exec('git rev-parse HEAD')))
         );
 
         return $next($request);
