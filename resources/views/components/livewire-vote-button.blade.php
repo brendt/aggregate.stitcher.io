@@ -19,6 +19,6 @@
 @else
     <a href="{{ action([\App\User\Controllers\RegisterController::class, 'showRegistrationForm']) }}">
         <x-upvote-icon></x-upvote-icon>
-        <span class="vote-count ml-1 text-sm text-grey-darkest">{{ $voteCount ?: 'vote' }}</span>
+        <span class="vote-count ml-1 text-sm text-red font-bold">vote</span>
     </a>
 @endif
