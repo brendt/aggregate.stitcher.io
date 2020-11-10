@@ -51,6 +51,13 @@
                     <span class="text-red">disabled</span>
                 @endisset
             </div>
+
+            @isset($currentCommit)
+                <div class="font-mono text-sm ml-2">
+                    <strong>Commit</strong>
+                    <span class="text-green">{{ $currentCommit }}</span>
+                </div>
+            @endisset
         </div>
     </nav>
 
