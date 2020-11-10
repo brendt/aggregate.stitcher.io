@@ -2,7 +2,6 @@
 
 namespace App\Exceptions;
 
-use Exception;
 use Illuminate\Foundation\Exceptions\Handler as BaseExceptionHandler;
 use Throwable;
 
