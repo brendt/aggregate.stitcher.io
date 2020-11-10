@@ -8,10 +8,6 @@
 
 <section>
     @foreach($posts as $post)
-        @if ($showDonation && $loop->index === $donationIndex)
-            <x-donation-card></x-donation-card>
-        @endif
-
         <x-post-card
             :post="$post"
             :user="$user"
