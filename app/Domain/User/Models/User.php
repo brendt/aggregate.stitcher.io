@@ -9,6 +9,7 @@ use Domain\Post\Models\Topic;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
+use Domain\Spam\Models\Spam;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -60,6 +61,10 @@ class User extends BaseUser
     public function mutes(): HasMany
     {
         return $this->hasMany(Mute::class);
+    }
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Spam::class);
     }
 
     public function interests(): HasManyThrough
@@ -113,6 +118,16 @@ class User extends BaseUser
     {
         foreach ($this->mutes as $mute) {
             if ($mute->muteableEquals($muteable)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    public function hasReported(Source $source): bool
+    {
+        foreach ($this->reports as $report) {
+            if ($report->source->is($source)) {
                 return true;
             }
         }

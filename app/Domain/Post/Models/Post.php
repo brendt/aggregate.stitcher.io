@@ -55,7 +55,7 @@ class Post extends Model implements Tweetable, Feedable
 
     public function votes(): HasMany
     {
-        return $this->hasMany(Vote::class);
+        return $this->hasMany(Spam::class);
     }
 
     public function votesThisWeek(): HasMany

@@ -47,7 +47,7 @@
                             {{ __('Mute source') }}
                         </post-button>
                     @endif
-                    @if(! $user->hasMuted($post->source))
+                    @if(! $user->hasReported($post->source))
                         –
                         <post-button :action="$post->source->getReportUrl()" :inline="true">
                             {{ __('Report source') }}

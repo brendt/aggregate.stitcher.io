@@ -6,6 +6,7 @@ use App\Admin\Controllers\AdminSourcesController;
 use App\Admin\Controllers\AdminTagsController;
 use App\Admin\Controllers\AdminTopicsController;
 use App\Admin\Middleware\AdminStatusMiddleware;
+use App\Feed\Controllers\SourceReportsController;
 use App\User\Controllers\ForgotPasswordController;
 use App\User\Controllers\LoginController;
 use App\User\Controllers\RegisterController;
@@ -55,6 +56,9 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
     Route::post('sources/{source}/mute', [SourceMutesController::class, 'store']);
     Route::post('sources/{source}/unmute', [SourceMutesController::class, 'delete']);
+
+    Route::post('sources/{source}/report', [SourceReportsController::class, 'store']);
+
 
     Route::post('tags/{tag}/mute', [TagMutesController::class, 'store']);
     Route::post('tags/{tag}/unmute', [TagMutesController::class, 'delete']);

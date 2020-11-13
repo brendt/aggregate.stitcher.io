@@ -2,6 +2,7 @@
 
 namespace Support\PageCache;
 
+use App\Events\SourceReportEvent;
 use Domain\Mute\Events\MuteChangedEvent;
 use Domain\Post\Events\PostCreatedEvent;
 use Domain\Post\Events\PostUpdatedEvent;
@@ -30,6 +31,7 @@ final class PageCacheSubscriber
                 PostCreatedEvent::class,
                 PostUpdatedEvent::class,
                 SourceDeletedEvent::class,
+                SourceReportEvent::class
             ],
             self::class . "@flushCache"
         );

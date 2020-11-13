@@ -13,6 +13,7 @@ final class SourceReportsController
         Source $source,
         SourceReportAction $reportAction
     ) {
+
         $reportAction($user, $source);
 
         return redirect()->back();
