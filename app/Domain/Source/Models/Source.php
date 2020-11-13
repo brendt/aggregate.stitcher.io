@@ -15,7 +15,6 @@ use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Topic;
 use Domain\Source\QueryBuilders\SourceQueryBuilder;
-use Domain\Spam\Actions\SourceReportAction;
 use Domain\User\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -151,7 +150,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
     }
     public function getReportUrl(): string
     {
-        return action([SourceReportsController::class, 'store'], $this);
+            return action([SourceReportsController::class, 'store'], $this);
     }
     public function isInactive(): bool
     {

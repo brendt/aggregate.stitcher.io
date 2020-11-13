@@ -49,8 +49,8 @@
                     @endif
                     @if(! $user->hasReported($post->source))
                         –
-                        <post-button :action="$post->source->getReportUrl()" :inline="true">
-                            {{ __('Report source') }}
+                            <post-button method="get" :action="$post->source->getReportUrl()" :inline="true">
+                                {{ __('Report source') }}
                         </post-button>
                     @endif
                     @if($user->isAdmin() && ! $post->hasBeenTweeted())

@@ -5,24 +5,24 @@ use App\Admin\Controllers\AdminErrorLogController;
 use App\Admin\Controllers\AdminSourcesController;
 use App\Admin\Controllers\AdminTagsController;
 use App\Admin\Controllers\AdminTopicsController;
+use App\Admin\Middleware\AdminMiddleware;
 use App\Admin\Middleware\AdminStatusMiddleware;
-use App\Feed\Controllers\SourceReportsController;
-use App\User\Controllers\ForgotPasswordController;
-use App\User\Controllers\LoginController;
-use App\User\Controllers\RegisterController;
-use App\User\Controllers\ResetPasswordController;
-use App\User\Controllers\GuestSourcesController;
 use App\Feed\Controllers\PostsController;
 use App\Feed\Controllers\PostTweetController;
 use App\Feed\Controllers\SourceMutesController;
-use App\User\Controllers\TagMutesController;
+use App\Feed\Controllers\SourceReportsController;
 use App\Feed\Controllers\TopicsController;
+use App\User\Controllers\ForgotPasswordController;
+use App\User\Controllers\GuestSourcesController;
+use App\User\Controllers\LoginController;
+use App\User\Controllers\RegisterController;
+use App\User\Controllers\ResetPasswordController;
+use App\User\Controllers\TagMutesController;
 use App\User\Controllers\UserInterestsController;
+use App\User\Controllers\UserMutesController;
 use App\User\Controllers\UserProfileController;
 use App\User\Controllers\UserSourcesController;
-use App\User\Controllers\UserMutesController;
 use App\User\Controllers\UserVerificationController;
-use App\Admin\Middleware\AdminMiddleware;
 use App\User\Middleware\VerifiedUserMiddleware;
 
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -56,7 +56,7 @@ Route::middleware('auth')->prefix('profile')->group(function () {
 
     Route::post('sources/{source}/mute', [SourceMutesController::class, 'store']);
     Route::post('sources/{source}/unmute', [SourceMutesController::class, 'delete']);
-
+    Route::get('sources/{source}/report', [SourceReportsController::class, 'showReportForm']);
     Route::post('sources/{source}/report', [SourceReportsController::class, 'store']);
 
 

@@ -10,13 +10,15 @@ use Domain\User\Models\User;
 
 final class SourceReportAction
 {
-    public function __invoke(User $user, Source $source): void
+    public function __invoke(User $user, Source $source, string $report): void
     {
-        $spam = Spam::create([
-                                 'user_id' => $user->id,
-                                 'source_id' => $source->id
-                             ]);
-
+        $spam = Spam::create(
+            [
+                'user_id' => $user->id,
+                'source_id' => $source->id,
+                'report' => $report
+            ]
+        );
         event(SourceReportEvent::new($spam));
     }
 }
