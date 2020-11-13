@@ -2,7 +2,6 @@
 
 namespace Domain\Spam\Events;
 
-
 use Domain\Spam\Models\Spam;
 use Domain\User\Events\ChangeForUserEvent;
 use Domain\User\Models\User;
@@ -15,7 +14,6 @@ final class SourceReportEvent extends DataTransferObject implements ChangeForUse
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
-    /** @var Spam */
     public $spam;
 
     public static function new(Spam $spam): SourceReportEvent
