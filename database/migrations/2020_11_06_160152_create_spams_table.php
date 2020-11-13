@@ -17,8 +17,8 @@ class CreateSpamsTable extends Migration
             $table->increments('id');
             $table->uuid('uuid')->unique();
 
-            $table->unsignedInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->unsignedInteger('source_id');
+            $table->foreign('source_id')->references('id')->on('sources')->onDelete('cascade');
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

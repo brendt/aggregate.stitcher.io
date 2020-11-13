@@ -47,6 +47,12 @@
                             {{ __('Mute source') }}
                         </post-button>
                     @endif
+                    @if(! $user->hasMuted($post->source))
+                        –
+                        <post-button :action="$post->source->getReportUrl()" :inline="true">
+                            {{ __('Report source') }}
+                        </post-button>
+                    @endif
                     @if($user->isAdmin() && ! $post->hasBeenTweeted())
                         –
                         <ajax-button

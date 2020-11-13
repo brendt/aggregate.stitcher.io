@@ -4,6 +4,7 @@ namespace Domain\Source\Models;
 
 use App\Admin\Controllers\AdminSourcesController;
 use App\Feed\Controllers\SourceMutesController;
+use App\Feed\Controllers\SourceReportsController;
 use Carbon\Carbon;
 use Domain\Log\Collections\ErrorLogCollection;
 use Domain\Log\Loggable;
@@ -14,6 +15,7 @@ use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Topic;
 use Domain\Source\QueryBuilders\SourceQueryBuilder;
+use Domain\Spam\Actions\SourceReportAction;
 use Domain\User\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -147,7 +149,10 @@ class Source extends Model implements Filterable, Muteable, Loggable
     {
         return action([SourceMutesController::class, 'delete'], $this);
     }
-
+    public function getReportUrl(): string
+    {
+        return action([SourceReportsController::class, 'store'], $this);
+    }
     public function isInactive(): bool
     {
         return ! $this->is_active;
