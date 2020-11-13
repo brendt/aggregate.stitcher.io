@@ -2,13 +2,14 @@
 
 namespace Support\PageCache;
 
-use App\Events\SourceReportEvent;
+
 use Domain\Mute\Events\MuteChangedEvent;
 use Domain\Post\Events\PostCreatedEvent;
 use Domain\Post\Events\PostUpdatedEvent;
 use Domain\Post\Events\VoteCreatedEvent;
 use Domain\Post\Events\VoteRemovedEvent;
 use Domain\Source\Events\SourceDeletedEvent;
+use Domain\Spam\Events\SourceReportEvent;
 use Domain\User\Events\ChangeForUserEvent;
 use Illuminate\Events\Dispatcher;
 
