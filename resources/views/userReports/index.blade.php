@@ -21,7 +21,6 @@
         <textarea-field
                 required
                 name="report"
-                :label="__('Reason :')"
         ></textarea-field>
 
 
