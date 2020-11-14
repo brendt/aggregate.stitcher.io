@@ -8,11 +8,9 @@
         {{$report->user->name}}
 
     </header>
-    <section class="leading-normal">
+    <section class="leading-normal border-solid border-4 border-gray-600 p-2">
         <p class="mb-2">
             {{$report->report}}
         </p>
-
-
     </section>
 </article>
