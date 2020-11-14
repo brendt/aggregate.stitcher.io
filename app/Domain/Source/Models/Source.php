@@ -15,6 +15,7 @@ use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
 use Domain\Post\Models\Topic;
 use Domain\Source\QueryBuilders\SourceQueryBuilder;
+use Domain\Spam\Models\Spam;
 use Domain\User\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -63,6 +64,11 @@ class Source extends Model implements Filterable, Muteable, Loggable
         return $this->hasMany(Post::class);
     }
 
+    public function reports(): HasMany
+    {
+        return $this->hasMany(Spam::class);
+    }
+
     public function sourceTopics(): HasMany
     {
         return $this->hasMany(SourceTopic::class);
@@ -102,7 +108,6 @@ class Source extends Model implements Filterable, Muteable, Loggable
         if (! Str::startsWith($url, ['http://', 'https://'])) {
             $url = 'http://' . $url;
         }
-
         $this->attributes['url'] = $url;
     }
 
@@ -111,13 +116,17 @@ class Source extends Model implements Filterable, Muteable, Loggable
         return $builder->where('is_validated', false);
     }
 
+    public function scopeReported(Builder $builder): Builder
+    {
+        return $builder->whereHas('reports');
+    }
+
     public function getPostByUrl(string $url): ?Post
     {
         foreach ($this->posts as $post) {
             if ($post->url !== $url) {
                 continue;
             }
-
             return $post;
         }
 

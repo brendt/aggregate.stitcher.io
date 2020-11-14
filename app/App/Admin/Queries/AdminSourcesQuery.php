@@ -15,16 +15,20 @@ class AdminSourcesQuery extends QueryBuilder
         $query = Source::query()
             ->leftJoin('source_topics', 'source_topics.source_id', '=', 'sources.id')
             ->leftJoin('topics', 'topics.id', '=', 'source_topics.topic_id')
+            ->leftJoin('spams', 'spams.source_id', '=', 'sources.id')
             ->select('sources.*')
-            ->with('topics')
+            ->with(['topics'])
+            ->withCount(['reports'])
             ->distinct();
 
         parent::__construct($query, $request);
 
-        $this->allowedFilters([
-            AllowedFilter::exact('is_active'),
-            AllowedFilter::custom('search', new FuzzyFilter('website', 'url', 'twitter_handle', 'topics.name')),
-        ]);
+        $this->allowedFilters(
+            [
+                AllowedFilter::exact('is_active'),
+                AllowedFilter::scope('reported'),
+                AllowedFilter::custom('search', new FuzzyFilter('website', 'url', 'twitter_handle', 'topics.name')),
+            ]);
 
         $this->allowedSorts([
             'post_count',

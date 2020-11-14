@@ -10,49 +10,61 @@
         <heading class="mt-4 md:mt-0">{{ __('Sources') }}</heading>
 
         <search-field
-            :current-url="$currentUrl"
-            :current-search-query="$currentSearchQuery"
+                :current-url="$currentUrl"
+                :current-search-query="$currentSearchQuery"
         ></search-field>
     </div>
 
     <div class="md-max:mt-2">
         <filter-button
-            name="is_active"
-            value="0"
+                name="is_active"
+                value="0"
         >
             {{ __('Show only inactive sources') }}
+        </filter-button>
+    </div>
+    <br>
+    <div class="md-max:mt-2">
+        <filter-button
+                name="reported"
+                value="1"
+        >
+            {{ __('Show only reported sources') }}
         </filter-button>
     </div>
 
     <table class="table mt-4 truncate">
         <thead class="md-max:hidden">
-            <tr>
-                <th>
-                    <sort-link name="url">
-                        {{ __('Name') }}
-                    </sort-link>
+        <tr>
+            <th>
+                <sort-link name="url">
+                    {{ __('Name') }}
+                </sort-link>
                 </th>
                 <th>
                     <sort-link name="is_validated">
                         {{ __('Feed') }}
                     </sort-link>
                 </th>
-                <th>
-                    {{ __('Topics') }}
-                </th>
-                <th class="text-right lg-max:hidden">
-                    <sort-link name="post_count">
-                        {{ __('Posts') }}
-                    </sort-link>
-                </th>
-                <th class="text-right  lg-max:hidden">
-                    <sort-link name="created_at">
-                        {{ __('Date created') }}
-                    </sort-link>
-                </th>
-                <th>
-                </th>
-            </tr>
+            <th>
+                {{ __('Topics') }}
+            </th>
+            <th class="text-right lg-max:hidden">
+                <sort-link name="post_count">
+                    {{ __('Posts') }}
+                </sort-link>
+            </th>
+            <th class="text-right lg-max:hidden">
+                {{ __('Reports') }}
+            </th>
+            <th class="text-right  lg-max:hidden">
+                <sort-link name="created_at">
+                    {{ __('Date created') }}
+                </sort-link>
+            </th>
+            <th>
+            </th>
+        </tr>
         </thead>
         <tbody>
             @foreach ($sources as $source)
@@ -100,6 +112,9 @@
                     </td>
                     <td class="text-right md-max:hidden lg-max:hidden">
                         {{ $source->post_count }}
+                    </td>
+                    <td class="text-right md-max:hidden lg-max:hidden">
+                        {{ $source->reports_count }}
                     </td>
                     <td class="text-right md-max:hidden  lg-max:hidden">
                         {{ $source->created_at->toDateTimeString() }}
