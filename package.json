@@ -12,7 +12,7 @@
     "url": "git@github.com:spatie-custom/blender.git"
   },
   "scripts": {
-    "dev": "NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "dev": "cross-env node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "production": "NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "format": "prettier --write 'resources/assets/**/*.{css,js,vue}'",
@@ -22,6 +22,7 @@
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "caniuse-lite": "^1.0.30000697",
     "chart.js": "^2.8.0",
+    "cross-env": "^7.0.2",
     "eslint": "^4.19.1",
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-vue": "^4.4.0",
@@ -32,5 +33,8 @@
     "tailwindcss": "^0.7.2",
     "vue": "^2.5.17",
     "vue-data-component": "^1.0.0-alpha.33"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.2.0"
   }
 }
