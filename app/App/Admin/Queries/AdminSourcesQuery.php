@@ -15,7 +15,7 @@ class AdminSourcesQuery extends QueryBuilder
         $query = Source::query()
             ->leftJoin('source_topics', 'source_topics.source_id', '=', 'sources.id')
             ->leftJoin('topics', 'topics.id', '=', 'source_topics.topic_id')
-            ->leftJoin('spams', 'spams.source_id', '=', 'sources.id')
+            ->leftJoin('post_reports', 'post_reports.source_id', '=', 'sources.id')
             ->select('sources.*')
             ->with(['topics'])
             ->withCount(['reports'])

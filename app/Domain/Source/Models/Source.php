@@ -13,9 +13,10 @@ use Domain\Model;
 use Domain\Mute\HasMutes;
 use Domain\Mute\Muteable;
 use Domain\Post\Models\Post;
+use Domain\Post\Models\Tag;
 use Domain\Post\Models\Topic;
 use Domain\Source\QueryBuilders\SourceQueryBuilder;
-use Domain\Spam\Models\Spam;
+use Domain\Spam\Models\PostReport;
 use Domain\User\Models\User;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -66,7 +67,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
 
     public function reports(): HasMany
     {
-        return $this->hasMany(Spam::class);
+        return $this->hasMany(PostReport::class);
     }
 
     public function sourceTopics(): HasMany
@@ -198,7 +199,7 @@ class Source extends Model implements Filterable, Muteable, Loggable
     }
 
     /**
-     * @return \Illuminate\Support\Collection|\Domain\Post\Models\Tag[]
+     * @return Collection|Tag[]
      */
     public function getTopicTags(): Collection
     {

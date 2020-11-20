@@ -49,10 +49,10 @@
                     @endif
                     @if(! $user->hasReported($post->source))
                         –
-                            <post-button method="get" :action="$post->source->getReportUrl()" :inline="true">
+                            <x-post-button method="get" :action="$post->source->getReportUrl()" :inline="true">
                                 {{ __('Report source') }}
-                        </post-button>
-                    @endif
+                            </x-post-button>
+                        @endif
                     @if($user->isAdmin() && ! $post->hasBeenTweeted())
                         –
                         <x-ajax-button

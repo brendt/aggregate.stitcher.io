@@ -2,7 +2,7 @@
 
 namespace Domain\Spam\Events;
 
-use Domain\Spam\Models\Spam;
+use Domain\Spam\Models\PostReport;
 use Domain\User\Events\ChangeForUserEvent;
 use Domain\User\Models\User;
 use Illuminate\Broadcasting\InteractsWithSockets;
@@ -16,12 +16,13 @@ final class SourceReportEvent extends DataTransferObject implements ChangeForUse
 
     public $spam;
 
-    public static function new(Spam $spam): SourceReportEvent
+    public static function new(PostReport $spam): SourceReportEvent
     {
         return new self(
             [
-                            'spam' => $spam,
-                        ]);
+                'spam' => $spam,
+            ]
+        );
     }
 
     public function getUser(): User

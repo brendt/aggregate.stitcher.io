@@ -1,13 +1,13 @@
 @php
-    /** @var \Domain\Spam\Models\Spam[] $reports */
+    /** @var \Domain\PostReport\Models\PostReport[] $reports */
 
 @endphp
 
 <section>
     @foreach($reports as $report)
-        <report-card
+        <x-report-card
                 :report="$report"
-        ></report-card>
+        ></x-report-card>
     @endforeach
 </section>
 

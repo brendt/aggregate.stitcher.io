@@ -26,7 +26,8 @@
         @endforeach
     </div>
 
-    <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'addLanguage'])" class="mt-4">
+    <x-form-component :action="action([\App\User\Controllers\UserProfileController::class, 'addLanguage'])"
+                      class="mt-4">
         <x-select-field
                 name="language"
                 :label="__('New language')"
@@ -36,12 +37,12 @@
         <x-submit-button class="mt-3">
             {{ __('Add language') }}
         </x-submit-button>
-    </form-component>
+    </x-form-component>
 
     <x-heading>{{ __('New password') }}</x-heading>
 
-    <form-component :action="action([\App\User\Controllers\UserProfileController::class, 'updatePassword'])"
-                    class="mt-4">
+    <x-form-component :action="action([\App\User\Controllers\UserProfileController::class, 'updatePassword'])"
+                      class="mt-4">
         <x-text-field
                 name="password"
                 type="password"
@@ -57,6 +58,6 @@
         <x-submit-button class="mt-3">
             {{ __('Save') }}
         </x-submit-button>
-    </form-component>
+    </x-form-component>
 
 @endcomponent

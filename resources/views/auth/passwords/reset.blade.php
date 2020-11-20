@@ -5,7 +5,7 @@
         {{ __('Choose a new password') }}
     </h1>
 
-    <form-component :action="route('password.update')">
+    <x-form-component :action="route('password.update')">
         <x-email-field
                 name="email"
                 :label="__('Email')"
@@ -29,5 +29,5 @@
                 {{ __('Reset') }}
             </x-submit-button>
         </div>
-    </form-component>
+    </x-form-component>
 @endcomponent

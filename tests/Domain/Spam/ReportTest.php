@@ -17,7 +17,8 @@ class ReportTest extends TestCase
     {
         /** @var Source $source */
         $source = factory(Source::class)->create();
-        (new SourceReportAction())->__invoke($this->user, $source);
+        $report = 'Spam report';
+        (new SourceReportAction())->__invoke($this->user, $source, $report);
         $this->user->refresh();
         $this->assertTrue($this->user->hasReported($source));
     }

@@ -21,7 +21,7 @@
         </p>
     </div>
 
-    <form-component
+    <x-form-component
             :action="action([\App\User\Controllers\GuestSourcesController::class, 'store'])"
             class="mt-4"
     >
@@ -55,5 +55,5 @@
                 {{ __('Submit') }}
             </x-submit-button>
         </div>
-    </form-component>
+    </x-form-component>
 @endcomponent

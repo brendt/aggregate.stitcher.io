@@ -5,7 +5,7 @@
 @component('layouts.user', [
     'title' => __('Report spam'),
 ])
-    <heading>{{ __('Report spam') }}</heading>
+    <x-heading>{{ __('Report spam') }}</x-heading>
 
     <div class="content">
         <p>
@@ -14,21 +14,21 @@
 
     </div>
 
-    <form-component
+    <x-form-component
             class="mt-8"
             :action="$source->getReportUrl()"
     >
-        <textarea-field
+        <x-textarea-field
                 required
                 name="report"
-        ></textarea-field>
+        ></x-textarea-field>
 
 
         <div class="flex justify-between">
-            <submit-button class="mt-3">
+            <x-submit-button class="mt-3">
                 {{ __('Save') }}
-            </submit-button>
+            </x-submit-button>
 
         </div>
-    </form-component>
+    </x-form-component>
 @endcomponent
