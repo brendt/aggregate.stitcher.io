@@ -9,7 +9,7 @@ use Domain\Post\Models\Topic;
 use Domain\Post\Models\View;
 use Domain\Post\Models\Vote;
 use Domain\Source\Models\Source;
-use Domain\Spam\Models\Spam;
+use Domain\Spam\Models\PostReport;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
@@ -64,7 +64,7 @@ class User extends BaseUser
     }
     public function reports(): HasMany
     {
-        return $this->hasMany(Spam::class);
+        return $this->hasMany(PostReport::class);
     }
 
     public function interests(): HasManyThrough

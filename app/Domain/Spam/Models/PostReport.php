@@ -9,7 +9,7 @@ use Domain\User\Models\User;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Support\HasUuid;
 
-class Spam extends Model
+class PostReport extends Model
 {
     use HasUuid;
 

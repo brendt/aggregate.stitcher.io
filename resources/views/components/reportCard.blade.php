@@ -1,5 +1,5 @@
 @php
-    /** @var \Domain\Spam\Models\Spam $report */
+    /** @var \Domain\PostReport\Models\PostReport $report */
 @endphp
 
 
