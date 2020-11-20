@@ -1,4 +1,4 @@
-<form-component
+<x-form-component
         class="mt-8"
         :action="action([\App\User\Controllers\UserInterestsController::class, 'update'])"
 >
@@ -15,4 +15,4 @@
             {{ __('Save') }}
         </x-submit-button>
     </div>
-</form-component>
+</x-form-component>
