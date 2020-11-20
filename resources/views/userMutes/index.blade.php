@@ -6,7 +6,7 @@
 @component('layouts.user', [
     'title' => __('Mutes'),
 ])
-    <heading>Mutes</heading>
+    <x-heading>Mutes</x-heading>
 
     <div class="content">
         <p>
@@ -38,13 +38,13 @@
                         @endif
                     </td>
                     <td class="text-right">
-                        <post-button
-                            :action="$mute->getMuteable()->getUnmuteUrl()"
+                        <x-post-button
+                                :action="$mute->getMuteable()->getUnmuteUrl()"
                         >
                             <span class="underline hover:no-underline text-grey-darker text-sm">
                                 {{ __('Unmute') }}
                             </span>
-                        </post-button>
+                        </x-post-button>
                     </td>
                 </tr>
             @endforeach

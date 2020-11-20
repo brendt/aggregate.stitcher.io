@@ -6,34 +6,35 @@
     'title' => __('Topics'),
 ])
     <div class="flex justify-between">
-        <heading>{{ __('Topics') }}</heading>
+        <x-heading>{{ __('Topics') }}</x-heading>
 
-        <search-field
-            :current-url="$currentUrl"
-            :current-search-query="$currentSearchQuery"
-        ></search-field>
+        <x-search-field
+                :current-url="$currentUrl"
+                :current-search-query="$currentSearchQuery"
+        ></x-search-field>
     </div>
 
     <table class="table mt-4">
         <thead>
-            <tr>
-                <th>
-                    <sort-link name="topics.name">
-                        {{ __('Name') }}
-                    </sort-link>
-                </th>
-                <th>
-                    {{ __('Tags') }}
-                </th>
-            </tr>
+        <tr>
+            <th>
+                <x-sort-link name="topics.name">
+                    {{ __('Name') }}
+                </x-sort-link>
+            </th>
+            <th>
+                {{ __('Tags') }}
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @foreach ($topics as $topic)
-                <tr>
-                    <td>
-                        <a href="{{ action([\App\Admin\Controllers\AdminTopicsController::class, 'edit'], $topic->slug) }}" class="link">
-                            {{ $topic->name }}
-                        </a>
+        @foreach ($topics as $topic)
+            <tr>
+                <td>
+                    <a href="{{ action([\App\Admin\Controllers\AdminTopicsController::class, 'edit'], $topic->slug) }}"
+                       class="link">
+                        {{ $topic->name }}
+                    </a>
                     </td>
                     <td>
                         {{ implode(', ', $topic->tags->map(function (\Domain\Post\Models\Tag $tag) {

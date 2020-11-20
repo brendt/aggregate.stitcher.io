@@ -5,9 +5,9 @@
 @component('layouts.admin', [
     'title' => $source->getName(),
 ])
-    <heading>
+    <x-heading>
         {{ $source->getName() }}
-    </heading>
+    </x-heading>
 
     <div class="mt-2">
         <a
@@ -30,71 +30,60 @@
 
     @if($viewsPerDay->isNotEmpty())
         <div class="mt-2 lg-max:hidden">
-            <source-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></source-chart>
+            <x-source-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></x-source-chart>
         </div>
     @endif
-    <div class="w-3/5">
-        <div class="mt-6">
-            <h2 class="text-xl ">
-                Spam reports :
-            </h2>
 
-        </div>
-        <report-list
-                :reports="$source->reports"
-        >
-        </report-list>
-    </div>
     <form-component
             class="mt-8"
             :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'update'], $source)"
     >
         <div class="w-3/5">
-            <text-field
+            <x-text-field
                     name="url"
                     :label="__('RSS url')"
                     :initial-value="$url"
-            ></text-field>
+            ></x-text-field>
 
-            <text-field
+            <x-text-field
                     name="twitter_handle"
                     :label="__('Twitter handle (optional)')"
                     :initial-value="$twitterHandle"
-            ></text-field>
+            ></x-text-field>
 
-            <select-field
+            <x-select-field
                     name="language"
                     :label="__('Language')"
                     :initial-value="$language"
                     :options="$languageOptions"
-            ></select-field>
+            ></x-select-field>
 
-            <checkboxes-field
+            <x-checkboxes-field
                     class="mt-2"
                     name="topic_ids[]"
                     :label="__('Topics')"
                     :options="$topicOptions"
                     :initial-values="$topics"
-            ></checkboxes-field>
+            ></x-checkboxes-field>
 
-            <checkbox-field
+            <x-checkbox-field
                     name="is_active"
                     :label="__('Is active')"
                     :initial-value="$isActive"
-            ></checkbox-field>
+            ></x-checkbox-field>
 
-            <checkbox-field
+            <x-checkbox-field
                     name="is_validated"
                     :label="__('Is validated')"
                     :initial-value="$isValidated"
-            ></checkbox-field>
+            ></x-checkbox-field>
         </div>
 
         <div class="flex justify-between items-center mt-4">
             <div>
-                <submit-button class="mt-3">
+                <x-submit-button class="mt-3">
                     {{ __('Save') }}
-                </submit-button>
+                </x-submit-button>
 
                 <a class="ml-2" href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'index']) }}">
                     {{ __('Back') }}
@@ -105,19 +94,19 @@
 
     <div class="md:flex md:justify-end">
         @if(!$source->is_active)
-            <post-button
+            <x-post-button
                     class="text-green font-bold py-4 md:px-3"
                     :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'activate'], $source->uuid)"
             >
                 {{ __('Activate') }}
-            </post-button>
+            </x-post-button>
         @else
-            <post-button
+            <x-post-button
                     class="font-bold py-4 md:px-3"
                     :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'sync'], $source->uuid)"
             >
                 {{ __('Sync now') }}
-            </post-button>
+            </x-post-button>
         @endif
 
         <a

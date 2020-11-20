@@ -11,19 +11,19 @@ $title = __('Error Log :name', [
     'title' => $title,
 ])
     <div class="md:flex md:justify-between md:items-baseline">
-        <heading>{{ $title }}</heading>
+        <x-heading>{{ $title }}</x-heading>
     </div>
 
     <table class="table mt-4 table-truncate">
         <tbody>
-            @foreach ($errorLogCollection as $errorLog)
-                <tr class="md-max:flex">
-                    <td class="md-max:w-full">
-                        <small class="mr-2">{{ $errorLog->created_at->toDateTimeString() }}</small>
-                        {{ $errorLog->message }}
-                    </td>
-                </tr>
-            @endforeach
+        @foreach ($errorLogCollection as $errorLog)
+            <tr class="md-max:flex">
+                <td class="md-max:w-full">
+                    <small class="mr-2">{{ $errorLog->created_at->toDateTimeString() }}</small>
+                    {{ $errorLog->message }}
+                </td>
+            </tr>
+        @endforeach
         </tbody>
     </table>
 

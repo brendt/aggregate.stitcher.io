@@ -8,29 +8,29 @@
 ])
     <nav class="bg-grey-lighter p-3 pt-4 flex justify-between">
         <div class="flex">
-            <active-link
-                :href="action([\App\Admin\Controllers\AdminAnalyticsController::class, 'index'], ['sort' => '-view_count'])"
-            >{{ __('Analytics') }}</active-link>
+            <x-active-link
+                    :href="action([\App\Admin\Controllers\AdminAnalyticsController::class, 'index'], ['sort' => '-view_count'])"
+            >{{ __('Analytics') }}</x-active-link>
 
-            <active-link
-                class="ml-4"
-                :href="action([\App\Admin\Controllers\AdminAnalyticsController::class, 'pageCache'])"
-            >{{ __('Analytics: page cache') }}</active-link>
+            <x-active-link
+                    class="ml-4"
+                    :href="action([\App\Admin\Controllers\AdminAnalyticsController::class, 'pageCache'])"
+            >{{ __('Analytics: page cache') }}</x-active-link>
 
-            <active-link
-                :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])"
-                class="ml-4"
-            >{{ __('Sources') }}</active-link>
+            <x-active-link
+                    :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])"
+                    class="ml-4"
+            >{{ __('Sources') }}</x-active-link>
 
-            <active-link
-                :href="action([\App\Admin\Controllers\AdminTopicsController::class, 'index'])"
-                class="ml-4"
-            >{{ __('Topics') }}</active-link>
+            <x-active-link
+                    :href="action([\App\Admin\Controllers\AdminTopicsController::class, 'index'])"
+                    class="ml-4"
+            >{{ __('Topics') }}</x-active-link>
 
-            <active-link
-                :href="action([\App\Admin\Controllers\AdminTagsController::class, 'index'])"
-                class="ml-4"
-            >{{ __('Tags') }}</active-link>
+            <x-active-link
+                    :href="action([\App\Admin\Controllers\AdminTagsController::class, 'index'])"
+                    class="ml-4"
+            >{{ __('Tags') }}</x-active-link>
         </div>
 
         <div class="flex ">
@@ -46,11 +46,19 @@
             <div class="font-mono text-sm ml-2">
                 <strong>preloading</strong>
                 @isset($preloadStatus)
-                    <span class="text-green">enabled</span> ({{$preloadStatus->classes_loaded}} classes, {{$preloadStatus->functions_loaded}} functions, {{$preloadStatus->memory_consumption}})
+                    <span class="text-green">enabled</span> ({{$preloadStatus->classes_loaded}}
+                    classes, {{$preloadStatus->functions_loaded}} functions, {{$preloadStatus->memory_consumption}})
                 @else
                     <span class="text-red">disabled</span>
                 @endisset
             </div>
+
+            @isset($currentCommit)
+                <div class="font-mono text-sm ml-2">
+                    <strong>Commit</strong>
+                    <span class="text-green">{{ $currentCommit }}</span>
+                </div>
+            @endisset
         </div>
     </nav>
 

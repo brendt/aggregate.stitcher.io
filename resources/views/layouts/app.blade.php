@@ -30,95 +30,99 @@
     {{-- <script defer src="{{ mix('vendor.js') }}"></script> --}}
     <script defer src="{{ mix('js/app.js') }}"></script>
 
-    @livewireAssets
+    @livewireStyles
 </head>
 <body class="bg-black md:p-3 min-h-screen flex flex-col">
-    <div class="bg-white flex-1 flex pb-8">
-        <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-8 md:mx-16 md:flex pt-4 md:pt-8">
+<div class="bg-white flex-1 flex pb-8">
+    <div class="w-full {{ $fullWidth ?? null ? '' : 'max-w-lg' }} mx-8 md:mx-16 md:flex pt-4 md:pt-8">
 
-            <nav class="{{ $fullWidth ?? null ? '' : 'md:w-1/3' }} md:pr-12 flex md:flex-col items-start justify-between relative">
-                <header class="h-12 mt:py-2 md:mb-8 flex items-center md:sticky pin-t">
-                    @isset($header)
-                        {{ $header }}
-                    @else
-                        <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
-                        <span class="bg-black text-white rounded text-xs ml-2" style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
-                    @endisset
-                </header>
+        <nav class="{{ $fullWidth ?? null ? '' : 'md:w-1/3' }} md:pr-12 flex md:flex-col items-start justify-between relative">
+            <header class="h-12 mt:py-2 md:mb-8 flex items-center md:sticky pin-t">
+                @isset($header)
+                    {{ $header }}
+                @else
+                    <a href="{{ url('/') }}" class="font-title text-2xl text-primary font-bold">aggregate</a>
+                    <span class="bg-black text-white rounded text-xs ml-2"
+                          style="padding: 0.25rem 0.25rem 0.1rem; margin-top: 0.15rem">beta</span>
+                @endisset
+            </header>
 
-                <div class="md:sticky md:b-4 mt-4 text-right md:text-left mb-8 md:mb-0">
-                    <button class="menu-toggle flex md:hidden ml-auto focus:outline-none">
-                        <i class="text-lg fas fa-bars mr-2"></i>
-                        <span class="block uppercase text-sm font-bold" style="transform: translateY(3px)">Menu</span>
-                    </button>
-                    <ul class="menu text-sm text-grey-darker hidden md:block mt-4">
-                        <li class="mb-2">
-                            <active-link
+            <div class="md:sticky md:b-4 mt-4 text-right md:text-left mb-8 md:mb-0">
+                <button class="menu-toggle flex md:hidden ml-auto focus:outline-none">
+                    <i class="text-lg fas fa-bars mr-2"></i>
+                    <span class="block uppercase text-sm font-bold" style="transform: translateY(3px)">Menu</span>
+                </button>
+                <ul class="menu text-sm text-grey-darker hidden md:block mt-4">
+                    <li class="mb-2">
+                        <x-active-link
                                 :href="action([\App\Feed\Controllers\PostsController::class, 'index'])"
                                 :other="[
                                     action([\App\Feed\Controllers\PostsController::class, 'all']),
                                     action([\App\Feed\Controllers\PostsController::class, 'latest']),
                                     action([\App\Feed\Controllers\PostsController::class, 'top']),
                                 ]"
-                            >
-                                {{ __('Feed') }}
-                            </active-link>
-                        </li>
+                        >
+                            {{ __('Feed') }}
+                        </x-active-link>
+                    </li>
 
-                        @if(! current_user())
+                    @if(! current_user())
                             <li class="mb-2">
                                 <a href="{{ action([\App\User\Controllers\RegisterController::class, 'showRegistrationForm']) }}">
                                     {{ __('Submit your feed') }}
                                 </a>
                             </li>
                         @elseif(! current_user()->getPrimarySource())
-                            <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])">
-                                    {{ __('Submit your feed') }}
-                                </active-link>
-                            </li>
-                        @endif
+                        <li class="mb-2">
+                            <x-active-link
+                                    :href="action([\App\User\Controllers\UserSourcesController::class, 'index'])">
+                                {{ __('Submit your feed') }}
+                            </x-active-link>
+                        </li>
+                    @endif
                         @if(current_user())
-                            <li class="mb-2">
-                                <active-link
+                        <li class="mb-2">
+                            <x-active-link
                                     :href="action([\App\User\Controllers\UserProfileController::class, 'index'])"
                                     :other="[
                                         action([\App\User\Controllers\UserMutesController::class, 'index']),
                                         action([\App\User\Controllers\UserSourcesController::class, 'index']),
                                     ]"
-                                >
-                                    {{ __('Profile') }}
-                                </active-link>
-                            </li>
-                            <li>
-                                <a href="{{ action([\App\User\Controllers\LoginController::class, 'logout']) }}">
+                            >
+                                {{ __('Profile') }}
+                            </x-active-link>
+                        </li>
+                        <li>
+                            <a href="{{ action([\App\User\Controllers\LoginController::class, 'logout']) }}">
                                     {{ __('Log out') }}
                                 </a>
                             </li>
                             @if(current_user()->isAdmin())
-                                <li class="mt-6 mb-2">
-                                    <active-link :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])">
-                                        {{ __('Admin') }}
-                                    </active-link>
-                                </li>
-                                <li>
-                                    <active-link href="/horizon" target="_blank" rel="noopener noreferrer">
-                                        {{ __('Horizon') }}
-                                    </active-link>
-                                </li>
-                            @endif
-                        @else
-                            <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\LoginController::class, 'login'])">
-                                    {{ __('Log in') }}
-                                </active-link>
+                            <li class="mt-6 mb-2">
+                                <x-active-link
+                                        :href="action([\App\Admin\Controllers\AdminSourcesController::class, 'index'])">
+                                    {{ __('Admin') }}
+                                </x-active-link>
                             </li>
-                            <li class="mb-2">
-                                <active-link :href="action([\App\User\Controllers\RegisterController::class, 'register'])">
-                                    {{ __('Register') }}
-                                </active-link>
+                            <li>
+                                <x-active-link href="/horizon" target="_blank" rel="noopener noreferrer">
+                                    {{ __('Horizon') }}
+                                </x-active-link>
                             </li>
                         @endif
+                        @else
+                        <li class="mb-2">
+                            <x-active-link :href="action([\App\User\Controllers\LoginController::class, 'login'])">
+                                {{ __('Log in') }}
+                            </x-active-link>
+                        </li>
+                        <li class="mb-2">
+                            <x-active-link
+                                    :href="action([\App\User\Controllers\RegisterController::class, 'register'])">
+                                {{ __('Register') }}
+                            </x-active-link>
+                        </li>
+                    @endif
                     </ul>
                 </div>
             </nav>
@@ -185,5 +189,6 @@
 
         gtag('config', '{{ config('app.analytics_id') }}');
     </script>
+@livewireScripts
 </body>
 </html>

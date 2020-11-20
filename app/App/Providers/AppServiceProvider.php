@@ -14,11 +14,11 @@ use Domain\Tweet\Api\FakeTwitterOAuth;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use League\CommonMark\CommonMarkConverter;
 use League\CommonMark\Environment;
 use Psr\Log\LoggerInterface;
-use Spatie\BladeX\BladeX;
 use Spatie\QueryString\QueryString;
 use Support\Markdown;
 use Support\Rss\Reader;
@@ -28,23 +28,17 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        Relation::morphMap([
-            'source' => Source::class,
-            'post' => Post::class,
-            'tag' => Tag::class,
-            'view' => View::class,
-            'topic' => Topic::class,
-            'vote' => Vote::class,
-        ]);
-
-        /** @var \Spatie\BladeX\BladeX $bladeX */
-        $bladeX = $this->app->get(BladeX::class);
-
-        $bladeX->component([
-            'components.*',
-            'components.form.*',
-            'components.icons.*',
-        ]);
+        Relation::morphMap(
+            [
+                'source' => Source::class,
+                'post' => Post::class,
+                'tag' => Tag::class,
+                'view' => View::class,
+                'topic' => Topic::class,
+                'vote' => Vote::class,
+            ]
+        );
+        Blade::componentNamespace('App\\Components', 'components');
 
         LengthAwarePaginator::defaultView('layouts.pagination');
     }

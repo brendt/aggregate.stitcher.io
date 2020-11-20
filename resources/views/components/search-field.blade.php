@@ -7,16 +7,16 @@
         <label for="filter[search]">{{ __('Search:') }}</label>
     </div>
 
-    <text-field
-        name="filter[search]"
-        label=""
-        :value="$currentSearchQuery"
-    ></text-field>
+    <x-text-field
+            name="filter[search]"
+            label=""
+            :value="$currentSearchQuery"
+    ></x-text-field>
 
     <div>
-        <submit-button class="md:ml-4 button-small">
+        <x-submit-button class="md:ml-4 button-small">
             {{ __('Search') }}
-        </submit-button>
+        </x-submit-button>
 
         @if($currentSearchQuery)
             <a href="{{ $currentUrl }}" class="ml-2 link">

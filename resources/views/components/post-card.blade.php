@@ -35,7 +35,7 @@
 
             @if($post->tags->isEmpty())
                 <div class="inline ml-1">
-                    @livewire('vote-button', $post->id, $post->vote_count)
+                    @livewire('vote-button', ['postId' => $post->id, 'voteCount' => $post->vote_count])
                 </div>
             @endif
 
@@ -43,9 +43,9 @@
                 @if ($user)
                     @if(! $user->hasMuted($post->source))
                         –
-                        <post-button :action="$post->source->getMuteUrl()" :inline="true">
+                        <x-post-button :action="$post->source->getMuteUrl()" :inline="true">
                             {{ __('Mute source') }}
-                        </post-button>
+                        </x-post-button>
                     @endif
                     @if(! $user->hasReported($post->source))
                         –
@@ -55,11 +55,11 @@
                     @endif
                     @if($user->isAdmin() && ! $post->hasBeenTweeted())
                         –
-                        <ajax-button
-                            :action="$post->getAdminTweetUrl()"
+                        <x-ajax-button
+                                :action="$post->getAdminTweetUrl()"
                         >
                             {{ __('Tweet') }}
-                        </ajax-button>
+                        </x-ajax-button>
                     @endif
                 @endif
             </div>
@@ -69,12 +69,12 @@
             @if($post->tags->isNotEmpty())
                 <p class="text-sm">
                     @foreach ($post->tags as $tag)
-                        <tag :tag="$tag" class="mr-2"></tag>
+                        <x-tag :tag="$tag" class="mr-2"></x-tag>
                     @endforeach
                 </p>
 
                 <div class="ml-1">
-                    @livewire('vote-button', $post->id, $post->vote_count)
+                    @livewire('vote-button', ['postId' => $post->id, 'voteCount' => $post->vote_count])
                 </div>
             @endif
         </div>

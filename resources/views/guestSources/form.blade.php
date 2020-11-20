@@ -11,48 +11,49 @@
             Here's a few things you should know before adding your feed on aggregate:
         </p>
 
-        <content-disclaimer></content-disclaimer>
+        <x-content-disclaimer></x-content-disclaimer>
 
         <p>
             If you'd like to make full use of the platform,
-            it's recommended to <a href="{{ action([\App\User\Controllers\RegisterController::class, 'register']) }}">register an account</a> before adding your feed.
+            it's recommended to <a href="{{ action([\App\User\Controllers\RegisterController::class, 'register']) }}">register
+                an account</a> before adding your feed.
             If you want to suggest a blog anonymously, you can use the form below.
         </p>
     </div>
 
     <form-component
-        :action="action([\App\User\Controllers\GuestSourcesController::class, 'store'])"
-        class="mt-4"
+            :action="action([\App\User\Controllers\GuestSourcesController::class, 'store'])"
+            class="mt-4"
     >
-        <text-field
-            name="url"
-            :label="__('URL')"
-            autofocus
-        ></text-field>
+        <x-text-field
+                name="url"
+                :label="__('URL')"
+                autofocus
+        ></x-text-field>
 
         <small>
             Don't worry about finding the correct RSS url,
             we'll find it for you as long as you provide an existing URL to a blog.
         </small>
 
-        <select-field
-            class="mt-2"
-            name="topic_ids[]"
-            :label="__('This blog is about')"
-            :options="$topicOptions"
-        ></select-field>
+        <x-select-field
+                class="mt-2"
+                name="topic_ids[]"
+                :label="__('This blog is about')"
+                :options="$topicOptions"
+        ></x-select-field>
 
-        <select-field
-            class="mt-2"
-            name="language"
-            :label="__('Language (optional)')"
-            :options="$languageOptions"
-        ></select-field>
+        <x-select-field
+                class="mt-2"
+                name="language"
+                :label="__('Language (optional)')"
+                :options="$languageOptions"
+        ></x-select-field>
 
         <div class="flex justify-between items-center mt-2">
-            <submit-button>
+            <x-submit-button>
                 {{ __('Submit') }}
-            </submit-button>
+            </x-submit-button>
         </div>
     </form-component>
 @endcomponent

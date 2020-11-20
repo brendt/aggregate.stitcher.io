@@ -6,20 +6,20 @@
 @component('layouts.admin', [
     'title' => __('Delete source'),
 ])
-    <heading>{{ __("Delete source {$source->website}?") }}</heading>
+    <x-heading>{{ __("Delete source {$source->website}?") }}</x-heading>
 
     <div class="mt-4">
         <form-component
-            :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'delete'], $source)"
-            class="flex items-baseline"
+                :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'delete'], $source)"
+                class="flex items-baseline"
         >
-            <submit-button class="button-small bg-red-dark">
+            <x-submit-button class="button-small bg-red-dark">
                 {{ __('Yes, delete') }}
-            </submit-button>
+            </x-submit-button>
 
             <a
-                href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'edit'], $source->uuid) }}"
-                class="ml-3"
+                    href="{{ action([\App\Admin\Controllers\AdminSourcesController::class, 'edit'], $source->uuid) }}"
+                    class="ml-3"
             >
                 {{ __('Cancel') }}
             </a>

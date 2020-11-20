@@ -5,7 +5,7 @@
 @component('layouts.user', [
     'title' => __('Interests'),
 ])
-    <heading>{{ __('Interests') }}</heading>
+    <x-heading>{{ __('Interests') }}</x-heading>
 
     <div class="content">
         <p>

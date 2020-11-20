@@ -5,55 +5,45 @@ namespace App\Components;
 use Domain\Post\Actions\AddVoteAction;
 use Domain\Post\Actions\RemoveVoteAction;
 use Domain\Post\Models\Post;
-use Domain\User\Models\User;
 use Livewire\Component;
 
 class VoteButton extends Component
 {
-    protected ?User $user = null;
-
-    protected AddVoteAction $addVoteAction;
-
-    protected RemoveVoteAction $removeVoteAction;
-
-    protected ?int $postId = null;
-
-    protected int $voteCount = 0;
+    public ?int $postId = null;
+    public int $voteCount = 0;
 
     public function mount($postId, $voteCount)
     {
         $this->postId = $postId;
         $this->voteCount = $voteCount;
-        $this->user = current_user();
-        $this->addVoteAction = app(AddVoteAction::class);
-        $this->removeVoteAction = app(RemoveVoteAction::class);
     }
 
     public function render()
     {
-        return view('components.voteButton', [
-            'hasVoted' => $this->user && $this->user->votedFor($this->postId),
-            'user' => $this->user,
-            'voteCount' => $this->voteCount,
-        ]);
+        $user = current_user();
+        return view(
+            'components.livewire-vote-button',
+            [
+                'hasVoted' => $user && $user->votedFor($this->postId),
+                'user' => $user,
+                'voteCount' => $this->voteCount,
+            ]
+        );
     }
 
     public function toggleVote()
     {
         $post = Post::find($this->postId);
-
-        if (! $post) {
+        if (!$post) {
             return;
         }
-
-        if ($this->user->votedFor($post)) {
-            $this->removeVoteAction->__invoke($post, $this->user);
+        $user = current_user();
+        if ($user->votedFor($post)) {
+            app(RemoveVoteAction::class)($post, $user);
         } else {
-            $this->addVoteAction->__invoke($post, $this->user);
+            app(AddVoteAction::class)($post, $user);
         }
-
         $this->voteCount = $post->vote_count;
-
-        $this->user->refresh();
+        $user->refresh();
     }
 }

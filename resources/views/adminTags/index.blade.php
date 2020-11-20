@@ -6,39 +6,40 @@
     'title' => __('Tags'),
 ])
     <div class="flex justify-between">
-        <heading>{{ __('Tags') }}</heading>
+        <x-heading>{{ __('Tags') }}</x-heading>
 
-        <search-field
-            :current-url="$currentUrl"
-            :current-search-query="$currentSearchQuery"
-        ></search-field>
+        <x-search-field
+                :current-url="$currentUrl"
+                :current-search-query="$currentSearchQuery"
+        ></x-search-field>
     </div>
 
     <table class="table mt-4">
         <thead>
-            <tr>
-                <th>
-                    <sort-link name="tags.name">
-                        {{ __('Name') }}
-                    </sort-link>
-                </th>
-                <th>
-                    <sort-link name="topics.name">
-                        {{ __('Topic') }}
-                    </sort-link>
-                </th>
-                <th>
-                    {{ __('Keywords') }}
-                </th>
-            </tr>
+        <tr>
+            <th>
+                <x-sort-link name="tags.name">
+                    {{ __('Name') }}
+                </x-sort-link>
+            </th>
+            <th>
+                <x-sort-link name="topics.name">
+                    {{ __('Topic') }}
+                </x-sort-link>
+            </th>
+            <th>
+                {{ __('Keywords') }}
+            </th>
+        </tr>
         </thead>
         <tbody>
-            @foreach ($tags as $tag)
-                <tr>
-                    <td>
-                        <a href="{{ action([\App\Admin\Controllers\AdminTagsController::class, 'edit'], $tag->slug) }}" class="link">
-                            {{ $tag->name }}
-                        </a>
+        @foreach ($tags as $tag)
+            <tr>
+                <td>
+                    <a href="{{ action([\App\Admin\Controllers\AdminTagsController::class, 'edit'], $tag->slug) }}"
+                       class="link">
+                        {{ $tag->name }}
+                    </a>
                     </td>
                     <td>
                         {{ $tag->topic->name }}

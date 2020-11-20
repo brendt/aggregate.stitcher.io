@@ -5,7 +5,7 @@
 @component('layouts.admin', [
     'title' => __('Analytics'),
 ])
-    <heading>{{ __('Analytics: page cache') }}</heading>
+    <x-heading>{{ __('Analytics: page cache') }}</x-heading>
 
     <canvas id="page-cache-report-chart" width="{{ $width ?? 400 }}" height="{{ $height ?? 75 }}"></canvas>
 

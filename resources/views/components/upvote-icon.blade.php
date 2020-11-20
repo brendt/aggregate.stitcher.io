@@ -1,12 +1,12 @@
 <svg
-    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1"
-    x="0px" y="0px" width="15" height="15"
-    viewBox="0 0 100 100"
-    xml:space="preserve">
+        xmlns="http://www.w3.org/2000/svg" version="1.1"
+        x="0px" y="0px" width="15" height="15"
+        viewBox="0 0 100 100"
+        xml:space="preserve">
         <g>
             <g>
                 <path
-                    @isset($color)
+                        @isset($color)
                         style="--upvote-icon-color: {{ $color }}"
                     @endisset
                     class="upvote-icon"

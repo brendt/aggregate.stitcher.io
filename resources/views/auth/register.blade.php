@@ -14,31 +14,32 @@
         <p>
             You're also able to submit your own feed, which will then show up on aggregate.
             Do you want to know more about how aggregate works before registering?
-            You can read about it <a href="{{ action(\App\Feed\Controllers\AboutController::class) }}" target="_blank" rel="noopener noreferrer">here</a>.
+            You can read about it <a href="{{ action(\App\Feed\Controllers\AboutController::class) }}" target="_blank"
+                                     rel="noopener noreferrer">here</a>.
         </p>
     </div>
 
     <form-component :action="route('register')" class="mt-8">
-        <email-field
-            name="email"
-            :label="__('Email')"
-            autofocus
-        ></email-field>
+        <x-email-field
+                name="email"
+                :label="__('Email')"
+                autofocus
+        ></x-email-field>
 
-        <password-field
-            name="password"
-            :label="__('Password')"
-        ></password-field>
+        <x-password-field
+                name="password"
+                :label="__('Password')"
+        ></x-password-field>
 
-        <password-field
-            name="password_confirmation"
-            :label="__('Repeat password')"
-        ></password-field>
+        <x-password-field
+                name="password_confirmation"
+                :label="__('Repeat password')"
+        ></x-password-field>
 
         <div class="flex justify-end items-center mt-2">
-            <submit-button>
+            <x-submit-button>
                 {{ __('Register') }}
-            </submit-button>
+            </x-submit-button>
         </div>
     </form-component>
 

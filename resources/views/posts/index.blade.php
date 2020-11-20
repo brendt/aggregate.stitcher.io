@@ -14,9 +14,9 @@
         </h2>
     @endif
 
-    <post-list
-        :posts="$posts"
-        :user="$user"
-        :donationIndex="$donationIndex"
-    ></post-list>
+    <x-post-list
+            :posts="$posts"
+            :user="$user"
+            :donationIndex="$donationIndex"
+    ></x-post-list>
 @endcomponent
