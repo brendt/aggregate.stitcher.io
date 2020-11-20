@@ -124,9 +124,9 @@
     </table>
 
     <div class="mt-4">
-        <form-component
-            :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'store'])"
-            class="md:flex md:items-bottom md:justify-end"
+        <x-form-component
+                :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'store'])"
+                class="md:flex md:items-bottom md:justify-end"
         >
             <div class="md:hidden">
                 <label for="url">{{ __('Source URL:') }}</label>
@@ -145,7 +145,7 @@
                     {{ __('Add source') }}
                 </span>
             </x-submit-button>
-        </form-component>
+        </x-form-component>
     </div>
 
     {{ $sources->render() }}

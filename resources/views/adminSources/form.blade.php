@@ -34,7 +34,7 @@
         </div>
     @endif
 
-    <form-component
+    <x-form-component
             class="mt-8"
             :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'update'], $source)"
     >
@@ -90,7 +90,7 @@
                 </a>
             </div>
         </div>
-    </form-component>
+    </x-form-component>
 
     <div class="md:flex md:justify-end">
         @if(!$source->is_active)

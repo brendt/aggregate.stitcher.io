@@ -16,10 +16,10 @@
         <x-content-disclaimer></x-content-disclaimer>
     </div>
 
-    <form-component
-            class="mt-8"
-            :action="action([\App\User\Controllers\UserSourcesController::class, 'update'])"
-    >
+    <x-form-component>
+        class="mt-8"
+        :action="action([\App\User\Controllers\UserSourcesController::class, 'update'])"
+        >
         <x-text-field
                 name="url"
                 :label="__('URL')"

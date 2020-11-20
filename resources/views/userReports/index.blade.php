@@ -14,7 +14,7 @@
 
     </div>
 
-    <form-component
+    <x-form-component
             class="mt-8"
             :action="$source->getReportUrl()"
     >
@@ -30,5 +30,5 @@
             </submit-button>
 
         </div>
-    </form-component>
+    </x-form-component>
 @endcomponent

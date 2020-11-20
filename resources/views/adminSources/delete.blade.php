@@ -9,7 +9,7 @@
     <x-heading>{{ __("Delete source {$source->website}?") }}</x-heading>
 
     <div class="mt-4">
-        <form-component
+        <x-form-component
                 :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'delete'], $source)"
                 class="flex items-baseline"
         >
@@ -23,6 +23,6 @@
             >
                 {{ __('Cancel') }}
             </a>
-        </form-component>
+        </x-form-component>
     </div>
 @endcomponent

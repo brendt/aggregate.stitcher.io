@@ -13,7 +13,7 @@
     </div>
 
     <div class="mt-4">
-        <form-component
+        <x-form-component
                 :action="action([\App\User\Controllers\UserSourcesController::class, 'delete'], $source)"
                 class="flex items-baseline"
         >
@@ -27,6 +27,6 @@
             >
                 {{ __('Cancel') }}
             </a>
-        </form-component>
+        </x-form-component>
     </div>
 @endcomponent
