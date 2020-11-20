@@ -23,6 +23,15 @@
             {{ __('Show only inactive sources') }}
         </x-filter-button>
     </div>
+    <br>
+    <div class="md-max:mt-2">
+        <x-filter-button
+                name="reported"
+                value="1"
+        >
+            {{ __('Show only reported sources') }}
+        </x-filter-button>
+    </div>
 
     <table class="table mt-4 truncate">
         <thead class="md-max:hidden">
@@ -44,6 +53,9 @@
                 <x-sort-link name="post_count">
                     {{ __('Posts') }}
                 </x-sort-link>
+            </th>
+            <th class="text-right lg-max:hidden">
+                {{ __('Reports') }}
             </th>
             <th class="text-right  lg-max:hidden">
                 <x-sort-link name="created_at">
@@ -95,12 +107,15 @@
                             </span>
                         @endif
                     </td>
-                    <td class="md-max:hidden">
-                        {{ $source->topics->implode('name', ', ') }}
-                    </td>
-                    <td class="text-right md-max:hidden lg-max:hidden">
-                        {{ $source->post_count }}
-                    </td>
+                <td class="md-max:hidden">
+                    {{ $source->topics->implode('name', ', ') }}
+                </td>
+                <td class="text-right md-max:hidden lg-max:hidden">
+                    {{ $source->post_count }}
+                </td>
+                <td class="text-right md-max:hidden lg-max:hidden">
+                    {{ $source->reports_count }}
+                </td>
                 <td class="text-right md-max:hidden  lg-max:hidden">
                     {{ $source->created_at->toDateTimeString() }}
                 </td>

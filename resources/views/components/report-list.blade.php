@@ -5,9 +5,9 @@
 
 <section>
     @foreach($reports as $report)
-        <report-card
+        <x-report-card
                 :report="$report"
-        ></report-card>
+        ></x-report-card>
     @endforeach
 </section>
 

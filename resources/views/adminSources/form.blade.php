@@ -33,7 +33,21 @@
             <x-source-chart :views-per-day="$viewsPerDay" :votes-per-day="$votesPerDay"></x-source-chart>
         </div>
     @endif
+    @if($source->reports()->count())
+        <div class="w-3/5">
+            <div class="mt-6">
+                <h2 class="text-xl ">
+                    {{ __('Spam reports :') }}
+                </h2>
 
+            </div>
+
+            <x-report-list
+                    :reports="$source->reports"
+            >
+            </x-report-list>
+        </div>
+    @endif
     <x-form-component
             class="mt-8"
             :action="action([\App\Admin\Controllers\AdminSourcesController::class, 'update'], $source)"
