@@ -18,7 +18,7 @@
         </p>
     </div>
 
-    <form-component :action="route('register')" class="mt-8">
+    <x-form-component :action="route('register')" class="mt-8">
         <x-email-field
             name="email"
             :label="__('Email')"
@@ -40,7 +40,7 @@
                 {{ __('Register') }}
             </x-submit-button>
         </div>
-    </form-component>
+    </x-form-component>
 
     <p class="mt-4 text-sm mt-8 text-grey-darker">
         {!! __('Already have an account? <a href=":register_url" class="link">Log in</a> instead.', [
