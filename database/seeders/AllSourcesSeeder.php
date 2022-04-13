@@ -9,6 +9,8 @@ class AllSourcesSeeder extends Seeder
 {
     public function run()
     {
+        (new UserSeeder)->run();
+
         $urls = explode(PHP_EOL, file_get_contents(__DIR__ . '/sources.txt'));
 
         foreach ($urls as $url) {

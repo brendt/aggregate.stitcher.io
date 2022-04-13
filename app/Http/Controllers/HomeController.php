@@ -12,19 +12,29 @@ final class HomeController
 {
     public function __invoke(Request $request)
     {
-        $query = Post::query()->orderByDesc('created_at');
+        $query = Post::query()
+            ->orderByDesc('created_at')
+            ->orderByDesc('id');
 
         $user = $request->user();
 
         $showDenied = $request->has('denied');
 
+        $onlyPending = $request->has('only_pending');
+
         if ($user) {
-            $query->whereIn('state', [
-                PostState::PENDING,
-                PostState::PUBLISHED,
-                PostState::STARRED,
-                $showDenied ? PostState::DENIED : null,
-            ]);
+            $states = [PostState::PENDING];
+
+            if (! $onlyPending) {
+                $states[] = PostState::PUBLISHED;
+                $states[] = PostState::STARRED;
+            }
+
+            if ($showDenied) {
+                $states[] = PostState::DENIED;
+            }
+
+            $query->whereIn('state', $states);
         } else {
             $query->whereIn('state', [
                 PostState::PUBLISHED,
@@ -38,6 +48,7 @@ final class HomeController
             'posts' => $posts,
             'user' => $user,
             'showDenied' => $showDenied,
+            'onlyPending' => $onlyPending,
         ]);
     }
 }
