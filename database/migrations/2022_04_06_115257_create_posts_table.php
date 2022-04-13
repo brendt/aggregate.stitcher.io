@@ -14,6 +14,8 @@ return new class extends Migration
             $table->unsignedBigInteger('source_id');
             $table->foreign('source_id')->references('id')->on('sources');
 
+            $table->string('state');
+
             $table->string('title');
             $table->string('url');
 

@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\DenyPostController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PublishPostController;
+use App\Http\Controllers\StarPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', HomeController::class);
+
+Route::middleware(['auth'])->group(function () {
+   Route::get('/deny/{post}', DenyPostController::class);
+   Route::get('/publish/{post}', PublishPostController::class);
+   Route::get('/star/{post}', StarPostController::class);
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
+
+require __DIR__ . '/auth.php';
