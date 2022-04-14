@@ -4,8 +4,8 @@
 
 @component('layout.app')
     <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
-        <div class="bg-white mx-4 shadow-md">
-            @if($user)
+        @if($user)
+            <div class="bg-white mx-4 shadow-md">
                 <div class="px-12 py-4 grid grid-cols-3">
                     <a
                         href="{{ action(\App\Http\Controllers\HomeController::class, [
@@ -31,14 +31,14 @@
                         class="underline hover:no-underline text-center"
                     >{{ $onlyPending ? 'Show all' : 'Only pending' }}</a>
                 </div>
-            @endif
 
-            <div class="flex">
-                <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
-                <div class="px-4 py-1 grow text-center bg-white">published</div>
-                <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
+                <div class="flex">
+                    <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
+                    <div class="px-4 py-1 grow text-center bg-white">published</div>
+                    <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
+                </div>
             </div>
-        </div>
+        @endif
 
         <div class="bg-white mx-4 shadow-md grid">
             @if($message)
