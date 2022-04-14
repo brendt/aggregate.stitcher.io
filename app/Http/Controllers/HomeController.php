@@ -28,6 +28,8 @@ final class HomeController
 
         $onlyPending = $request->get('only_pending');
 
+        $onlyToday = $request->get('only_today');
+
         if ($user) {
             $states = [PostState::PENDING];
 
@@ -48,6 +50,10 @@ final class HomeController
             ]);
         }
 
+        if ($onlyToday) {
+            $query->where('created_at', '>=', now()->startOfDay());
+        }
+
         $posts = $query->paginate(50);
 
         return view('home', [
@@ -55,6 +61,7 @@ final class HomeController
             'user' => $user,
             'showDenied' => $showDenied,
             'onlyPending' => $onlyPending,
+            'onlyToday' => $onlyToday,
             'message' => $request->get('message'),
             'pendingSources' => Source::query()->where('state', SourceState::PENDING)->count(),
         ]);

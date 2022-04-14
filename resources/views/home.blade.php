@@ -6,13 +6,27 @@
     <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
         @if($user)
             <div class="bg-white mx-4 shadow-md">
-                <div class="px-12 py-4 grid grid-cols-3">
+                <div class="px-12 py-4 grid grid-cols-4 text-sm">
                     <a
                         href="{{ action(\App\Http\Controllers\HomeController::class, [
                         'show_denied' => ! $showDenied,
                     ] + request()->query->all()) }}"
                         class="underline hover:no-underline text-center"
                     >{{ $showDenied ? 'Hide denied' : 'Show denied' }}</a>
+
+                    <a
+                        href="{{ action(\App\Http\Controllers\HomeController::class, [
+                        'only_pending' => ! $onlyPending,
+                    ] + request()->query->all()) }}"
+                        class="underline hover:no-underline text-center"
+                    >{{ $onlyPending ? 'Show all' : 'Only pending' }}</a>
+
+                    <a
+                        href="{{ action(\App\Http\Controllers\HomeController::class, [
+                        'only_today' => ! $onlyToday,
+                    ] + request()->query->all()) }}"
+                        class="underline hover:no-underline text-center"
+                    >{{ $onlyToday ? 'All time' : 'Only today' }}</a>
 
                     <a
                         href="{{ action(\App\Http\Controllers\SourcesAdminController::class) }}"
@@ -23,13 +37,6 @@
                             <span class="font-bold">({{ $pendingSources }})</span>
                         @endif
                     </a>
-
-                    <a
-                        href="{{ action(\App\Http\Controllers\HomeController::class, [
-                        'only_pending' => ! $onlyPending,
-                    ] + request()->query->all()) }}"
-                        class="underline hover:no-underline text-center"
-                    >{{ $onlyPending ? 'Show all' : 'Only pending' }}</a>
                 </div>
 
                 <div class="flex">
