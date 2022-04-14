@@ -52,8 +52,8 @@ deployOnlyCode
 
 @task('startDeployment', ['on' => 'local'])
 {{ logMessage("🏃  Starting deployment...") }}
-git checkout v2
-git pull origin v2
+git checkout master
+git pull origin master
 @endtask
 
 @task('cloneRepository', ['on' => 'remote'])
@@ -167,7 +167,7 @@ eval `ssh-agent -s`
 ssh-add -D
 ssh-add ~/.ssh/id_rsa_aggregate
 
-git pull origin v2
+git pull origin master
 
 ssh-add -D
 
