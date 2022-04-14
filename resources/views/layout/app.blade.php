@@ -13,6 +13,9 @@
     <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
+
+    <meta name="title" content="aggregate.stitcher.io">
+    <meta name="description" content="My community-driven RSS feed">
 </head>
 <body class="bg-gray-100">
 {{ $slot }}
