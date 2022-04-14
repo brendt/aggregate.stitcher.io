@@ -6,6 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\PostState;
+use App\Models\Source;
+use App\Models\SourceState;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 final class HomeController
@@ -14,13 +17,16 @@ final class HomeController
     {
         $query = Post::query()
             ->orderByDesc('created_at')
-            ->orderByDesc('id');
+            ->orderByDesc('id')
+            ->whereHas('source', function (Builder $query) {
+                $query->where('state', SourceState::PUBLISHED);
+            });
 
         $user = $request->user();
 
-        $showDenied = $request->has('denied');
+        $showDenied = $request->get('show_denied');
 
-        $onlyPending = $request->has('only_pending');
+        $onlyPending = $request->get('only_pending');
 
         if ($user) {
             $states = [PostState::PENDING];
@@ -49,6 +55,8 @@ final class HomeController
             'user' => $user,
             'showDenied' => $showDenied,
             'onlyPending' => $onlyPending,
+            'message' => $request->get('message'),
+            'pendingSources' => Source::query()->where('state', SourceState::PENDING)->count(),
         ]);
     }
 }

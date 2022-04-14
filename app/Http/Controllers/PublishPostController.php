@@ -15,6 +15,6 @@ final class PublishPostController
             'state' => PostState::PUBLISHED,
         ]);
 
-        return redirect()->action(HomeController::class);
+        return redirect()->action(HomeController::class, request()->query->all());
     }
 }

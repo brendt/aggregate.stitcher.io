@@ -15,6 +15,6 @@ final class DenyPostController
             'state' => PostState::DENIED,
         ]);
 
-        return redirect()->action(HomeController::class);
+        return redirect()->action(HomeController::class, request()->query->all());
     }
 }

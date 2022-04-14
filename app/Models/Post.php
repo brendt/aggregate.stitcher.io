@@ -19,7 +19,7 @@ class Post extends Model
 
     protected static function booted()
     {
-        self::creating(fn (Post $post) => $post->state = PostState::PENDING);
+        self::creating(fn (Post $post) => $post->state ??= PostState::PENDING);
     }
 
     public function source(): BelongsTo

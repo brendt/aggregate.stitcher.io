@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\Source;
+use App\Models\SourceState;
 use Illuminate\Database\Seeder;
+use Throwable;
 
 class AllSourcesSeeder extends Seeder
 {
@@ -14,15 +16,13 @@ class AllSourcesSeeder extends Seeder
         $urls = explode(PHP_EOL, file_get_contents(__DIR__ . '/sources.txt'));
 
         foreach ($urls as $url) {
-            $name = parse_url($url, PHP_URL_HOST);
-
-            if (! $name) {
+            if (! $url) {
                 continue;
             }
 
             Source::create([
-                'name' => $name,
                 'url' => $url,
+                'state' => SourceState::PUBLISHED,
             ]);
         }
     }

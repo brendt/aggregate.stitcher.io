@@ -68,7 +68,6 @@ https://statamic.com/blog/statamic-at-spiegel-scale
 https://stitcher.io/rss
 https://thephp.cc/news/atom
 https://thephp.website/en/feed.xml
-https://uxdesign.cc/feed
 https://www.amitmerchant.com/feed
 https://www.behindthesource.co.uk/rss
 https://www.bram.us/feed/

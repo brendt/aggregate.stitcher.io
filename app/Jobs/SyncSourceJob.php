@@ -12,7 +12,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 
-class SyncSource implements ShouldQueue
+class SyncSourceJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -62,7 +62,10 @@ class SyncSource implements ShouldQueue
 
     private function resolveCreatedAt(array $item): ?Carbon
     {
-        $updated = $item['updated'] ?? $item['pubDate'] ?? $item['timestamp'];
+        $updated = $item['published']
+            ?? $item['pubDate']
+            ?? $item['updated']
+            ?? $item['timestamp'];
 
         return Carbon::make($updated);
     }

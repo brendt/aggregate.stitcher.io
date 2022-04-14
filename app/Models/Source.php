@@ -13,8 +13,62 @@ class Source extends Model
 
     public $guarded = [];
 
+    protected $casts = [
+        'state' => SourceState::class
+    ];
+
+    protected static function booted()
+    {
+        self::creating(function (Source $source) {
+            $source->state ??= SourceState::PENDING;
+
+            $source->name ??= $source->getBaseUrl();
+        });
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function isPublishing(): bool
+    {
+        return $this->state === SourceState::PUBLISHING;
+    }
+    public function isPublished(): bool
+    {
+        return $this->state === SourceState::PUBLISHED;
+    }
+
+    public function isDenied(): bool
+    {
+        return $this->state === SourceState::DENIED;
+    }
+
+    public function isPending(): bool
+    {
+        return $this->state === SourceState::PENDING;
+    }
+
+    public function isInvalid(): bool
+    {
+        return $this->state === SourceState::INVALID;
+    }
+
+    public function canPublish(): bool
+    {
+        return ! $this->isPublished() && !$this->isPublishing();
+    }
+
+    public function canDeny(): bool
+    {
+        return ! $this->isDenied();
+    }
+
+    public function getBaseUrl(): string
+    {
+        $parsed = parse_url($this->url);
+
+        return ($parsed['scheme'] ?? 'http') . '://' . $parsed['host'];
     }
 }

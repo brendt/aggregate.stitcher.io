@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\SyncSource;
+use App\Jobs\SyncSourceJob;
 use App\Models\Source;
 use Illuminate\Console\Command;
 use Throwable;
@@ -13,8 +13,15 @@ class SyncCommand extends Command
 
     public function handle()
     {
-        if ($sourceId = $this->option('source')) {
-            $sources = collect([Source::find($sourceId)]);
+        $filter = $this->option('source');
+
+        if ($filter) {
+            $sources = Source::query()
+                ->where(
+                    is_int($filter) ? 'id' : 'name',
+                    $filter
+                )
+                ->get();
         } else {
             $sources = Source::all();
         }
@@ -23,7 +30,7 @@ class SyncCommand extends Command
             $this->comment("Syncing source <fg=green>{$source->name}</> (#{$source->id})");
 
             try {
-                dispatch(new SyncSource($source));
+                dispatch(new SyncSourceJob($source));
             } catch (Throwable $e) {
                 $this->output->writeln("\t[<fg=green>{$source->name}</> (#{$source->id})] <bg=red;fg=white>{$e->getMessage()}</>");
             }

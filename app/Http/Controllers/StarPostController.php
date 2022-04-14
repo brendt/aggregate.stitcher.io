@@ -15,6 +15,6 @@ final class StarPostController
             'state' => PostState::STARRED,
         ]);
 
-        return redirect()->action(HomeController::class);
+        return redirect()->action(HomeController::class, request()->query->all());
     }
 }

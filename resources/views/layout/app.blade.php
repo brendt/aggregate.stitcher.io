@@ -8,5 +8,17 @@
 </head>
 <body class="bg-gray-100">
 {{ $slot }}
+
+<div class="text-sm mb-4 pb-4 text-center text-gray-400">
+    @if(!\Illuminate\Support\Facades\Auth::hasUser())
+        <a class="underline hover:no-underline" href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create']) }}">
+            login
+        </a>
+    @else
+        <a class="underline hover:no-underline" href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']) }}">
+            logout
+        </a>
+    @endif
+</div>
 </body>
 </html>
