@@ -11,4 +11,5 @@ enum SourceState: string
     case PUBLISHED = 'published';
     case DENIED = 'denied';
     case INVALID = 'invalid';
+    case DUPLICATE = 'duplicate';
 }

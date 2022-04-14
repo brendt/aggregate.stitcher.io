@@ -3,15 +3,8 @@
 ?>
 
 @component('layout.app')
-    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full">
-
-        <div class="bg-white m-4 shadow-md grid">
-            @if($message)
-                <div class="px-12 py-4 bg-green-100 font-bold block text-center">
-                    {{ $message }}
-                </div>
-            @endif
-
+    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
+        <div class="bg-white mx-4 shadow-md">
             @if($user)
                 <div class="px-12 py-4 grid grid-cols-3">
                     <a
@@ -40,6 +33,20 @@
                 </div>
             @endif
 
+            <div class="flex">
+                <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
+                <div class="px-4 py-1 grow text-center bg-white">published</div>
+                <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
+            </div>
+        </div>
+
+        <div class="bg-white mx-4 shadow-md grid">
+            @if($message)
+                <div class="px-12 py-4 bg-green-100 font-bold block text-center">
+                    {{ $message }}
+                </div>
+            @endif
+
             <a
                 class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
                 href="{{ action(\App\Http\Controllers\SuggestSourceController::class) }}"
@@ -58,7 +65,7 @@
                         rel="noopener noreferrer"
                         class="
                         block px-12 p-4
-                        {{ $post->isPending() ? 'bg-gray-100' : '' }}
+                        {{ $post->isPending() ? 'bg-gray-200' : '' }}
                         {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
                         {{ $post->isStarred() ? 'hover:bg-yellow-300' : 'hover:bg-pink-100' }}
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}

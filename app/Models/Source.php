@@ -55,9 +55,16 @@ class Source extends Model
         return $this->state === SourceState::INVALID;
     }
 
+    public function isDuplicate(): bool
+    {
+        return $this->state === SourceState::DUPLICATE;
+    }
+
     public function canPublish(): bool
     {
-        return ! $this->isPublished() && !$this->isPublishing();
+        return ! $this->isPublished()
+            && ! $this->isPublishing()
+            && ! $this->isDuplicate();
     }
 
     public function canDeny(): bool

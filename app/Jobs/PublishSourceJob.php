@@ -31,6 +31,19 @@ class PublishSourceJob implements ShouldQueue
             try {
                 Feed::load($feedUrl);
 
+                if (Source::query()
+                    ->where('url', $feedUrl)
+                    ->whereNot('id', $this->source->id)
+                    ->exists()
+                ) {
+                    $this->source->update([
+                        'url' => $feedUrl,
+                        'state' => SourceState::DUPLICATE,
+                    ]);
+
+                    return;
+                }
+
                 $this->source->update([
                     'url' => $feedUrl,
                     'state' => SourceState::PUBLISHED,

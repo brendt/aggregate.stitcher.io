@@ -3,23 +3,33 @@
 ?>
 
 @component('layout.app')
-    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full">
-        <div class="bg-white m-4 shadow-md grid">
-            <div class="flex border-b border-gray-200">
-                <div class="px-4 py-1 grow text-center bg-gray-100">pending</div>
-                <div class="px-4 py-1 grow text-center bg-blue-100">publishing</div>
-                <div class="px-4 py-1 grow text-center bg-white">published</div>
-                <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
-            </div>
+
+    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
+        <div class="text-sm text-center text-gray-400">
+            <a class="underline hover:no-underline" href="{{ action(\App\Http\Controllers\HomeController::class) }}">
+                back
+            </a>
+        </div>
+
+        <div class="flex mx-4 shadow-md">
+            <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
+            <div class="px-4 py-1 grow text-center bg-blue-100">publishing</div>
+            <div class="px-4 py-1 grow text-center bg-white">published</div>
+            <div class="px-4 py-1 grow text-center bg-orange-100">duplicate</div>
+            <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
+        </div>
+
+        <div class="bg-white mx-4 shadow-md grid">
 
             @foreach ($sources as $source)
                 <div>
                     <div
                         class="
-                            block px-12 p-4
-                            {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
-                        {{ $source->isPending() ? 'bg-gray-100' : '' }}
-                        {{ $source->isDenied() ? 'bg-red-100' : '' }}
+                                block px-12 p-4
+                                {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
+                                {{ $source->isPending() ? 'bg-gray-200' : '' }}
+                                {{ $source->isDenied() ? 'bg-red-100' : '' }}
+                                {{ $source->isDuplicate() ? 'bg-orange-100' : '' }}
                             "
                     >
                         <h1 class="font-bold">
