@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DeleteSourceController;
 use App\Http\Controllers\DenyPostController;
 use App\Http\Controllers\DenySourceController;
 use App\Http\Controllers\HomeController;
@@ -34,6 +35,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/sources', SourcesAdminController::class);
     Route::get('/source/deny/{source}', DenySourceController::class);
     Route::get('/source/publish/{source}', PublishSourceController::class);
+    Route::get('/source/delete/{source}', DeleteSourceController::class);
 });
 
 Route::get('/dashboard', function () {

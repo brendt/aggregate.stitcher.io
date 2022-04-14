@@ -60,6 +60,14 @@
                                     Deny
                                 </a>
                             @endif
+
+                            @if($source->canDelete())
+                                <a href="{{ action(\App\Http\Controllers\DeleteSourceController::class, $source) }}"
+                                   class="underline hover:no-underline text-red-600 py-2"
+                                >
+                                    Delete
+                                </a>
+                            @endif
                         </div>
                     </div>
                 </div>

@@ -72,6 +72,11 @@ class Source extends Model
         return ! $this->isDenied();
     }
 
+    public function canDelete(): bool
+    {
+        return $this->isDenied();
+    }
+
     public function getBaseUrl(): string
     {
         $parsed = parse_url($this->url);
