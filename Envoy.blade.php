@@ -3,8 +3,8 @@ require __DIR__.'/vendor/autoload.php';
 
 $server = "stitcher.io";
 $userAndServer = 'forge@'. $server;
-$repository = "brendt/analytics.stitcher.io.git";
-$baseDir = "/home/forge/analytics.stitcher.io";
+$repository = "brendt/aggregate.stitcher.io.git";
+$baseDir = "/home/forge/aggregate.stitcher.io";
 $releasesDir = "{$baseDir}/releases";
 $currentDir = "{$baseDir}/current";
 $newReleaseName = date('Ymd-His');
@@ -67,7 +67,7 @@ mkdir {{ $newReleaseDir }};
 # Clone the repo
 eval `ssh-agent -s`
 ssh-add -D
-ssh-add ~/.ssh/id_rsa_analytics
+ssh-add ~/.ssh/id_rsa_aggregate
 
 git clone --depth 1 git@github.com:{{ $repository }} {{ $newReleaseName }}
 
@@ -165,7 +165,7 @@ cd {{ $currentDir }}
 
 eval `ssh-agent -s`
 ssh-add -D
-ssh-add ~/.ssh/id_rsa_analytics
+ssh-add ~/.ssh/id_rsa_aggregate
 
 git pull origin master
 
