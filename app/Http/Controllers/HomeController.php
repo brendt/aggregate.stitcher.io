@@ -51,7 +51,7 @@ final class HomeController
         }
 
         if ($onlyToday) {
-            $query->where('created_at', '>=', now()->startOfDay());
+            $query->where('created_at', '>=', now()->subHours(24));
         }
 
         $posts = $query->paginate(50);
