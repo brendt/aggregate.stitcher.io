@@ -5,7 +5,7 @@
 @component('layout.app')
     <div class="mx-auto container grid gap-4 mt-4">
         @if($user)
-            <div class="bg-white mx-4 shadow-md">
+            <div class="bg-white mx-4 shadow-md max-w-full">
                 <div class="px-12 py-4 grid md:grid-cols-4 text-sm">
                     <a
                         href="{{ action(\App\Http\Controllers\HomeController::class, [
