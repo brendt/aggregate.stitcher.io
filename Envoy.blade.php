@@ -16,7 +16,6 @@ return "echo '\033[32m" .$message. "\033[0m';\n";
 }
 
 $css = isset($css);
-echo $css;
 @endsetup
 
 @servers(['local' => '127.0.0.1', 'remote' => $userAndServer])
@@ -50,7 +49,11 @@ finishDeploy
 @endmacro
 
 @macro('deploy-code')
-deployOnlyCode
+pullChanges
+@if($css)
+    runYarn
+@endif
+finishCodeDeploy
 @endmacro
 
 @task('startDeployment', ['on' => 'local'])
@@ -162,7 +165,7 @@ ls -dt {{ $releasesDir }}/* | tail -n +6 | xargs -d "\n" rm -rf;
 {{ logMessage("🚀  Application deployed!") }}
 @endtask
 
-@task('deployOnlyCode',['on' => 'remote'])
+@task('pullChanges',['on' => 'remote'])
 {{ logMessage("💻  Deploying code changes...") }}
 cd {{ $currentDir }}
 
@@ -173,6 +176,10 @@ ssh-add ~/.ssh/id_rsa_aggregate
 git pull origin master
 
 ssh-add -D
+@endtask
+
+@task('finishCodeDeploy',['on' => 'remote'])
+cd {{ $currentDir }}
 
 php artisan config:clear
 php artisan cache:clear
