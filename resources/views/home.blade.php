@@ -6,7 +6,7 @@
     <div class="mx-auto container grid gap-4 mt-4">
         @if($user)
             <div class="bg-white mx-4 shadow-md">
-                <div class="px-12 py-4 grid grid-cols-4 text-sm">
+                <div class="px-12 py-4 grid md:grid-cols-4 text-sm">
                     <a
                         href="{{ action(\App\Http\Controllers\HomeController::class, [
                         'show_denied' => ! $showDenied,
