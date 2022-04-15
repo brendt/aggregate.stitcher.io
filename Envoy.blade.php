@@ -50,9 +50,13 @@ finishDeploy
 
 @macro('deploy-code')
 pullChanges
+
 @if($css)
-    runYarn
+    cd {{ $currentDir }};
+    yarn config set ignore-engines true
+    yarn --frozen-lockfile
 @endif
+
 finishCodeDeploy
 @endmacro
 
