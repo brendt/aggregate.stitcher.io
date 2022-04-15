@@ -52,9 +52,7 @@ finishDeploy
 pullChanges
 
 @if($css)
-    cd {{ $currentDir }};
-    yarn config set ignore-engines true
-    yarn --frozen-lockfile
+    runYarnInCurrentDir
 @endif
 
 finishCodeDeploy
@@ -105,6 +103,13 @@ composer install --prefer-dist --no-scripts --no-dev -o;
 @task('runYarn', ['on' => 'remote'])
 {{ logMessage("📦  Running Yarn...") }}
 cd {{ $newReleaseDir }};
+yarn config set ignore-engines true
+yarn --frozen-lockfile
+@endtask
+
+@task('runYarnInCurrentDir', ['on' => 'remote'])
+{{ logMessage("📦  Running Yarn...") }}
+cd {{ $currentDir }};
 yarn config set ignore-engines true
 yarn --frozen-lockfile
 @endtask
