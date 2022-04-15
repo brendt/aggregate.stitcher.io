@@ -3,7 +3,7 @@
 ?>
 
 @component('layout.app')
-    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
+    <div class="mx-auto container grid gap-4 mt-4">
         @if($user)
             <div class="bg-white mx-4 shadow-md">
                 <div class="px-12 py-4 grid grid-cols-4 text-sm">

@@ -18,6 +18,7 @@
     <meta name="description" content="My community-driven RSS feed">
 </head>
 <body class="bg-gray-100">
+
 {{ $slot }}
 
 <div class="text-sm my-4 pb-4 text-center text-gray-400">
