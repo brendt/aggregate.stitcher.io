@@ -80,15 +80,15 @@
                         >
                         <h1 class="font-bold">
                             {{ $post->title }}
-                            <span class="text-sm font-normal">— {{ $post->source->name }}</span>
                         </h1>
 
                         <div class="text-sm font-light text-gray-800">
+                            {{ $post->source->name }},
                             @php
                                 $diffInHours = $post->created_at->diffInHours(now())
                             @endphp
 
-                            Published
+                            published
 
                             @if($diffInHours <= 1)
                                 right now

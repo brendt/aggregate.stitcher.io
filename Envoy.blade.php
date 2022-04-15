@@ -169,10 +169,6 @@ ssh-add ~/.ssh/id_rsa_aggregate
 
 git pull origin master
 
-@if(isset($css))
-    runYarn
-@endif
-
 ssh-add -D
 
 php artisan config:clear
