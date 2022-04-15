@@ -14,6 +14,9 @@ $user = get_current_user();
 function logMessage($message) {
 return "echo '\033[32m" .$message. "\033[0m';\n";
 }
+
+$css = isset($css);
+echo $css;
 @endsetup
 
 @servers(['local' => '127.0.0.1', 'remote' => $userAndServer])
