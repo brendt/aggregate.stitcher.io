@@ -69,7 +69,7 @@
                             href
                         ="{{ $post->url }}"
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                         class="
                         block px-12 p-4
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
