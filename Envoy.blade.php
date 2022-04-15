@@ -50,11 +50,6 @@ finishDeploy
 
 @macro('deploy-code')
 pullChanges
-
-@if($css)
-    runYarnInCurrentDir
-@endif
-
 finishCodeDeploy
 @endmacro
 
