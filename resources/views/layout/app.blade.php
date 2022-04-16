@@ -19,75 +19,15 @@
 </head>
 <body class="bg-gray-100">
 
-<div
-    style="z-index:-1;"
-    class="
-    flex
-    items-start
-    mx-auto
-    px-4
-    w-full
-
-    text-sm
-
-    lg:text-md
-
-    mt-4
-    flex-row
-    flex-wrap
-
-    md:mt-0
-    container
-
-    lg:flex-col
-    lg:absolute
-    lg:px-0
-    lg:mx-0
-">
-    <a href="/rss" class="
-       bg-orange-500
-       hover:bg-orange-400
-       hover:underline
-       text-white
-       font-bold
-       px-4 py-2
-       mb-2
-       shadow
-   ">
-        RSS
-    </a>
-
-    <a href="https://github.com/brendt/aggregate.stitcher.io/projects/2" class="
-       bg-black
-       hover:bg-gray-600
-       hover:underline
-       text-white
-       font-bold
-       px-4 py-2
-       shadow
-       mb-2
-   ">
-        GitHub
-    </a>
-
-{{--    <a href="" class="--}}
-{{--       bg-green-500--}}
-{{--       hover:bg-green-400--}}
-{{--       hover:underline--}}
-{{--       text-white--}}
-{{--       font-bold--}}
-{{--       px-4 py-2--}}
-{{--       shadow--}}
-{{--   ">--}}
-{{--        About--}}
-{{--    </a>--}}
-</div>
-
 {{ $slot }}
 
 <div class="text-sm my-4 pb-4 text-center text-gray-400 flex justify-center">
     <a href="/rss" class="underline hover:no-underline mr-4">
         RSS
+    </a>
+    
+    <a href="https://github.com/brendt/aggregate.stitcher.io/projects/2" class="underline hover:no-underline mr-4">
+        GitHub
     </a>
 
     @if(!\Illuminate\Support\Facades\Auth::hasUser())
