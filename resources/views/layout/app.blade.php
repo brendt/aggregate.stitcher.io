@@ -25,7 +25,7 @@
     <a href="/rss" class="underline hover:no-underline mr-4">
         RSS
     </a>
-    
+
     <a href="https://github.com/brendt/aggregate.stitcher.io/projects/2" class="underline hover:no-underline mr-4">
         GitHub
     </a>

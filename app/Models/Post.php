@@ -92,6 +92,9 @@ class Post extends Model implements Feedable
 
     public static function getAllFeedItems(): Collection
     {
-        return self::query()->where('state', PostState::PUBLISHED)->get();
+        return self::query()
+            ->where('state', PostState::PUBLISHED)
+            ->orderByDesc('created_at')
+            ->get();
     }
 }
