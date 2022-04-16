@@ -96,7 +96,10 @@
                                 {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago
                             @else
                                 {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }}
-                                ago
+                                ago{{ $user ? ',' : '' }}
+                            @endif
+                            @if($user)
+                                {{ $post->visits }} visits
                             @endif
                         </div>
                         @if($user)

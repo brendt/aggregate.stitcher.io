@@ -21,6 +21,8 @@ namespace App\Models{
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property int $visits
+ * @property string|null $uuid
  * @property-read \App\Models\Source $source
  * @method static \Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
@@ -33,8 +35,10 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereVisits($value)
  */
-	class Post extends \Eloquent {}
+	class Post extends \Eloquent implements \Spatie\Feed\Feedable {}
 }
 
 namespace App\Models{
