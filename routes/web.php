@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Posts\AdminPostsController;
+use App\Http\Controllers\Posts\DenyPendingPostsController;
 use App\Http\Controllers\Sources\DeleteSourceController;
 use App\Http\Controllers\Posts\DenyPostController;
 use App\Http\Controllers\Sources\DenySourceController;
@@ -32,6 +33,7 @@ Route::get('/post/{post}', ShowPostController::class);
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/posts', AdminPostsController::class);
+   Route::get('/posts/deny-all', DenyPendingPostsController::class);
    Route::get('/post/deny/{post}', DenyPostController::class);
    Route::get('/post/publish/{post}', PublishPostController::class);
    Route::get('/post/star/{post}', StarPostController::class);

@@ -115,5 +115,13 @@
                     more
                 </a>
             @endif
+
+            @if($posts->count())
+                <a class="px-12 py-4 font-bold block text-center bg-red-100 hover:bg-red-300"
+                   href="{{ action(\App\Http\Controllers\Posts\DenyPendingPostsController::class) }}"
+                   >
+                    Mark all pending as denied
+                </a>
+            @endif
         </div>
 @endcomponent
