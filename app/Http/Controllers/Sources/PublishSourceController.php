@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sources;
 
+use App\Http\Controllers\Sources\AdminSourcesController;
 use App\Jobs\PublishSourceJob;
 use App\Models\Source;
 use App\Models\SourceState;
@@ -18,6 +19,6 @@ final class PublishSourceController
 
         dispatch(new PublishSourceJob($source));
 
-        return redirect()->action(SourcesAdminController::class, request()->query->all());
+        return redirect()->action(AdminSourcesController::class, request()->query->all());
     }
 }

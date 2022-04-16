@@ -1,8 +1,8 @@
 @component('mail::message')
-# A new source was added
+    # A new source was added
 
-@component('mail::button', ['url' => action(\App\Http\Controllers\SourcesAdminController::class)])
-    View Source
-@endcomponent
+    @component('mail::button', ['url' => action(\App\Http\Controllers\Sources\AdminSourcesController::class)])
+        View Source
+    @endcomponent
 
 @endcomponent

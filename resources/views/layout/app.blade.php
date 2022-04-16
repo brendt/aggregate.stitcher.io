@@ -30,15 +30,15 @@
         GitHub
     </a>
 
-    @if(!\Illuminate\Support\Facades\Auth::hasUser())
+    @if(\Illuminate\Support\Facades\Auth::user())
         <a class="underline hover:no-underline"
-           href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create']) }}">
-            login
+           href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']) }}">
+            Logout
         </a>
     @else
         <a class="underline hover:no-underline"
-           href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'destroy']) }}">
-            logout
+           href="{{ action([\App\Http\Controllers\Auth\AuthenticatedSessionController::class, 'create']) }}">
+            Login
         </a>
     @endif
 </div>

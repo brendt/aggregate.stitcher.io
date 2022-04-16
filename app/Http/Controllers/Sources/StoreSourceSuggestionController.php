@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Sources;
 
+use App\Http\Controllers\HomeController;
 use App\Jobs\PublishSourceJob;
 use App\Mail\SourceAddedMail;
 use App\Models\Source;
@@ -31,7 +32,7 @@ final class StoreSourceSuggestionController
 
             dispatch(new PublishSourceJob($source));
 
-            return redirect()->action(SourcesAdminController::class);
+            return redirect()->action(AdminSourcesController::class);
         }
 
         Mail::to(User::find(1)->email)

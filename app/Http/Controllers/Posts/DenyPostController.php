@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Posts;
 
 use App\Models\Post;
 use App\Models\PostState;
@@ -15,6 +15,6 @@ final class DenyPostController
             'state' => PostState::DENIED,
         ]);
 
-        return redirect()->action(HomeController::class, request()->query->all());
+        return redirect()->action(AdminPostsController::class, request()->query->all());
     }
 }

@@ -3,13 +3,8 @@
 ?>
 
 @component('layout.app')
-
-    <div class="mx-auto md:w-3/4 xl:w-1/3 w-full grid gap-4 mt-4">
-        <div class="text-sm text-center text-gray-400">
-            <a class="underline hover:no-underline" href="{{ action(\App\Http\Controllers\HomeController::class) }}">
-                back
-            </a>
-        </div>
+    <div class="mx-auto container grid gap-4 mt-4">
+        @include('includes.adminMenu')
 
         <div class="flex mx-4 shadow-md">
             <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
@@ -19,8 +14,7 @@
             <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
         </div>
 
-        <div class="bg-white mx-4 shadow-md grid">
-
+        <div class="bg-white mx-4 shadow-md max-w-full">
             @foreach ($sources as $source)
                 <div>
                     <div
@@ -46,7 +40,7 @@
                             </a>
 
                             @if($source->canPublish())
-                                <a href="{{ action(\App\Http\Controllers\PublishSourceController::class, $source) }}"
+                                <a href="{{ action(\App\Http\Controllers\Sources\PublishSourceController::class, $source) }}"
                                    class="underline hover:no-underline text-green-600 mr-4 py-2"
                                 >
                                     Publish
@@ -54,7 +48,7 @@
                             @endif
 
                             @if($source->canDeny())
-                                <a href="{{ action(\App\Http\Controllers\DenySourceController::class, $source) }}"
+                                <a href="{{ action(\App\Http\Controllers\Sources\DenySourceController::class, $source) }}"
                                    class="underline hover:no-underline text-red-600 py-2"
                                 >
                                     Deny
@@ -62,7 +56,7 @@
                             @endif
 
                             @if($source->canDelete())
-                                <a href="{{ action(\App\Http\Controllers\DeleteSourceController::class, $source) }}"
+                                <a href="{{ action(\App\Http\Controllers\Sources\DeleteSourceController::class, $source) }}"
                                    class="underline hover:no-underline text-red-600 py-2"
                                 >
                                     Delete

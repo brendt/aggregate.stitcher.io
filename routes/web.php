@@ -1,16 +1,17 @@
 <?php
 
-use App\Http\Controllers\DeleteSourceController;
-use App\Http\Controllers\DenyPostController;
-use App\Http\Controllers\DenySourceController;
+use App\Http\Controllers\Posts\AdminPostsController;
+use App\Http\Controllers\Sources\DeleteSourceController;
+use App\Http\Controllers\Posts\DenyPostController;
+use App\Http\Controllers\Sources\DenySourceController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\PublishPostController;
-use App\Http\Controllers\PublishSourceController;
-use App\Http\Controllers\ShowPostController;
-use App\Http\Controllers\SourcesAdminController;
-use App\Http\Controllers\StarPostController;
-use App\Http\Controllers\StoreSourceSuggestionController;
-use App\Http\Controllers\SuggestSourceController;
+use App\Http\Controllers\Posts\PublishPostController;
+use App\Http\Controllers\Sources\PublishSourceController;
+use App\Http\Controllers\Posts\ShowPostController;
+use App\Http\Controllers\Sources\AdminSourcesController;
+use App\Http\Controllers\Posts\StarPostController;
+use App\Http\Controllers\Sources\StoreSourceSuggestionController;
+use App\Http\Controllers\Sources\SuggestSourceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,11 +31,12 @@ Route::post('/suggest', StoreSourceSuggestionController::class);
 Route::get('/post/{post}', ShowPostController::class);
 
 Route::middleware(['auth'])->group(function () {
+   Route::get('/posts', AdminPostsController::class);
    Route::get('/post/deny/{post}', DenyPostController::class);
    Route::get('/post/publish/{post}', PublishPostController::class);
    Route::get('/post/star/{post}', StarPostController::class);
 
-    Route::get('/sources', SourcesAdminController::class);
+    Route::get('/sources', AdminSourcesController::class);
     Route::get('/source/deny/{source}', DenySourceController::class);
     Route::get('/source/publish/{source}', PublishSourceController::class);
     Route::get('/source/delete/{source}', DeleteSourceController::class);
