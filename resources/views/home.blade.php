@@ -68,8 +68,6 @@
                         <{{ $user ? 'div' : 'a' }}
                             href
                         ="{{ $post->getPublicUrl() }}"
-                        target="_blank"
-                        rel="noopener noreferrer"
                         class="
                         block px-12 p-4
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
@@ -106,7 +104,6 @@
                             <div class="flex gap-2 text-sm pt-2">
                                 <a href="{{ $post->url }}"
                                    class="underline hover:no-underline mr-4 py-2"
-                                   target="_blank" rel="noopener noreferrer"
                                 >
                                     Show
                                 </a>
