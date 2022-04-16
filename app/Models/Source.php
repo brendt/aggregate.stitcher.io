@@ -62,8 +62,7 @@ class Source extends Model
 
     public function canPublish(): bool
     {
-        return ! $this->isPublished()
-            && ! $this->isPublishing();
+        return ! $this->isPublished();
     }
 
     public function canDeny(): bool

@@ -12,6 +12,7 @@
             <div class="px-4 py-1 grow text-center bg-white">published</div>
             <div class="px-4 py-1 grow text-center bg-orange-100">duplicate</div>
             <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
+            <div class="px-4 py-1 grow text-center bg-red-300">invalid</div>
         </div>
 
         <div class="bg-white mx-4 shadow-md max-w-full">
@@ -23,6 +24,7 @@
                                 {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
                                 {{ $source->isPending() ? 'bg-gray-200' : '' }}
                                 {{ $source->isDenied() ? 'bg-red-100' : '' }}
+                                {{ $source->isInvalid() ? 'bg-red-300' : '' }}
                                 {{ $source->isDuplicate() ? 'bg-orange-100' : '' }}
                             "
                     >

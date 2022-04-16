@@ -12,7 +12,14 @@ class PublishSourceCommand extends Command
 
     public function handle()
     {
-        $source = Source::findOrFail($this->argument('source'));
+        $sourceId = $this->argument('source');
+
+        $source = Source::query()
+            ->where(
+                is_int($sourceId) ? 'id' : 'name',
+                $sourceId
+            )
+            ->first();
 
         dispatch(new PublishSourceJob($source));
     }

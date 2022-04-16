@@ -25,6 +25,8 @@ class PublishSourceJob implements ShouldQueue
 
     public function handle()
     {
+        Feed::$userAgent = 'Aggregate';
+
         $feedUrls = $this->getPossibleUrls($this->source->url);
 
         foreach ($feedUrls as $feedUrl) {
@@ -55,11 +57,11 @@ class PublishSourceJob implements ShouldQueue
             } catch (Throwable) {
                 continue;
             }
-
-            $this->source->update([
-                'state' => SourceState::INVALID,
-            ]);
         }
+
+        $this->source->update([
+            'state' => SourceState::INVALID,
+        ]);
     }
 
     private function getPossibleUrls(string $url): array
@@ -77,6 +79,7 @@ class PublishSourceJob implements ShouldQueue
             "{$scheme}://{$host}/rss.xml",
 
             "{$scheme}://{$host}/feed",
+            "{$scheme}://{$host}/feed.atom",
             "{$scheme}://{$host}/index",
             "{$scheme}://{$host}/atom",
             "{$scheme}://{$host}/rss",
