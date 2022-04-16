@@ -6,6 +6,7 @@ use App\Http\Controllers\DenySourceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PublishPostController;
 use App\Http\Controllers\PublishSourceController;
+use App\Http\Controllers\ShowPostController;
 use App\Http\Controllers\SourcesAdminController;
 use App\Http\Controllers\StarPostController;
 use App\Http\Controllers\StoreSourceSuggestionController;
@@ -26,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', HomeController::class);
 Route::get('/suggest', SuggestSourceController::class);
 Route::post('/suggest', StoreSourceSuggestionController::class);
+Route::get('/post/{post}', ShowPostController::class);
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/post/deny/{post}', DenyPostController::class);
@@ -43,5 +45,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 Route::mailPreview();
+
+Route::feeds();
 
 require __DIR__ . '/auth.php';

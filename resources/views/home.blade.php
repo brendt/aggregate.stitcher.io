@@ -67,7 +67,7 @@
                     <div>
                         <{{ $user ? 'div' : 'a' }}
                             href
-                        ="{{ $post->url }}"
+                        ="{{ $post->getPublicUrl() }}"
                         target="_blank"
                         rel="noopener noreferrer"
                         class="
@@ -95,7 +95,8 @@
                             @elseif($diffInHours <= 24)
                                 {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago
                             @else
-                                {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }} ago
+                                {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }}
+                                ago
                             @endif
                         </div>
                         @if($user)
@@ -138,7 +139,8 @@
         </div>
 
         @if($posts->hasMorePages())
-            <a class="px-12 py-4 font-bold block text-center hover:bg-pink-200" href="{{ $posts->nextPageUrl() }}" title="Add your own">
+            <a class="px-12 py-4 font-bold block text-center hover:bg-pink-200" href="{{ $posts->nextPageUrl() }}"
+               title="Add your own">
                 more
             </a>
         @endif

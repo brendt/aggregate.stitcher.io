@@ -2,28 +2,18 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+use Ramsey\Uuid\Uuid;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * This is used by Laravel authentication to redirect users after login.
-     *
-     * @var string
-     */
     public const HOME = '/';
 
-    /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @return void
-     */
     public function boot()
     {
         $this->configureRateLimiting();
@@ -36,13 +26,16 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware(['web'])
                 ->group(base_path('routes/web.php'));
         });
+
+        Route::bind('post', function (int|string $id) {
+            if (Uuid::isValid($id)) {
+                return Post::query()->where('uuid', $id)->firstOrFail();
+            }
+
+            return Post::findOrFail($id);
+        });
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
     protected function configureRateLimiting()
     {
         RateLimiter::for('api', function (Request $request) {

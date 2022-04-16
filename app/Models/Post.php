@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\ShowPostController;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Ramsey\Uuid\Uuid;
+use Spatie\Feed\Feedable;
+use Spatie\Feed\FeedItem;
 
-class Post extends Model
+class Post extends Model implements Feedable
 {
     use HasFactory;
 
@@ -15,11 +20,15 @@ class Post extends Model
 
     protected $casts = [
         'state' => PostState::class,
+        'visits' => 'integer',
     ];
 
     protected static function booted()
     {
-        self::creating(fn (Post $post) => $post->state ??= PostState::PENDING);
+        self::creating(function (Post $post) {
+            $post->state ??= PostState::PENDING;
+            $post->uuid ??= Uuid::uuid4()->toString();
+        });
     }
 
     public function source(): BelongsTo
@@ -49,16 +58,40 @@ class Post extends Model
 
     public function canDeny(): bool
     {
-        return ! $this->isDenied();
+        return !$this->isDenied();
     }
 
     public function canStar(): bool
     {
-        return ! $this->isStarred();
+        return !$this->isStarred();
     }
 
     public function canPublish(): bool
     {
-        return ! $this->isStarred() && ! $this->isPublished();
+        return !$this->isStarred() && !$this->isPublished();
+    }
+
+    public function getPublicUrl(): string
+    {
+        return action(ShowPostController::class, [
+            'post' => $this->uuid,
+        ]);
+    }
+
+    public function toFeedItem(): FeedItem
+    {
+        return FeedItem::create()
+            ->id($this->getPublicUrl())
+            ->link($this->getPublicUrl())
+            ->title($this->title)
+            ->updated($this->created_at)
+            ->summary('')
+            ->authorName('')
+            ->authorEmail('');
+    }
+
+    public static function getAllFeedItems(): Collection
+    {
+        return self::query()->where('state', PostState::PUBLISHED)->get();
     }
 }
