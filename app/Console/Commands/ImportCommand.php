@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use App\Jobs\PublishSourceJob;
 use App\Jobs\SyncSourceJob;
 use App\Models\Source;
 use App\Models\SourceState;

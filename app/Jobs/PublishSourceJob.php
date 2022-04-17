@@ -2,6 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Events\SourceFeedUrlFound;
+use App\Events\SourceFeedUrlsResolved;
+use App\Events\SourceFeedUrlTried;
 use App\Models\Source;
 use App\Models\SourceState;
 use Feed;
@@ -20,7 +23,8 @@ class PublishSourceJob implements ShouldQueue
 
     public function __construct(
         public readonly Source $source
-    ) {
+    )
+    {
     }
 
     public function handle()
@@ -29,9 +33,19 @@ class PublishSourceJob implements ShouldQueue
 
         $feedUrls = $this->getPossibleUrls($this->source->url);
 
+        event(new SourceFeedUrlsResolved(
+            $this->source,
+            $feedUrls
+        ));
+
         foreach ($feedUrls as $feedUrl) {
             try {
                 Feed::load($feedUrl);
+
+                event(new SourceFeedUrlFound(
+                    $this->source,
+                    $feedUrl)
+                );
 
                 if (Source::query()
                     ->where('url', $feedUrl)
@@ -54,7 +68,13 @@ class PublishSourceJob implements ShouldQueue
                 dispatch(new SyncSourceJob($this->source));
 
                 return;
-            } catch (Throwable) {
+            } catch (Throwable $exception) {
+                event(new SourceFeedUrlTried(
+                    $this->source,
+                    $feedUrl,
+                    $exception
+                ));
+
                 continue;
             }
         }
@@ -105,13 +125,13 @@ class PublishSourceJob implements ShouldQueue
         $scheme = parse_url($url, PHP_URL_SCHEME);
         $html = @file_get_contents($url);
 
-        if (! $html) {
+        if (!$html) {
             $host = parse_url($url, PHP_URL_HOST);
 
             $html = @file_get_contents("{$scheme}://{$host}");
         }
 
-        if (! $html) {
+        if (!$html) {
             return null;
         }
 
@@ -121,13 +141,13 @@ class PublishSourceJob implements ShouldQueue
 
         [$link] = $dom->find('head link[type="application/rss+xml"]');
 
-        if (! $link || ! $link->href) {
+        if (!$link || !$link->href) {
             return null;
         }
 
         $href = $link->href;
 
-        if (! Str::startsWith($href, 'http')) {
+        if (!Str::startsWith($href, 'http')) {
             $href = $scheme . '://' . preg_replace('/^[\/]+/', '', $href);
         }
 

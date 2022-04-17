@@ -6,9 +6,9 @@ use App\Jobs\PublishSourceJob;
 use App\Models\Source;
 use Illuminate\Console\Command;
 
-class PublishSourceCommand extends Command
+class SourcePublishSourceCommand extends Command
 {
-    protected $signature = 'publish {source}';
+    protected $signature = 'source:publish {source}';
 
     public function handle()
     {

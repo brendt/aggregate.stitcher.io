@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\SourceDebugCommand;
 use App\Models\Post;
 use App\Models\PostState;
 use App\Models\Source;
@@ -12,21 +13,11 @@ use Illuminate\View\View;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     *
-     * @return void
-     */
     public function register()
     {
-        //
+        $this->app->singleton(SourceDebugCommand::class, fn () => new SourceDebugCommand());
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
     public function boot()
     {
         \Illuminate\Support\Facades\View::composer('*', function (View $view) {

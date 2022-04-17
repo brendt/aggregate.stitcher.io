@@ -7,9 +7,9 @@ use App\Models\Source;
 use Illuminate\Console\Command;
 use Throwable;
 
-class SyncCommand extends Command
+class SourceSyncCommand extends Command
 {
-    protected $signature = 'sync {--source=}';
+    protected $signature = 'source:sync {--source=}';
 
     public function handle()
     {
