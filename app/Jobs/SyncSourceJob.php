@@ -41,11 +41,17 @@ class SyncSourceJob implements ShouldQueue
 
     private function resolveTitle(array $item): string
     {
-        if (is_string($item['title'] ?? null)) {
-            return $item['title'];
+        $title = $item['title'] ?? null;
+
+        if (! $title) {
+            return $item['id'];
         }
 
-        return $item['id'];
+        $title = preg_replace_callback("/(&#[0-9]+;)/", function ($match) {
+            return mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES");
+        }, $title);
+
+        return html_entity_decode($title);
     }
 
     private function resolveItems(Feed $feed): mixed
