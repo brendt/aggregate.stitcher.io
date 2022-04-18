@@ -48,6 +48,17 @@ cleanOldReleases
 finishDeploy
 @endmacro
 
+@macro('deploy-front')
+startDeployment
+cloneRepository
+runYarn
+generateAssets
+updateSymlinks
+blessNewRelease
+cleanOldReleases
+finishDeploy
+@endmacro
+
 @macro('deploy-code')
 pullChanges
 finishCodeDeploy
