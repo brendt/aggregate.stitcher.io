@@ -30,6 +30,7 @@ Route::get('/', HomeController::class);
 Route::get('/suggest', SuggestSourceController::class);
 Route::post('/suggest', StoreSourceSuggestionController::class);
 Route::get('/post/{post}', ShowPostController::class);
+Route::view('/about', 'about');
 
 Route::middleware(['auth'])->group(function () {
    Route::get('/posts', AdminPostsController::class);

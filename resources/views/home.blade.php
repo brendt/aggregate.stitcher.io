@@ -25,7 +25,7 @@
 
             <div class="">
                 @foreach ($posts as $post)
-                    <div>
+                    <div class="overflow-x-hidden">
                         <a
                             href="{{ $post->getPublicUrl() }}"
                             class="
