@@ -49,14 +49,10 @@ finishDeploy
 @endmacro
 
 @macro('deploy-front')
-startDeployment
-cloneRepository
-runYarn
-generateAssets
-updateSymlinks
-blessNewRelease
-cleanOldReleases
-finishDeploy
+pullChanges
+runYarnInCurrentDir
+generateAssetsInCurrentDir
+finishCodeDeploy
 @endmacro
 
 @macro('deploy-code')
@@ -123,6 +119,12 @@ yarn --frozen-lockfile
 @task('generateAssets', ['on' => 'remote'])
 {{ logMessage("🌅  Generating assets...") }}
 cd {{ $newReleaseDir }};
+yarn run production
+@endtask
+
+@task('generateAssetsInCurrentDir', ['on' => 'remote'])
+{{ logMessage("🌅  Generating assets...") }}
+cd {{ $currentDir }};
 yarn run production
 @endtask
 
