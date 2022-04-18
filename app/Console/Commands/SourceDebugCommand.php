@@ -18,7 +18,7 @@ class SourceDebugCommand extends Command
     {
         $sourceUrl = $this->argument('source');
 
-        $source = Source::create([
+        $source = Source::firstOrCreate([
             'url' => $sourceUrl,
         ]);
 
