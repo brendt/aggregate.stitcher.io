@@ -23,7 +23,7 @@
                 >{{ $onlyToday ? 'All time' : 'Only today' }}</a>
             </div>
 
-            <div class="flex">
+            <div class="md:flex">
                 <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
                 <div class="px-4 py-1 grow text-center bg-white">published</div>
                 <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
