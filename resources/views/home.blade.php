@@ -49,13 +49,15 @@
                                 published
 
                                 @if($diffInHours <= 1)
-                                    right now
+                                    right now,
                                 @elseif($diffInHours <= 24)
-                                    {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago
+                                    {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago,
                                 @else
                                     {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }}
-                                    ago
+                                    ago,
                                 @endif
+
+                                {{ $post->visits }} visits
                             </div>
                         </a>
                     </div>
