@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App;
 use App\Console\Commands\SourceDebugCommand;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -16,11 +17,13 @@ class EventServiceProvider extends ServiceProvider
     ];
 
     protected $subscribe = [
-        SourceDebugCommand::class,
     ];
 
     public function boot()
     {
+        if (App::runningInConsole()) {
+            $this->subscribe[] = SourceDebugCommand::class;
+        }
     }
 
     public function shouldDiscoverEvents()
