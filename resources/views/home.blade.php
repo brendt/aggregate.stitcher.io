@@ -57,7 +57,7 @@
                                     ago,
                                 @endif
 
-                                {{ $post->visits }} visits
+                                {{ $post->visits }} {{ \Illuminate\Support\Str::plural('visit', $post->visits) }}
                             </div>
                         </a>
                     </div>
