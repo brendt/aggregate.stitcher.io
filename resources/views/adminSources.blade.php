@@ -36,7 +36,6 @@
                         <div class="flex gap-2 text-sm pt-2">
                             <a href="{{ $source->getBaseUrl() }}"
                                class="underline hover:no-underline mr-4 py-2"
-                               target="_blank" rel="noopener noreferrer"
                             >
                                 Show
                             </a>
