@@ -31,10 +31,16 @@ class Source extends Model
         return $this->hasMany(Post::class);
     }
 
+    public function isExternals(): bool
+    {
+        return $this->name === 'https://externals.io';
+    }
+
     public function isPublishing(): bool
     {
         return $this->state === SourceState::PUBLISHING;
     }
+
     public function isPublished(): bool
     {
         return $this->state === SourceState::PUBLISHED;

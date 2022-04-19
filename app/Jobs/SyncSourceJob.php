@@ -63,6 +63,10 @@ class SyncSourceJob implements ShouldQueue
 
     private function resolveId(array $item): string
     {
+        if ($this->source->isExternals()) {
+            return $this->resolveIdForExternals($item);
+        }
+
         return $item['id'] ?? $item['link'];
     }
 
@@ -74,5 +78,19 @@ class SyncSourceJob implements ShouldQueue
             ?? $item['timestamp'];
 
         return Carbon::make($updated);
+    }
+
+    public function resolveIdForExternals(array $item): string
+    {
+        $existingPost = Post::query()
+            ->where('title', $item['title'])
+            ->where('source_id', $this->source->id)
+            ->first();
+
+        if ($existingPost) {
+            return $existingPost->url;
+        }
+
+        return $item['link'];
     }
 }
