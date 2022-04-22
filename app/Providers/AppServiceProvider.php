@@ -22,11 +22,14 @@ class AppServiceProvider extends ServiceProvider
     {
         \Illuminate\Support\Facades\View::composer('*', function (View $view) {
             $view->with([
-                'pendingPosts' => Post::query()->where('state', PostState::PENDING)->count(),
-                'pendingSources' => Source::query()->where('state', SourceState::PENDING)
+                'pendingPosts' => Post::query()
+                    ->where('state', PostState::PENDING)
                     ->whereHas('source', function (Builder $query) {
                         $query->where('state', SourceState::PUBLISHED);
                     })
+                    ->count(),
+                'pendingSources' => Source::query()
+                    ->where('state', SourceState::PENDING)
                     ->count(),
             ]);
         });
