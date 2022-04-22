@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Http\Controllers\Posts\ShowPostController;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -97,5 +98,25 @@ class Post extends Model implements Feedable
             ->orderByDesc('created_at')
             ->limit(20)
             ->get();
+    }
+
+    public function scopeWhereActiveSource(Builder $builder): void
+    {
+        $builder->where(function (Builder $builder) {
+            $builder
+                ->whereHas('source', function (Builder $query) {
+                    $query->where('state', SourceState::PUBLISHED);
+                })
+                ->orWhereNull('source_id');
+        });
+    }
+
+    public function getSourceName(): string
+    {
+        if ($this->source) {
+            return $this->source->name;
+        }
+
+        return parse_url($this->url, PHP_URL_HOST);
     }
 }

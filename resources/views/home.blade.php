@@ -41,7 +41,7 @@
                             </h1>
 
                             <div class="text-sm font-light text-gray-800">
-                                {{ $post->source->name }},
+                                {{ $post->getSourceName() }},
                                 @php
                                     $diffInHours = $post->created_at->diffInHours(now())
                                 @endphp

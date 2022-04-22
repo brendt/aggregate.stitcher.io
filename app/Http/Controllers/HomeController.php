@@ -6,8 +6,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\PostState;
-use App\Models\SourceState;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 final class HomeController
@@ -17,9 +15,7 @@ final class HomeController
         $posts = Post::query()
             ->orderByDesc('created_at')
             ->orderByDesc('id')
-            ->whereHas('source', function (Builder $query) {
-                $query->where('state', SourceState::PUBLISHED);
-            })
+            ->whereActiveSource()
             ->whereIn('state', [
                 PostState::PUBLISHED,
                 PostState::STARRED,

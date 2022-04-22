@@ -38,6 +38,15 @@
             @endif
 
             <div>
+
+                <a
+                    class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
+                    href="{{ action(\App\Http\Controllers\Posts\CreatePostController::class) }}"
+                    title="Add your own"
+                >
+                    +
+                </a>
+
                 @foreach ($posts as $post)
                     <div>
                         <div
@@ -53,7 +62,7 @@
                             </h1>
 
                             <div class="text-sm font-light text-gray-800">
-                                {{ $post->source->name }},
+                                {{ $post->getSourceName() }},
 
                                 @php
                                     $diffInHours = $post->created_at->diffInHours(now())

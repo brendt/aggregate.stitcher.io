@@ -15,19 +15,20 @@ namespace App\Models{
  * App\Models\Post
  *
  * @property int $id
- * @property int $source_id
+ * @property string|null $uuid
+ * @property int|null $source_id
  * @property \App\Models\PostState $state
  * @property string $title
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $visits
- * @property string|null $uuid
- * @property-read \App\Models\Source $source
+ * @property-read \App\Models\Source|null $source
  * @method static \Database\Factories\PostFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Post newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereActiveSource()
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSourceId($value)

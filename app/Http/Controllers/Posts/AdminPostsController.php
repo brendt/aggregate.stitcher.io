@@ -8,7 +8,6 @@ use App\Models\Post;
 use App\Models\PostState;
 use App\Models\Source;
 use App\Models\SourceState;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 final class AdminPostsController
@@ -18,9 +17,7 @@ final class AdminPostsController
         $query = Post::query()
             ->orderByDesc('created_at')
             ->orderByDesc('id')
-            ->whereHas('source', function (Builder $query) {
-                $query->where('state', SourceState::PUBLISHED);
-            });
+            ->whereActiveSource();
 
         $user = $request->user();
 
