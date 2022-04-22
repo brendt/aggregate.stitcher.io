@@ -24,7 +24,7 @@ final class HomeController
                 PostState::PUBLISHED,
                 PostState::STARRED,
             ])
-            ->paginate(50);
+            ->paginate(20);
 
         return view('home', [
             'user' => $request->user(),

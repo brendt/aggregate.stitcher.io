@@ -95,6 +95,7 @@ class Post extends Model implements Feedable
         return self::query()
             ->where('state', PostState::PUBLISHED)
             ->orderByDesc('created_at')
+            ->limit(20)
             ->get();
     }
 }
