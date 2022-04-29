@@ -16,11 +16,11 @@ final class StorePostController
             'url' => ['url', 'required']
         ])['url'];
 
-        $meta = get_meta_tags($url);
+        dd(getTitle($url));
 
         Post::create([
             'state' => PostState::PUBLISHED,
-            'title' => $meta['title'] ?? $url,
+            'title' => getTitle($url),
             'url' => $url,
         ]);
 
