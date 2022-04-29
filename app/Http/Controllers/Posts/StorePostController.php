@@ -16,8 +16,6 @@ final class StorePostController
             'url' => ['url', 'required']
         ])['url'];
 
-        dd(getTitle($url));
-
         Post::create([
             'state' => PostState::PUBLISHED,
             'title' => getTitle($url),
