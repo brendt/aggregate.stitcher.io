@@ -42,7 +42,7 @@
                 <a
                     class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
                     href="{{ action(\App\Http\Controllers\Posts\CreatePostController::class) }}"
-                    title="Add your own"
+                    title="Add new post"
                 >
                     +
                 </a>

@@ -16,6 +16,14 @@
         </div>
 
         <div class="bg-white mx-4 shadow-md max-w-full">
+            <a
+                class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
+                href="{{ action(\App\Http\Controllers\Sources\SuggestSourceController::class) }}"
+                title="Add new source"
+            >
+                +
+            </a>
+
             @foreach ($sources as $source)
                 <div>
                     <div
