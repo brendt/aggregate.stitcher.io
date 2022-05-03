@@ -21,16 +21,10 @@ final class StoreSourceSuggestionController
             'url' => ['required', 'url'],
         ])['url'];
 
-        $source = Source::create([
-            'url' => $url,
-        ]);
+        $source = $this->createSource($url);
 
         if ($request->user()) {
-            $source->update([
-                'state' => SourceState::PUBLISHING,
-            ]);
-
-            dispatch(new PublishSourceJob($source));
+            $this->publishSource($source);
 
             return redirect()->action(AdminSourcesController::class);
         }
@@ -41,5 +35,29 @@ final class StoreSourceSuggestionController
         return redirect()->action(HomeController::class, [
             'message' => 'Thank you for your suggestion, we\'ll review it soon!',
         ]);
+    }
+
+    public function createSource(string $url): Source
+    {
+        $source = Source::create([
+            'url' => $url,
+        ]);
+
+        if ($source->hasDuplicate()) {
+            $source->update([
+                'state' => SourceState::DUPLICATE,
+            ]);
+        }
+
+        return $source;
+    }
+
+    public function publishSource(Source $source): void
+    {
+        $source->update([
+            'state' => SourceState::PUBLISHING,
+        ]);
+
+        dispatch(new PublishSourceJob($source));
     }
 }

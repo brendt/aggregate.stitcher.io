@@ -14,7 +14,7 @@ class Source extends Model
     public $guarded = [];
 
     protected $casts = [
-        'state' => SourceState::class
+        'state' => SourceState::class,
     ];
 
     protected static function booted()
@@ -86,5 +86,13 @@ class Source extends Model
         $parsed = parse_url($this->url);
 
         return ($parsed['scheme'] ?? 'http') . '://' . $parsed['host'];
+    }
+
+    public function hasDuplicate(): bool
+    {
+        return self::query()
+            ->whereNot('id', $this->id)
+            ->where('name', $this->getBaseUrl())
+            ->exists();
     }
 }
