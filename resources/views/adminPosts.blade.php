@@ -57,7 +57,7 @@
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         "
                         >
-                            <h1 class="font-bold break-all">
+                            <h1 class="font-bold break-words">
                                 {{ $post->title }}
                             </h1>
 

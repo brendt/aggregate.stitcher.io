@@ -36,7 +36,7 @@
                                 {{ $source->isDuplicate() ? 'bg-orange-100' : '' }}
                             "
                     >
-                        <h1 class="font-bold break-all">
+                        <h1 class="font-bold break-words">
                             {{ $source->name }}
                             <span class="text-sm font-normal">— {{ $source->url }}</span>
                         </h1>
