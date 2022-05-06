@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\SourceDuplicationFound;
 use App\Events\SourceFeedUrlFound;
 use App\Events\SourceFeedUrlsResolved;
 use App\Events\SourceFeedUrlTried;
@@ -42,11 +43,6 @@ class PublishSourceJob implements ShouldQueue
             try {
                 Feed::load($feedUrl);
 
-                event(new SourceFeedUrlFound(
-                    $this->source,
-                    $feedUrl)
-                );
-
                 if (Source::query()
                     ->where('url', $feedUrl)
                     ->whereNot('id', $this->source->id)
@@ -57,8 +53,15 @@ class PublishSourceJob implements ShouldQueue
                         'state' => SourceState::DUPLICATE,
                     ]);
 
+                    dispatch(new SourceDuplicationFound($this->source));
+
                     return;
                 }
+
+                event(new SourceFeedUrlFound(
+                        $this->source,
+                        $feedUrl)
+                );
 
                 $this->source->update([
                     'url' => $feedUrl,

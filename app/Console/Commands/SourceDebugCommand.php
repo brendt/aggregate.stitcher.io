@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Events\PostResolved;
+use App\Events\SourceDuplicationFound;
 use App\Events\SourceFeedUrlFound;
 use App\Events\SourceFeedUrlsResolved;
 use App\Events\SourceFeedUrlTried;
@@ -44,12 +46,28 @@ class SourceDebugCommand extends Command
         $this->info("[{$event->source->name}] {$event->feedUrl} succeeded!");
     }
 
+    public function onSourceDuplicationFound(SourceDuplicationFound $event): void
+    {
+        $this->error("[{$event->source->name}] already exists");
+    }
+
+    public function onPostResolved(PostResolved $event): void
+    {
+        $this->info("[{$event->post->url}] synced");
+
+        $payload = json_encode($event->payload, JSON_PRETTY_PRINT);
+
+        $this->comment("[{$event->post->url}] {$payload}");
+    }
+
     public function subscribe(Dispatcher $dispatcher): array
     {
         return [
             SourceFeedUrlsResolved::class => 'onSourceFeedUrlsResolved',
             SourceFeedUrlTried::class => 'onSourceFeedUrlTried',
             SourceFeedUrlFound::class => 'onSourceFeedUrlFound',
+            SourceDuplicationFound::class => 'onSourceDuplicationFound',
+            PostResolved::class => 'onPostResolved',
         ];
     }
 }

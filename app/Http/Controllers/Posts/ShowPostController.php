@@ -14,6 +14,6 @@ final class ShowPostController
             'visits' => $post->visits + 1,
         ]);
 
-        return redirect()->to($post->url);
+        return redirect()->to($post->getFullUrl());
     }
 }

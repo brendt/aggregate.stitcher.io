@@ -78,6 +78,19 @@ class Post extends Model implements Feedable
         ]);
     }
 
+    public function getFullUrl(): string
+    {
+        $host = parse_url($this->url, PHP_URL_HOST);
+
+        if ($host !== null) {
+            return $this->url;
+        }
+
+        $path = parse_url($this->url, PHP_URL_PATH);
+
+        return "{$this->source->getBaseUrl()}/{$path}";
+    }
+
     public function toFeedItem(): FeedItem
     {
         return FeedItem::create()

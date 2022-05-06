@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Events\PostResolved;
 use App\Models\Post;
 use App\Models\Source;
 use Carbon\Carbon;
@@ -25,17 +26,19 @@ class SyncSourceJob implements ShouldQueue
     {
         $feed = Feed::load($this->source->url);
 
-        foreach ($this->resolveItems($feed) as $item) {
-            Post::updateOrCreate(
+        foreach ($this->resolveItems($feed) as $payload) {
+            $post = Post::updateOrCreate(
                 [
                     'source_id' => $this->source->id,
-                    'url' => $this->resolveId($item),
+                    'url' => $this->resolveId($payload),
                 ],
                 [
-                    'title' => $this->resolveTitle($item),
-                    'created_at' => $this->resolveCreatedAt($item),
+                    'title' => $this->resolveTitle($payload),
+                    'created_at' => $this->resolveCreatedAt($payload),
                 ]
             );
+
+            event(new PostResolved($post, $payload));
         }
     }
 
