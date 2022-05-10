@@ -29,6 +29,10 @@ class SourceDebugCommand extends Command
 
     public function onSourceFeedUrlsResolved(SourceFeedUrlsResolved $event): void
     {
+        if (! $this->output) {
+            return;
+        }
+
         $this->info("[{$event->source->name}] Trying these URLs:");
 
         foreach ($event->feedUrls as $feedUrl) {
@@ -38,21 +42,37 @@ class SourceDebugCommand extends Command
 
     public function onSourceFeedUrlTried(SourceFeedUrlTried $event): void
     {
+        if (! $this->output) {
+            return;
+        }
+
         $this->error("[{$event->source->name}] {$event->feedUrl} failed");
     }
 
     public function onSourceFeedUrlFound(SourceFeedUrlFound $event): void
     {
+        if (! $this->output) {
+            return;
+        }
+
         $this->info("[{$event->source->name}] {$event->feedUrl} succeeded!");
     }
 
     public function onSourceDuplicationFound(SourceDuplicationFound $event): void
     {
+        if (! $this->output) {
+            return;
+        }
+
         $this->error("[{$event->source->name}] already exists");
     }
 
     public function onPostResolved(PostResolved $event): void
     {
+        if (! $this->output) {
+            return;
+        }
+
         $this->info("[{$event->post->url}] synced");
 
         $payload = json_encode($event->payload, JSON_PRETTY_PRINT);
