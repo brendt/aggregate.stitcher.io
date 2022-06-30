@@ -47,7 +47,12 @@ class SyncSourceJob implements ShouldQueue
         $title = $item['title'] ?? null;
 
         if (! $title) {
-            return $item['id'];
+            $meta = get_meta_tags($item['id']);
+
+            return $meta['title']
+                ?? $meta['twitter:title']
+                ?? $meta['og:title']
+                ?? $item['id'];
         }
 
         $title = preg_replace_callback("/(&#[0-9]+;)/", function ($match) {

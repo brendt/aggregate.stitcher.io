@@ -77,7 +77,17 @@ class SourceDebugCommand extends Command
 
         $payload = json_encode($event->payload, JSON_PRETTY_PRINT);
 
-        $this->comment("[{$event->post->url}] {$payload}");
+        $resolvedData = json_encode($event->post->toArray(), JSON_PRETTY_PRINT);
+
+        $this->comment("[{$event->post->url}]
+
+Raw payload:
+{$payload}
+
+<fg=green>
+Resolved data:
+{$resolvedData}</>
+");
     }
 
     public function subscribe(Dispatcher $dispatcher): array
