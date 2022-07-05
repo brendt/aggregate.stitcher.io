@@ -33,7 +33,7 @@ class SyncSourceJob implements ShouldQueue
                     'url' => $this->resolveId($payload),
                 ],
                 [
-                    'title' => $this->resolveTitle($payload),
+                    'title' => $this->decode($this->resolveTitle($payload)),
                     'created_at' => $this->resolveCreatedAt($payload),
                 ]
             );
@@ -100,5 +100,10 @@ class SyncSourceJob implements ShouldQueue
         }
 
         return $item['link'];
+    }
+
+    private function decode(string $string): string
+    {
+        return html_entity_decode($string);
     }
 }

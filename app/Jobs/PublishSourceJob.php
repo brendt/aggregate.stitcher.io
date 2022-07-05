@@ -53,7 +53,7 @@ class PublishSourceJob implements ShouldQueue
                         'state' => SourceState::DUPLICATE,
                     ]);
 
-                    dispatch(new SourceDuplicationFound($this->source));
+                    event(new SourceDuplicationFound($this->source));
 
                     return;
                 }

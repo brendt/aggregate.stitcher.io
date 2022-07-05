@@ -14,11 +14,21 @@ use Illuminate\Events\Dispatcher;
 
 class SourceDebugCommand extends Command
 {
-    protected $signature = 'source:debug {source}';
+    protected $signature = 'source:debug {source} {--clean}';
 
     public function handle()
     {
         $sourceUrl = $this->argument('source');
+
+        if (Source::where('url', $sourceUrl)->exists() && $this->option('clean')) {
+            $source = Source::where('url', $sourceUrl)->first();
+
+            $source->posts->each->delete();
+
+            $source->delete();
+
+            $this->info("Deleted existing source");
+        }
 
         $source = Source::firstOrCreate([
             'url' => $sourceUrl,
