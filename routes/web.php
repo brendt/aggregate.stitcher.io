@@ -15,6 +15,7 @@ use App\Http\Controllers\Sources\AdminSourcesController;
 use App\Http\Controllers\Posts\StarPostController;
 use App\Http\Controllers\Sources\StoreSourceSuggestionController;
 use App\Http\Controllers\Sources\SuggestSourceController;
+use App\Http\Controllers\TopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,6 +30,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
+Route::get('/top', TopController::class);
 Route::get('/suggest', SuggestSourceController::class);
 Route::post('/suggest', StoreSourceSuggestionController::class);
 Route::get('/post/{post}', ShowPostController::class);
