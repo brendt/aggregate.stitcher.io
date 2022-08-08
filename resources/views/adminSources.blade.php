@@ -6,14 +6,14 @@
     <div class="mx-auto container grid gap-4 mt-4">
         @include('includes.adminMenu')
 
-        <div class="md:flex mx-4 shadow-md">
-            <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>
-            <div class="px-4 py-1 grow text-center bg-blue-100">publishing</div>
-            <div class="px-4 py-1 grow text-center bg-white">published</div>
-            <div class="px-4 py-1 grow text-center bg-orange-100">duplicate</div>
-            <div class="px-4 py-1 grow text-center bg-red-100">denied</div>
-            <div class="px-4 py-1 grow text-center bg-red-300">invalid</div>
-        </div>
+{{--        <div class="md:flex mx-4 shadow-md">--}}
+{{--            <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>--}}
+{{--            <div class="px-4 py-1 grow text-center bg-blue-100">publishing</div>--}}
+{{--            <div class="px-4 py-1 grow text-center bg-white">published</div>--}}
+{{--            <div class="px-4 py-1 grow text-center bg-orange-100">duplicate</div>--}}
+{{--            <div class="px-4 py-1 grow text-center bg-red-100">denied</div>--}}
+{{--            <div class="px-4 py-1 grow text-center bg-red-300">invalid</div>--}}
+{{--        </div>--}}
 
         <div class="bg-white mx-4 shadow-md max-w-full">
             <a
