@@ -4,6 +4,7 @@ use App\Http\Controllers\Posts\AdminPostsController;
 use App\Http\Controllers\Posts\CreatePostController;
 use App\Http\Controllers\Posts\DenyPendingPostsController;
 use App\Http\Controllers\Posts\StorePostController;
+use App\Http\Controllers\Sources\AdminSourceDetailController;
 use App\Http\Controllers\Sources\DeleteSourceController;
 use App\Http\Controllers\Posts\DenyPostController;
 use App\Http\Controllers\Sources\DenySourceController;
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/posts/star/{post}', StarPostController::class);
 
     Route::get('/sources', AdminSourcesController::class);
+    Route::get('/sources/{source}', AdminSourceDetailController::class);
     Route::get('/sources/deny/{source}', DenySourceController::class);
     Route::get('/sources/publish/{source}', PublishSourceController::class);
     Route::get('/sources/delete/{source}', DeleteSourceController::class);

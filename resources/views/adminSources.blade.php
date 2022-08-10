@@ -42,6 +42,12 @@
                         </h1>
 
                         <div class="flex gap-2 text-sm pt-2">
+                            <a href="{{ action(\App\Http\Controllers\Sources\AdminSourceDetailController::class, $source) }}"
+                               class="underline hover:no-underline mr-4 py-2"
+                            >
+                                Detail
+                            </a>
+
                             <a href="{{ $source->getBaseUrl() }}"
                                class="underline hover:no-underline mr-4 py-2"
                             >
