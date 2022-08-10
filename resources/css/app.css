@@ -1,3 +1,15 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+.add-link:hover .add-sign {
+    display: none;
+}
+
+.add-link .add-label {
+    display: none;
+}
+
+.add-link:hover .add-label {
+    display: inline;
+}

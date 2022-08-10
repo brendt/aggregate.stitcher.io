@@ -21,7 +21,7 @@
                 href="{{ action(\App\Http\Controllers\Sources\SuggestSourceController::class) }}"
                 title="Add new source"
             >
-                +
+                Add Source
             </a>
 
             @foreach ($sources as $source)

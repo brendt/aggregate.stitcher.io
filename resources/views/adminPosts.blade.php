@@ -44,7 +44,7 @@
                     href="{{ action(\App\Http\Controllers\Posts\CreatePostController::class) }}"
                     title="Add new post"
                 >
-                    +
+                    Add Post
                 </a>
 
                 @foreach ($posts as $post)

@@ -16,11 +16,12 @@
             @endif
 
             <a
-                class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
+                class="hover:bg-pink-200 px-12 py-4 font-bold block text-center add-link"
                 href="{{ action(\App\Http\Controllers\Sources\SuggestSourceController::class) }}"
                 title="Add your own"
             >
-                +
+                <span class="add-sign">+</span>
+                <span class="add-label">Make a suggestion…</span>
             </a>
 
             <div class="">
