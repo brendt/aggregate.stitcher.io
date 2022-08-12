@@ -9,6 +9,12 @@ use Illuminate\Console\Command;
 
 class TwitterSyncCommand extends Command
 {
+    private const EXCLUDE = [
+        'wordle',
+        'worldle',
+        'metrodle',
+    ];
+
     protected $signature = 'twitter:sync';
 
     public function handle(Twitter $twitter)
@@ -41,6 +47,10 @@ class TwitterSyncCommand extends Command
     private function storeTweets(array $tweets): void
     {
         foreach ($tweets as $tweet) {
+            if ($this->hasExcludedWord($tweet->text)) {
+                continue;
+            }
+
             Tweet::updateOrCreate([
                 'tweet_id' => $tweet->id,
             ], [
@@ -50,5 +60,19 @@ class TwitterSyncCommand extends Command
                 'payload' => json_encode($tweet),
             ]);
         }
+    }
+
+    private function hasExcludedWord(string $text): bool
+    {
+        foreach (self::EXCLUDE as $exclude) {
+            if (str_contains(
+                haystack: strtolower($text ?? ''),
+                needle: strtolower($exclude),
+            )) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
