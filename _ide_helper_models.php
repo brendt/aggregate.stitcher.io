@@ -18,7 +18,9 @@ namespace App\Models{
  * @property string|null $uuid
  * @property int|null $source_id
  * @property \App\Models\PostState $state
+ * @property \App\Models\PostType $type
  * @property string $title
+ * @property string|null $body
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -29,11 +31,13 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Post query()
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereActiveSource()
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSourceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereUuid($value)
@@ -65,6 +69,33 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereUrl($value)
  */
 	class Source extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Tweet
+ *
+ * @property int $id
+ * @property int $tweet_id
+ * @property \App\Models\TweetState $state
+ * @property string $text
+ * @property string $user_name
+ * @property mixed $payload
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet wherePayload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereTweetId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereUserName($value)
+ */
+	class Tweet extends \Eloquent {}
 }
 
 namespace App\Models{

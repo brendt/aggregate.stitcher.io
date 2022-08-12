@@ -13,8 +13,15 @@
 
     <a
         href="{{ action(\App\Http\Controllers\Sources\AdminSourcesController::class) }}"
-        class="underline hover:no-underline text-center"
+        class="mr-4 underline hover:no-underline text-center"
     >
         Sources
         <span class="font-bold">({{ $pendingSources }})</span></a>
+
+    <a
+        href="{{ action(\App\Http\Controllers\Tweets\AdminTweetController::class) }}"
+        class="underline hover:no-underline text-center"
+    >
+        Tweets
+        <span class="font-bold">({{ $pendingTweets }})</span></a>
 </div>

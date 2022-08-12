@@ -4,7 +4,7 @@
 
 /**
  * A helper file for Laravel, to provide autocomplete information to your IDE
- * Generated for Laravel 9.7.0.
+ * Generated for Laravel 9.10.1.
  *
  * This file should not be included in your code, only analyzed by your IDE!
  *
@@ -1936,7 +1936,7 @@
          *
          * @param array $credentials
          * @param array|callable $callbacks
-         * @param false $remember
+         * @param bool $remember
          * @return bool 
          * @static 
          */ 
@@ -2476,6 +2476,19 @@
                         return $instance->getClassComponentAliases();
         }
                     /**
+         * Register an anonymous component namespace.
+         *
+         * @param string $directory
+         * @param string|null $prefix
+         * @return void 
+         * @static 
+         */ 
+        public static function anonymousComponentNamespace($directory, $prefix = null)
+        {
+                        /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
+                        $instance->anonymousComponentNamespace($directory, $prefix);
+        }
+                    /**
          * Register a class-based component namespace.
          *
          * @param string $namespace
@@ -2487,6 +2500,17 @@
         {
                         /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
                         $instance->componentNamespace($namespace, $prefix);
+        }
+                    /**
+         * Get the registered anonymous component namespaces.
+         *
+         * @return array 
+         * @static 
+         */ 
+        public static function getAnonymousComponentNamespaces()
+        {
+                        /** @var \Illuminate\View\Compilers\BladeCompiler $instance */
+                        return $instance->getAnonymousComponentNamespaces();
         }
                     /**
          * Get the registered class component namespaces.
@@ -4809,6 +4833,66 @@
                         return $instance->setApplication($app);
         }
                     /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param object|callable $macro
+         * @return void 
+         * @static 
+         */ 
+        public static function macro($name, $macro)
+        {
+                        \Illuminate\Database\DatabaseManager::macro($name, $macro);
+        }
+                    /**
+         * Mix another object into the class.
+         *
+         * @param object $mixin
+         * @param bool $replace
+         * @return void 
+         * @throws \ReflectionException
+         * @static 
+         */ 
+        public static function mixin($mixin, $replace = true)
+        {
+                        \Illuminate\Database\DatabaseManager::mixin($mixin, $replace);
+        }
+                    /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */ 
+        public static function hasMacro($name)
+        {
+                        return \Illuminate\Database\DatabaseManager::hasMacro($name);
+        }
+                    /**
+         * Flush the existing macros.
+         *
+         * @return void 
+         * @static 
+         */ 
+        public static function flushMacros()
+        {
+                        \Illuminate\Database\DatabaseManager::flushMacros();
+        }
+                    /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */ 
+        public static function macroCall($method, $parameters)
+        {
+                        /** @var \Illuminate\Database\DatabaseManager $instance */
+                        return $instance->macroCall($method, $parameters);
+        }
+                    /**
          * Determine if the connected database is a MariaDB database.
          *
          * @return bool 
@@ -4913,6 +4997,21 @@
         {            //Method inherited from \Illuminate\Database\Connection         
                         /** @var \Illuminate\Database\MySqlConnection $instance */
                         return $instance->selectOne($query, $bindings, $useReadPdo);
+        }
+                    /**
+         * Run a select statement and return the first column of the first row.
+         *
+         * @param string $query
+         * @param array $bindings
+         * @param bool $useReadPdo
+         * @return mixed 
+         * @throws \Illuminate\Database\MultipleColumnsSelectedException
+         * @static 
+         */ 
+        public static function scalar($query, $bindings = [], $useReadPdo = true)
+        {            //Method inherited from \Illuminate\Database\Connection         
+                        /** @var \Illuminate\Database\MySqlConnection $instance */
+                        return $instance->scalar($query, $bindings, $useReadPdo);
         }
                     /**
          * Run a select statement against the database.
@@ -6696,7 +6795,7 @@
          * Define a new ability.
          *
          * @param string $ability
-         * @param callable|string $callback
+         * @param callable|array|string $callback
          * @return \Illuminate\Auth\Access\Gate 
          * @throws \InvalidArgumentException
          * @static 
@@ -7136,6 +7235,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest baseUrl(string $url)
      * @method static \Illuminate\Http\Client\PendingRequest beforeSending(callable $callback)
      * @method static \Illuminate\Http\Client\PendingRequest bodyFormat(string $format)
+     * @method static \Illuminate\Http\Client\PendingRequest connectTimeout(int $seconds)
      * @method static \Illuminate\Http\Client\PendingRequest contentType(string $contentType)
      * @method static \Illuminate\Http\Client\PendingRequest dd()
      * @method static \Illuminate\Http\Client\PendingRequest dump()
@@ -7154,6 +7254,7 @@
      * @method static \Illuminate\Http\Client\PendingRequest withUserAgent(string $userAgent)
      * @method static \Illuminate\Http\Client\PendingRequest withoutRedirecting()
      * @method static \Illuminate\Http\Client\PendingRequest withoutVerifying()
+     * @method static \Illuminate\Http\Client\PendingRequest throw(callable $callback = null)
      * @method static array pool(callable $callback)
      * @method static \Illuminate\Http\Client\Response delete(string $url, array $data = [])
      * @method static \Illuminate\Http\Client\Response get(string $url, array|string|null $query = null)
@@ -11173,7 +11274,7 @@
          * Retrieve an old input item.
          *
          * @param string|null $key
-         * @param string|array|null $default
+         * @param \Illuminate\Database\Eloquent\Model|string|array|null $default
          * @return string|array|null 
          * @static 
          */ 
@@ -11424,6 +11525,32 @@
         {
                         /** @var \Illuminate\Http\Request $instance */
                         return $instance->input($key, $default);
+        }
+                    /**
+         * Retrieve input from the request as a Stringable instance.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return \Illuminate\Support\Stringable 
+         * @static 
+         */ 
+        public static function str($key, $default = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->str($key, $default);
+        }
+                    /**
+         * Retrieve input from the request as a Stringable instance.
+         *
+         * @param string $key
+         * @param mixed $default
+         * @return \Illuminate\Support\Stringable 
+         * @static 
+         */ 
+        public static function string($key, $default = null)
+        {
+                        /** @var \Illuminate\Http\Request $instance */
+                        return $instance->string($key, $default);
         }
                     /**
          * Retrieve input as a boolean value.
@@ -12866,6 +12993,28 @@
         {
                         /** @var \Illuminate\Routing\Router $instance */
                         return $instance->macroCall($method, $parameters);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailPreview\MailPreviewServiceProvider::registerRouteMacro()
+         * @param string $prefix
+         * @static 
+         */ 
+        public static function mailPreview($prefix = 'spatie-mail-preview')
+        {
+                        return \Illuminate\Routing\Router::mailPreview($prefix);
         }
          
     }
@@ -16634,6 +16783,189 @@
      
 }
 
+    namespace Spatie\MailPreview\Facades { 
+            /**
+     * 
+     *
+     */ 
+        class SentMails {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function add($sentMail)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->add($sentMail);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function reset()
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->reset();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function count()
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->count();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertCount($expectedCount)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertCount($expectedCount);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function all()
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->all();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function last()
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->last();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function lastContains($expectedSubstring)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->lastContains($expectedSubstring);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertLastContains($expectedSubstring)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertLastContains($expectedSubstring);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function timesSent($findMail)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->timesSent($findMail);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertSent($findMail, $expectedCount = 1)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertSent($findMail, $expectedCount);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertNothingSent()
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertNothingSent();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertTimesSent($expectedCount, $findMail)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertTimesSent($expectedCount, $findMail);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function assertNotSent($findMail)
+        {
+                        /** @var \Spatie\MailPreview\SentMails\SentMails $instance */
+                        return $instance->assertNotSent($findMail);
+        }
+         
+    }
+     
+}
+
+    namespace Spatie\SignalAwareCommand\Facades { 
+            /**
+     * 
+     *
+     * @see \Spatie\SignalAwareCommand\Signal
+     */ 
+        class Signal {
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function handle($signal, $callable)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->handle($signal, $callable);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function executeSignalHandlers($signal, $command)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->executeSignalHandlers($signal, $command);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */ 
+        public static function clearHandlers($signal = null)
+        {
+                        /** @var \Spatie\SignalAwareCommand\Signal $instance */
+                        return $instance->clearHandlers($signal);
+        }
+         
+    }
+     
+}
+
     namespace Illuminate\Http { 
             /**
      * 
@@ -16697,6 +17029,40 @@
         public static function hasValidSignatureWhileIgnoring($ignoreQuery = [], $absolute = true)
         {
                         return \Illuminate\Http\Request::hasValidSignatureWhileIgnoring($ignoreQuery, $absolute);
+        }
+         
+    }
+     
+}
+
+    namespace Illuminate\Routing { 
+            /**
+     * 
+     *
+     * @mixin \Illuminate\Routing\RouteRegistrar
+     */ 
+        class Router {
+                    /**
+         * 
+         *
+         * @see \Spatie\Feed\FeedServiceProvider::registerRouteMacro()
+         * @param mixed $baseUrl
+         * @static 
+         */ 
+        public static function feeds($baseUrl = '')
+        {
+                        return \Illuminate\Routing\Router::feeds($baseUrl);
+        }
+                    /**
+         * 
+         *
+         * @see \Spatie\MailPreview\MailPreviewServiceProvider::registerRouteMacro()
+         * @param string $prefix
+         * @static 
+         */ 
+        public static function mailPreview($prefix = 'spatie-mail-preview')
+        {
+                        return \Illuminate\Routing\Router::mailPreview($prefix);
         }
          
     }
@@ -16996,6 +17362,21 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->findOrNew($id, $columns);
+            }
+             
+                /**
+             * Find a model by its primary key or call a callback.
+             *
+             * @param mixed $id
+             * @param \Closure|array $columns
+             * @param \Closure|null $callback
+             * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Eloquent\Collection|static[]|static|mixed 
+             * @static 
+             */ 
+            public static function findOr($id, $columns = [], $callback = null)
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->findOr($id, $columns, $callback);
             }
              
                 /**
@@ -17430,6 +17811,18 @@ namespace  {
             {
                                 /** @var \Illuminate\Database\Eloquent\Builder $instance */
                                 return $instance->setEagerLoads($eagerLoad);
+            }
+             
+                /**
+             * Flush the relationships being eagerly loaded.
+             *
+             * @return \Illuminate\Database\Eloquent\Builder|static 
+             * @static 
+             */ 
+            public static function withoutEagerLoads()
+            {
+                                /** @var \Illuminate\Database\Eloquent\Builder $instance */
+                                return $instance->withoutEagerLoads();
             }
              
                 /**
@@ -20370,6 +20763,8 @@ namespace  {
             class View extends \Illuminate\Support\Facades\View {}
             class Horizon extends \Laravel\Horizon\Horizon {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
+            class sentMails extends \Spatie\MailPreview\Facades\SentMails {}
+            class Signal extends \Spatie\SignalAwareCommand\Facades\Signal {}
      
 }
 

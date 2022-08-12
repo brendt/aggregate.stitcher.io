@@ -19,6 +19,7 @@ class Post extends Model implements Feedable
     public $guarded = [];
 
     protected $casts = [
+        'type' => PostType::class,
         'state' => PostState::class,
         'visits' => 'integer',
     ];
@@ -54,6 +55,11 @@ class Post extends Model implements Feedable
     public function isPublished(): bool
     {
         return $this->state === PostState::PUBLISHED;
+    }
+
+    public function isTweet(): bool
+    {
+        return $this->type === PostType::TWEET;
     }
 
     public function canDeny(): bool

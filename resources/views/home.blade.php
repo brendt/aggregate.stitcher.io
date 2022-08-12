@@ -26,6 +26,14 @@
 
             <div class="">
                 @foreach ($posts as $post)
+                    @php
+                    $hoverColor = match(true) {
+                        $post->isStarred() => 'yellow-300',
+                        $post->isTweet() => 'blue-100',
+                        default => 'pink-100',
+                    };
+                    @endphp
+
                     <div class="overflow-x-hidden">
                         <a
                             href="{{ $post->getPublicUrl() }}"
@@ -33,13 +41,16 @@
                         block px-12 p-4
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
                         {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
-                        {{ $post->isStarred() ? 'hover:bg-yellow-300' : 'hover:bg-pink-100' }}
+                        {{ "hover:bg-{$hoverColor}" }}
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
-                        "
-                        >
+                        ">
                             <h1 class="font-bold break-words">
                                 {{ $post->title }}
                             </h1>
+
+                            @if($post->body)
+                                {{ $post->body }}
+                            @endif
 
                             <div class="text-sm font-light text-gray-800">
                                 {{ $post->getSourceName() }},
@@ -47,7 +58,11 @@
                                     $diffInHours = $post->created_at->diffInHours(now())
                                 @endphp
 
-                                published
+                                @if($post->isTweet())
+                                    tweeted
+                                @else
+                                    published
+                                @endif
 
                                 @if($diffInHours <= 1)
                                     right now,

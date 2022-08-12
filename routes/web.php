@@ -17,6 +17,11 @@ use App\Http\Controllers\Posts\StarPostController;
 use App\Http\Controllers\Sources\StoreSourceSuggestionController;
 use App\Http\Controllers\Sources\SuggestSourceController;
 use App\Http\Controllers\TopController;
+use App\Http\Controllers\Tweets\AdminTweetController;
+use App\Http\Controllers\Tweets\DenyPendingTweetsController;
+use App\Http\Controllers\Tweets\DenyTweetController;
+use App\Http\Controllers\Tweets\PublishTweetController;
+use App\Http\Controllers\Tweets\TweetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -31,27 +36,35 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
+Route::get('/tweets', TweetController::class);
 Route::get('/top', TopController::class);
 Route::get('/suggest', SuggestSourceController::class);
 Route::post('/suggest', StoreSourceSuggestionController::class);
 Route::get('/post/{post}', ShowPostController::class);
 Route::view('/about', 'about');
 
-Route::middleware(['auth'])->group(function () {
-   Route::get('/posts', AdminPostsController::class);
-    Route::get('/posts/create', CreatePostController::class);
-    Route::post('/posts/create', StorePostController::class);
-    Route::get('/posts/deny-all', DenyPendingPostsController::class);
-    Route::get('/posts/deny/{post}', DenyPostController::class);
-    Route::get('/posts/publish/{post}', PublishPostController::class);
-    Route::get('/posts/star/{post}', StarPostController::class);
+Route::middleware(['auth'])
+    ->prefix('/admin')
+    ->group(function () {
+        Route::get('/posts', AdminPostsController::class);
+        Route::get('/posts/create', CreatePostController::class);
+        Route::post('/posts/create', StorePostController::class);
+        Route::get('/posts/deny-all', DenyPendingPostsController::class);
+        Route::get('/posts/deny/{post}', DenyPostController::class);
+        Route::get('/posts/publish/{post}', PublishPostController::class);
+        Route::get('/posts/star/{post}', StarPostController::class);
 
-    Route::get('/sources', AdminSourcesController::class);
-    Route::get('/sources/{source}', AdminSourceDetailController::class);
-    Route::get('/sources/deny/{source}', DenySourceController::class);
-    Route::get('/sources/publish/{source}', PublishSourceController::class);
-    Route::get('/sources/delete/{source}', DeleteSourceController::class);
-});
+        Route::get('/tweets', AdminTweetController::class);
+        Route::get('/tweets/deny-all', DenyPendingTweetsController::class);
+        Route::get('/tweets/deny/{tweet}', DenyTweetController::class);
+        Route::get('/tweets/publish/{tweet}', PublishTweetController::class);
+
+        Route::get('/sources', AdminSourcesController::class);
+        Route::get('/sources/{source}', AdminSourceDetailController::class);
+        Route::get('/sources/deny/{source}', DenySourceController::class);
+        Route::get('/sources/publish/{source}', PublishSourceController::class);
+        Route::get('/sources/delete/{source}', DeleteSourceController::class);
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
