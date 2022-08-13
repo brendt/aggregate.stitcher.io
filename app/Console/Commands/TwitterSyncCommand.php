@@ -3,16 +3,21 @@
 namespace App\Console\Commands;
 
 use App\Models\Tweet;
+use App\Models\TweetState;
 use Carbon\Carbon;
 use DG\Twitter\Twitter;
 use Illuminate\Console\Command;
 
 class TwitterSyncCommand extends Command
 {
-    private const EXCLUDE = [
+    private static $excludeWords = [
         'wordle',
         'worldle',
         'metrodle',
+        'trump',
+        'democrat',
+        'republican',
+        'covid',
     ];
 
     protected $signature = 'twitter:sync';
@@ -47,13 +52,14 @@ class TwitterSyncCommand extends Command
     private function storeTweets(array $tweets): void
     {
         foreach ($tweets as $tweet) {
-            if ($this->hasExcludedWord($tweet->text)) {
-                continue;
-            }
+            $state = $this->shouldBeRejected($tweet->text)
+                ? TweetState::REJECTED
+                : TweetState::PENDING;
 
             Tweet::updateOrCreate([
                 'tweet_id' => $tweet->id,
             ], [
+                'state' => $state,
                 'text' => $tweet->text,
                 'user_name' => $tweet->user->screen_name,
                 'created_at' => Carbon::make($tweet->created_at),
@@ -62,15 +68,21 @@ class TwitterSyncCommand extends Command
         }
     }
 
-    private function hasExcludedWord(string $text): bool
+    private function shouldBeRejected(string $text): bool
     {
-        foreach (self::EXCLUDE as $exclude) {
+        // Reject tweets containing a specific word
+        foreach (self::$excludeWords as $exclude) {
             if (str_contains(
                 haystack: strtolower($text ?? ''),
                 needle: strtolower($exclude),
             )) {
                 return true;
             }
+        }
+
+        // Reject mentions
+        if (str_starts_with($text, '@')) {
+            return true;
         }
 
         return false;
