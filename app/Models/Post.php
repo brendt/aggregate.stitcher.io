@@ -112,6 +112,7 @@ class Post extends Model implements Feedable
     public static function getAllFeedItems(): Collection
     {
         return self::query()
+            ->where('type', PostType::BLOG)
             ->where('state', PostState::PUBLISHED)
             ->orderByDesc('created_at')
             ->limit(20)
