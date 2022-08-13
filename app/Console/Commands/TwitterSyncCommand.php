@@ -21,6 +21,7 @@ class TwitterSyncCommand extends Command
         'covid',
         'governor',
         'ballot',
+        'politics',
     ];
 
     protected $signature = 'twitter:sync {--clean}';
