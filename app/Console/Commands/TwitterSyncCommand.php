@@ -67,11 +67,11 @@ class TwitterSyncCommand extends Command
     private function storeTweets(array $tweets): void
     {
         foreach ($tweets as $tweet) {
-            $state = $this->shouldBeRejected($tweet->full_text)
+            $subject = $tweet->retweeted_status ?? $tweet;
+
+            $state = $this->shouldBeRejected($subject->full_text)
                 ? TweetState::REJECTED
                 : TweetState::PENDING;
-
-            $subject = $tweet->retweeted_status ?? $tweet;
 
             Tweet::updateOrCreate([
                 'tweet_id' => $tweet->id,
