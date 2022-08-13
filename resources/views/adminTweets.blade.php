@@ -44,6 +44,10 @@
                                     {{ $tweet->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $tweet->created_at->diffInDays(now())) }}
                                     ago
                                 @endif
+
+                                @if($tweet->retweeted_by_user_name)
+                                    , retweeted by {{ $tweet->retweeted_by_user_name }}
+                                @endif
                             </div>
 
                             <div class="flex gap-2 text-sm pt-2">

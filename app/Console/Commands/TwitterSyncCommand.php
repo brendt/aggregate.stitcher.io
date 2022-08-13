@@ -7,6 +7,7 @@ use App\Models\TweetState;
 use Carbon\Carbon;
 use DG\Twitter\Twitter;
 use Illuminate\Console\Command;
+use LanguageDetector\LanguageDetector;
 
 class TwitterSyncCommand extends Command
 {
@@ -18,12 +19,24 @@ class TwitterSyncCommand extends Command
         'democrat',
         'republican',
         'covid',
+        'governor',
+        'ballot',
     ];
 
-    protected $signature = 'twitter:sync';
+    protected $signature = 'twitter:sync {--clean}';
 
-    public function handle(Twitter $twitter)
+    private LanguageDetector $languageDetector;
+
+    public function handle(Twitter $twitter, LanguageDetector $languageDetector)
     {
+        $this->languageDetector = $languageDetector;
+
+        if ($this->option('clean')) {
+            $this->error('Truncating tweets!');
+
+            Tweet::truncate();
+        }
+
         do {
             $lastTweet = Tweet::query()
                 ->orderByDesc('tweet_id')
@@ -33,6 +46,7 @@ class TwitterSyncCommand extends Command
                 'list_id' => '1317700686709219328',
                 'since_id' => $lastTweet?->tweet_id,
                 'count' => 200,
+                'tweet_mode' => 'extended',
             ]);
 
             $count = count($tweets);
@@ -52,17 +66,22 @@ class TwitterSyncCommand extends Command
     private function storeTweets(array $tweets): void
     {
         foreach ($tweets as $tweet) {
-            $state = $this->shouldBeRejected($tweet->text)
+            $state = $this->shouldBeRejected($tweet->full_text)
                 ? TweetState::REJECTED
                 : TweetState::PENDING;
+
+            $subject = $tweet->retweeted_status ?? $tweet;
 
             Tweet::updateOrCreate([
                 'tweet_id' => $tweet->id,
             ], [
                 'state' => $state,
-                'text' => $tweet->text,
-                'user_name' => $tweet->user->screen_name,
-                'created_at' => Carbon::make($tweet->created_at),
+                'text' => $subject->full_text,
+                'user_name' => $subject->user->screen_name,
+                'retweeted_by_user_name' => isset($tweet->retweeted_status)
+                    ? $tweet->user->screen_name
+                    : null,
+                'created_at' => Carbon::make($subject->created_at),
                 'payload' => json_encode($tweet),
             ]);
         }
@@ -82,6 +101,11 @@ class TwitterSyncCommand extends Command
 
         // Reject mentions
         if (str_starts_with($text, '@')) {
+            return true;
+        }
+
+        // Only show English tweets
+        if ($this->languageDetector->evaluate($text)->getLanguage()->getCode() !== 'en') {
             return true;
         }
 

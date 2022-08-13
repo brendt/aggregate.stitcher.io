@@ -14,6 +14,7 @@ use DG\Twitter\Twitter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
+use LanguageDetector\LanguageDetector;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -29,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
                 config('services.twitter.access_token_secret'),
             );
         });
+
+        $this->app->singleton(LanguageDetector::class, fn () => new LanguageDetector());
     }
 
     public function boot()

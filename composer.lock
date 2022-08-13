@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1b4259bb447f35a743bced894450fef6",
+    "content-hash": "5f1ccd27aa9172432f0dc0e9114fe61f",
     "packages": [
         {
             "name": "brick/math",
@@ -1331,6 +1331,51 @@
                 }
             ],
             "time": "2022-03-20T21:51:18+00:00"
+        },
+        {
+            "name": "landrok/language-detector",
+            "version": "1.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/landrok/language-detector.git",
+                "reference": "97f30d9d8969e63337ecce403f423adad8a21ee2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/landrok/language-detector/zipball/97f30d9d8969e63337ecce403f423adad8a21ee2",
+                "reference": "97f30d9d8969e63337ecce403f423adad8a21ee2",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=7.2",
+                "webmozart/assert": "^1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LanguageDetector\\": "src/LanguageDetector/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "A fast and reliable PHP library for detecting languages",
+            "homepage": "https://github.com/landrok/language-detector",
+            "keywords": [
+                "detector",
+                "language",
+                "n-grams"
+            ],
+            "support": {
+                "issues": "https://github.com/landrok/language-detector/issues",
+                "source": "https://github.com/landrok/language-detector/tree/1.3.1"
+            },
+            "time": "2021-04-09T12:12:22+00:00"
         },
         {
             "name": "laravel/framework",
