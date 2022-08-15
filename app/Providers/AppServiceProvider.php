@@ -48,7 +48,7 @@ class AppServiceProvider extends ServiceProvider
                     ->where('state', SourceState::PENDING)
                     ->count(),
                 'pendingTweets' => Tweet::query()
-                    ->where('state', TweetState::PENDING)
+                    ->pendingToday()
                     ->count(),
             ]);
         });

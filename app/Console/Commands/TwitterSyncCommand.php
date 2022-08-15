@@ -2,34 +2,28 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Mute;
 use App\Models\Tweet;
 use App\Models\TweetState;
 use Carbon\Carbon;
 use DG\Twitter\Twitter;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Collection;
 use LanguageDetector\LanguageDetector;
 
 class TwitterSyncCommand extends Command
 {
-    private static $excludeWords = [
-        'wordle',
-        'worldle',
-        'metrodle',
-        'trump',
-        'democrat',
-        'republican',
-        'covid',
-        'governor',
-        'ballot',
-        'politics',
-    ];
-
     protected $signature = 'twitter:sync {--clean}';
 
     private LanguageDetector $languageDetector;
 
+    /** @var \Illuminate\Database\Eloquent\Collection<Mute> */
+    private Collection $mutes;
+
     public function handle(Twitter $twitter, LanguageDetector $languageDetector)
     {
+        $this->mutes = Mute::query()->select('text')->get();
+
         $this->languageDetector = $languageDetector;
 
         if ($this->option('clean')) {
@@ -91,10 +85,10 @@ class TwitterSyncCommand extends Command
     private function shouldBeRejected(string $text): bool
     {
         // Reject tweets containing a specific word
-        foreach (self::$excludeWords as $exclude) {
+        foreach ($this->mutes as $mute) {
             if (str_contains(
                 haystack: strtolower($text ?? ''),
-                needle: strtolower($exclude),
+                needle: strtolower($mute->text),
             )) {
                 return true;
             }

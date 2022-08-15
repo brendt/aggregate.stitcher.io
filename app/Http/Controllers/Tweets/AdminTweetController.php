@@ -12,6 +12,7 @@ final class AdminTweetController
     {
         $tweets = Tweet::query()
             ->where('state', TweetState::PENDING)
+            ->where('created_at', '>=', now()->subHours(24))
             ->orderByDesc('tweet_id')
             ->get();
 

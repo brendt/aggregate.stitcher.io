@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\Posts\AdminPostsController;
+use App\Http\Controllers\Posts\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
 use App\Http\Controllers\Posts\DenyPendingPostsController;
+use App\Http\Controllers\Posts\StoreMuteController;
 use App\Http\Controllers\Posts\StorePostController;
 use App\Http\Controllers\Sources\AdminSourceDetailController;
 use App\Http\Controllers\Sources\DeleteSourceController;
@@ -53,6 +55,9 @@ Route::middleware(['auth'])
         Route::get('/posts/deny/{post}', DenyPostController::class);
         Route::get('/posts/publish/{post}', PublishPostController::class);
         Route::get('/posts/star/{post}', StarPostController::class);
+
+        Route::get('/mutes/create', CreateMuteController::class);
+        Route::post('/mutes/create', StoreMuteController::class);
 
         Route::get('/tweets', AdminTweetController::class);
         Route::get('/tweets/deny-all', DenyPendingTweetsController::class);

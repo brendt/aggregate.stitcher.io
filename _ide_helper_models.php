@@ -12,6 +12,25 @@
 
 namespace App\Models{
 /**
+ * App\Models\Mute
+ *
+ * @property int $id
+ * @property string $text
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute whereText($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Mute whereUpdatedAt($value)
+ */
+	class Mute extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Post
  *
  * @property int $id
@@ -83,12 +102,15 @@ namespace App\Models{
  * @property mixed $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property string|null $retweeted_by_user_name
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet pendingToday()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet query()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet wherePayload($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereRetweetedByUserName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereTweetId($value)

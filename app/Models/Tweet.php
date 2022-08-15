@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
@@ -17,6 +18,13 @@ class Tweet extends Model
         'tweet_id' => 'integer',
         'created_at' => 'datetime',
     ];
+
+    public function scopePendingToday(Builder $builder): void
+    {
+        $builder
+            ->where('state', TweetState::PENDING)
+            ->where('created_at', '>=', now()->subHours(24));
+    }
 
 
     public function isPending(): bool

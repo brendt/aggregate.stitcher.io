@@ -15,6 +15,15 @@
                 </div>
             @endif
 
+
+            <a
+                class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
+                href="{{ action(\App\Http\Controllers\Posts\CreateMuteController::class) }}"
+                title="Add mute"
+            >
+                Add mute
+            </a>
+
             <div class="">
                 @foreach ($tweets as $tweet)
                     <div class="overflow-x-hidden">
