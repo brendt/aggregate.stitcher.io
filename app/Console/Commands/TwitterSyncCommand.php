@@ -9,22 +9,17 @@ use Carbon\Carbon;
 use DG\Twitter\Twitter;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
-use LanguageDetector\LanguageDetector;
 
 class TwitterSyncCommand extends Command
 {
     protected $signature = 'twitter:sync {--clean}';
 
-    private LanguageDetector $languageDetector;
-
     /** @var \Illuminate\Database\Eloquent\Collection<Mute> */
     private Collection $mutes;
 
-    public function handle(Twitter $twitter, LanguageDetector $languageDetector)
+    public function handle(Twitter $twitter)
     {
         $this->mutes = Mute::query()->select('text')->get();
-
-        $this->languageDetector = $languageDetector;
 
         if ($this->option('clean')) {
             $this->error('Truncating tweets!');
