@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\Posts\AdminPostsController;
-use App\Http\Controllers\Posts\CreateMuteController;
+use App\Http\Controllers\Tweets\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
 use App\Http\Controllers\Posts\DenyPendingPostsController;
-use App\Http\Controllers\Posts\StoreMuteController;
+use App\Http\Controllers\Tweets\StoreMuteController;
 use App\Http\Controllers\Posts\StorePostController;
 use App\Http\Controllers\Sources\AdminSourceDetailController;
 use App\Http\Controllers\Sources\DeleteSourceController;

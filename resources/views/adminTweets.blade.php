@@ -18,7 +18,7 @@
 
             <a
                 class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
-                href="{{ action(\App\Http\Controllers\Posts\CreateMuteController::class) }}"
+                href="{{ action(\App\Http\Controllers\Tweets\CreateMuteController::class) }}"
                 title="Add mute"
             >
                 Add mute

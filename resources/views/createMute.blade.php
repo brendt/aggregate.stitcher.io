@@ -4,7 +4,7 @@
 
         <div class="bg-white mx-4 shadow-md grid">
             <form method="POST"
-                  action="{{ action(\App\Http\Controllers\Posts\StoreMuteController::class) }}">
+                  action="{{ action(\App\Http\Controllers\Tweets\StoreMuteController::class) }}">
                 @csrf
                 <div class="px-12 p-4 grid gap-4">
                     <label for="url">
