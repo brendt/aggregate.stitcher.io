@@ -63,14 +63,10 @@ class TwitterSyncCommand extends Command
         foreach ($tweets as $tweet) {
             $subject = $tweet->retweeted_status ?? $tweet;
 
-            $state = $this->shouldBeRejected($subject->full_text)
-                ? TweetState::REJECTED
-                : TweetState::PENDING;
-
-            Tweet::updateOrCreate([
+            $tweet = Tweet::updateOrCreate([
                 'tweet_id' => $tweet->id,
             ], [
-                'state' => $state,
+                'state' => TweetState::PENDING,
                 'text' => $subject->full_text,
                 'user_name' => $subject->user->screen_name,
                 'retweeted_by_user_name' => isset($tweet->retweeted_status)
@@ -79,28 +75,26 @@ class TwitterSyncCommand extends Command
                 'created_at' => Carbon::make($subject->created_at),
                 'payload' => json_encode($tweet),
             ]);
+
+            if ($this->shouldBeRejected($tweet)) {
+                $tweet->update([
+                    'state' => TweetState::REJECTED,
+                ]);
+            }
         }
     }
 
-    private function shouldBeRejected(string $text): bool
+    private function shouldBeRejected(Tweet $tweet): bool
     {
         // Reject tweets containing a specific word
         foreach ($this->mutes as $mute) {
-            if (str_contains(
-                haystack: strtolower($text ?? ''),
-                needle: strtolower($mute->text),
-            )) {
+            if ($tweet->containsPhrase($mute->text)) {
                 return true;
             }
         }
 
         // Reject mentions
-        if (str_starts_with($text, '@')) {
-            return true;
-        }
-
-        // Only show English tweets
-        if ($this->languageDetector->evaluate($text)->getLanguage()->getCode() !== 'en') {
+        if (str_starts_with($tweet->text, '@')) {
             return true;
         }
 

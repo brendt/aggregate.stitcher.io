@@ -56,4 +56,12 @@ class Tweet extends Model
     {
         return "https://twitter.com/{$this->user_name}/status/{$this->tweet_id}";
     }
+
+    public function containsPhrase(string $needle): bool
+    {
+        return str_contains(
+            haystack: strtolower($this->text ?? ''),
+            needle: strtolower($needle),
+        );
+    }
 }
