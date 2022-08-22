@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Abraham\TwitterOAuth\TwitterOAuth;
 use DG\Twitter\Twitter;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Cache;

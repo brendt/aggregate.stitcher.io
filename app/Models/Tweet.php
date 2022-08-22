@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
@@ -57,11 +58,19 @@ class Tweet extends Model
         return "https://twitter.com/{$this->user_name}/status/{$this->tweet_id}";
     }
 
+    public function getPayload(): object
+    {
+        return json_decode($this->payload);
+    }
+
     public function containsPhrase(string $needle): bool
     {
-        return str_contains(
-            haystack: strtolower($this->text ?? ''),
-            needle: strtolower($needle),
-        );
+        return
+            str_contains(
+                haystack: strtolower($this->text ?? ''),
+                needle: strtolower($needle),
+            )
+            ||
+            str_replace('@', '', strtolower($this->user_name)) === str_replace('@', '', strtolower($needle));
     }
 }

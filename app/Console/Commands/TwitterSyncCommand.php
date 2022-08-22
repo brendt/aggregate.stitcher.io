@@ -88,6 +88,11 @@ class TwitterSyncCommand extends Command
             }
         }
 
+        // Reject replies
+        if ($tweet->getPayload()->in_reply_to_status_id) {
+            return true;
+        }
+
         // Reject mentions
         if (str_starts_with($tweet->text, '@')) {
             return true;
