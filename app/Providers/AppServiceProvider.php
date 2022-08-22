@@ -2,19 +2,16 @@
 
 namespace App\Providers;
 
-use App\Channels\Twitter\TwitterRepository;
 use App\Console\Commands\SourceDebugCommand;
 use App\Models\Post;
 use App\Models\PostState;
 use App\Models\Source;
 use App\Models\SourceState;
 use App\Models\Tweet;
-use App\Models\TweetState;
 use DG\Twitter\Twitter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
-use LanguageDetector\LanguageDetector;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +27,6 @@ class AppServiceProvider extends ServiceProvider
                 config('services.twitter.access_token_secret'),
             );
         });
-
-        $this->app->singleton(LanguageDetector::class, fn () => new LanguageDetector());
     }
 
     public function boot()

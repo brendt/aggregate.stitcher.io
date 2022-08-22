@@ -33,7 +33,7 @@ class TwitterSyncCommand extends Command
                 ->first();
 
             $tweets = $twitter->request('lists/statuses.json', 'GET', [
-                'list_id' => '1317700686709219328',
+                'list_id' => config('services.twitter.list_id'),
                 'since_id' => $lastTweet?->tweet_id,
                 'count' => 200,
                 'tweet_mode' => 'extended',

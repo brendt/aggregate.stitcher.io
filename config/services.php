@@ -36,6 +36,7 @@ return [
         'api_secret_key' => env('TWITTER_API_SECRET_KEY'),
         'access_token' => env('TWITTER_ACCESS_TOKEN'),
         'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
+        'list_id' => env('TWITTER_LIST_ID'),
     ],
 
 ];
