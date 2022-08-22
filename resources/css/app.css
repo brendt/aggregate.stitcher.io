@@ -13,3 +13,7 @@
 .add-link:hover .add-label {
     display: inline;
 }
+
+.tweet-text em {
+    background-color: rgb(252, 249, 175);
+}

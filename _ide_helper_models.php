@@ -98,6 +98,7 @@ namespace App\Models{
  * @property int $tweet_id
  * @property \App\Models\TweetState $state
  * @property string $text
+ * @property string|null $parsed_text
  * @property string $user_name
  * @property mixed $payload
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -109,6 +110,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet query()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereParsedText($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet wherePayload($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereRetweetedByUserName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet whereState($value)

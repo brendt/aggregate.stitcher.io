@@ -34,8 +34,8 @@
                                 &#64;{{ $tweet->user_name }}
                             </h1>
 
-                            <div class="mt-2">
-                                {!! nl2br($tweet->text)  !!}
+                            <div class="mt-2 tweet-text">
+                                {!! nl2br($tweet->parsed_text)  !!}
                             </div>
 
                             <div class="text-sm font-light text-gray-800 mt-2">

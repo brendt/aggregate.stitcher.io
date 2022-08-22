@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Actions\ParseTweetText;
 use App\Models\Mute;
 use App\Models\Tweet;
 use App\Models\TweetState;
@@ -76,6 +77,8 @@ class TwitterSyncCommand extends Command
                     'state' => TweetState::REJECTED,
                 ]);
             }
+
+            (new ParseTweetText)($tweet);
         }
     }
 

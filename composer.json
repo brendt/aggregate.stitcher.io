@@ -9,6 +9,7 @@
         "dg/rss-php": "^1.5",
         "dg/twitter-php": "^4.1",
         "doctrine/dbal": "^3.3",
+        "donatello-za/rake-php-plus": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/horizon": "^5.9",
