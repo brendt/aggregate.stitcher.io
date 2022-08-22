@@ -98,6 +98,11 @@ class TwitterSyncCommand extends Command
             return true;
         }
 
+        // Reject non-english tweets
+        if ($tweet->getPayload()->lang !== 'en') {
+            return true;
+        }
+
         return false;
     }
 }
