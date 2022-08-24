@@ -6,7 +6,7 @@ use App\Models\Tweet;
 use App\Models\TweetState;
 use Illuminate\Http\Request;
 
-final class SavedTweetControllerTweetController
+final class SavedTweetController
 {
     public function __invoke(Request $request)
     {

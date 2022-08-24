@@ -95,7 +95,7 @@
                         Show rejected
                     </a>
                     <a class="px-12 py-4 font-bold block text-center hover:bg-blue-300"
-                       href="{{ action(\App\Http\Controllers\Tweets\SavedTweetControllerTweetController::class) }}"
+                       href="{{ action(\App\Http\Controllers\Tweets\SavedTweetController::class) }}"
                     >
                         Show saved
                     </a>
