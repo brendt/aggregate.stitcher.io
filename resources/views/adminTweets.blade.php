@@ -67,10 +67,10 @@
                                 </a>
 
                                 @if($tweet->canPublish())
-                                    <a href="{{ action(\App\Http\Controllers\Tweets\PublishTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
+                                    <a href="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
                                        class="underline hover:no-underline text-green-600 mr-4 py-2"
                                     >
-                                        Publish
+                                        Save
                                     </a>
                                 @endif
 
@@ -88,6 +88,18 @@
             </div>
 
             @if($tweets->count())
+                <div class="grid grid-cols-2">
+                    <a class="px-12 py-4 font-bold block text-center hover:bg-red-300"
+                       href="{{ action(\App\Http\Controllers\Tweets\RejectedTweetController::class) }}"
+                    >
+                        Show rejected
+                    </a>
+                    <a class="px-12 py-4 font-bold block text-center hover:bg-blue-300"
+                       href="{{ action(\App\Http\Controllers\Tweets\SavedTweetControllerTweetController::class) }}"
+                    >
+                        Show saved
+                    </a>
+                </div>
                 <a class="px-12 py-4 font-bold block text-center bg-red-100 hover:bg-red-300"
                    href="{{ action(\App\Http\Controllers\Tweets\DenyPendingTweetsController::class) }}"
                 >

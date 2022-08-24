@@ -5,6 +5,8 @@ use App\Http\Controllers\Tweets\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
 use App\Http\Controllers\Posts\DenyPendingPostsController;
 use App\Http\Controllers\Tweets\RejectedTweetController;
+use App\Http\Controllers\Tweets\SavedTweetControllerTweetController;
+use App\Http\Controllers\Tweets\SaveTweetController;
 use App\Http\Controllers\Tweets\StoreMuteController;
 use App\Http\Controllers\Posts\StorePostController;
 use App\Http\Controllers\Sources\AdminSourceDetailController;
@@ -62,7 +64,9 @@ Route::middleware(['auth'])
 
         Route::get('/tweets', AdminTweetController::class);
         Route::get('/tweets/rejected', RejectedTweetController::class);
+        Route::get('/tweets/saved', SavedTweetControllerTweetController::class);
         Route::get('/tweets/deny-all', DenyPendingTweetsController::class);
+        Route::get('/tweets/save/{tweet}', SaveTweetController::class);
         Route::get('/tweets/deny/{tweet}', DenyTweetController::class);
         Route::get('/tweets/publish/{tweet}', PublishTweetController::class);
 
