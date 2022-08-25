@@ -87,19 +87,20 @@
                 @endforeach
             </div>
 
+            <div class="grid grid-cols-2">
+                <a class="px-12 py-4 font-bold block text-center hover:bg-red-300"
+                   href="{{ action(\App\Http\Controllers\Tweets\RejectedTweetController::class) }}"
+                >
+                    Show rejected
+                </a>
+                <a class="px-12 py-4 font-bold block text-center hover:bg-blue-300"
+                   href="{{ action(\App\Http\Controllers\Tweets\SavedTweetController::class) }}"
+                >
+                    Show saved
+                </a>
+            </div>
+                
             @if($tweets->count())
-                <div class="grid grid-cols-2">
-                    <a class="px-12 py-4 font-bold block text-center hover:bg-red-300"
-                       href="{{ action(\App\Http\Controllers\Tweets\RejectedTweetController::class) }}"
-                    >
-                        Show rejected
-                    </a>
-                    <a class="px-12 py-4 font-bold block text-center hover:bg-blue-300"
-                       href="{{ action(\App\Http\Controllers\Tweets\SavedTweetController::class) }}"
-                    >
-                        Show saved
-                    </a>
-                </div>
                 <a class="px-12 py-4 font-bold block text-center bg-red-100 hover:bg-red-300"
                    href="{{ action(\App\Http\Controllers\Tweets\DenyPendingTweetsController::class) }}"
                 >
