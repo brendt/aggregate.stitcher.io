@@ -99,7 +99,7 @@
                     Show saved
                 </a>
             </div>
-                
+
             @if($tweets->count())
                 <a class="px-12 py-4 font-bold block text-center bg-red-100 hover:bg-red-300"
                    href="{{ action(\App\Http\Controllers\Tweets\DenyPendingTweetsController::class) }}"

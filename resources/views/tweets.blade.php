@@ -15,15 +15,6 @@
                 </div>
             @endif
 
-{{--            <a--}}
-{{--                class="hover:bg-pink-200 px-12 py-4 font-bold block text-center add-link"--}}
-{{--                href="{{ action(\App\Http\Controllers\Sources\SuggestSourceController::class) }}"--}}
-{{--                title="Add your own"--}}
-{{--            >--}}
-{{--                <span class="add-sign">+</span>--}}
-{{--                <span class="add-label">Suggest a twitter account</span>--}}
-{{--            </a>--}}
-
             <div class="">
                 @foreach ($tweets as $tweet)
                     <div class="overflow-x-hidden">
@@ -31,9 +22,7 @@
                             href="{{ $tweet->getPublicUrl() }}"
                             class="
                         block px-12 p-4
-{{--                        {{ $post->isPending() ? 'bg-gray-200' : '' }}--}}
                         hover:bg-blue-100
-{{--                        {{ $post->isDenied() ? 'bg-red-100' : '' }}--}}
                         "
                         >
                             <h1 class="font-bold">
@@ -45,6 +34,12 @@
                             </div>
 
                             <div class="text-sm font-light text-gray-800 mt-2">
+                                @if($tweet->rejection_reason)
+                                    <span class="text-red-500 font-bold">
+                                    Rejected: {{ $tweet->rejection_reason }}
+                                    </span>
+                                @endif
+
                                 @php
                                     $diffInHours = $tweet->created_at->diffInHours(now())
                                 @endphp

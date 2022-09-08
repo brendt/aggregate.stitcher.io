@@ -4,7 +4,9 @@ namespace App\Console\Commands;
 
 use App\Actions\ParseTweetText;
 use App\Models\Mute;
+use App\Models\RejectionReason;
 use App\Models\Tweet;
+use App\Models\TweetFeedType;
 use App\Models\TweetState;
 use Carbon\Carbon;
 use DG\Twitter\Twitter;
@@ -28,6 +30,13 @@ class TwitterSyncCommand extends Command
             Tweet::truncate();
         }
 
+        $this->syncFromList($twitter);
+
+        $this->info('Done');
+    }
+
+    public function syncFromList(Twitter $twitter): void
+    {
         do {
             $lastTweet = Tweet::query()
                 ->orderByDesc('tweet_id')
@@ -45,13 +54,11 @@ class TwitterSyncCommand extends Command
             if ($count === 0) {
                 $this->comment('No more new tweets');
             } else {
-                $this->comment("Syncing {$count} tweets");
+                $this->comment("Syncing {$count} tweets from list");
 
                 $this->storeTweets($tweets);
             }
         } while ($tweets !== []);
-
-        $this->info('Done');
     }
 
     private function storeTweets(array $tweets): void
@@ -63,7 +70,7 @@ class TwitterSyncCommand extends Command
                 'tweet_id' => $tweet->id,
             ], [
                 'state' => TweetState::PENDING,
-                'text' => $subject->full_text,
+                'text' => $subject->full_text ,
                 'user_name' => $subject->user->screen_name,
                 'retweeted_by_user_name' => isset($tweet->retweeted_status)
                     ? $tweet->user->screen_name
@@ -72,9 +79,10 @@ class TwitterSyncCommand extends Command
                 'payload' => json_encode($tweet),
             ]);
 
-            if ($this->shouldBeRejected($tweet)) {
+            if ($reason = $this->shouldBeRejected($tweet)) {
                 $tweet->update([
                     'state' => TweetState::REJECTED,
+                    'rejection_reason' => $reason->message,
                 ]);
             }
 
@@ -82,30 +90,32 @@ class TwitterSyncCommand extends Command
         }
     }
 
-    private function shouldBeRejected(Tweet $tweet): bool
+    private function shouldBeRejected(Tweet $tweet): ?RejectionReason
     {
         // Reject tweets containing a specific word
         foreach ($this->mutes as $mute) {
             if ($tweet->containsPhrase($mute->text)) {
-                return true;
+                return RejectionReason::mute($mute->text);
             }
         }
 
         // Reject replies
         if ($tweet->getPayload()->in_reply_to_status_id) {
-            return true;
+            return RejectionReason::isReply();
         }
 
         // Reject mentions
         if (str_starts_with($tweet->text, '@')) {
-            return true;
+            return RejectionReason::isMention();
         }
 
         // Reject non-english tweets
-        if ($tweet->getPayload()->lang !== 'en') {
-            return true;
+        $language = $tweet->getPayload()->lang;
+
+        if ($language !== 'en') {
+            return RejectionReason::otherLanguage($language);
         }
 
-        return false;
+        return null;
     }
 }
