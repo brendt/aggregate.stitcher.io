@@ -3,6 +3,67 @@
 ?>
 
 @component('layout.app')
+    <style>
+        .drag-container {
+            position: relative;
+            height: auto;
+            max-height: 1000px;
+            overflow-x: hidden;
+        }
+
+        .drag {
+            width: 100%;
+            position: relative;
+            height: auto;
+            left: 0;
+            top: 0;
+        }
+
+        .dragging-left {
+            background-color: rgb(237, 204, 204);
+        }
+
+        .border-left-reached {
+            background-color: rgb(226, 130, 130);
+        }
+
+        .dragging-right {
+            background-color: rgb(200, 235, 201);
+        }
+
+        .border-right-reached {
+            background-color: rgb(153, 233, 138);
+        }
+
+        .drag-container.dragged {
+            max-height: 0;
+            transition: all 0.4s 0s ease-in;
+        }
+
+        .drag-container.dragged-left {
+            background-color: rgb(226, 130, 130);
+        }
+
+        .drag-container.dragged-right {
+            background-color: rgb(153, 233, 138);
+        }
+
+        .dragged {
+            -webkit-transition: all 0.4s 0s ease-in;
+            -moz-transition: all 0.4s 0s ease-in;
+            -o-transition: all 0.4s 0s ease-in;
+            transition: all 0.4s 0s ease-in;
+        }
+
+        .drag.dragged-left {
+            left: -200%;
+        }
+
+        .drag.dragged-right {
+            left: 200%;
+        }
+    </style>
+
     <div class="mx-auto container grid gap-4 mt-4">
         @if($user)
             @include('includes.adminMenu')
@@ -15,7 +76,6 @@
                 </div>
             @endif
 
-
             <a
                 class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
                 href="{{ action(\App\Http\Controllers\Tweets\CreateMuteController::class) }}"
@@ -26,61 +86,67 @@
 
             <div class="">
                 @foreach ($tweets as $tweet)
-                    <div class="overflow-x-hidden">
+                    <div class="drag-container">
                         <div
-                            class="block px-12 p-4 bg-gray-200 "
+                            class="drag bg-gray-200"
+                            x-deny-url="{{ action(\App\Http\Controllers\Tweets\DenyTweetController::class, $tweet->id) }}"
+                            x-save-url="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, $tweet->id) }}"
                         >
-                            <h1 class="font-bold">
-                                &#64;{{ $tweet->user_name }}
-                            </h1>
+                            <div
+                                class="block px-12 p-4"
+                            >
+                                <h1 class="font-bold">
+                                    &#64;{{ $tweet->user_name }}
+                                </h1>
 
-                            <div class="mt-2 tweet-text">
-                                {!! nl2br($tweet->parsed_text)  !!}
-                            </div>
+                                <div class="mt-2 tweet-text">
+                                    {!! nl2br($tweet->parsed_text)  !!}
+                                </div>
 
-                            <div class="text-sm font-light text-gray-800 mt-2">
-                                @php
-                                    $diffInHours = $tweet->created_at->diffInHours(now())
-                                @endphp
+                                <div class="text-sm font-light text-gray-800 mt-2">
+                                    @php
+                                        $diffInHours = $tweet->created_at->diffInHours(now())
+                                    @endphp
 
-                                Tweeted
+                                    Tweeted
 
-                                @if($diffInHours <= 1)
-                                    right now
-                                @elseif($diffInHours <= 24)
-                                    {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago
-                                @else
-                                    {{ $tweet->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $tweet->created_at->diffInDays(now())) }}
-                                    ago
-                                @endif
+                                    @if($diffInHours <= 1)
+                                        right now
+                                    @elseif($diffInHours <= 24)
+                                        {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago
+                                    @else
+                                        {{ $tweet->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $tweet->created_at->diffInDays(now())) }}
+                                        ago
+                                    @endif
 
-                                @if($tweet->retweeted_by_user_name)
-                                    , retweeted by {{ $tweet->retweeted_by_user_name }}
-                                @endif
-                            </div>
+                                    @if($tweet->retweeted_by_user_name)
+                                        , retweeted by {{ $tweet->retweeted_by_user_name }}
+                                    @endif
+                                </div>
 
-                            <div class="flex gap-2 text-sm pt-2">
-                                <a href="{{ $tweet->getPublicUrl() }}"
-                                   class="underline hover:no-underline mr-4 py-2"
-                                >
-                                    Show
-                                </a>
-
-                                @if($tweet->canPublish())
-                                    <a href="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
-                                       class="underline hover:no-underline text-green-600 mr-4 py-2"
+                                <div class="flex gap-2 text-sm pt-2">
+                                    <a href="{{ $tweet->getPublicUrl() }}"
+                                       class="underline hover:no-underline mr-4 py-2"
                                     >
-                                        Save
+                                        Show
                                     </a>
-                                @endif
 
-                                @if($tweet->canDeny())
-                                    <a href="{{ action(\App\Http\Controllers\Tweets\DenyTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
-                                       class="underline hover:no-underline text-red-600 py-2"
-                                    >
-                                        Deny
-                                    </a>
-                                @endif
+                                    @if($tweet->canPublish())
+                                        <a href="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
+                                           class="underline hover:no-underline text-green-600 mr-4 py-2"
+                                        >
+                                            Save
+                                        </a>
+                                    @endif
+
+                                    @if($tweet->canDeny())
+                                        <a href="{{ action(\App\Http\Controllers\Tweets\DenyTweetController::class, ['tweet' => $tweet, ...request()->query->all()]) }}"
+                                           class="underline hover:no-underline text-red-600 py-2"
+                                        >
+                                            Deny
+                                        </a>
+                                    @endif
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -108,4 +174,97 @@
                 </a>
             @endif
         </div>
+
+        <script>
+            const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+
+            const init = function (container, drag) {
+                drag.addEventListener('touchstart', (e) => {
+                    drag.setAttribute('x-drag-start', e.changedTouches[0].pageX);
+                });
+
+                drag.addEventListener('touchend', (e) => {
+                    if (drag.classList.contains('border-right-reached')) {
+                        drag.classList.add('dragged');
+                        drag.classList.add('dragged-right');
+                        container.classList.add('dragged');
+                        container.classList.add('dragged-right');
+                        drag.style.left = null;
+
+                        fetch(drag.getAttribute('x-save-url'), {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken,
+                            }
+                        });
+
+                        return;
+                    }
+
+                    if (drag.classList.contains('border-left-reached')) {
+                        drag.classList.add('dragged');
+                        drag.classList.add('dragged-left');
+                        container.classList.add('dragged');
+                        container.classList.add('dragged-left');
+                        drag.style.left = null;
+
+                        fetch(drag.getAttribute('x-deny-url'), {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': csrfToken,
+                            }
+                        });
+
+                        return;
+                    }
+
+                    drag.classList.remove('dragging');
+                    drag.classList.remove('dragging-left');
+                    drag.classList.remove('dragging-right');
+                    drag.style.left = 0;
+                });
+
+                drag.addEventListener('touchmove', (e) => {
+                    const start = drag.getAttribute('x-drag-start');
+                    const currentPos = e.changedTouches[0].pageX;
+                    const delta = (currentPos - start) / 2;
+
+                    if (Math.abs(delta) < 10) {
+                        return;
+                    }
+
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const border = drag.offsetWidth / 4;
+
+                    drag.classList.remove('dragging-left');
+                    drag.classList.remove('dragging-right');
+
+                    if (delta > 0) {
+                        drag.classList.add('dragging-right');
+                    } else {
+                        drag.classList.add('dragging-left');
+                    }
+
+                    drag.style.left = `${delta}px`;
+
+                    if (delta > border) {
+                        // Right border reached
+                        drag.classList.add('border-right-reached');
+                    } else if (delta < -border) {
+                        // Left border reached
+                        drag.classList.add('border-left-reached');
+                    } else {
+                        // Border not reached
+                        drag.classList.remove('border-right-reached');
+                        drag.classList.remove('border-left-reached');
+                    }
+                });
+            };
+
+            const containers = document.querySelectorAll('.drag-container');
+
+            containers.forEach((container) => init(container, container.querySelector('.drag')));
+        </script>
 @endcomponent

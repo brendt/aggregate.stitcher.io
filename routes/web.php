@@ -66,8 +66,8 @@ Route::middleware(['auth'])
         Route::get('/tweets/rejected', RejectedTweetController::class);
         Route::get('/tweets/saved', SavedTweetController::class);
         Route::get('/tweets/deny-all', DenyPendingTweetsController::class);
-        Route::get('/tweets/save/{tweet}', SaveTweetController::class);
-        Route::get('/tweets/deny/{tweet}', DenyTweetController::class);
+        Route::post('/tweets/save/{tweet}', SaveTweetController::class);
+        Route::post('/tweets/deny/{tweet}', DenyTweetController::class);
         Route::get('/tweets/publish/{tweet}', PublishTweetController::class);
 
         Route::get('/sources', AdminSourcesController::class);
