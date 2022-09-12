@@ -229,7 +229,7 @@
                     const currentPos = e.changedTouches[0].pageX;
                     const delta = (currentPos - start) / 2;
 
-                    if (Math.abs(delta) < 10) {
+                    if (Math.abs(delta) < 20) {
                         return;
                     }
 
