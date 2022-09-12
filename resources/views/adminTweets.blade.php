@@ -4,6 +4,20 @@
 
 @component('layout.app')
     <style>
+        :root {
+            --drag-background-color: #fff;
+        }
+
+        .left {
+            --drag-background-color: rgb(237, 204, 204);
+            --final-position: -200%;
+        }
+
+        .right {
+            --drag-background-color: rgb(200, 235, 201);
+            --final-position: 200%;
+        }
+
         .drag-container {
             position: relative;
             height: auto;
@@ -11,7 +25,9 @@
             overflow-x: hidden;
         }
 
+        /* 0 reset */
         .drag {
+            background-color: var(--drag-background-color);
             width: 100%;
             position: relative;
             height: auto;
@@ -19,48 +35,27 @@
             top: 0;
         }
 
-        .dragging-left {
-            background-color: rgb(237, 204, 204);
+        /* 1 */
+        .dragging {
+            background-color: var(--drag-background-color);
         }
 
-        .border-left-reached {
-            background-color: rgb(226, 130, 130);
+        /* 2 */
+        .border-reached {
+            background-color: var(--drag-background-color);
+            filter: brightness(80%);
         }
 
-        .dragging-right {
-            background-color: rgb(200, 235, 201);
-        }
-
-        .border-right-reached {
-            background-color: rgb(153, 233, 138);
-        }
-
+        /* 3 */
         .drag-container.dragged {
             max-height: 0;
             transition: all 0.4s 0s ease-in;
+            background-color: var(--drag-background-color);
         }
 
-        .drag-container.dragged-left {
-            background-color: rgb(226, 130, 130);
-        }
-
-        .drag-container.dragged-right {
-            background-color: rgb(153, 233, 138);
-        }
-
-        .dragged {
-            -webkit-transition: all 0.4s 0s ease-in;
-            -moz-transition: all 0.4s 0s ease-in;
-            -o-transition: all 0.4s 0s ease-in;
+        .drag-container.dragged .drag {
+            left: var(--final-position);
             transition: all 0.4s 0s ease-in;
-        }
-
-        .drag.dragged-left {
-            left: -200%;
-        }
-
-        .drag.dragged-right {
-            left: 200%;
         }
     </style>
 
@@ -184,44 +179,22 @@
                 });
 
                 drag.addEventListener('touchend', (e) => {
-                    if (drag.classList.contains('border-right-reached')) {
-                        drag.classList.add('dragged');
-                        drag.classList.add('dragged-right');
-                        container.classList.add('dragged');
-                        container.classList.add('dragged-right');
-                        drag.style.left = null;
-
-                        fetch(drag.getAttribute('x-save-url'), {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': csrfToken,
-                            }
-                        });
+                    if (! drag.classList.contains('border-reached')) {
+                        reset(drag);
 
                         return;
                     }
 
-                    if (drag.classList.contains('border-left-reached')) {
-                        drag.classList.add('dragged');
-                        drag.classList.add('dragged-left');
-                        container.classList.add('dragged');
-                        container.classList.add('dragged-left');
-                        drag.style.left = null;
+                    setDragged(drag, container);
 
-                        fetch(drag.getAttribute('x-deny-url'), {
-                            method: 'POST',
-                            headers: {
-                                'X-CSRF-TOKEN': csrfToken,
-                            }
-                        });
+                    const action = drag.classList.contains('left') ? 'deny' : 'save';
 
-                        return;
-                    }
-
-                    drag.classList.remove('dragging');
-                    drag.classList.remove('dragging-left');
-                    drag.classList.remove('dragging-right');
-                    drag.style.left = 0;
+                    fetch(drag.getAttribute(`x-${action}-url`), {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRF-TOKEN': csrfToken,
+                        }
+                    });
                 });
 
                 drag.addEventListener('touchmove', (e) => {
@@ -236,35 +209,52 @@
                     e.preventDefault();
                     e.stopPropagation();
 
-                    const border = drag.offsetWidth / 4;
-
-                    drag.classList.remove('dragging-left');
-                    drag.classList.remove('dragging-right');
-
-                    if (delta > 0) {
-                        drag.classList.add('dragging-right');
-                    } else {
-                        drag.classList.add('dragging-left');
-                    }
-
-                    drag.style.left = `${delta}px`;
-
-                    if (delta > border) {
-                        // Right border reached
-                        drag.classList.add('border-right-reached');
-                    } else if (delta < -border) {
-                        // Left border reached
-                        drag.classList.add('border-left-reached');
-                    } else {
-                        // Border not reached
-                        drag.classList.remove('border-right-reached');
-                        drag.classList.remove('border-left-reached');
-                    }
+                    setDirection(drag, delta);
+                    setPosition(drag, delta);
+                    detectBorder(drag, delta);
                 });
             };
 
-            const containers = document.querySelectorAll('.drag-container');
+            function setPosition(drag, delta) {
+                drag.style.left = `${delta}px`;
+            }
 
-            containers.forEach((container) => init(container, container.querySelector('.drag')));
+            function setDirection(drag, delta) {
+                drag.classList.remove('left');
+                drag.classList.remove('right');
+
+                drag.classList.add(delta > 0 ? 'right' : 'left');
+            }
+
+            function detectBorder(drag, delta) {
+                const border = drag.offsetWidth / 4;
+
+                if (Math.abs(delta) > border) {
+                    // Border reached
+                    drag.classList.add('border-reached');
+                } else {
+                    // Border not reached
+                    drag.classList.remove('border-reached');
+                }
+            }
+
+            function reset(drag) {
+                drag.classList.remove('left');
+                drag.classList.remove('right');
+                drag.classList.remove('border-reached');
+                drag.classList.remove('dragging');
+                drag.style.left = 0;
+            }
+
+            function setDragged(drag, container) {
+                drag.classList.add('dragged');
+                container.classList.add('dragged');
+                container.classList.add(drag.classList.contains('left') ? 'left' : 'right');
+                drag.style.left = null;
+            }
+
+            document.querySelectorAll('.drag-container').forEach(
+                (container) => init(container, container.querySelector('.drag'))
+            );
         </script>
 @endcomponent
