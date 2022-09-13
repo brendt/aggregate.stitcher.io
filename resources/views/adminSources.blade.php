@@ -5,16 +5,6 @@
 @component('layout.app')
     <div class="mx-auto container grid gap-4 mt-4">
         @include('includes.adminMenu')
-
-{{--        <div class="md:flex mx-4 shadow-md">--}}
-{{--            <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>--}}
-{{--            <div class="px-4 py-1 grow text-center bg-blue-100">publishing</div>--}}
-{{--            <div class="px-4 py-1 grow text-center bg-white">published</div>--}}
-{{--            <div class="px-4 py-1 grow text-center bg-orange-100">duplicate</div>--}}
-{{--            <div class="px-4 py-1 grow text-center bg-red-100">denied</div>--}}
-{{--            <div class="px-4 py-1 grow text-center bg-red-300">invalid</div>--}}
-{{--        </div>--}}
-
         <div class="bg-white mx-4 shadow-md max-w-full">
             <a
                 class="hover:bg-pink-200 px-12 py-4 font-bold block text-center"
@@ -25,7 +15,7 @@
             </a>
 
             @foreach ($sources as $source)
-                <div>
+                <div class="overflow-hidden">
                     <div
                         class="
                                 block px-12 p-4
@@ -36,7 +26,7 @@
                                 {{ $source->isDuplicate() ? 'bg-orange-100' : '' }}
                             "
                     >
-                        <h1 class="font-bold break-words">
+                        <h1 class="font-bold break-all">
                             {{ $source->name }}
                             <span class="text-sm font-normal">— {{ $source->url }}</span>
                         </h1>

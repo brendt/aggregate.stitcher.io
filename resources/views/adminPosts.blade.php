@@ -5,31 +5,6 @@
 @component('layout.app')
     <div class="mx-auto container grid gap-4 mt-4">
         @include('includes.adminMenu')
-
-{{--        <div class="bg-white mx-4 shadow-md max-w-full">--}}
-{{--            <div class="px-12 py-4 grid md:grid-cols-3 text-sm">--}}
-{{--                <a--}}
-{{--                    href="{{ action(\App\Http\Controllers\Posts\AdminPostsController::class, [--}}
-{{--                        'show_all' => ! $showAll,--}}
-{{--                    ] + request()->query->all()) }}"--}}
-{{--                    class="underline hover:no-underline text-center"--}}
-{{--                >{{ $showAll ? 'Only Pending' : 'Show All' }}</a>--}}
-
-{{--                <a--}}
-{{--                    href="{{ action(\App\Http\Controllers\Posts\AdminPostsController::class, [--}}
-{{--                        'only_today' => ! $onlyToday,--}}
-{{--                    ] + request()->query->all()) }}"--}}
-{{--                    class="underline hover:no-underline text-center"--}}
-{{--                >{{ $onlyToday ? 'All time' : 'Only today' }}</a>--}}
-{{--            </div>--}}
-
-{{--            <div class="md:flex">--}}
-{{--                <div class="px-4 py-1 grow text-center bg-gray-200">pending</div>--}}
-{{--                <div class="px-4 py-1 grow text-center bg-white">published</div>--}}
-{{--                <div class="px-4 py-1 grow text-center bg-red-100">denied</div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-
         <div class="bg-white mx-4 shadow-md grid">
             @if($message)
                 <div class="px-12 py-4 bg-green-100 font-bold block text-center">
@@ -57,7 +32,7 @@
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         "
                         >
-                            <h1 class="font-bold break-words">
+                            <h1 class="font-bold break-all">
                                 {{ $post->title }}
                             </h1>
 
