@@ -176,9 +176,12 @@
             const init = function (container, drag) {
                 drag.addEventListener('touchstart', (e) => {
                     drag.setAttribute('x-drag-start', e.changedTouches[0].pageX);
+                    drag.setAttribute('x-drag-start-y', e.changedTouches[0].pageY);
                 });
 
                 drag.addEventListener('touchend', (e) => {
+                    drag.removeAttribute('x-dragging-vertical');
+
                     if (! drag.classList.contains('border-reached')) {
                         reset(drag);
 
@@ -198,20 +201,29 @@
                 });
 
                 drag.addEventListener('touchmove', (e) => {
-                    const start = drag.getAttribute('x-drag-start');
-                    const currentPos = e.changedTouches[0].pageX;
-                    const delta = (currentPos - start) / 2;
+                    const startX = drag.getAttribute('x-drag-start');
+                    const currentPosX = e.changedTouches[0].pageX;
+                    const deltaX = (currentPosX - startX) / 2;
 
-                    if (Math.abs(delta) < 20) {
+                    const startY = drag.getAttribute('x-drag-start-y');
+                    const currentPosY = e.changedTouches[0].pageY;
+                    const deltaY = currentPosY - startY;
+
+                    if (Math.abs(deltaY) > 5 || drag.hasAttribute('x-dragging-vertical')) {
+                        drag.setAttribute('x-dragging-vertical', 'true');
+
                         return;
                     }
 
-                    e.preventDefault();
+                    if (e.cancelable) {
+                        e.preventDefault();
+                    }
+
                     e.stopPropagation();
 
-                    setDirection(drag, delta);
-                    setPosition(drag, delta);
-                    detectBorder(drag, delta);
+                    setDirection(drag, deltaX);
+                    setPosition(drag, deltaX);
+                    detectBorder(drag, deltaX);
                 });
             };
 
