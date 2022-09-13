@@ -10,11 +10,13 @@
 
         .left {
             --drag-background-color: rgb(237, 204, 204);
+            --final-drag-background-color: rgb(243, 162, 162);
             --final-position: -200%;
         }
 
         .right {
             --drag-background-color: rgb(200, 235, 201);
+            --final-drag-background-color: rgb(145, 239, 149);
             --final-position: 200%;
         }
 
@@ -42,15 +44,14 @@
 
         /* 2 */
         .border-reached {
-            background-color: var(--drag-background-color);
-            filter: brightness(80%);
+            background-color: var(--final-drag-background-color);
         }
 
         /* 3 */
         .drag-container.dragged {
             max-height: 0;
-            transition: all 0.4s 0s ease-in;
-            background-color: var(--drag-background-color);
+            transition: all 0.3s 0s ease-in;
+            background-color: var(--final-drag-background-color);
         }
 
         .drag-container.dragged .drag {
