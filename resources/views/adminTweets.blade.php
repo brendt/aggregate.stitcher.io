@@ -173,6 +173,28 @@
         <script>
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+            function getDeltaX(e, drag) {
+                const startX = drag.getAttribute('x-drag-start');
+                const currentPosX = e.changedTouches[0].pageX;
+
+                return currentPosX - startX;
+            }
+
+            function getDeltaY(e, drag) {
+                const startY = drag.getAttribute('x-drag-start-y');
+                const currentPosY = e.changedTouches[0].pageY;
+
+                return currentPosY - startY;
+            }
+
+            function isDraggingVertical(drag, deltaY) {
+                if (drag.hasAttribute('x-dragging-horizontal')) {
+                    return false;
+                }
+
+                return Math.abs(deltaY) > 10 || drag.hasAttribute('x-dragging-vertical');
+            }
+
             const init = function (container, drag) {
                 drag.addEventListener('touchstart', (e) => {
                     drag.setAttribute('x-drag-start', e.changedTouches[0].pageX);
@@ -201,15 +223,13 @@
                 });
 
                 drag.addEventListener('touchmove', (e) => {
-                    const startX = drag.getAttribute('x-drag-start');
-                    const currentPosX = e.changedTouches[0].pageX;
-                    const deltaX = (currentPosX - startX) / 2;
+                    const deltaX = getDeltaX(e, drag);
+                    const deltaY = getDeltaY(e, drag);
+                    const draggingVertical = isDraggingVertical(drag, deltaY);
 
-                    const startY = drag.getAttribute('x-drag-start-y');
-                    const currentPosY = e.changedTouches[0].pageY;
-                    const deltaY = currentPosY - startY;
-
-                    if (Math.abs(deltaY) > 5 || drag.hasAttribute('x-dragging-vertical')) {
+                    if (! draggingVertical && Math.abs(deltaX) > 10) {
+                        drag.setAttribute('x-dragging-horizontal', 'true');
+                    } else if (draggingVertical) {
                         drag.setAttribute('x-dragging-vertical', 'true');
 
                         return;
@@ -256,6 +276,8 @@
                 drag.classList.remove('border-reached');
                 drag.classList.remove('dragging');
                 drag.style.left = 0;
+                drag.removeAttribute('x-dragging-horizontal');
+                drag.removeAttribute('x-dragging-vertical');
             }
 
             function setDragged(drag, container) {
