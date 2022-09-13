@@ -23,5 +23,5 @@
         class="underline hover:no-underline text-center"
     >
         Tweets
-        <span class="font-bold">({{ $pendingTweets }})</span></a>
+        <span class="font-bold">(<span id="tweet-count">{{ $pendingTweets }}</span>)</span></a>
 </div>

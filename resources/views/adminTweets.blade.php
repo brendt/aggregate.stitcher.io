@@ -328,6 +328,11 @@
                             'X-CSRF-TOKEN': csrfToken,
                         }
                     });
+
+                    const tweetCountElement = document.querySelector('#tweet-count');
+                    const tweetCount = parseInt(tweetCountElement.innerHTML);
+
+                    tweetCountElement.innerHTML = tweetCount - 1;
                 }
             }
 
