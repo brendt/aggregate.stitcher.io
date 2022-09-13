@@ -173,122 +173,183 @@
         <script>
             const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-            function getDeltaX(e, drag) {
-                const startX = drag.getAttribute('x-drag-start');
-                const currentPosX = e.changedTouches[0].pageX;
+            class Drag
+            {
+                element;
+                event;
 
-                return currentPosX - startX;
-            }
-
-            function getDeltaY(e, drag) {
-                const startY = drag.getAttribute('x-drag-start-y');
-                const currentPosY = e.changedTouches[0].pageY;
-
-                return currentPosY - startY;
-            }
-
-            function isDraggingVertical(drag, deltaY) {
-                if (drag.hasAttribute('x-dragging-horizontal')) {
-                    return false;
+                constructor(element, event) {
+                    this.element = element;
+                    this.event = event;
                 }
 
-                return Math.abs(deltaY) > 10 || drag.hasAttribute('x-dragging-vertical');
-            }
+                get deltaX() {
+                    // TODO: refactor to x-drag-start-x
+                    const startX = this.element.getAttribute('x-drag-start');
+                    const currentPosX = this.event.changedTouches[0].pageX;
 
-            const init = function (container, drag) {
-                drag.addEventListener('touchstart', (e) => {
-                    drag.setAttribute('x-drag-start', e.changedTouches[0].pageX);
-                    drag.setAttribute('x-drag-start-y', e.changedTouches[0].pageY);
-                });
+                    return currentPosX - startX;
+                }
 
-                drag.addEventListener('touchend', (e) => {
-                    drag.removeAttribute('x-dragging-vertical');
+                get deltaY() {
+                    const startY = this.element.getAttribute('x-drag-start-y');
+                    const currentPosY = this.event.changedTouches[0].pageY;
 
-                    if (! drag.classList.contains('border-reached')) {
-                        reset(drag);
+                    return currentPosY - startY;
+                }
+
+                get borderReached() {
+                    return this.element.classList.contains('border-reached');
+                }
+
+                isDraggingVertical() {
+                    if (this.element.hasAttribute('x-dragging-horizontal')) {
+                        return false;
+                    }
+
+                    return Math.abs(this.deltaY) > 10
+                        || this.element.hasAttribute('x-dragging-vertical');
+                }
+
+                isDraggingHorizontal() {
+                    if (this.element.hasAttribute('x-dragging-vertical')) {
+                        return false;
+                    }
+
+                    return Math.abs(this.deltaX) > 10
+                        || this.element.hasAttribute('x-dragging-horizontal');
+                }
+
+                markDraggingHorizontal() {
+                    this.element.setAttribute('x-dragging-horizontal', 'true');
+                }
+
+                markDraggingVertical() {
+                    this.element.setAttribute('x-dragging-vertical', 'true');
+                }
+
+                isAlreadyDragging() {
+                    return this.isDraggingVertical() || this.isDraggingHorizontal();
+                }
+
+                determineDragDirection() {
+                    if (this.isDraggingHorizontal()) {
+                        this.markDraggingHorizontal();
+
+                        return 'horizontal';
+                    } else if (this.isDraggingVertical()) {
+                        this.markDraggingVertical();
+
+                        return 'vertical';
+                    } else {
+                        return null;
+                    }
+                }
+
+                setPosition() {
+                    this.element.style.left = `${this.deltaX}px`;
+                }
+
+                setDirection() {
+                    this.element.classList.remove('left');
+                    this.element.classList.remove('right');
+                    this.element.classList.add(this.deltaX > 0 ? 'right' : 'left');
+                }
+
+                detectBorder() {
+                    const border = this.element.offsetWidth / 4;
+
+                    if (Math.abs(this.deltaX) > border) {
+                        // Border reached
+                        this.element.classList.add('border-reached');
+                    } else {
+                        // Border not reached
+                        this.element.classList.remove('border-reached');
+                    }
+                }
+
+                reset() {
+                    this.element.classList.remove('left');
+                    this.element.classList.remove('right');
+                    this.element.classList.remove('border-reached');
+                    this.element.classList.remove('dragging');
+                    this.element.style.left = 0;
+                    this.element.removeAttribute('x-dragging-horizontal');
+                    this.element.removeAttribute('x-dragging-vertical');
+                }
+
+                handleDragStart() {
+                    this.element.setAttribute('x-drag-start', this.event.changedTouches[0].pageX);
+                    this.element.setAttribute('x-drag-start-y', this.event.changedTouches[0].pageY);
+                }
+
+                handleDragMove() {
+                    if (this.determineDragDirection() === 'vertical') {
+                        return;
+                    }
+
+                    if (Math.abs(this.deltaX) < 10) {
+                        return;
+                    }
+
+                    if (this.event.cancelable) {
+                        this.event.preventDefault();
+                    }
+
+                    this.event.stopPropagation();
+
+                    this.setDirection();
+                    this.setPosition();
+                    this.detectBorder();
+                }
+
+                handleDragEnd() {
+                    this.element.removeAttribute('x-dragging-vertical');
+
+                    if (!this.borderReached) {
+                        this.reset();
 
                         return;
                     }
 
-                    setDragged(drag, container);
+                    const container = this.element.parentElement;
+                    const isLeft = this.element.classList.contains('left');
+                    const action = isLeft ? 'deny' : 'save';
 
-                    const action = drag.classList.contains('left') ? 'deny' : 'save';
+                    this.element.classList.add('dragged');
+                    this.element.style.left = null;
+                    container.classList.add('dragged');
+                    container.classList.add(isLeft ? 'left' : 'right');
 
-                    fetch(drag.getAttribute(`x-${action}-url`), {
+                    fetch(this.element.getAttribute(`x-${action}-url`), {
                         method: 'POST',
                         headers: {
                             'X-CSRF-TOKEN': csrfToken,
                         }
                     });
-                });
-
-                drag.addEventListener('touchmove', (e) => {
-                    const deltaX = getDeltaX(e, drag);
-                    const deltaY = getDeltaY(e, drag);
-                    const draggingVertical = isDraggingVertical(drag, deltaY);
-
-                    if (! draggingVertical && Math.abs(deltaX) > 10) {
-                        drag.setAttribute('x-dragging-horizontal', 'true');
-                    } else if (draggingVertical) {
-                        drag.setAttribute('x-dragging-vertical', 'true');
-
-                        return;
-                    }
-
-                    if (e.cancelable) {
-                        e.preventDefault();
-                    }
-
-                    e.stopPropagation();
-
-                    setDirection(drag, deltaX);
-                    setPosition(drag, deltaX);
-                    detectBorder(drag, deltaX);
-                });
-            };
-
-            function setPosition(drag, delta) {
-                drag.style.left = `${delta}px`;
-            }
-
-            function setDirection(drag, delta) {
-                drag.classList.remove('left');
-                drag.classList.remove('right');
-
-                drag.classList.add(delta > 0 ? 'right' : 'left');
-            }
-
-            function detectBorder(drag, delta) {
-                const border = drag.offsetWidth / 4;
-
-                if (Math.abs(delta) > border) {
-                    // Border reached
-                    drag.classList.add('border-reached');
-                } else {
-                    // Border not reached
-                    drag.classList.remove('border-reached');
                 }
             }
 
-            function reset(drag) {
-                drag.classList.remove('left');
-                drag.classList.remove('right');
-                drag.classList.remove('border-reached');
-                drag.classList.remove('dragging');
-                drag.style.left = 0;
-                drag.removeAttribute('x-dragging-horizontal');
-                drag.removeAttribute('x-dragging-vertical');
-            }
+            const init = function (element) {
+                element.addEventListener('touchstart', (event) => {
+                    const drag = new Drag(element, event);
 
-            function setDragged(drag, container) {
-                drag.classList.add('dragged');
-                container.classList.add('dragged');
-                container.classList.add(drag.classList.contains('left') ? 'left' : 'right');
-                drag.style.left = null;
-            }
+                    drag.handleDragStart();
+                });
 
-            document.querySelectorAll('.drag-container').forEach(
-                (container) => init(container, container.querySelector('.drag'))
-            );
+                element.addEventListener('touchmove', (event) => {
+                    const drag = new Drag(element, event);
+
+                    drag.handleDragMove();
+                });
+
+                element.addEventListener('touchend', (event) => {
+                    const drag = new Drag(element, event);
+
+                    drag.handleDragEnd();
+                });
+            };
+
+            document.querySelectorAll('.drag').forEach((element) => init(element));
         </script>
 @endcomponent
