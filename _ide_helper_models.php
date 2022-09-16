@@ -97,7 +97,7 @@ namespace App\Models{
  * @property int $id
  * @property int $tweet_id
  * @property \App\Models\TweetState $state
- * @property \App\Models\TweetFeedType $feed_type
+ * @property string $feed_type
  * @property string $text
  * @property string|null $parsed_text
  * @property string|null $rejection_reason

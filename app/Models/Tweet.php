@@ -18,6 +18,7 @@ class Tweet extends Model
         'state' => TweetState::class,
         'tweet_id' => 'integer',
         'created_at' => 'datetime',
+        'feed_type' => TweetFeedType::class,
     ];
 
     public function scopePendingToday(Builder $builder): void

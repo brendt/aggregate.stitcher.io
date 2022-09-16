@@ -91,9 +91,14 @@
                             <div
                                 class="block px-12 p-4 break-all"
                             >
-                                <h1 class="font-bold">
-                                    &#64;{{ $tweet->user_name }}
-                                </h1>
+                                <div class="flex align-baseline">
+                                    <h1 class="font-bold">
+                                        &#64;{{ $tweet->user_name }}
+                                    </h1>
+                                    <span class="ml-2 px-2 bg-{{ $tweet->feed_type->getColour() }}-100 rounded">
+                                        {{ $tweet->feed_type->value }}
+                                    </span>
+                                </div>
 
                                 <div class="mt-2 tweet-text">
                                     {!! nl2br($tweet->parsed_text)  !!}

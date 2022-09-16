@@ -30,6 +30,8 @@ class TwitterSyncCommand extends Command
             Tweet::truncate();
         }
 
+        $this->syncFromSearch($twitter);
+
         $this->syncFromList($twitter);
 
         $this->info('Done');
@@ -39,6 +41,7 @@ class TwitterSyncCommand extends Command
     {
         do {
             $lastTweet = Tweet::query()
+                ->where('feed_type', TweetFeedType::LIST)
                 ->orderByDesc('tweet_id')
                 ->first();
 
@@ -56,12 +59,39 @@ class TwitterSyncCommand extends Command
             } else {
                 $this->comment("Syncing {$count} tweets from list");
 
-                $this->storeTweets($tweets);
+                $this->storeTweets($tweets, TweetFeedType::LIST);
             }
         } while ($tweets !== []);
     }
 
-    private function storeTweets(array $tweets): void
+    public function syncFromSearch(Twitter $twitter): void
+    {
+        do {
+            $lastTweet = Tweet::query()
+                ->where('feed_type', TweetFeedType::SEARCH)
+                ->orderByDesc('tweet_id')
+                ->first();
+
+            $tweets = $twitter->request('/search/tweets.json', 'GET', [
+                'q' => 'phpstorm',
+                'since_id' => $lastTweet?->tweet_id,
+                'count' => 200,
+                'tweet_mode' => 'extended',
+            ])->statuses;
+
+            $count = count($tweets);
+
+            if ($count === 0) {
+                $this->comment('No more new tweets');
+            } else {
+                $this->comment("Syncing {$count} tweets from search");
+
+                $this->storeTweets($tweets, TweetFeedType::SEARCH);
+            }
+        } while ($tweets !== []);
+    }
+
+    private function storeTweets(array $tweets, TweetFeedType $feedType): void
     {
         foreach ($tweets as $tweet) {
             $subject = $tweet->retweeted_status ?? $tweet;
@@ -70,6 +100,7 @@ class TwitterSyncCommand extends Command
                 'tweet_id' => $tweet->id,
             ], [
                 'state' => TweetState::PENDING,
+                'feed_type' => $feedType,
                 'text' => $subject->full_text ,
                 'user_name' => $subject->user->screen_name,
                 'retweeted_by_user_name' => isset($tweet->retweeted_status)
