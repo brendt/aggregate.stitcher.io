@@ -26,13 +26,14 @@
                     <div>
                         <div
                             class="
+                            word-break
                         block px-12 p-4
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
                         {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         "
                         >
-                            <h1 class="font-bold break-all">
+                            <h1 class="font-bold">
                                 {{ $post->title }}
                             </h1>
 

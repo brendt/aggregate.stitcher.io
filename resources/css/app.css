@@ -14,6 +14,10 @@
     display: inline;
 }
 
+.word-break {
+    word-break: break-word;
+}
+
 .tweet-text em {
     background-color: rgb(252, 249, 175);
 }

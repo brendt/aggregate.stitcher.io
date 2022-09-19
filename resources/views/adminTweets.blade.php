@@ -89,7 +89,7 @@
                             x-save-url="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, $tweet->id) }}"
                         >
                             <div
-                                class="block px-12 p-4 break-all"
+                                class="block px-12 p-4 word-break"
                             >
                                 <div class="flex align-baseline">
                                     <h1 class="font-bold">

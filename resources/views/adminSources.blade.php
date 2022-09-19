@@ -15,7 +15,7 @@
             </a>
 
             @foreach ($sources as $source)
-                <div class="overflow-hidden">
+                <div class="word-break">
                     <div
                         class="
                                 block px-12 p-4
@@ -26,7 +26,7 @@
                                 {{ $source->isDuplicate() ? 'bg-orange-100' : '' }}
                             "
                     >
-                        <h1 class="font-bold break-all">
+                        <h1 class="font-bold">
                             {{ $source->name }}
                             <span class="text-sm font-normal">— {{ $source->url }}</span>
                         </h1>
