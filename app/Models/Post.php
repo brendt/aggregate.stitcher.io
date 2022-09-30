@@ -138,4 +138,9 @@ class Post extends Model implements Feedable
 
         return parse_url($this->url, PHP_URL_HOST);
     }
+
+    public function getParsedTitle(): string
+    {
+        return html_entity_decode($this->title);
+    }
 }

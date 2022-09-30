@@ -45,7 +45,7 @@
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         ">
                             <h1 class="font-bold break-words">
-                                {{ $post->title }}
+                                {{ $post->getParsedTitle() }}
                             </h1>
 
                             @if($post->body)
