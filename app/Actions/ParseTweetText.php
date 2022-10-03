@@ -11,15 +11,15 @@ final class ParseTweetText
     {
         $text = $tweet->text;
 
-        $keywords = RakePlus::create($text)->get();
-
-        foreach ($keywords as $keyword) {
-            $text = str_replace(
-                search: $keyword,
-                replace: "<em>{$keyword}</em>",
-                subject: $text
-            );
-        }
+//        $keywords = RakePlus::create($text)->get();
+//
+//        foreach ($keywords as $keyword) {
+//            $text = str_replace(
+//                search: $keyword,
+//                replace: "<em>{$keyword}</em>",
+//                subject: $text
+//            );
+//        }
 
         $tweet->update([
             'parsed_text' => $text,
