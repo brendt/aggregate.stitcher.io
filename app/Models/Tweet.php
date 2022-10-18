@@ -74,4 +74,9 @@ class Tweet extends Model
             ||
             str_replace('@', '', strtolower($this->user_name)) === str_replace('@', '', strtolower($needle));
     }
+
+    public function isRetweet(): bool
+    {
+        return $this->retweeted_by_user_name !== null;
+    }
 }

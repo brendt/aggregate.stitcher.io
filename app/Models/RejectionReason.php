@@ -27,4 +27,9 @@ class RejectionReason
     {
         return new self("Other language: {$language}");
     }
+
+    public static function retweetedFromSearch(): self
+    {
+        return new self("Retweeted from search");
+    }
 }

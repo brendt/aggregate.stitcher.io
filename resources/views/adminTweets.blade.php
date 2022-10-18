@@ -95,9 +95,15 @@
                                     <h1 class="font-bold">
                                         &#64;{{ $tweet->user_name }}
                                     </h1>
-                                    <span class="ml-2 px-2 bg-{{ $tweet->feed_type->getColour() }}-100 rounded">
-                                        {{ $tweet->feed_type->value }}
-                                    </span>
+                                    @if($tweet->isRetweet())
+                                        <span class="ml-2 px-2 bg-purple-100 rounded">
+                                            retweet
+                                        </span>
+                                    @else
+                                        <span class="ml-2 px-2 bg-{{ $tweet->feed_type->getColour() }}-100 rounded">
+                                            {{ $tweet->feed_type->value }}
+                                        </span>
+                                    @endif
                                 </div>
 
                                 <div class="mt-2 tweet-text">

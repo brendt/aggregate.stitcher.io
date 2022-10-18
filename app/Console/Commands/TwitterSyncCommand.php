@@ -123,6 +123,10 @@ class TwitterSyncCommand extends Command
 
     private function shouldBeRejected(Tweet $tweet): ?RejectionReason
     {
+        if ($tweet->isRetweet() && $tweet->feed_type === TweetFeedType::SEARCH) {
+            return RejectionReason::retweetedFromSearch();
+        }
+
         // Reject tweets containing a specific word
         foreach ($this->mutes as $mute) {
             if ($tweet->containsPhrase($mute->text)) {
