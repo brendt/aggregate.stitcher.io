@@ -9,7 +9,7 @@
         href="{{ action(\App\Http\Controllers\Posts\AdminPostsController::class) }}"
     >
         Posts
-        <span class="font-bold">({{ $pendingPosts }})</span></a>
+        <span class="font-bold">(<span id="post-count">{{ $pendingPosts }}</span>)</span></a>
 
     <a
         href="{{ action(\App\Http\Controllers\Sources\AdminSourcesController::class) }}"

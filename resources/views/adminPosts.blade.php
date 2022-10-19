@@ -3,6 +3,8 @@
 ?>
 
 @component('layout.app')
+    @include('includes.drag')
+
     <div class="mx-auto container grid gap-4 mt-4">
         @include('includes.adminMenu')
         <div class="bg-white mx-4 shadow-md grid">
@@ -23,15 +25,19 @@
                 </a>
 
                 @foreach ($posts as $post)
-                    <div>
+                    <div class="drag-container">
                         <div
                             class="
-                            word-break
-                        block px-12 p-4
-                        {{ $post->isPending() ? 'bg-gray-200' : '' }}
-                        {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
-                        {{ $post->isDenied() ? 'bg-red-100' : '' }}
-                        "
+                                drag bg-gray-200
+                                word-break
+                                block px-12 p-4
+                                {{ $post->isPending() ? 'bg-gray-200' : '' }}
+                                {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
+                                {{ $post->isDenied() ? 'bg-red-100' : '' }}
+                            "
+                            x-deny-url="{{ action(\App\Http\Controllers\Posts\DenyPostController::class, $post->id) }}"
+                            x-save-url="{{ action(\App\Http\Controllers\Posts\PublishPostController::class, $post->id) }}"
+                            x-counter-id="post-count"
                         >
                             <h1 class="font-bold">
                                 {{ $post->title }}

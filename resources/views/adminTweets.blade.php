@@ -4,7 +4,7 @@
 
 @component('layout.app')
     @include('includes.drag')
-    
+
     <div class="mx-auto container grid gap-4 mt-4">
         @if($user)
             @include('includes.adminMenu')
@@ -32,6 +32,7 @@
                             class="drag bg-gray-200"
                             x-deny-url="{{ action(\App\Http\Controllers\Tweets\DenyTweetController::class, $tweet->id) }}"
                             x-save-url="{{ action(\App\Http\Controllers\Tweets\SaveTweetController::class, $tweet->id) }}"
+                            x-counter-id="tweet-count"
                         >
                             <div
                                 class="block px-12 p-4 word-break"

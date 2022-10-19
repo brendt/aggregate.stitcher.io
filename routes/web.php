@@ -56,7 +56,9 @@ Route::middleware(['auth'])
         Route::post('/posts/create', StorePostController::class);
         Route::get('/posts/deny-all', DenyPendingPostsController::class);
         Route::get('/posts/deny/{post}', DenyPostController::class);
+        Route::post('/posts/deny/{post}', DenyPostController::class);
         Route::get('/posts/publish/{post}', PublishPostController::class);
+        Route::post('/posts/publish/{post}', PublishPostController::class);
         Route::get('/posts/star/{post}', StarPostController::class);
 
         Route::get('/mutes/create', CreateMuteController::class);

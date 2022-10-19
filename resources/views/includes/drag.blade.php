@@ -213,10 +213,12 @@
                 }
             });
 
-            const tweetCountElement = document.querySelector('#tweet-count');
-            const tweetCount = parseInt(tweetCountElement.innerHTML);
+            const counterId = this.element.getAttribute(`x-counter-id`);
 
-            tweetCountElement.innerHTML = tweetCount - 1;
+            const countElement = document.querySelector(`#${counterId}`);
+            const count = parseInt(countElement.innerHTML);
+
+            countElement.innerHTML = count - 1;
         }
     }
 
