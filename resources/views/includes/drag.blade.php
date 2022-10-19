@@ -240,5 +240,7 @@
         });
     };
 
-    document.querySelectorAll('.drag').forEach((element) => init(element));
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.drag').forEach((element) => init(element));
+    });
 </script>
