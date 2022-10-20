@@ -58,26 +58,6 @@
 <script>
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
-    function vibrate() {
-        if (!window) {
-            console.log('no window');
-            return;
-        }
-
-        if (!window.navigator) {
-            console.log('no window.navigator');
-            return;
-        }
-
-        if (!window.navigator.vibrate) {
-            console.log('no window.navigator.vibrate');
-            return;
-        }
-
-        window.navigator.vibrate(100);
-        alert('vibrate');
-    }
-
     class Drag
     {
         element;
@@ -225,9 +205,7 @@
             this.element.style.left = null;
             container.classList.add('dragged');
             container.classList.add(isLeft ? 'left' : 'right');
-
-            vibrate();
-
+            
             fetch(this.element.getAttribute(`x-${action}-url`), {
                 method: 'POST',
                 headers: {
