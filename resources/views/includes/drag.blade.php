@@ -206,6 +206,8 @@
             container.classList.add('dragged');
             container.classList.add(isLeft ? 'left' : 'right');
 
+            navigator.vibrate(200);
+            
             fetch(this.element.getAttribute(`x-${action}-url`), {
                 method: 'POST',
                 headers: {
