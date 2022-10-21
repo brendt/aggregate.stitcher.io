@@ -12,7 +12,7 @@
     "devDependencies": {
         "@tailwindcss/forms": "^0.4.0",
         "alpinejs": "^3.10.4",
-        "autoprefixer": "^10.4.2",
+        "autoprefixer": "^10.4.12",
         "axios": "^0.25",
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
