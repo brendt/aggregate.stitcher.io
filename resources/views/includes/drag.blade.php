@@ -205,7 +205,7 @@
             this.element.style.left = null;
             container.classList.add('dragged');
             container.classList.add(isLeft ? 'left' : 'right');
-            
+
             fetch(this.element.getAttribute(`x-${action}-url`), {
                 method: 'POST',
                 headers: {

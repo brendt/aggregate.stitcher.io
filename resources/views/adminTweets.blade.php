@@ -5,7 +5,7 @@
 @component('layout.app')
     @include('includes.drag')
 
-    <div class="mx-auto container grid gap-4 mt-4">
+    <div class="mx-auto container grid gap-4 mt-4 md:w-2/5">
         @if($user)
             @include('includes.adminMenu')
         @endif
@@ -25,7 +25,7 @@
                 Add mute
             </a>
 
-            <div class="">
+            <div class="drag-list">
                 @foreach ($tweets as $tweet)
                     <div class="drag-container">
                         <div
