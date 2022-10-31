@@ -4228,16 +4228,16 @@
         },
         {
             "name": "spatie/laravel-stubs",
-            "version": "2.4.4",
+            "version": "2.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-stubs.git",
-                "reference": "206c50b0cbb465c4595598dfa4948e54e8316ee3"
+                "reference": "1c244e4f494424f0b70396aedb721d18f56ea274"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/206c50b0cbb465c4595598dfa4948e54e8316ee3",
-                "reference": "206c50b0cbb465c4595598dfa4948e54e8316ee3",
+                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/1c244e4f494424f0b70396aedb721d18f56ea274",
+                "reference": "1c244e4f494424f0b70396aedb721d18f56ea274",
                 "shasum": ""
             },
             "require": {
@@ -4281,7 +4281,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-stubs/tree/2.4.4"
+                "source": "https://github.com/spatie/laravel-stubs/tree/2.5.0"
             },
             "funding": [
                 {
@@ -4289,7 +4289,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-07-29T14:11:40+00:00"
+            "time": "2022-09-14T18:21:05+00:00"
         },
         {
             "name": "spatie/temporary-directory",
