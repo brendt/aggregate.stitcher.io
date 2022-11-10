@@ -14,6 +14,7 @@ final class PublishPostController
     {
         $post->update([
             'state' => PostState::PUBLISHED,
+            'published_at' => now(),
         ]);
 
         $returnUrl = $request->query->get(

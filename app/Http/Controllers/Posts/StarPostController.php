@@ -14,6 +14,7 @@ final class StarPostController
     {
         $post->update([
             'state' => PostState::STARRED,
+            'published_at' => now(),
         ]);
 
         $returnUrl = $request->query->get(

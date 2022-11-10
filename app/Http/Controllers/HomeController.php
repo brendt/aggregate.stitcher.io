@@ -13,7 +13,7 @@ final class HomeController
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->orderByDesc('created_at')
+            ->orderByDesc('published_at')
             ->orderByDesc('id')
             ->whereActiveSource()
             ->whereIn('state', [

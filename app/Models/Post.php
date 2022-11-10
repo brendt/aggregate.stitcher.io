@@ -22,6 +22,7 @@ class Post extends Model implements Feedable
         'type' => PostType::class,
         'state' => PostState::class,
         'visits' => 'integer',
+        'published_at' => 'datetime',
     ];
 
     protected static function booted()
