@@ -1571,16 +1571,16 @@
         },
         {
             "name": "laravel/horizon",
-            "version": "v5.9.10",
+            "version": "v5.10.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/horizon.git",
-                "reference": "09b2031b3077f22aaca07f1dbe4ee2cc8eacad78"
+                "reference": "07a5d73b804c6ba17598e378057f4353c983fb3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/horizon/zipball/09b2031b3077f22aaca07f1dbe4ee2cc8eacad78",
-                "reference": "09b2031b3077f22aaca07f1dbe4ee2cc8eacad78",
+                "url": "https://api.github.com/repos/laravel/horizon/zipball/07a5d73b804c6ba17598e378057f4353c983fb3a",
+                "reference": "07a5d73b804c6ba17598e378057f4353c983fb3a",
                 "shasum": ""
             },
             "require": {
@@ -1642,9 +1642,9 @@
             ],
             "support": {
                 "issues": "https://github.com/laravel/horizon/issues",
-                "source": "https://github.com/laravel/horizon/tree/v5.9.10"
+                "source": "https://github.com/laravel/horizon/tree/v5.10.4"
             },
-            "time": "2022-07-25T13:24:03+00:00"
+            "time": "2022-11-07T08:57:31+00:00"
         },
         {
             "name": "laravel/sanctum",
