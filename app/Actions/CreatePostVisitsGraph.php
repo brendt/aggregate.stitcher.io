@@ -4,7 +4,9 @@ namespace App\Actions;
 
 use App\Data\VisitsForDay;
 use App\Models\Post;
+use App\Models\PostVisit;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 final class CreatePostVisitsGraph
 {
@@ -16,9 +18,13 @@ final class CreatePostVisitsGraph
         $visitsPerDay = $post->visitsPerDay(self::LIMIT)
             ->mapWithKeys(fn (VisitsForDay $day) => [$day->day->format('Y-m-d') => $day]);
 
-        $max = $visitsPerDay
-            ->sortByDesc(fn (VisitsForDay $day) => $day->visits)
-            ->first();
+        $max = DB::query()
+            ->selectRaw("COUNT(*) AS `visits`, `created_at_day`, `post_id`")
+            ->from((new PostVisit)->getTable())
+            ->groupByRaw('`created_at_day`, `post_id`')
+            ->orderByDesc('visits')
+            ->limit(1)
+            ->get('visits')[0]->visits;
 
         $coordinates = collect(range(0, 50))
             ->map(fn (int $days) => now()->subDays($days)->format('Y-m-d'))
@@ -28,7 +34,7 @@ final class CreatePostVisitsGraph
                 $day = $visitsPerDay[$key] ?? null;
 
                 return [$key => $day
-                    ? $day->rebase(self::BASE, $max->visits)->visits
+                    ? $day->rebase(self::BASE, $max)->visits
                     : 1 // Default value because 0 renders too small a line
                 ];
             })

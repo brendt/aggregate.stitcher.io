@@ -168,6 +168,7 @@ class Post extends Model implements Feedable
 
     public function getVisitsGraph(): string
     {
+        return (new CreatePostVisitsGraph)($this);
         return Cache::remember(
             "svg-{$this->uuid}",
             now()->addHour(),
