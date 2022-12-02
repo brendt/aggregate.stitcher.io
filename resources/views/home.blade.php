@@ -57,6 +57,11 @@
 
                                     <div class="text-sm font-light text-gray-800">
                                         {{ $post->getSourceName() }},
+
+                                        <span class="md:hidden">
+                                            <br>
+                                        </span>
+                                        
                                         @php
                                             $diffInHours = $post->created_at->diffInHours(now())
                                         @endphp
@@ -76,9 +81,6 @@
                                             ago,
                                         @endif
 
-                                        <span class="md:hidden">
-                                            <br>
-                                        </span>
                                         {{ $post->visits }} {{ \Illuminate\Support\Str::plural('visit', $post->visits) }}
                                     </div>
                                 </div>
