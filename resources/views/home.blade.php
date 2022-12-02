@@ -76,6 +76,9 @@
                                             ago,
                                         @endif
 
+                                        <span class="md:hidden">
+                                            <br>
+                                        </span>
                                         {{ $post->visits }} {{ \Illuminate\Support\Str::plural('visit', $post->visits) }}
                                     </div>
                                 </div>
