@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\Links\AdminLinksController;
+use App\Http\Controllers\Links\CreateLinkController;
+use App\Http\Controllers\Links\StoreLinkController;
+use App\Http\Controllers\Links\VisitLinkController;
 use App\Http\Controllers\Posts\AdminPostsController;
 use App\Http\Controllers\Tweets\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
@@ -48,6 +52,8 @@ Route::post('/suggest', StoreSourceSuggestionController::class);
 Route::get('/post/{post}', ShowPostController::class);
 Route::view('/about', 'about');
 
+Route::get('/links/{link}', VisitLinkController::class);
+
 Route::middleware(['auth'])
     ->prefix('/admin')
     ->group(function () {
@@ -79,6 +85,10 @@ Route::middleware(['auth'])
         Route::get('/sources/deny/{source}', DenySourceController::class);
         Route::get('/sources/publish/{source}', PublishSourceController::class);
         Route::get('/sources/delete/{source}', DeleteSourceController::class);
+
+        Route::get('/links', AdminLinksController::class);
+        Route::get('/links/create', CreateLinkController::class);
+        Route::post('/links/create', StoreLinkController::class);
     });
 
 Route::get('/dashboard', function () {

@@ -12,6 +12,29 @@
 
 namespace App\Models{
 /**
+ * App\Models\Link
+ *
+ * @property int $id
+ * @property string $uuid
+ * @property string $url
+ * @property int $visits
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Link newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Link newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Link query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereUrl($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereUuid($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereVisits($value)
+ */
+	class Link extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Mute
  *
  * @property int $id
@@ -42,6 +65,7 @@ namespace App\Models{
  * @property string|null $body
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $published_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $visits
  * @property-read \App\Models\Source|null $source
@@ -53,6 +77,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSourceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
@@ -97,15 +122,15 @@ namespace App\Models{
  * @property int $id
  * @property int $tweet_id
  * @property \App\Models\TweetState $state
- * @property string $feed_type
+ * @property \App\Models\TweetFeedType $feed_type
  * @property string $text
  * @property string|null $parsed_text
  * @property string|null $rejection_reason
  * @property string $user_name
+ * @property string|null $retweeted_by_user_name
  * @property mixed $payload
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
- * @property string|null $retweeted_by_user_name
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Tweet pendingToday()

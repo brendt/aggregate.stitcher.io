@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Link;
 use App\Models\Post;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -33,6 +34,14 @@ class RouteServiceProvider extends ServiceProvider
             }
 
             return Post::findOrFail($id);
+        });
+
+        Route::bind('link', function (int|string $id) {
+            if (Uuid::isValid($id)) {
+                return Link::query()->where('uuid', $id)->firstOrFail();
+            }
+
+            return Link::findOrFail($id);
         });
     }
 
