@@ -92,6 +92,27 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\PostVisit
+ *
+ * @property int $id
+ * @property int $post_id
+ * @property \Illuminate\Support\Carbon $created_at_day
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit whereCreatedAtDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostVisit whereUpdatedAt($value)
+ */
+	class PostVisit extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\Source
  *
  * @property int $id

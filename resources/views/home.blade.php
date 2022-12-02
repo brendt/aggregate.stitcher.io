@@ -44,36 +44,47 @@
                         {{ "hover:bg-{$hoverColor}" }}
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         ">
-                            <h1 class="font-bold break-words">
-                                {{ $post->getParsedTitle() }}
-                            </h1>
 
-                            @if($post->body)
-                                {{ $post->body }}
-                            @endif
+                            <div class="flex items-end">
+                                <div>
+                                    <h1 class="font-bold break-words">
+                                        {{ $post->getParsedTitle() }}
+                                    </h1>
 
-                            <div class="text-sm font-light text-gray-800">
-                                {{ $post->getSourceName() }},
-                                @php
-                                    $diffInHours = $post->created_at->diffInHours(now())
-                                @endphp
+                                    @if($post->body)
+                                        {{ $post->body }}
+                                    @endif
 
-                                @if($post->isTweet())
-                                    tweeted
-                                @else
-                                    published
-                                @endif
+                                    <div class="text-sm font-light text-gray-800">
+                                        {{ $post->getSourceName() }},
+                                        @php
+                                            $diffInHours = $post->created_at->diffInHours(now())
+                                        @endphp
 
-                                @if($diffInHours <= 1)
-                                    right now,
-                                @elseif($diffInHours <= 24)
-                                    {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago,
-                                @else
-                                    {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }}
-                                    ago,
-                                @endif
+                                        @if($post->isTweet())
+                                            tweeted
+                                        @else
+                                            published
+                                        @endif
 
-                                {{ $post->visits }} {{ \Illuminate\Support\Str::plural('visit', $post->visits) }}
+                                        @if($diffInHours <= 1)
+                                            right now,
+                                        @elseif($diffInHours <= 24)
+                                            {{ $diffInHours }} {{ \Illuminate\Support\Str::plural('hour', $diffInHours) }} ago,
+                                        @else
+                                            {{ $post->created_at->diffInDays(now()) }} {{ \Illuminate\Support\Str::plural('day', $post->created_at->diffInDays(now())) }}
+                                            ago,
+                                        @endif
+
+                                        {{ $post->visits }} {{ \Illuminate\Support\Str::plural('visit', $post->visits) }}
+                                    </div>
+                                </div>
+
+                                @auth
+                                    <div class="ml-8">
+                                        {!! $post->getVisitsGraph() !!}
+                                    </div>
+                                @endauth
                             </div>
                         </a>
                     </div>

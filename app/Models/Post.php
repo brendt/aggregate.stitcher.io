@@ -2,12 +2,17 @@
 
 namespace App\Models;
 
+use App\Actions\CreatePostVisitsGraph;
+use App\Data\VisitsForDay;
 use App\Http\Controllers\Posts\ShowPostController;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -65,17 +70,17 @@ class Post extends Model implements Feedable
 
     public function canDeny(): bool
     {
-        return !$this->isDenied();
+        return ! $this->isDenied();
     }
 
     public function canStar(): bool
     {
-        return !$this->isStarred();
+        return ! $this->isStarred();
     }
 
     public function canPublish(): bool
     {
-        return !$this->isStarred() && !$this->isPublished();
+        return ! $this->isStarred() && ! $this->isPublished();
     }
 
     public function getPublicUrl(): string
@@ -143,5 +148,30 @@ class Post extends Model implements Feedable
     public function getParsedTitle(): string
     {
         return html_entity_decode($this->title);
+    }
+
+    public function visitsPerDay(int $limit = 50): \Illuminate\Support\Collection
+    {
+        return DB::query()
+            ->from((new PostVisit())->getTable())
+            ->selectRaw('`created_at_day`, COUNT(*) as `visits`')
+            ->where('post_id', $this->id)
+            ->groupBy('created_at_day')
+            ->orderByDesc('created_at_day')
+            ->limit($limit)
+            ->get()
+            ->map(fn (object $row) => new VisitsForDay(
+                visits: $row->visits,
+                day: Carbon::make($row->created_at_day),
+            ));
+    }
+
+    public function getVisitsGraph(): string
+    {
+        return Cache::remember(
+            "svg-{$this->uuid}",
+            now()->addHour(),
+            fn () => (new CreatePostVisitsGraph)($this)
+        );
     }
 }
