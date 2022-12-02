@@ -38,15 +38,15 @@
                         <a
                             href="{{ $post->getPublicUrl() }}"
                             class="
-                        block px-12 p-4
+                        block lg:px-12 p-4
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
                         {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
                         {{ "hover:bg-{$hoverColor}" }}
                         {{ $post->isDenied() ? 'bg-red-100' : '' }}
                         ">
 
-                            <div class="flex items-end">
-                                <div>
+                            <div class="md:flex items-end">
+                                <div class="break-words">
                                     <h1 class="font-bold break-words">
                                         {{ $post->getParsedTitle() }}
                                     </h1>
@@ -81,7 +81,7 @@
                                 </div>
 
                                 @auth
-                                    <div class="ml-8">
+                                    <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
                                         {!! $post->getVisitsGraph() !!}
                                     </div>
                                 @endauth
