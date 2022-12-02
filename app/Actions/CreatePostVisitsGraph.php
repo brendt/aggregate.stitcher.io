@@ -24,7 +24,9 @@ final class CreatePostVisitsGraph
             ->groupByRaw('`created_at_day`, `post_id`')
             ->orderByDesc('visits')
             ->limit(1)
-            ->get('visits')[0]->visits;
+            ->get('visits');
+
+        $max = ($max[0] ?? null)?->visits;
 
         $coordinates = collect(range(0, 50))
             ->map(fn (int $days) => now()->subDays($days)->format('Y-m-d'))

@@ -43,6 +43,18 @@ class Post extends Model implements Feedable
         return $this->belongsTo(Source::class);
     }
 
+    public function scopeHomePage(Builder|Post $query): void
+    {
+        $query
+            ->orderByDesc('published_at')
+            ->orderByDesc('id')
+            ->whereActiveSource()
+            ->whereIn('state', [
+                PostState::PUBLISHED,
+                PostState::STARRED,
+            ]);
+    }
+
     public function isPending(): bool
     {
         return $this->state === PostState::PENDING;
@@ -166,11 +178,16 @@ class Post extends Model implements Feedable
             ));
     }
 
+    public function getVisitsGraphCacheKey(): string
+    {
+        return "svg-{$this->uuid}";
+    }
+
     public function getVisitsGraph(): string
     {
         return Cache::remember(
-            "svg-{$this->uuid}",
-            now()->addHour(),
+            $this->getVisitsGraphCacheKey(),
+            now()->addDay(),
             fn () => (new CreatePostVisitsGraph)($this)
         );
     }
