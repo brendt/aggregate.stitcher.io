@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 final class CreatePostVisitsGraph
 {
     private const BASE = 25;
-    private const LIMIT = 50;
+    private const LIMIT = 20;
 
     public function __invoke(Post $post): string
     {
@@ -28,7 +28,9 @@ final class CreatePostVisitsGraph
 
         $max = ($max[0] ?? null)?->visits;
 
-        $coordinates = collect(range(0, 50))
+        $step = floor(150 / self::LIMIT);
+
+        $coordinates = collect(range(0, self::LIMIT))
             ->map(fn (int $days) => now()->subDays($days)->format('Y-m-d'))
             ->reverse()
             ->mapWithKeys(function (string $key) use ($max, $visitsPerDay) {
@@ -41,7 +43,7 @@ final class CreatePostVisitsGraph
                 ];
             })
             ->values()
-            ->map(fn (int $visits, int $index) => $index * 3 . ',' . $visits)
+            ->map(fn (int $visits, int $index) => $index * $step . ',' . $visits)
             ->implode(' ');
 
         $svg = view('visitsSvg', [

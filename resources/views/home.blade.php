@@ -61,9 +61,9 @@
                                         <span class="md:hidden">
                                             <br>
                                         </span>
-                                        
+
                                         @php
-                                            $diffInHours = $post->created_at->diffInHours(now())
+                                            $diffInHours = ($post->published_at ?? $post->created_at)->diffInHours(now())
                                         @endphp
 
                                         @if($post->isTweet())
