@@ -12,6 +12,7 @@ final class CreatePostVisitsGraph
 {
     private const BASE = 25;
     private const LIMIT = 20;
+    private const GRAPH_WIDTH = 150;
 
     public function __invoke(Post $post): string
     {
@@ -28,7 +29,7 @@ final class CreatePostVisitsGraph
 
         $max = ($max[0] ?? null)?->visits;
 
-        $step = floor(150 / self::LIMIT);
+        $step = floor(self::GRAPH_WIDTH / self::LIMIT);
 
         $coordinates = collect(range(0, self::LIMIT))
             ->map(fn (int $days) => now()->subDays($days)->format('Y-m-d'))
