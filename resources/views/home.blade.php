@@ -39,6 +39,7 @@
                             href="{{ $post->getPublicUrl() }}"
                             class="
                         block lg:px-12 p-4
+                        hover:bg-pink-100
                         {{ $post->isPending() ? 'bg-gray-200' : '' }}
                         {{ $post->isStarred() ? 'bg-yellow-100' : '' }}
                         {{ "hover:bg-{$hoverColor}" }}
