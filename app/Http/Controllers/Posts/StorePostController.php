@@ -20,6 +20,7 @@ final class StorePostController
             'state' => PostState::PUBLISHED,
             'title' => getTitle($url),
             'url' => $url,
+            'published_at' => now(),
         ]);
 
         return redirect()->action(AdminPostsController::class);
