@@ -4,6 +4,7 @@ namespace App\SparkLine;
 
 use Illuminate\Support\Collection;
 use Ramsey\Uuid\Uuid;
+use Spatie\Period\Period;
 
 final class SparkLine
 {
@@ -23,14 +24,22 @@ final class SparkLine
         ?int $maxValue = null,
     ) {
         $this->maxValue = $maxValue ?? $this->resolveMaxValueFromDays();
-        $this->days = $this->days->mapWithKeys(
-            fn (SparkLineDay $day) => [$day->day->format('Y-m-d') => $day]
-        );
+        $this->days = $this->days
+            ->sortBy(fn (SparkLineDay $day) => $day->day->timestamp)
+            ->mapWithKeys(fn (SparkLineDay $day) => [$day->day->format('Y-m-d') => $day]);
     }
 
     public function getTotal(): int
     {
         return $this->days->sum(fn (SparkLineDay $day) => $day->visits) ?? 0;
+    }
+
+    public function getPeriod(): Period
+    {
+        return Period::make(
+            now()->subDays($this->maxItemAmount),
+            now(),
+        );
     }
 
     public function withMaxValue(?int $maxValue): self

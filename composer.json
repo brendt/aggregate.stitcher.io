@@ -21,7 +21,8 @@
         "spatie/laravel-feed": "^4.1",
         "spatie/laravel-mail-preview": "^6.0",
         "spatie/laravel-route-attributes": "^1.10",
-        "spatie/laravel-stubs": "^2.4"
+        "spatie/laravel-stubs": "^2.4",
+        "spatie/period": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",

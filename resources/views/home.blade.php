@@ -28,16 +28,22 @@
                 @if ($sparkLine)
                     <div class="overflow-x-hidden block lg:px-12 p-4">
 
+                        <div>
+                            <h1 class="font-bold break-words">
+                                Total visits: {{ $sparkLine->getTotal() }}
+                            </h1>
+                        </div>
                         <div class="md:flex items-end">
-                            <div class="break-words">
-                                <h1 class="font-bold break-words">
-                                    Total visits: {{ $sparkLine->getTotal() }}
-                                </h1>
+                            <div class="text-sm font-light text-gray-800">
+                                {{ $sparkLine->getPeriod()->start()->format('Y-m-d') }} — {{ $sparkLine->getPeriod()->end()->format('Y-m-d') }}
                             </div>
                             <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
                                 {!! $sparkLine !!}
                             </div>
                         </div>
+
+
+
                     </div>
                 @endif
 

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10295ef3bb33f40166f768a074fed1e7",
+    "content-hash": "a3c25502ba47d17489234cae87396f0b",
     "packages": [
         {
             "name": "brick/math",
@@ -4289,6 +4289,59 @@
                 }
             ],
             "time": "2022-09-14T18:21:05+00:00"
+        },
+        {
+            "name": "spatie/period",
+            "version": "2.3.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/period.git",
+                "reference": "83fca442d96bcf245109fd0e8fba0f1efeb380d4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/period/zipball/83fca442d96bcf245109fd0e8fba0f1efeb380d4",
+                "reference": "83fca442d96bcf245109fd0e8fba0f1efeb380d4",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.0"
+            },
+            "require-dev": {
+                "larapack/dd": "^1.1",
+                "nesbot/carbon": "^2.54",
+                "phpunit/phpunit": "^9.5",
+                "spatie/ray": "^1.31"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Period\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Brent Roose",
+                    "email": "brent@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Complex period comparisons",
+            "homepage": "https://github.com/spatie/period",
+            "keywords": [
+                "period",
+                "spatie"
+            ],
+            "support": {
+                "issues": "https://github.com/spatie/period/issues",
+                "source": "https://github.com/spatie/period/tree/2.3.5"
+            },
+            "time": "2022-10-03T07:32:05+00:00"
         },
         {
             "name": "spatie/temporary-directory",

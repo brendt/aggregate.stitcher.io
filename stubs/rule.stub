@@ -2,17 +2,12 @@
 
 namespace {{ namespace }};
 
-use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Contracts\Validation\InvokableRule;
 
-class {{ class }} implements Rule
+class {{ class }}  implements InvokableRule
 {
-    public function passes($attribute, $value)
+    public function __invoke($attribute, $value, $fail)
     {
         //
-    }
-
-    public function message()
-    {
-        return 'The validation error message.';
     }
 }
