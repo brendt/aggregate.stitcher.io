@@ -191,7 +191,7 @@ class Post extends Model implements Feedable
             ->limit(20)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
-                visits: $row->visits,
+                count: $row->visits,
                 day: Carbon::make($row->created_at_day),
             ));
 

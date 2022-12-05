@@ -42,7 +42,7 @@ final class HomeController
             ->limit(20)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
-                visits: $row->visits,
+                count: $row->visits,
                 day: Carbon::make($row->created_at_day),
             ));
 
@@ -62,7 +62,7 @@ final class HomeController
             ->limit(20)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
-                visits: $row->visits,
+                count: $row->visits,
                 day: Carbon::make($row->published_at_day),
             ));
 

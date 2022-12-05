@@ -34,7 +34,7 @@ final class SparkLine
 
     public function getTotal(): int
     {
-        return $this->days->sum(fn (SparkLineDay $day) => $day->visits) ?? 0;
+        return $this->days->sum(fn (SparkLineDay $day) => $day->count) ?? 0;
     }
 
     public function getPeriod(): Period
@@ -128,9 +128,9 @@ final class SparkLine
         }
 
         return $this->days
-            ->sortByDesc(fn (SparkLineDay $day) => $day->visits)
+            ->sortByDesc(fn (SparkLineDay $day) => $day->count)
             ->first()
-            ->visits;
+            ->count;
     }
 
     private function resolveMaxItemAmountFromDays(): int
@@ -151,12 +151,12 @@ final class SparkLine
 
                 return [
                     $key => $day
-                        ? $day->rebase($this->height - 5, $this->maxValue)->visits
+                        ? $day->rebase($this->height - 5, $this->maxValue)->count
                         : 1, // Default value is 1 because 0 renders too small a line
                 ];
             })
             ->values()
-            ->map(fn (int $visits, int $index) => $index * $step . ',' . $visits)
+            ->map(fn (int $count, int $index) => $index * $step . ',' . $count)
             ->implode(' ');
     }
 }

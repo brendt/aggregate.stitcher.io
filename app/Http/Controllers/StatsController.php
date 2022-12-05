@@ -21,7 +21,7 @@ final class StatsController
             ->limit(20)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
-                visits: $row->visits,
+                count: $row->visits,
                 day: Carbon::make($row->published_at_day),
             ));
 
