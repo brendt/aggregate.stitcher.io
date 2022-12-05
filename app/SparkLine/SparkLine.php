@@ -8,28 +8,27 @@ use Spatie\Period\Period;
 
 final class SparkLine
 {
+    private Collection $days;
     private int $maxValue;
     private int $maxItemAmount;
+    private int $width = 155;
+    private int $height = 30;
+    private int $strokeWidth = 2;
+    private array $colors = ['#c82161', '#fe2977', '#b848f5', '#b848f5'];
 
     public static function new(Collection $days): self
     {
         return new self($days);
     }
 
-    public function __construct(
-        private Collection $days,
-        private int $width = 155,
-        private int $height = 30,
-        private int $strokeWidth = 2,
-        private array $colors = ['#c82161', '#fe2977', '#b848f5', '#b848f5'],
-        ?int $maxValue = null,
-        ?int $maxItemAmount = null,
-    ) {
-        $this->maxValue = $maxValue ?? $this->resolveMaxValueFromDays();
-        $this->maxItemAmount = $maxItemAmount ?? $this->resolveMaxItemAmountFromDays();
-        $this->days = $this->days
+    public function __construct(Collection $days)
+    {
+        $this->days = $days
             ->sortBy(fn (SparkLineDay $day) => $day->day->timestamp)
             ->mapWithKeys(fn (SparkLineDay $day) => [$day->day->format('Y-m-d') => $day]);
+
+        $this->maxValue = $this->resolveMaxValueFromDays();
+        $this->maxItemAmount = $this->resolveMaxItemAmountFromDays();
     }
 
     public function getTotal(): int
