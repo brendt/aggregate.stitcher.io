@@ -27,11 +27,12 @@ final class HomeController
             'user' => $user,
             'posts' => $posts,
             'message' => $request->get('message'),
-            'sparkLine' => $user ? $this->getSparkLine() : null,
+            'totalVisitsSparkLine' => $user ? $this->getTotalVisitsSparkLine() : null,
+            'totalPostsSparkLine' => $user ? $this->getTotalPostsSparkLine() : null,
         ]);
     }
 
-    private function getSparkLine(): SparkLine
+    private function getTotalVisitsSparkLine(): SparkLine
     {
         $days = DB::query()
             ->from((new PostVisit())->getTable())
@@ -47,5 +48,24 @@ final class HomeController
 
         return SparkLine::new($days)
             ->withColors('#34A853', '#43CC64', '#4CE870');
+    }
+
+    private function getTotalPostsSparkLine(): SparkLine
+    {
+        $days = DB::query()
+            ->from((new Post())->getTable())
+            ->selectRaw('`published_at_day`, COUNT(*) as `visits`')
+            ->groupBy('published_at_day')
+            ->orderByDesc('published_at_day')
+            ->whereNotNull('published_at_day')
+            ->limit(20)
+            ->get()
+            ->map(fn (object $row) => new SparkLineDay(
+                visits: $row->visits,
+                day: Carbon::make($row->published_at_day),
+            ));
+
+        return SparkLine::new($days)
+            ->withColors('#4285F4', '#31ACF2', '#2BC9F4');
     }
 }

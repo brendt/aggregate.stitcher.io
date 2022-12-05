@@ -29,6 +29,7 @@ class Post extends Model implements Feedable
         'state' => PostState::class,
         'visits' => 'integer',
         'published_at' => 'datetime',
+        'published_at_day' => 'date',
     ];
 
     protected static function booted()
@@ -36,6 +37,10 @@ class Post extends Model implements Feedable
         self::creating(function (Post $post) {
             $post->state ??= PostState::PENDING;
             $post->uuid ??= Uuid::uuid4()->toString();
+        });
+
+        self::saving(function (Post $post) {
+            $post->published_at_day = $post->published_at;
         });
     }
 

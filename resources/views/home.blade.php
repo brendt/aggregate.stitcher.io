@@ -25,23 +25,35 @@
             </a>
 
             <div class="">
-                @if ($sparkLine)
-                    <div class="overflow-x-hidden block lg:px-12 p-4">
+                @if ($user)
+                    <div class="overflow-x-hidden block lg:px-12 p-4 md:flex">
                         <div class="md:flex items-end">
                             <div>
                                 <h1 class="font-bold break-words">
-                                    Total visits: {{ $sparkLine->getTotal() }}
+                                    Total visits: {{ $totalVisitsSparkLine->getTotal() }}
                                 </h1>
                                 <div class="text-sm font-light text-gray-800">
-                                    {{ $sparkLine->getPeriod()->start()->format('Y-m-d') }} — {{ $sparkLine->getPeriod()->end()->format('Y-m-d') }}
+                                    {{ $totalVisitsSparkLine->getPeriod()->start()->format('Y-m-d') }} — {{ $totalVisitsSparkLine->getPeriod()->end()->format('Y-m-d') }}
                                 </div>
                             </div>
                             <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
-                                {!! $sparkLine !!}
+                                {!! $totalVisitsSparkLine !!}
                             </div>
                         </div>
 
-
+                        <div class="md:flex items-end mt-8 md:ml-4">
+                            <div>
+                                <h1 class="font-bold break-words">
+                                    Published posts: {{ $totalPostsSparkLine->getTotal() }}
+                                </h1>
+                                <div class="text-sm font-light text-gray-800">
+                                    {{ $totalPostsSparkLine->getPeriod()->start()->format('Y-m-d') }} — {{ $totalPostsSparkLine->getPeriod()->end()->format('Y-m-d') }}
+                                </div>
+                            </div>
+                            <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
+                                {!! $totalPostsSparkLine !!}
+                            </div>
+                        </div>
                     </div>
                 @endif
 
