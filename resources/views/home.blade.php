@@ -25,13 +25,29 @@
             </a>
 
             <div class="">
+                @if ($sparkLine)
+                    <div class="overflow-x-hidden block lg:px-12 p-4">
+
+                        <div class="md:flex items-end">
+                            <div class="break-words">
+                                <h1 class="font-bold break-words">
+                                    Total visits: {{ $sparkLine->getTotal() }}
+                                </h1>
+                            </div>
+                            <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
+                                {!! $sparkLine !!}
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 @foreach ($posts as $post)
                     @php
-                    $hoverColor = match(true) {
-                        $post->isStarred() => 'yellow-300',
-                        $post->isTweet() => 'blue-100',
-                        default => 'pink-100',
-                    };
+                        $hoverColor = match(true) {
+                            $post->isStarred() => 'yellow-300',
+                            $post->isTweet() => 'blue-100',
+                            default => 'pink-100',
+                        };
                     @endphp
 
                     <div class="overflow-x-hidden">
@@ -87,7 +103,7 @@
 
                                 @auth
                                     <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
-                                        {!! $post->getVisitsGraph() !!}
+                                        {!! $post->getSparkLine() !!}
                                     </div>
                                 @endauth
                             </div>

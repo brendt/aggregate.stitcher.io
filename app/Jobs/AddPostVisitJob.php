@@ -36,7 +36,7 @@ class AddPostVisitJob implements ShouldQueue
             ->each(function (Post $post) {
                 Cache::delete($post->getVisitsGraphCacheKey());
 
-                $post->getVisitsGraph();
+                $post->getSparkLine();
             });
     }
 }

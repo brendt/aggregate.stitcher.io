@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use App\Actions\CreatePostVisitsGraph;
-use App\Data\VisitsForDay;
+use App\Actions\CreateSparkLine;
+use App\SparkLine\SparkLineDay;
 use App\Http\Controllers\Posts\ShowPostController;
+use App\SparkLine\SparkLine;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
@@ -162,33 +163,51 @@ class Post extends Model implements Feedable
         return html_entity_decode($this->title);
     }
 
-    public function visitsPerDay(int $limit = 50): \Illuminate\Support\Collection
-    {
-        return DB::query()
-            ->from((new PostVisit())->getTable())
-            ->selectRaw('`created_at_day`, COUNT(*) as `visits`')
-            ->where('post_id', $this->id)
-            ->groupBy('created_at_day')
-            ->orderByDesc('created_at_day')
-            ->limit($limit)
-            ->get()
-            ->map(fn (object $row) => new VisitsForDay(
-                visits: $row->visits,
-                day: Carbon::make($row->created_at_day),
-            ));
-    }
-
     public function getVisitsGraphCacheKey(): string
     {
         return "svg-{$this->uuid}";
     }
 
-    public function getVisitsGraph(): string
+    public function getSparkLine(): string
     {
-        return Cache::remember(
+        if (
+            app()->environment('production')
+            && ($cache = Cache::get($this->getVisitsGraphCacheKey()))
+        ) {
+            return $cache;
+        }
+
+        $days = DB::query()
+            ->from((new PostVisit())->getTable())
+            ->selectRaw('`created_at_day`, COUNT(*) as `visits`')
+            ->where('post_id', $this->id)
+            ->groupBy('created_at_day')
+            ->orderByDesc('created_at_day')
+            ->limit(20)
+            ->get()
+            ->map(fn (object $row) => new SparkLineDay(
+                visits: $row->visits,
+                day: Carbon::make($row->created_at_day),
+            ));
+
+        $maxValue = DB::query()
+            ->selectRaw("COUNT(*) AS `visits`, `created_at_day`, `post_id`")
+            ->from((new PostVisit)->getTable())
+            ->groupByRaw('`created_at_day`, `post_id`')
+            ->orderByDesc('visits')
+            ->limit(1)
+            ->get('visits');
+
+        $maxValue = ($maxValue[0] ?? null)?->visits;
+
+        $sparkLine = SparkLine::new($days)->withMaxValue($maxValue)->make();
+
+        Cache::put(
             $this->getVisitsGraphCacheKey(),
+            $sparkLine,
             now()->addDay(),
-            fn () => (new CreatePostVisitsGraph)($this)
         );
+
+        return $sparkLine;
     }
 }

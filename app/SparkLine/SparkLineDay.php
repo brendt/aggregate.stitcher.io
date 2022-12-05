@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Data;
+namespace App\SparkLine;
 
 use Carbon\Carbon;
 
-final class VisitsForDay
+final class SparkLineDay
 {
     public function __construct(
         public readonly int $visits,
