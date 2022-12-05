@@ -205,7 +205,10 @@ class Post extends Model implements Feedable
 
         $maxValue = ($maxValue[0] ?? null)?->visits;
 
-        $sparkLine = SparkLine::new($days)->withMaxValue($maxValue)->make();
+        $sparkLine = SparkLine::new($days)
+            ->withMaxItemAmount(20)
+            ->withMaxValue($maxValue)
+            ->make();
 
         Cache::put(
             $this->getVisitsGraphCacheKey(),

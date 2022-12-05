@@ -9,6 +9,7 @@ use Spatie\Period\Period;
 final class SparkLine
 {
     private int $maxValue;
+    private int $maxItemAmount;
 
     public static function new(Collection $days): self
     {
@@ -17,13 +18,15 @@ final class SparkLine
 
     public function __construct(
         private Collection $days,
-        private int $maxItemAmount = 20,
-        private int $width = 150,
-        private int $height = 25,
+        private int $width = 155,
+        private int $height = 30,
+        private int $strokeWidth = 2,
         private array $colors = ['#c82161', '#fe2977', '#b848f5', '#b848f5'],
         ?int $maxValue = null,
+        ?int $maxItemAmount = null,
     ) {
         $this->maxValue = $maxValue ?? $this->resolveMaxValueFromDays();
+        $this->maxItemAmount = $maxItemAmount ?? $this->resolveMaxItemAmountFromDays();
         $this->days = $this->days
             ->sortBy(fn (SparkLineDay $day) => $day->day->timestamp)
             ->mapWithKeys(fn (SparkLineDay $day) => [$day->day->format('Y-m-d') => $day]);
@@ -42,11 +45,39 @@ final class SparkLine
         );
     }
 
+    public function withStrokeWidth(int $strokeWidth): self
+    {
+        $clone = clone $this;
+
+        $clone->strokeWidth = $strokeWidth;
+
+        return $clone;
+    }
+
+    public function withDimensions(?int $width = null, ?int $height = null): self
+    {
+        $clone = clone $this;
+
+        $clone->width = $width ?? $clone->width;
+        $clone->height = $height ?? $clone->height;
+
+        return $clone;
+    }
+
     public function withMaxValue(?int $maxValue): self
     {
         $clone = clone $this;
 
         $clone->maxValue = $maxValue ?? $clone->resolveMaxValueFromDays();
+
+        return $clone;
+    }
+
+    public function withMaxItemAmount(?int $maxItemAmount): self
+    {
+        $clone = clone $this;
+
+        $clone->maxItemAmount = $maxItemAmount ?? $clone->resolveMaxItemAmountFromDays();
 
         return $clone;
     }
@@ -62,11 +93,12 @@ final class SparkLine
 
     public function make(): string
     {
-        return view('visitsSvg', [
-            'coordinates' => $this->resolveCoordinated(),
+        return view('sparkLine', [
+            'coordinates' => $this->resolveCoordinates(),
             'colors' => $this->resolveColors(),
             'width' => $this->width,
             'height' => $this->height,
+            'strokeWidth' => $this->strokeWidth,
             'id' => Uuid::uuid4()->toString(),
         ])->render();
     }
@@ -98,10 +130,15 @@ final class SparkLine
         return $this->days
             ->sortByDesc(fn (SparkLineDay $day) => $day->visits)
             ->first()
-            ->visits + 1;
+            ->visits;
     }
 
-    private function resolveCoordinated(): string
+    private function resolveMaxItemAmountFromDays(): int
+    {
+        return max($this->days->count(), 1);
+    }
+
+    private function resolveCoordinates(): string
     {
         $step = floor($this->width / $this->maxItemAmount);
 
@@ -114,7 +151,7 @@ final class SparkLine
 
                 return [
                     $key => $day
-                        ? $day->rebase($this->height, $this->maxValue)->visits
+                        ? $day->rebase($this->height - 5, $this->maxValue)->visits
                         : 1, // Default value is 1 because 0 renders too small a line
                 ];
             })

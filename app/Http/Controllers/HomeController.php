@@ -47,6 +47,7 @@ final class HomeController
             ));
 
         return SparkLine::new($days)
+            ->withMaxItemAmount(20)
             ->withColors('#34A853', '#43CC64', '#4CE870');
     }
 
@@ -66,6 +67,7 @@ final class HomeController
             ));
 
         return SparkLine::new($days)
+            ->withMaxItemAmount(20)
             ->withColors('#4285F4', '#31ACF2', '#2BC9F4');
     }
 }

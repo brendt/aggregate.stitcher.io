@@ -5,6 +5,7 @@ use App\Http\Controllers\Links\CreateLinkController;
 use App\Http\Controllers\Links\StoreLinkController;
 use App\Http\Controllers\Links\VisitLinkController;
 use App\Http\Controllers\Posts\AdminPostsController;
+use App\Http\Controllers\StatsController;
 use App\Http\Controllers\Tweets\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
 use App\Http\Controllers\Posts\DenyPendingPostsController;
@@ -57,6 +58,7 @@ Route::get('/links/{link}', VisitLinkController::class);
 Route::middleware(['auth'])
     ->prefix('/admin')
     ->group(function () {
+        Route::get('/stats', StatsController::class);
         Route::get('/posts', AdminPostsController::class);
         Route::get('/posts/create', CreatePostController::class);
         Route::post('/posts/create', StorePostController::class);
