@@ -104,6 +104,7 @@ class TwitterSyncCommand extends Command
                 'text' => $subject->full_text ,
                 'user_name' => $subject->user->screen_name,
                 'retweeted_by_user_name' => isset($tweet->retweeted_status)
+                    /** @phpstan-ignore-next-line  */
                     ? $tweet->user->screen_name
                     : null,
                 'created_at' => Carbon::make($subject->created_at),

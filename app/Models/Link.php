@@ -21,6 +21,7 @@ class Link extends Model
     protected static function booted()
     {
         self::creating(
+            /** @phpstan-ignore-next-line  */
             fn (Link $link) => $link->uuid ??= Uuid::uuid4()->toString()
         );
     }

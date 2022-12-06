@@ -16,7 +16,7 @@ class SourcePublishSourceCommand extends Command
 
         $source = Source::query()
             ->where(
-                is_int($sourceId) ? 'id' : 'name',
+                is_numeric($sourceId) ? 'id' : 'name',
                 $sourceId
             )
             ->first();

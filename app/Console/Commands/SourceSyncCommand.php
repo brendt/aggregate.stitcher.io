@@ -18,7 +18,7 @@ class SourceSyncCommand extends Command
         if ($filter) {
             $sources = Source::query()
                 ->where(
-                    is_int($filter) ? 'id' : 'name',
+                    is_numeric($filter) ? 'id' : 'name',
                     $filter
                 )
                 ->get();

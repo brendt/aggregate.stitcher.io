@@ -21,7 +21,7 @@ class RegisteredUserController extends Controller
     public function create()
     {
         abort(404);
-        return view('auth.register');
+//        return view('auth.register');
     }
 
     /**
@@ -35,22 +35,22 @@ class RegisteredUserController extends Controller
     public function store(Request $request)
     {
         abort(404);
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        ]);
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
-
-        event(new Registered($user));
-
-        Auth::login($user);
-
-        return redirect(RouteServiceProvider::HOME);
+//        $request->validate([
+//            'name' => ['required', 'string', 'max:255'],
+//            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+//            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+//        ]);
+//
+//        $user = User::create([
+//            'name' => $request->name,
+//            'email' => $request->email,
+//            'password' => Hash::make($request->password),
+//        ]);
+//
+//        event(new Registered($user));
+//
+//        Auth::login($user);
+//
+//        return redirect(RouteServiceProvider::HOME);
     }
 }

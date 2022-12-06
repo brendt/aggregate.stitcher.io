@@ -39,6 +39,7 @@ class SourceDebugCommand extends Command
 
     public function onSourceFeedUrlsResolved(SourceFeedUrlsResolved $event): void
     {
+        /** @phpstan-ignore-next-line  */
         if (! $this->output) {
             return;
         }
@@ -52,6 +53,7 @@ class SourceDebugCommand extends Command
 
     public function onSourceFeedUrlTried(SourceFeedUrlTried $event): void
     {
+        /** @phpstan-ignore-next-line  */
         if (! $this->output) {
             return;
         }
@@ -61,6 +63,7 @@ class SourceDebugCommand extends Command
 
     public function onSourceFeedUrlFound(SourceFeedUrlFound $event): void
     {
+        /** @phpstan-ignore-next-line  */
         if (! $this->output) {
             return;
         }
@@ -70,6 +73,7 @@ class SourceDebugCommand extends Command
 
     public function onSourceDuplicationFound(SourceDuplicationFound $event): void
     {
+        /** @phpstan-ignore-next-line  */
         if (! $this->output) {
             return;
         }
@@ -79,6 +83,7 @@ class SourceDebugCommand extends Command
 
     public function onPostResolved(PostResolved $event): void
     {
+        /** @phpstan-ignore-next-line  */
         if (! $this->output) {
             return;
         }

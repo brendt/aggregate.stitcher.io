@@ -31,7 +31,9 @@
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
+        "nunomaduro/larastan": "^2.0",
         "phpunit/phpunit": "^9.5.10",
+        "phpstan/phpstan": "^1.9",
         "spatie/laravel-ignition": "^1.0"
     },
     "autoload": {
@@ -50,6 +52,9 @@
         }
     },
     "scripts": {
+        "phpstan": [
+            "./vendor/bin/phpstan analyse"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"

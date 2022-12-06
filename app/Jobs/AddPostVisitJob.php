@@ -3,7 +3,6 @@
 namespace App\Jobs;
 
 use App\Models\Post;
-use App\Models\PostState;
 use App\Models\PostVisit;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -34,7 +33,7 @@ class AddPostVisitJob implements ShouldQueue
             ->homePage()
             ->paginate(20)
             ->each(function (Post $post) {
-                Cache::delete($post->getVisitsGraphCacheKey());
+                Cache::forget($post->getVisitsGraphCacheKey());
 
                 $post->getSparkLine();
             });
