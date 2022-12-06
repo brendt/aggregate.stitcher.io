@@ -17,7 +17,8 @@ final class AdminPostsController
         $query = Post::query()
             ->orderByDesc('created_at')
             ->orderByDesc('id')
-            ->whereActiveSource();
+            ->whereActiveSource()
+        ;
 
         $user = $request->user();
 

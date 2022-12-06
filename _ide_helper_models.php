@@ -66,6 +66,7 @@ namespace App\Models{
  * @property string $url
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $published_at
+ * @property \Illuminate\Support\Carbon|null $published_at_day
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $visits
  * @property-read \App\Models\Source|null $source
@@ -79,6 +80,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAtDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSourceId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereTitle($value)
@@ -124,6 +126,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
  * @property-read int|null $posts_count
+ * @method static \Database\Factories\SourceFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|Source newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Source newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Source query()
