@@ -43,5 +43,10 @@ jobs:
       - name: List Installed Dependencies
         run: composer show -D
 
+      - name: Setup Laravel
+        run: |
+          cp .env.ci .env
+          php artisan key:generate
+
       - name: Execute tests
         run: vendor/bin/phpunit
