@@ -49,6 +49,7 @@ class Link extends Model
 
     public function getVisitsGraphCacheKey(): string
     {
+        /** @phpstan-ignore-next-line */
         return "link-svg-{$this->uuid}";
     }
 
