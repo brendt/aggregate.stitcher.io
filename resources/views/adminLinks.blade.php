@@ -27,7 +27,7 @@
                     <div class="block px-12 p-4 word-break">
                         <div class="flex align-baseline">
                             <h1 class="font-bold">
-                                {{ $link->title }} <span class="text-sm">({{ $link->url }})</span>
+                                {{ $link->title }} <span class="text-sm">(<a href="{{ $link->url }}" class="hover:no-underline underline">{{ $link->url }}</a>)</span>
                             </h1>
                         </div>
 
@@ -41,14 +41,6 @@
                         </div>
                         <div class="text-sm font-light text-gray-800 mt-2">
                             {{ $link->visits }} visits
-                        </div>
-
-                        <div class="flex gap-2 text-sm pt-2">
-                            <a href="{{ $link->url }}"
-                               class="underline hover:no-underline mr-4 py-2"
-                            >
-                                Show
-                            </a>
                         </div>
                     </div>
 
