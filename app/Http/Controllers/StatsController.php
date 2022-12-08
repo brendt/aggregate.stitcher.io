@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\SparkLine\SparkLine;
-use App\SparkLine\SparkLineDay;
+use Brendt\SparkLine\SparkLine;
+use Brendt\SparkLine\SparkLineDay;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -26,10 +26,10 @@ final class StatsController
             ));
 
         $sparkLine = SparkLine::new($days)
-            ->withDimensions(500, 200)
-            ->withStrokeWidth(2)
+            ->withStrokeWidth(4)
+            ->withDimensions(500, 100)
             ->withMaxItemAmount(100)
-            ->withColors('#4285F4', '#31ACF2', '#2BC9F4');
+            ->withMaxValue(20);
 
         return view('stats', [
             'sparkLine' => $sparkLine,

@@ -12,7 +12,9 @@
                             Total visits: {{ $sparkLine->getTotal() }}
                         </h1>
                         <div class="text-sm font-light text-gray-800">
-                            {{ $sparkLine->getPeriod()->start()->format('Y-m-d') }} — {{ $sparkLine->getPeriod()->end()->format('Y-m-d') }}
+                            @if($period = $sparkLine->getPeriod())
+                                {{ $period->start()->format('Y-m-d') }} — {{ $period->end()->format('Y-m-d') }}
+                            @endif
                         </div>
                     </div>
                     <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">

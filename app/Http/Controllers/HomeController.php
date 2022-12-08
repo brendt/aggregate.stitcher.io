@@ -6,9 +6,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use App\Models\PostVisit;
-use App\Models\User;
-use App\SparkLine\SparkLine;
-use App\SparkLine\SparkLineDay;
+use Brendt\SparkLine\SparkLine;
+use Brendt\SparkLine\SparkLineDay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;

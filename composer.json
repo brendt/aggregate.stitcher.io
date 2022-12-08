@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "brendt/php-sparkline": "^0.1",
         "dg/rss-php": "^1.5",
         "dg/twitter-php": "^4.1",
         "doctrine/dbal": "^3.3",

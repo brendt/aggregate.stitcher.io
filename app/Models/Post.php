@@ -2,10 +2,9 @@
 
 namespace App\Models;
 
-use App\Actions\CreateSparkLine;
-use App\SparkLine\SparkLineDay;
 use App\Http\Controllers\Posts\ShowPostController;
-use App\SparkLine\SparkLine;
+use Brendt\SparkLine\SparkLine;
+use Brendt\SparkLine\SparkLineDay;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
