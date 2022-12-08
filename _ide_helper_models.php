@@ -17,6 +17,7 @@ namespace App\Models{
  * @property int $id
  * @property string $uuid
  * @property string $url
+ * @property string|null $title
  * @property int $visits
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -25,12 +26,34 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Link query()
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Link whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUrl($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereUuid($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Link whereVisits($value)
  */
 	class Link extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\LinkVisit
+ *
+ * @property int $id
+ * @property int $link_id
+ * @property \Illuminate\Support\Carbon $created_at_day
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit query()
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit whereCreatedAtDay($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit whereLinkId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|LinkVisit whereUpdatedAt($value)
+ */
+	class LinkVisit extends \Eloquent {}
 }
 
 namespace App\Models{

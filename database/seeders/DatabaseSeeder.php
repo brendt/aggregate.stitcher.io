@@ -11,5 +11,6 @@ class DatabaseSeeder extends Seeder
         (new UserSeeder)->run();
         (new SourceSeeder)->run();
         (new PostSeeder)->run();
+        (new LinkSeeder)->run();
     }
 }

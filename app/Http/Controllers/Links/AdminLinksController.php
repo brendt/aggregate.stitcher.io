@@ -9,7 +9,7 @@ final class AdminLinksController
 {
     public function __invoke(Request $request)
     {
-        $links = Link::query()->orderByDesc('created_at')->get();
+        $links = Link::query()->orderByDesc('created_at')->paginate(100);
 
         return view('adminLinks', [
             'links' => $links,

@@ -23,31 +23,37 @@
             </a>
 
             @foreach ($links as $link)
-                <div class="block px-12 p-4 word-break">
-                    <div class="flex align-baseline">
-                        <h1 class="font-bold">
-                            {{ $link->url }}
-                        </h1>
-                    </div>
+                <div class="md:flex items-center">
+                    <div class="block px-12 p-4 word-break">
+                        <div class="flex align-baseline">
+                            <h1 class="font-bold">
+                                {{ $link->title }} <span class="text-sm">({{ $link->url }})</span>
+                            </h1>
+                        </div>
 
-                    <div class="text-sm font-light text-gray-800 mt-2">
+                        <div class="text-sm font-light text-gray-800 mt-2">
                         <span
                             x-data-url="{{ $link->getRedirectLink() }}"
                             class="cursor-pointer underline hover:no-underline link-copy"
                         >
                             {{ $link->getRedirectLink() }}
                         </span>
-                    </div>
-                    <div class="text-sm font-light text-gray-800 mt-2">
-                        {{ $link->visits }} visits
+                        </div>
+                        <div class="text-sm font-light text-gray-800 mt-2">
+                            {{ $link->visits }} visits
+                        </div>
+
+                        <div class="flex gap-2 text-sm pt-2">
+                            <a href="{{ $link->url }}"
+                               class="underline hover:no-underline mr-4 py-2"
+                            >
+                                Show
+                            </a>
+                        </div>
                     </div>
 
-                    <div class="flex gap-2 text-sm pt-2">
-                        <a href="{{ $link->url }}"
-                           class="underline hover:no-underline mr-4 py-2"
-                        >
-                            Show
-                        </a>
+                    <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
+                        {!! $link->getSparkLine() !!}
                     </div>
                 </div>
             @endforeach

@@ -37,5 +37,7 @@ class AddPostVisitJob implements ShouldQueue
 
                 $post->getSparkLine();
             });
+
+        Cache::forget($this->post->getVisitsGraphCacheKey());
     }
 }

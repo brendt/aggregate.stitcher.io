@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\Links;
 
+use App\Jobs\AddLinkVisitJob;
 use App\Models\Link;
 
 final class VisitLinkController
 {
     public function __invoke(Link $link)
     {
-        $link->update([
-            'visits' => $link->visits + 1,
-        ]);
+        dispatch(new AddLinkVisitJob($link));
 
         return redirect()->to($link->url);
     }
