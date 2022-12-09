@@ -37,6 +37,7 @@ finishDeploy
 
 @macro('deploy-back')
 startDeployment
+setupPhp
 cloneRepository
 runComposer
 updateSymlinks
@@ -64,6 +65,11 @@ finishCodeDeploy
 {{ logMessage("🏃  Starting deployment...") }}
 git checkout master
 git pull origin master
+@endtask
+
+@task('cloneRepository', ['on' => 'remote'])
+{{ logMessage("🐘  Using PHP 8.2...") }}
+alias php=php8.2
 @endtask
 
 @task('cloneRepository', ['on' => 'remote'])
