@@ -68,11 +68,6 @@ git pull origin master
 @endtask
 
 @task('cloneRepository', ['on' => 'remote'])
-{{ logMessage("🐘  Using PHP 8.2...") }}
-alias php=php8.2
-@endtask
-
-@task('cloneRepository', ['on' => 'remote'])
 {{ logMessage("🌀  Cloning repository...") }}
 [ -d {{ $releasesDir }} ] || mkdir {{ $releasesDir }};
 cd {{ $releasesDir }};
@@ -172,7 +167,7 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 
-sudo service php8.1-fpm restart
+sudo service php8.2-fpm restart
 sudo supervisorctl restart all
 @endtask
 
@@ -208,5 +203,5 @@ php artisan config:clear
 php artisan cache:clear
 php artisan config:cache
 sudo supervisorctl restart all
-sudo service php8.1-fpm restart
+sudo service php8.2-fpm restart
 @endtask
