@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\InfoController;
 use App\Http\Controllers\Links\AdminLinksController;
 use App\Http\Controllers\Links\CreateLinkController;
 use App\Http\Controllers\Links\StoreLinkController;
@@ -58,6 +59,7 @@ Route::get('/links/{link}', VisitLinkController::class);
 Route::middleware(['auth'])
     ->prefix('/admin')
     ->group(function () {
+        Route::get('/info', InfoController::class);
         Route::get('/stats', StatsController::class);
         Route::get('/posts', AdminPostsController::class);
         Route::get('/posts/create', CreatePostController::class);
