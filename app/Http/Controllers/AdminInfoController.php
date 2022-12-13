@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-final class InfoController
+final class AdminInfoController
 {
     public function __invoke()
     {
