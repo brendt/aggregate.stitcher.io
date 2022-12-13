@@ -6,11 +6,11 @@ namespace App\Events;
 
 use App\Models\Post;
 
-final class PostResolved
+final readonly class PostResolved
 {
     public function __construct(
-        public readonly Post $post,
-        public readonly array $payload,
+        public Post $post,
+        public array $payload,
     ) {
     }
 }

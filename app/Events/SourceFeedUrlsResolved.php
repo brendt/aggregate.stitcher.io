@@ -6,11 +6,11 @@ namespace App\Events;
 
 use App\Models\Source;
 
-final class SourceFeedUrlsResolved
+final readonly class SourceFeedUrlsResolved
 {
     public function __construct(
-        public readonly Source $source,
-        public readonly array $feedUrls,
+        public Source $source,
+        public array $feedUrls,
     )
     {
     }

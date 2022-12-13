@@ -6,10 +6,10 @@ namespace App\Events;
 
 use App\Models\Source;
 
-final class SourceDuplicationFound
+final readonly class SourceDuplicationFound
 {
     public function __construct(
-        public readonly Source $source,
+        public Source $source,
     )
     {
     }

@@ -7,12 +7,12 @@ namespace App\Events;
 use App\Models\Source;
 use Throwable;
 
-final class SourceFeedUrlTried
+final readonly class SourceFeedUrlTried
 {
     public function __construct(
-        public readonly Source $source,
-        public readonly string $feedUrl,
-        public readonly Throwable $exception,
+        public Source $source,
+        public string $feedUrl,
+        public Throwable $exception,
     )
     {
     }
