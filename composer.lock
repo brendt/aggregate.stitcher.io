@@ -7754,16 +7754,16 @@
         },
         {
             "name": "nunomaduro/larastan",
-            "version": "2.2.9",
+            "version": "2.3.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/nunomaduro/larastan.git",
-                "reference": "333e7915b984ce6606175749430081a372ead37e"
+                "reference": "32ad25904dc8fbfdae4d4e431a27ba3bad2979cc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/333e7915b984ce6606175749430081a372ead37e",
-                "reference": "333e7915b984ce6606175749430081a372ead37e",
+                "url": "https://api.github.com/repos/nunomaduro/larastan/zipball/32ad25904dc8fbfdae4d4e431a27ba3bad2979cc",
+                "reference": "32ad25904dc8fbfdae4d4e431a27ba3bad2979cc",
                 "shasum": ""
             },
             "require": {
@@ -7778,7 +7778,7 @@
                 "mockery/mockery": "^1.4.4",
                 "php": "^8.0.2",
                 "phpmyadmin/sql-parser": "^5.5",
-                "phpstan/phpstan": "^1.9.0"
+                "phpstan/phpstan": "^1.9.4"
             },
             "require-dev": {
                 "nikic/php-parser": "^4.13.2",
@@ -7827,7 +7827,7 @@
             ],
             "support": {
                 "issues": "https://github.com/nunomaduro/larastan/issues",
-                "source": "https://github.com/nunomaduro/larastan/tree/2.2.9"
+                "source": "https://github.com/nunomaduro/larastan/tree/2.3.4"
             },
             "funding": [
                 {
@@ -7847,7 +7847,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2022-11-04T14:58:00+00:00"
+            "time": "2023-01-02T12:13:26+00:00"
         },
         {
             "name": "phar-io/manifest",
@@ -8070,21 +8070,22 @@
         },
         {
             "name": "phpmyadmin/sql-parser",
-            "version": "5.5.0",
+            "version": "5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpmyadmin/sql-parser.git",
-                "reference": "8ab99cd0007d880f49f5aa1807033dbfa21b1cb5"
+                "reference": "63f2f77847586864a661ef009ae687dbdda0a9f1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/8ab99cd0007d880f49f5aa1807033dbfa21b1cb5",
-                "reference": "8ab99cd0007d880f49f5aa1807033dbfa21b1cb5",
+                "url": "https://api.github.com/repos/phpmyadmin/sql-parser/zipball/63f2f77847586864a661ef009ae687dbdda0a9f1",
+                "reference": "63f2f77847586864a661ef009ae687dbdda0a9f1",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0",
-                "symfony/polyfill-mbstring": "^1.3"
+                "symfony/polyfill-mbstring": "^1.3",
+                "symfony/polyfill-php80": "^1.16"
             },
             "conflict": {
                 "phpmyadmin/motranslator": "<3.0"
@@ -8133,26 +8134,38 @@
                 "analysis",
                 "lexer",
                 "parser",
-                "sql"
+                "query linter",
+                "sql",
+                "sql lexer",
+                "sql linter",
+                "sql parser",
+                "sql syntax highlighter",
+                "sql tokenizer"
             ],
             "support": {
                 "issues": "https://github.com/phpmyadmin/sql-parser/issues",
                 "source": "https://github.com/phpmyadmin/sql-parser"
             },
-            "time": "2021-12-09T04:31:52+00:00"
+            "funding": [
+                {
+                    "url": "https://www.phpmyadmin.net/donate/",
+                    "type": "other"
+                }
+            ],
+            "time": "2023-01-02T05:36:07+00:00"
         },
         {
             "name": "phpstan/phpstan",
-            "version": "1.9.4",
+            "version": "1.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "d03bccee595e2146b7c9d174486b84f4dc61b0f2"
+                "reference": "45411d15bf85a33b4a8ee9b75a6e82998c9adb97"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/d03bccee595e2146b7c9d174486b84f4dc61b0f2",
-                "reference": "d03bccee595e2146b7c9d174486b84f4dc61b0f2",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/45411d15bf85a33b4a8ee9b75a6e82998c9adb97",
+                "reference": "45411d15bf85a33b4a8ee9b75a6e82998c9adb97",
                 "shasum": ""
             },
             "require": {
@@ -8182,7 +8195,7 @@
             ],
             "support": {
                 "issues": "https://github.com/phpstan/phpstan/issues",
-                "source": "https://github.com/phpstan/phpstan/tree/1.9.4"
+                "source": "https://github.com/phpstan/phpstan/tree/1.9.8"
             },
             "funding": [
                 {
@@ -8198,7 +8211,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-17T13:33:52+00:00"
+            "time": "2023-01-08T21:26:18+00:00"
         },
         {
             "name": "phpunit/php-code-coverage",
