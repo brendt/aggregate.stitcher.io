@@ -14,7 +14,7 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.2",
         "laravel/horizon": "^5.9",
-        "laravel/sanctum": "^2.14.1",
+        "laravel/sanctum": "^3.2.0",
         "laravel/tinker": "^2.7",
         "paquettg/php-html-parser": "^3.1",
         "ramsey/uuid": "^4.3",
