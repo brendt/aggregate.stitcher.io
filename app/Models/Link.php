@@ -6,6 +6,7 @@ use App\Http\Controllers\Links\VisitLinkController;
 use Brendt\SparkLine\SparkLine;
 use Brendt\SparkLine\SparkLineDay;
 use Carbon\Carbon;
+use ErrorException;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
