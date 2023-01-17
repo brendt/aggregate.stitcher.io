@@ -101,7 +101,11 @@ class Link extends Model
 
     protected function resolveTitle(): ?string
     {
-        $meta = get_meta_tags($this->url);
+        try {
+            $meta = get_meta_tags($this->url);
+        } catch (ErrorException) {
+            $meta = null;
+        }
 
         return $meta['title']
             ?? $meta['twitter:title']
