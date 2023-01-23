@@ -4296,16 +4296,16 @@
         },
         {
             "name": "spatie/laravel-stubs",
-            "version": "2.5.0",
+            "version": "2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-stubs.git",
-                "reference": "1c244e4f494424f0b70396aedb721d18f56ea274"
+                "reference": "374397b50789c00b0ac6e8665185d5f1de49de31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/1c244e4f494424f0b70396aedb721d18f56ea274",
-                "reference": "1c244e4f494424f0b70396aedb721d18f56ea274",
+                "url": "https://api.github.com/repos/spatie/laravel-stubs/zipball/374397b50789c00b0ac6e8665185d5f1de49de31",
+                "reference": "374397b50789c00b0ac6e8665185d5f1de49de31",
                 "shasum": ""
             },
             "require": {
@@ -4315,7 +4315,7 @@
             "require-dev": {
                 "mockery/mockery": "^1.4",
                 "orchestra/testbench": "^6.24|^7.0",
-                "phpunit/phpunit": "^9.4"
+                "pestphp/pest": "^1.22"
             },
             "type": "library",
             "extra": {
@@ -4349,7 +4349,7 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-stubs/tree/2.5.0"
+                "source": "https://github.com/spatie/laravel-stubs/tree/2.5.1"
             },
             "funding": [
                 {
@@ -4357,7 +4357,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2022-09-14T18:21:05+00:00"
+            "time": "2023-01-15T11:47:40+00:00"
         },
         {
             "name": "spatie/period",
