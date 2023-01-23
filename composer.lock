@@ -7418,23 +7418,23 @@
         },
         {
             "name": "laravel/breeze",
-            "version": "v1.17.0",
+            "version": "v1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/breeze.git",
-                "reference": "5d9ff31af5ddfe86ddf7bcd22df7b61818dcc2c1"
+                "reference": "4280282cff1ed240d6494bbb3405635820a09931"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/breeze/zipball/5d9ff31af5ddfe86ddf7bcd22df7b61818dcc2c1",
-                "reference": "5d9ff31af5ddfe86ddf7bcd22df7b61818dcc2c1",
+                "url": "https://api.github.com/repos/laravel/breeze/zipball/4280282cff1ed240d6494bbb3405635820a09931",
+                "reference": "4280282cff1ed240d6494bbb3405635820a09931",
                 "shasum": ""
             },
             "require": {
-                "illuminate/console": "^9.21",
-                "illuminate/filesystem": "^9.21",
-                "illuminate/support": "^9.21",
-                "illuminate/validation": "^9.21",
+                "illuminate/console": "^9.21|^10.0",
+                "illuminate/filesystem": "^9.21|^10.0",
+                "illuminate/support": "^9.21|^10.0",
+                "illuminate/validation": "^9.21|^10.0",
                 "php": "^8.0.2"
             },
             "conflict": {
@@ -7475,7 +7475,7 @@
                 "issues": "https://github.com/laravel/breeze/issues",
                 "source": "https://github.com/laravel/breeze"
             },
-            "time": "2023-01-03T14:13:49+00:00"
+            "time": "2023-01-17T14:08:34+00:00"
         },
         {
             "name": "laravel/sail",
