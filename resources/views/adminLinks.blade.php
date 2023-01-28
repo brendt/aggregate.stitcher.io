@@ -40,7 +40,7 @@
                         </span>
                         </div>
                         <div class="text-sm font-light text-gray-800 mt-2">
-                            {{ $link->visits }} visits
+                            {{ $link->visits }} visits{{ $link->visits_this_week ? ", {$link->visits_this_week} visits this week" : '' }}
                         </div>
                     </div>
 
