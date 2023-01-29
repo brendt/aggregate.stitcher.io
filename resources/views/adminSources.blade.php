@@ -15,9 +15,10 @@
             </a>
 
             @foreach ($sources as $source)
-                <div class="word-break">
+                <div class="word-break border-b border-gray-200">
                     <div
                         class="
+                                pt-6
                                 block px-12 p-4
                                 {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
                                 {{ $source->isPending() ? 'bg-gray-200' : '' }}
@@ -32,11 +33,13 @@
                         </h1>
 
                         <div class="flex gap-2 text-sm pt-2">
-                            <a href="{{ action(\App\Http\Controllers\Sources\AdminSourceDetailController::class, $source) }}"
-                               class="underline hover:no-underline mr-4 py-2"
-                            >
-                                Detail
-                            </a>
+                            @if($source->isPublished())
+                                <a href="{{ action(\App\Http\Controllers\Sources\AdminSourceDetailController::class, $source) }}"
+                                   class="underline hover:no-underline mr-4 py-2"
+                                >
+                                    Detail
+                                </a>
+                            @endif
 
                             <a href="{{ $source->getBaseUrl() }}"
                                class="underline hover:no-underline mr-4 py-2"

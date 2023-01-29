@@ -34,6 +34,7 @@ use App\Http\Controllers\Tweets\DenyPendingTweetsController;
 use App\Http\Controllers\Tweets\DenyTweetController;
 use App\Http\Controllers\Tweets\PublishTweetController;
 use App\Http\Controllers\Tweets\TweetController;
+use App\Http\Controllers\Tweets\TweetPostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -71,6 +72,7 @@ Route::middleware(['auth'])
         Route::get('/posts/publish/{post}', PublishPostController::class);
         Route::post('/posts/publish/{post}', PublishPostController::class);
         Route::get('/posts/star/{post}', StarPostController::class);
+        Route::get('/posts/tweet/{post}', TweetPostController::class);
 
         Route::get('/mutes/create', CreateMuteController::class);
         Route::post('/mutes/create', StoreMuteController::class);

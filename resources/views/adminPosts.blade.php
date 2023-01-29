@@ -28,6 +28,7 @@
                     <div class="drag-container">
                         <div
                             class="
+                                border-b border-gray-200
                                 drag bg-gray-200
                                 word-break
                                 block px-12 p-4
