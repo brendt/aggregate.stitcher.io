@@ -8,6 +8,6 @@ class {{ class }}  implements InvokableRule
 {
     public function __invoke($attribute, $value, $fail)
     {
-        //
+        // $fail('This rule failed');
     }
 }

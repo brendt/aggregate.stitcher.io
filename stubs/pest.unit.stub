@@ -1,0 +1,5 @@
+<?php
+
+it('performs a unit test', function () {
+    expect(true)->toBeTrue();
+});

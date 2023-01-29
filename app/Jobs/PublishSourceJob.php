@@ -24,9 +24,7 @@ class PublishSourceJob implements ShouldQueue
 
     public function __construct(
         public readonly Source $source
-    )
-    {
-    }
+    ) {}
 
     public function handle()
     {
@@ -59,9 +57,9 @@ class PublishSourceJob implements ShouldQueue
                 }
 
                 event(new SourceFeedUrlFound(
-                        $this->source,
-                        $feedUrl)
-                );
+                    $this->source,
+                    $feedUrl
+                ));
 
                 $this->source->update([
                     'url' => $feedUrl,
@@ -128,14 +126,24 @@ class PublishSourceJob implements ShouldQueue
         $scheme = parse_url($url, PHP_URL_SCHEME);
         $html = @file_get_contents($url);
 
-        if (!$html) {
+        if (! $html) {
             $host = parse_url($url, PHP_URL_HOST);
 
             $html = @file_get_contents("{$scheme}://{$host}");
         }
 
-        if (!$html) {
+        if (! $html) {
             return null;
+        }
+
+        preg_match(
+            pattern: '/<link rel="alternate" type="application\/rss\+xml" [\w\=\"|\s]+ href=\"([^"]+)/',
+            subject: $html,
+            matches: $matches,
+        );
+
+        if ($url = $matches[1] ?? null) {
+            return $url;
         }
 
         $dom = new Dom();
@@ -144,13 +152,13 @@ class PublishSourceJob implements ShouldQueue
 
         [$link] = $dom->find('head link[type="application/rss+xml"]');
 
-        if (!$link || !$link->href) {
+        if (! $link || ! $link->href) {
             return null;
         }
 
         $href = $link->href;
 
-        if (!Str::startsWith($href, 'http')) {
+        if (! Str::startsWith($href, 'http')) {
             $href = $scheme . '://' . preg_replace('/^[\/]+/', '', $href);
         }
 

@@ -6,9 +6,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use {{ namespacedModel }};
 
-/**
- * @extends Factory<{{ model }}>
- */
 class {{ model }}Factory extends Factory
 {
     protected $model = {{ model }}::class;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Actions\ResolveSourceName;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
@@ -22,7 +23,7 @@ class Source extends Model
         self::creating(function (Source $source) {
             $source->state ??= SourceState::PENDING;
 
-            $source->name ??= $source->getBaseUrl();
+            $source->name ??= (new ResolveSourceName)($source);
         });
     }
 

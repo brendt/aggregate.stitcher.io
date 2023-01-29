@@ -23,7 +23,9 @@
         "spatie/laravel-mail-preview": "^6.0",
         "spatie/laravel-route-attributes": "^1.10",
         "spatie/laravel-stubs": "^2.4",
-        "spatie/period": "^2.3"
+        "spatie/period": "^2.3",
+        "ext-simplexml" : "*",
+        "ext-libxml" : "*"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
