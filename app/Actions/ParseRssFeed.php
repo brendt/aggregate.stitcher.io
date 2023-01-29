@@ -25,7 +25,7 @@ final readonly class ParseRssFeed
         $json = json_encode($xml);
         $array = json_decode($json, true);
 
-        return collect($array['entry'] ?? $array['entries'])
+        return $this->resolveItems($array)
             ->map(function (array $item) {
                 return new RssEntry(
                     url: $this->resolveUrl($item),
@@ -98,5 +98,16 @@ final readonly class ParseRssFeed
     private function decode(string $string): string
     {
         return html_entity_decode($string);
+    }
+
+    private function resolveItems(mixed $array): Collection
+    {
+        return collect(
+            $array['entry']
+            ?? $array['entries']
+            ?? $array['item']
+            ?? $array['items']
+            ?? $array['channel']['item']
+        );
     }
 }

@@ -8,7 +8,10 @@ final class ResolveSourceName
 {
     public function __invoke(Source $source): string
     {
-        if (str_contains($source->url, 'youtube.com')) {
+        if (
+            str_contains($source->url, 'youtube.com')
+            || str_contains($source->url, 'medium.com')
+        ) {
             $contents = file_get_contents($source->url);
 
             preg_match(
