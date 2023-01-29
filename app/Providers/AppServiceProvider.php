@@ -31,20 +31,26 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        \Illuminate\Support\Facades\View::composer('*', function (View $view) {
+        $pendingPosts = Post::query()
+            ->where('state', PostState::PENDING)
+            ->whereHas('source', function (Builder $query) {
+                $query->where('state', SourceState::PUBLISHED);
+            })
+            ->count();
+
+        $pendingSources = Source::query()
+            ->where('state', SourceState::PENDING)
+            ->count();
+
+        $pendingTweets = Tweet::query()
+            ->pendingToday()
+            ->count();
+
+        \Illuminate\Support\Facades\View::composer('*', function (View $view) use ($pendingTweets, $pendingSources, $pendingPosts) {
             $view->with([
-                'pendingPosts' => Post::query()
-                    ->where('state', PostState::PENDING)
-                    ->whereHas('source', function (Builder $query) {
-                        $query->where('state', SourceState::PUBLISHED);
-                    })
-                    ->count(),
-                'pendingSources' => Source::query()
-                    ->where('state', SourceState::PENDING)
-                    ->count(),
-                'pendingTweets' => Tweet::query()
-                    ->pendingToday()
-                    ->count(),
+                'pendingPosts' => $pendingPosts,
+                'pendingSources' => $pendingSources,
+                'pendingTweets' => $pendingTweets,
             ]);
         });
     }
