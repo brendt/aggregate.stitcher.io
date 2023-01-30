@@ -147,6 +147,7 @@ namespace App\Models{
  * @property string $name
  * @property string $url
  * @property \App\Models\SourceState $state
+ * @property string|null $twitter_handle
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Models\Post[] $posts
@@ -159,6 +160,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Source whereTwitterHandle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereUrl($value)
  */

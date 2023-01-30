@@ -15,6 +15,10 @@ final readonly class TweetPost
     {
         $message = $post->title;
 
+        if ($handle = $post->source->twitter_handle) {
+            $message .= " by {$handle}";
+        }
+
         $message .= PHP_EOL . PHP_EOL . $post->getPublicUrl();
 
         $response = $this->twitter->send($message);
