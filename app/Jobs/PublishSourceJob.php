@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Actions\ResolveTwitterHandle;
 use App\Events\SourceDuplicationFound;
 use App\Events\SourceFeedUrlFound;
 use App\Events\SourceFeedUrlsResolved;
@@ -26,7 +27,7 @@ class PublishSourceJob implements ShouldQueue
         public readonly Source $source
     ) {}
 
-    public function handle()
+    public function handle(ResolveTwitterHandle $resolveTwitterHandle)
     {
         Feed::$userAgent = 'Aggregate';
 
@@ -83,6 +84,8 @@ class PublishSourceJob implements ShouldQueue
         $this->source->update([
             'state' => SourceState::INVALID,
         ]);
+
+        $resolveTwitterHandle($this->source);
     }
 
     private function getPossibleUrls(string $url): array
