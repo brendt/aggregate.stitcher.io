@@ -22,6 +22,7 @@ final class TweetRandomPostCommand extends Command
                 'https://externals.io',
                 'https://blog.jetbrains.com',
                 'https://stitcher.io',
+                'https://laravel-news.com',
             ])
             ->get()
             ->pluck('id');
