@@ -21,6 +21,7 @@ final class TweetRandomPostCommand extends Command
                 'https://xkcd.com',
                 'https://externals.io',
                 'https://blog.jetbrains.com',
+                'https://stitcher.io',
             ])
             ->get()
             ->pluck('id');
