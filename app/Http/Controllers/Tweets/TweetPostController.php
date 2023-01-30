@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Tweets;
 
-use App\Actions\TweetPostAction;
+use App\Actions\TweetPost;
 use App\Http\Controllers\HomeController;
 use App\Models\Post;
 
 final class TweetPostController
 {
     public function __invoke(
-        TweetPostAction $action,
+        TweetPost $action,
         Post $post,
     ) {
         $action($post);

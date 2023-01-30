@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Models\Post;
 use DG\Twitter\Twitter;
 
-final readonly class TweetPostAction
+final readonly class TweetPost
 {
     public function __construct(
         private Twitter $twitter
@@ -13,7 +13,9 @@ final readonly class TweetPostAction
 
     public function __invoke(Post $post)
     {
-        $message = "\"{$post->title}\": {$post->getPublicUrl()}";
+        $message = $post->title;
+
+        $message .= PHP_EOL . PHP_EOL . $post->getPublicUrl();
 
         $response = $this->twitter->send($message);
 
