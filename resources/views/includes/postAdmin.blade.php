@@ -4,6 +4,8 @@
         $post->isTweet() => 'blue-100',
         default => 'pink-100',
     };
+
+    /** @var \App\Models\Post $post */
 @endphp
 
 <div class="overflow-x-hidden border-b border-gray-200 pt-2">
@@ -83,7 +85,15 @@
                         </a>
                     @endif
 
-                    <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
+                    <span
+                        x-data-url="{{ $post->getPublicUrl() }}"
+                        x-data-hide-url="true"
+                        class="cursor-pointer underline hover:no-underline link-copy ml-2"
+                    >
+                        Copy
+                    </span>
+
+                    <div class="mt-2 ml-2 lg:ml-8 lg:mt-0 ">
                         {!! $post->getSparkLine() !!}
                     </div>
                 </div>

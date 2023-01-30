@@ -73,4 +73,8 @@
                 </a>
             @endif
         </div>
+
+    @auth()
+        @include('includes.copyLink')
+    @endauth
 @endcomponent
