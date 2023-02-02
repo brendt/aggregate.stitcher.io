@@ -19,6 +19,12 @@
         <span class="font-bold">({{ $pendingSources }})</span></a>
 
     <a
+        class="mr-4 underline hover:no-underline text-center"
+        href="{{ action(\App\Http\Controllers\Posts\FindPostController::class) }}"
+    >
+        Find</a>
+
+    <a
         href="{{ action(\App\Http\Controllers\Links\AdminLinksController::class) }}"
         class="underline hover:no-underline text-center"
     >
