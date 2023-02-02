@@ -29,6 +29,7 @@ class Post extends Model implements Feedable
         'visits' => 'integer',
         'published_at' => 'datetime',
         'published_at_day' => 'date',
+        'hide_until' => 'datetime',
     ];
 
     protected static function booted()

@@ -39,7 +39,7 @@ final class HomeController
             ->selectRaw('`created_at_day`, COUNT(*) as `visits`')
             ->groupBy('created_at_day')
             ->orderByDesc('created_at_day')
-            ->limit(20)
+            ->limit(31)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
                 count: $row->visits,
@@ -47,7 +47,8 @@ final class HomeController
             ));
 
         return SparkLine::new($days)
-            ->withMaxItemAmount(20)
+            ->withMaxItemAmount(31)
+            ->withDimensions(width: 310)
             ->withColors('#34A853', '#43CC64', '#4CE870');
     }
 
@@ -59,7 +60,7 @@ final class HomeController
             ->groupBy('published_at_day')
             ->orderByDesc('published_at_day')
             ->whereNotNull('published_at_day')
-            ->limit(20)
+            ->limit(31)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
                 count: $row->visits,
@@ -67,7 +68,8 @@ final class HomeController
             ));
 
         return SparkLine::new($days)
-            ->withMaxItemAmount(20)
+            ->withMaxItemAmount(31)
+            ->withDimensions(width: 310)
             ->withColors('#4285F4', '#31ACF2', '#2BC9F4');
     }
 }

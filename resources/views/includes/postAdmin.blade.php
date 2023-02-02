@@ -61,11 +61,21 @@
                         Show
                     </a>
 
-                    @if($post->canDeny())
-                        <a href="{{ action(\App\Http\Controllers\Posts\DenyPostController::class, ['post' => $post, ...request()->query->all()]) }}"
-                           class="underline hover:no-underline text-red-600 ml-2"
+                    @if($showDeny ?? true)
+                        @if($post->canDeny())
+                            <a href="{{ action(\App\Http\Controllers\Posts\DenyPostController::class, ['post' => $post, ...request()->query->all()]) }}"
+                               class="underline hover:no-underline text-red-600 ml-2"
+                            >
+                                Deny
+                            </a>
+                        @endif
+                    @endif
+
+                    @if($showHide ?? false)
+                        <a href="{{ action(\App\Http\Controllers\Posts\HidePostController::class, $post) }}"
+                           class="underline hover:no-underline text-yellow-600 ml-2"
                         >
-                            Deny
+                            Hide
                         </a>
                     @endif
 

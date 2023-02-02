@@ -87,6 +87,7 @@ namespace App\Models{
  * @property string $title
  * @property string|null $body
  * @property string $url
+ * @property \Illuminate\Support\Carbon|null $hide_until
  * @property string|null $tweet_id
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $published_at
@@ -102,6 +103,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereActiveSource()
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereBody($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereHideUntil($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAtDay($value)
