@@ -19,13 +19,6 @@
         <span class="font-bold">({{ $pendingSources }})</span></a>
 
     <a
-        href="{{ action(\App\Http\Controllers\Tweets\AdminTweetController::class) }}"
-        class="mr-4 underline hover:no-underline text-center"
-    >
-        Tweets
-        <span class="font-bold">(<span id="tweet-count">{{ $pendingTweets }}</span>)</span></a>
-
-    <a
         href="{{ action(\App\Http\Controllers\Links\AdminLinksController::class) }}"
         class="underline hover:no-underline text-center"
     >

@@ -69,22 +69,6 @@
                         </a>
                     @endif
 
-                    @if($post->tweet_id)
-                        <a
-                            class="underline hover:no-underline text-blue-400 ml-2"
-                            href="https://twitter.com/brendt_gd/status/{{ $post->tweet_id }}"
-                        >
-                            Show tweet
-                        </a>
-                    @else
-                        <a
-                            class="underline hover:no-underline text-blue-400 ml-2"
-                            href="{{ action(\App\Http\Controllers\Tweets\TweetPostController::class, $post) }}"
-                        >
-                            Tweet
-                        </a>
-                    @endif
-
                     <span
                         x-data-url="{{ $post->getPublicUrl() }}"
                         x-data-hide-url="true"
