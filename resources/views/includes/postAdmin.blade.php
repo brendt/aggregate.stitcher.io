@@ -80,7 +80,7 @@
                     @endif
 
                     <span
-                        x-data-url="{{ $post->getPublicUrl() }}"
+                        x-data-url="{{ $post->getTweetMessage() }}"
                         x-data-hide-url="true"
                         class="cursor-pointer underline hover:no-underline link-copy ml-2"
                     >

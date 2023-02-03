@@ -218,4 +218,17 @@ class Post extends Model implements Feedable
 
         return $sparkLine;
     }
+
+    public function getTweetMessage(): string
+    {
+        $message = $this->title;
+
+        if ($handle = $this->source->twitter_handle) {
+            $message .= " by {$handle}";
+        }
+
+        $message .= PHP_EOL . PHP_EOL . $this->getPublicUrl();
+
+        return $message;
+    }
 }

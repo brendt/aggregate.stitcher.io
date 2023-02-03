@@ -13,13 +13,7 @@ final readonly class TweetPost
 
     public function __invoke(Post $post)
     {
-        $message = $post->title;
-
-        if ($handle = $post->source->twitter_handle) {
-            $message .= " by {$handle}";
-        }
-
-        $message .= PHP_EOL . PHP_EOL . $post->getPublicUrl();
+        $message = $post->getTweetMessage();
 
         $response = $this->twitter->send($message);
 
