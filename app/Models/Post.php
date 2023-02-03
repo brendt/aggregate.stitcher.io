@@ -223,7 +223,7 @@ class Post extends Model implements Feedable
     {
         $message = $this->title;
 
-        if ($handle = $this->source->twitter_handle) {
+        if ($handle = ($this->source->twitter_handle ?? null)) {
             $message .= " by {$handle}";
         }
 
