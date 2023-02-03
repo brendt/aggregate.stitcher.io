@@ -27,7 +27,7 @@ class PublishSourceJob implements ShouldQueue
         public readonly Source $source
     ) {}
 
-    public function handle()
+    public function handle(ResolveTwitterHandle $resolveTwitterHandle)
     {
         Feed::$userAgent = 'Aggregate';
 
@@ -61,6 +61,8 @@ class PublishSourceJob implements ShouldQueue
                     $this->source,
                     $feedUrl
                 ));
+
+                $resolveTwitterHandle($this->source);
 
                 $this->source->update([
                     'url' => $feedUrl,
