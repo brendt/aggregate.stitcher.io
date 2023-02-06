@@ -84,7 +84,7 @@
                         x-data-hide-url="true"
                         class="cursor-pointer underline hover:no-underline link-copy ml-2"
                     >
-                        Copy for Twitter
+                        Tweet
                     </span>
 
                     <span
@@ -92,7 +92,7 @@
                         x-data-hide-url="true"
                         class="cursor-pointer underline hover:no-underline link-copy ml-2"
                     >
-                        Copy Link
+                        Copy
                     </span>
 
                     <div class="mt-2 ml-2 lg:ml-8 lg:mt-0 ">
