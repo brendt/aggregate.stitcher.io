@@ -6,6 +6,8 @@
     })
 
     function initLink(link) {
+        link.setAttribute('x-data-original-label', link.innerHTML);
+
         link.addEventListener('click', function () {
             removeCopiedLinkStyles();
 
@@ -32,16 +34,9 @@
 
     function removeCopiedLinkStyles() {
         links.forEach(function (link) {
-            const hideUrl = link.getAttribute('x-data-hide-url');
-            const url = link.getAttribute('x-data-url');
             link.classList.remove('font-bold', 'text-green-600');
             link.classList.add('underline');
-
-            if (hideUrl) {
-                link.innerHTML = 'Copy';
-            } else {
-                link.innerHTML = url;
-            }
+            link.innerHTML = link.getAttribute('x-data-original-label');
         })
     }
 </script>
