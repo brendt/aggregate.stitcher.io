@@ -3824,16 +3824,16 @@
         },
         {
             "name": "spatie/laravel-backup",
-            "version": "8.1.6",
+            "version": "8.1.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-backup.git",
-                "reference": "08d3e39717be811622ab8c9916d9f271c12a82fa"
+                "reference": "f073c8c9f5715272060e4bdceecedd02c29005f9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/08d3e39717be811622ab8c9916d9f271c12a82fa",
-                "reference": "08d3e39717be811622ab8c9916d9f271c12a82fa",
+                "url": "https://api.github.com/repos/spatie/laravel-backup/zipball/f073c8c9f5715272060e4bdceecedd02c29005f9",
+                "reference": "f073c8c9f5715272060e4bdceecedd02c29005f9",
                 "shasum": ""
             },
             "require": {
@@ -3907,7 +3907,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-backup/issues",
-                "source": "https://github.com/spatie/laravel-backup/tree/8.1.6"
+                "source": "https://github.com/spatie/laravel-backup/tree/8.1.7"
             },
             "funding": [
                 {
@@ -3919,7 +3919,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-01-16T14:36:41+00:00"
+            "time": "2023-02-03T15:57:49+00:00"
         },
         {
             "name": "spatie/laravel-feed",
