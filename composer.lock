@@ -4247,25 +4247,26 @@
         },
         {
             "name": "spatie/laravel-route-attributes",
-            "version": "1.17.0",
+            "version": "1.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-attributes.git",
-                "reference": "8ac5efa8cf35a18455e37862a20898545bf2101b"
+                "reference": "f43aad7e00695d64e28b24c24364190898ee6cd5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/8ac5efa8cf35a18455e37862a20898545bf2101b",
-                "reference": "8ac5efa8cf35a18455e37862a20898545bf2101b",
+                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/f43aad7e00695d64e28b24c24364190898ee6cd5",
+                "reference": "f43aad7e00695d64e28b24c24364190898ee6cd5",
                 "shasum": ""
             },
             "require": {
-                "illuminate/contracts": "^8.70|^9.0",
+                "illuminate/contracts": "^8.70|^9.0|^10.0",
+                "nesbot/carbon": "^2.63",
                 "php": "^8.0"
             },
             "require-dev": {
-                "orchestra/testbench": "^6.0|^7.0",
-                "phpunit/phpunit": "^9.3"
+                "orchestra/testbench": "^6.25|^7.0|^8.0",
+                "phpunit/phpunit": "^9.5.10"
             },
             "type": "library",
             "extra": {
@@ -4301,7 +4302,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-attributes/issues",
-                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.17.0"
+                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.18.0"
             },
             "funding": [
                 {
@@ -4313,7 +4314,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2022-11-22T17:31:55+00:00"
+            "time": "2023-02-09T15:32:42+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
