@@ -51,6 +51,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
+Route::get('/latest-mail', \App\Http\Controllers\LatestMailController::class);
 Route::get('/tweets', TweetController::class);
 Route::get('/top', TopController::class);
 Route::get('/suggest', SuggestSourceController::class);
