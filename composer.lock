@@ -4248,16 +4248,16 @@
         },
         {
             "name": "spatie/laravel-route-attributes",
-            "version": "1.18.0",
+            "version": "1.18.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/laravel-route-attributes.git",
-                "reference": "f43aad7e00695d64e28b24c24364190898ee6cd5"
+                "reference": "6f19ad379f79a8c87b3b21ee9c3b6dc72080123d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/f43aad7e00695d64e28b24c24364190898ee6cd5",
-                "reference": "f43aad7e00695d64e28b24c24364190898ee6cd5",
+                "url": "https://api.github.com/repos/spatie/laravel-route-attributes/zipball/6f19ad379f79a8c87b3b21ee9c3b6dc72080123d",
+                "reference": "6f19ad379f79a8c87b3b21ee9c3b6dc72080123d",
                 "shasum": ""
             },
             "require": {
@@ -4303,7 +4303,7 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/laravel-route-attributes/issues",
-                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.18.0"
+                "source": "https://github.com/spatie/laravel-route-attributes/tree/1.18.2"
             },
             "funding": [
                 {
@@ -4315,7 +4315,7 @@
                     "type": "other"
                 }
             ],
-            "time": "2023-02-09T15:32:42+00:00"
+            "time": "2023-03-09T15:47:11+00:00"
         },
         {
             "name": "spatie/laravel-signal-aware-command",
