@@ -7733,16 +7733,16 @@
         },
         {
             "name": "laravel/sail",
-            "version": "v1.21.1",
+            "version": "v1.21.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/sail.git",
-                "reference": "fd8d04bc546457b504aa2b3c2d541840551f836f"
+                "reference": "19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/sail/zipball/fd8d04bc546457b504aa2b3c2d541840551f836f",
-                "reference": "fd8d04bc546457b504aa2b3c2d541840551f836f",
+                "url": "https://api.github.com/repos/laravel/sail/zipball/19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc",
+                "reference": "19d6fe167e2389b41fe1b4ee52293d1eaf8a43fc",
                 "shasum": ""
             },
             "require": {
@@ -7794,7 +7794,7 @@
                 "issues": "https://github.com/laravel/sail/issues",
                 "source": "https://github.com/laravel/sail"
             },
-            "time": "2023-03-01T23:07:57+00:00"
+            "time": "2023-03-06T14:23:15+00:00"
         },
         {
             "name": "maximebf/debugbar",
