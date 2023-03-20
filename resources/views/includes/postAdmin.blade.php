@@ -18,7 +18,7 @@
         <div class="md:flex items-end">
             <div class="break-words">
                 <h1 class="font-bold break-words flex items-center">
-                    <span>{{ $post->getParsedTitle() }} </span> {{ $post->getRanking()->getSaturation() }} <span class="ml-2 text-xs px-2 py-1 rounded" style="text-align:center;min-width:75px;color:#fff; background-color:hsl(110 ,{{ $post->getRanking()->getSaturation() }}%, 34%)">{!! $post->getRanking() !!}</span>
+                    <span>{{ $post->getParsedTitle() }} </span> <span class="ml-2 text-xs px-2 py-1 rounded" style="text-align:center;min-width:75px;color:#fff; background-color:hsl(110 ,{{ $post->getRanking()->getSaturation() }}%, 34%)">{!! $post->getRanking() !!}</span>
                 </h1>
 
                 @if($post->body)
