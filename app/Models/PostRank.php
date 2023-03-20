@@ -13,6 +13,7 @@ final readonly class PostRank
     {
         $percentage = (1 - $this->position / $this->total) * 100 + 1;
 
+        // Steps by 10% is accurate enough
         return min([100, (ceil($percentage / 10)) * 10]);
     }
 
