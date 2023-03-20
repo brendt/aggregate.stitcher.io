@@ -9,6 +9,11 @@ final readonly class PostRank
         public int $total,
     ) {}
 
+    public function getSaturation(): int
+    {
+        return (1 - $this->position / $this->total) * 100 + 1;
+    }
+
     public function __toString(): string
     {
         return "{$this->position}&thinsp;/&thinsp;{$this->total}";
