@@ -11,7 +11,9 @@ final readonly class PostRank
 
     public function getSaturation(): int
     {
-        return (1 - $this->position / $this->total) * 100 + 1;
+        $percentage = (1 - $this->position / $this->total) * 100 + 1;
+
+        return min([100, (ceil($percentage / 10)) * 10]);
     }
 
     public function __toString(): string
