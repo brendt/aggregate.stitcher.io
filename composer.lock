@@ -8,20 +8,20 @@
     "packages": [
         {
             "name": "brendt/php-sparkline",
-            "version": "1.0.0",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brendt/php-sparkline.git",
-                "reference": "f36e43e8eca75ab6f5ea2ac57741620fcc63a5b3"
+                "reference": "f828b9050b397f9018ed4a0ab87c286fac720538"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brendt/php-sparkline/zipball/f36e43e8eca75ab6f5ea2ac57741620fcc63a5b3",
-                "reference": "f36e43e8eca75ab6f5ea2ac57741620fcc63a5b3",
+                "url": "https://api.github.com/repos/brendt/php-sparkline/zipball/f828b9050b397f9018ed4a0ab87c286fac720538",
+                "reference": "f828b9050b397f9018ed4a0ab87c286fac720538",
                 "shasum": ""
             },
             "require": {
-                "illuminate/collections": "^9.43",
+                "illuminate/collections": "^9.43|^10.0",
                 "php": "^8.1",
                 "ramsey/uuid": "^4.6",
                 "spatie/period": "^2.3"
@@ -56,9 +56,9 @@
             ],
             "support": {
                 "issues": "https://github.com/brendt/php-sparkline/issues",
-                "source": "https://github.com/brendt/php-sparkline/tree/1.0.0"
+                "source": "https://github.com/brendt/php-sparkline/tree/1.1.0"
             },
-            "time": "2022-12-08T10:00:38+00:00"
+            "time": "2023-03-16T05:09:11+00:00"
         },
         {
             "name": "brick/math",
@@ -4459,16 +4459,16 @@
         },
         {
             "name": "spatie/period",
-            "version": "2.3.5",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/spatie/period.git",
-                "reference": "83fca442d96bcf245109fd0e8fba0f1efeb380d4"
+                "reference": "85fbbea7b24fdff0c924aeed5b109be93c025850"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/spatie/period/zipball/83fca442d96bcf245109fd0e8fba0f1efeb380d4",
-                "reference": "83fca442d96bcf245109fd0e8fba0f1efeb380d4",
+                "url": "https://api.github.com/repos/spatie/period/zipball/85fbbea7b24fdff0c924aeed5b109be93c025850",
+                "reference": "85fbbea7b24fdff0c924aeed5b109be93c025850",
                 "shasum": ""
             },
             "require": {
@@ -4476,7 +4476,8 @@
             },
             "require-dev": {
                 "larapack/dd": "^1.1",
-                "nesbot/carbon": "^2.54",
+                "nesbot/carbon": "^2.63",
+                "pestphp/pest": "^1.22",
                 "phpunit/phpunit": "^9.5",
                 "spatie/ray": "^1.31"
             },
@@ -4506,9 +4507,9 @@
             ],
             "support": {
                 "issues": "https://github.com/spatie/period/issues",
-                "source": "https://github.com/spatie/period/tree/2.3.5"
+                "source": "https://github.com/spatie/period/tree/2.4.0"
             },
-            "time": "2022-10-03T07:32:05+00:00"
+            "time": "2023-02-20T14:31:09+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -8344,24 +8345,27 @@
         },
         {
             "name": "phpdocumentor/type-resolver",
-            "version": "1.6.2",
+            "version": "1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpDocumentor/TypeResolver.git",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d"
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
-                "reference": "48f445a408c131e38cab1c235aa6d2bb7a0bb20d",
+                "url": "https://api.github.com/repos/phpDocumentor/TypeResolver/zipball/1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
+                "reference": "1534aea9bde19a5c85c5d1e1f834ab63f4c5dcf5",
                 "shasum": ""
             },
             "require": {
+                "doctrine/deprecations": "^1.0",
                 "php": "^7.4 || ^8.0",
-                "phpdocumentor/reflection-common": "^2.0"
+                "phpdocumentor/reflection-common": "^2.0",
+                "phpstan/phpdoc-parser": "^1.13"
             },
             "require-dev": {
                 "ext-tokenizer": "*",
+                "phpbench/phpbench": "^1.2",
                 "phpstan/extension-installer": "^1.1",
                 "phpstan/phpstan": "^1.8",
                 "phpstan/phpstan-phpunit": "^1.1",
@@ -8393,9 +8397,9 @@
             "description": "A PSR-5 based resolver of Class names, Types and Structural Element Names",
             "support": {
                 "issues": "https://github.com/phpDocumentor/TypeResolver/issues",
-                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.6.2"
+                "source": "https://github.com/phpDocumentor/TypeResolver/tree/1.7.0"
             },
-            "time": "2022-10-14T12:47:21+00:00"
+            "time": "2023-03-12T10:13:29+00:00"
         },
         {
             "name": "phpmyadmin/sql-parser",
@@ -8483,6 +8487,51 @@
                 }
             ],
             "time": "2023-01-25T10:43:40+00:00"
+        },
+        {
+            "name": "phpstan/phpdoc-parser",
+            "version": "1.16.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpstan/phpdoc-parser.git",
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/e27e92d939e2e3636f0a1f0afaba59692c0bf571",
+                "reference": "e27e92d939e2e3636f0a1f0afaba59692c0bf571",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2 || ^8.0"
+            },
+            "require-dev": {
+                "php-parallel-lint/php-parallel-lint": "^1.2",
+                "phpstan/extension-installer": "^1.0",
+                "phpstan/phpstan": "^1.5",
+                "phpstan/phpstan-phpunit": "^1.1",
+                "phpstan/phpstan-strict-rules": "^1.0",
+                "phpunit/phpunit": "^9.5",
+                "symfony/process": "^5.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PHPStan\\PhpDocParser\\": [
+                        "src/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "PHPDoc parser with support for nullable, intersection and generic types",
+            "support": {
+                "issues": "https://github.com/phpstan/phpdoc-parser/issues",
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.1"
+            },
+            "time": "2023-02-07T18:11:17+00:00"
         },
         {
             "name": "phpstan/phpstan",
