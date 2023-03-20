@@ -17,8 +17,8 @@
     >
         <div class="md:flex items-end">
             <div class="break-words">
-                <h1 class="font-bold break-words">
-                    {{ $post->getParsedTitle() }}
+                <h1 class="font-bold break-words flex items-center">
+                    <span>{{ $post->getParsedTitle() }} </span><span class="ml-2 text-xs px-2 py-1 bg-green-100 rounded">{!! $post->getRanking() !!}</span>
                 </h1>
 
                 @if($post->body)

@@ -173,6 +173,40 @@ class Post extends Model implements Feedable
         return "svg-{$this->uuid}";
     }
 
+    public function getRankingCacheKey(): string
+    {
+        return "rank-{$this->uuid}";
+    }
+
+    public function getRanking(): PostRank
+    {
+        if (
+            app()->environment('production')
+            && ($cache = Cache::get($this->getRankingCacheKey()))
+        ) {
+            return $cache;
+        }
+
+        $posts = DB::query()
+            ->select('id', 'visits')
+            ->from($this->getTable())
+            ->where('state', PostState::PUBLISHED->value)
+            ->orderByDesc('visits')
+            ->get();
+
+        $position = $posts->mapWithKeys(fn (object $row, int $position) => [$row->id => $position])[$this->id] ?? 0;
+
+        $rank = new PostRank(position: $position, total: $posts->count());
+
+        Cache::put(
+            $this->getRankingCacheKey(),
+            $rank,
+            now()->addDay(),
+        );
+
+        return $rank;
+    }
+
     public function getSparkLine(): string
     {
         if (
@@ -195,19 +229,8 @@ class Post extends Model implements Feedable
                 day: Carbon::make($row->created_at_day),
             ));
 
-        $maxValue = DB::query()
-            ->selectRaw("COUNT(*) AS `visits`, `created_at_day`, `post_id`")
-            ->from((new PostVisit)->getTable())
-            ->groupByRaw('`created_at_day`, `post_id`')
-            ->orderByDesc('visits')
-            ->limit(1)
-            ->get('visits');
-
-        $maxValue = ($maxValue[0] ?? null)?->visits;
-
         $sparkLine = SparkLine::new($days)
             ->withMaxItemAmount(20)
-            ->withMaxValue($maxValue)
             ->make();
 
         Cache::put(
