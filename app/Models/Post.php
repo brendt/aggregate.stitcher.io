@@ -180,31 +180,20 @@ class Post extends Model implements Feedable
 
     public function getRanking(): PostRank
     {
-        if (
-            app()->environment('production')
-            && ($cache = Cache::get($this->getRankingCacheKey()))
-        ) {
-            return $cache;
-        }
-
-        $posts = DB::query()
-            ->select('id', 'visits')
-            ->from($this->getTable())
-            ->where('state', PostState::PUBLISHED->value)
-            ->orderByDesc('visits')
-            ->get();
+        $posts = Cache::remember(
+            'posts_ranking',
+            now()->addSeconds(10),
+            fn () => DB::query()
+                ->select('id', 'visits')
+                ->from($this->getTable())
+                ->where('state', PostState::PUBLISHED->value)
+                ->orderByDesc('visits')
+                ->get()
+        );
 
         $position = $posts->mapWithKeys(fn (object $row, int $position) => [$row->id => $position])[$this->id] ?? 0;
 
-        $rank = new PostRank(position: $position, total: $posts->count());
-
-        Cache::put(
-            $this->getRankingCacheKey(),
-            $rank,
-            now()->addDay(),
-        );
-
-        return $rank;
+        return new PostRank(position: $position, total: $posts->count());
     }
 
     public function getSparkLine(): string
