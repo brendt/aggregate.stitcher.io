@@ -77,6 +77,11 @@
                         >
                             Hide
                         </a>
+                        <a href="{{ action(\App\Http\Controllers\Posts\PermanentlyHidePostController::class, $post) }}"
+                           class="underline hover:no-underline text-yellow-600 ml-2"
+                        >
+                            Hide forever
+                        </a>
                     @endif
 
                     <span

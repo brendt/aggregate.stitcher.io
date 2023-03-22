@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminInfoController;
+use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\FindPostController;
 use App\Http\Controllers\Posts\HidePostController;
 use App\Http\Controllers\InfoController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\Links\CreateLinkController;
 use App\Http\Controllers\Links\StoreLinkController;
 use App\Http\Controllers\Links\VisitLinkController;
 use App\Http\Controllers\Posts\AdminPostsController;
+use App\Http\Controllers\Posts\PermanentlyHidePostController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\Tweets\CreateMuteController;
 use App\Http\Controllers\Posts\CreatePostController;
@@ -51,7 +53,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
-Route::get('/latest-mail', \App\Http\Controllers\LatestMailController::class);
+Route::get('/latest-mail', LatestMailController::class);
 Route::get('/tweets', TweetController::class);
 Route::get('/top', TopController::class);
 Route::get('/suggest', SuggestSourceController::class);
@@ -78,6 +80,7 @@ Route::middleware(['auth'])
         Route::get('/posts/star/{post}', StarPostController::class);
         Route::get('/posts/tweet/{post}', TweetPostController::class);
         Route::get('/posts/hide/{post}', HidePostController::class);
+        Route::get('/posts/hide-permanently/{post}', PermanentlyHidePostController::class);
 
         Route::get('/mutes/create', CreateMuteController::class);
         Route::post('/mutes/create', StoreMuteController::class);
