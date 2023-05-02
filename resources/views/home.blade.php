@@ -25,7 +25,7 @@
             </a>
 
             <div class="">
-                @if ($user)
+                @if ($user && ($totalVisitsSparkLine ?? null))
                     <div class="overflow-x-hidden block lg:px-12 p-4 md:flex border-b border-gray-200">
                         <div class="md:flex items-end">
                             <div>
