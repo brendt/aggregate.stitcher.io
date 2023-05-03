@@ -211,7 +211,7 @@ class Post extends Model implements Feedable
             ->where('post_id', $this->id)
             ->groupBy('created_at_day')
             ->orderByDesc('created_at_day')
-            ->limit(20)
+//            ->limit(20)
             ->get()
             ->map(fn (object $row) => new SparkLineDay(
                 count: $row->visits,
@@ -219,7 +219,7 @@ class Post extends Model implements Feedable
             ));
 
         $sparkLine = SparkLine::new($days)
-            ->withMaxItemAmount(20)
+//            ->withMaxItemAmount(20)
             ->make();
 
         Cache::put(
