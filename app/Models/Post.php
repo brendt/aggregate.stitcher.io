@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Ramsey\Uuid\Uuid;
@@ -47,6 +48,11 @@ class Post extends Model implements Feedable
     public function source(): BelongsTo
     {
         return $this->belongsTo(Source::class);
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(PostComment::class)->orderByDesc('created_at');
     }
 
     public function scopeHomePage(Builder|Post $query): void
@@ -161,6 +167,13 @@ class Post extends Model implements Feedable
         }
 
         return parse_url($this->url, PHP_URL_HOST);
+    }
+
+    public function getShortSourceName(): string
+    {
+        $url = $this->source?->getBaseUrl() ?? parse_url($this->url, PHP_URL_HOST);
+
+        return str_replace(['http://', 'https://', 'www.'], '', $url);
     }
 
     public function getParsedTitle(): string

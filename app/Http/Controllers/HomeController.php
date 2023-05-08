@@ -17,7 +17,7 @@ final class HomeController
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('source')
+            ->with('source', 'comments')
             ->homePage()
             ->paginate(20);
 

@@ -4,13 +4,14 @@ use App\Http\Controllers\AdminInfoController;
 use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\FindPostController;
 use App\Http\Controllers\Posts\HidePostController;
-use App\Http\Controllers\InfoController;
 use App\Http\Controllers\Links\AdminLinksController;
 use App\Http\Controllers\Links\CreateLinkController;
 use App\Http\Controllers\Links\StoreLinkController;
 use App\Http\Controllers\Links\VisitLinkController;
 use App\Http\Controllers\Posts\AdminPostsController;
 use App\Http\Controllers\Posts\PermanentlyHidePostController;
+use App\Http\Controllers\Posts\PostCommentsController;
+use App\Http\Controllers\Posts\StorePostCommentController;
 use App\Http\Controllers\Posts\TopPostController;
 use App\Http\Controllers\StatsController;
 use App\Http\Controllers\Tweets\CreateMuteController;
@@ -40,6 +41,12 @@ use App\Http\Controllers\Tweets\DenyTweetController;
 use App\Http\Controllers\Tweets\PublishTweetController;
 use App\Http\Controllers\Tweets\TweetController;
 use App\Http\Controllers\Tweets\TweetPostController;
+use App\Http\Controllers\Users\AcceptInvitationController;
+use App\Http\Controllers\Users\SendUserInvitationController;
+use App\Http\Controllers\Users\SendInviteController;
+use App\Http\Controllers\Users\StoreAcceptedInvitationController;
+use App\Http\Controllers\Users\AboutInvitesController;
+use App\Http\Middleware\IsAdminMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,17 +61,29 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', HomeController::class);
+Route::get('/about-invites', AboutInvitesController::class);
 Route::get('/latest-mail', LatestMailController::class);
 Route::get('/tweets', TweetController::class);
 Route::get('/top', TopPostController::class);
 Route::get('/suggest', SuggestSourceController::class);
 Route::post('/suggest', StoreSourceSuggestionController::class);
+Route::get('/post/{post}/comments', PostCommentsController::class);
+Route::post('/post/{post}/comments', StorePostCommentController::class);
 Route::get('/post/{post}', ShowPostController::class);
 Route::view('/about', 'about');
-
 Route::get('/links/{link}', VisitLinkController::class);
 
+Route::get('/invite/accept/{code}', AcceptInvitationController::class);
+Route::post('/invite/accept/{code}', StoreAcceptedInvitationController::class);
+
 Route::middleware(['auth'])
+    ->prefix('/user')
+    ->group(function () {
+        Route::get('/invite', SendInviteController::class);
+        Route::post('/invite', SendUserInvitationController::class);
+    });
+
+Route::middleware(['auth', IsAdminMiddleware::class])
     ->prefix('/admin')
     ->group(function () {
         Route::get('/find', FindPostController::class);
@@ -109,7 +128,7 @@ Route::middleware(['auth'])
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', IsAdminMiddleware::class])->name('dashboard');
 
 Route::mailPreview();
 

@@ -3,12 +3,14 @@
 ?>
 
 @component('layout.app')
-    <div class="mx-auto container grid gap-4 mt-4">
-        @if($user)
+    <div class="mx-auto container grid gap-4 mt-2 md:mt-4">
+        @if($user->is_admin ?? null)
             @include('includes.adminMenu')
+        @elseif($user)
+            @include('includes.userMenu')
         @endif
 
-        <div class="bg-white mx-4 shadow-md grid">
+        <div class="bg-white mx-1 md:mx-4 shadow-md grid">
             @if($message)
                 <div class="px-12 py-4 bg-green-100 font-bold block text-center">
                     {{ $message }}
@@ -25,7 +27,7 @@
             </a>
 
             <div class="">
-                @if ($user && ($totalVisitsSparkLine ?? null))
+                @if (($user->is_admin ?? false) && ($totalVisitsSparkLine ?? null))
                     <div class="overflow-x-hidden block lg:px-12 p-4 md:flex border-b border-gray-200">
                         <div class="md:flex items-end">
                             <div>
@@ -55,7 +57,7 @@
                 @endif
 
                 @foreach ($posts as $post)
-                    @auth()
+                    @if($user->is_admin ?? false)
                         @include('includes.postAdmin')
                     @else()
                         @include('includes.postGuest')
