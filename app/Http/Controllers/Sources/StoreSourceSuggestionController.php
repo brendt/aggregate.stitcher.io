@@ -44,9 +44,10 @@ final class StoreSourceSuggestionController
         ]);
 
         if ($source->hasDuplicate()) {
-            $source->update([
-                'state' => SourceState::DUPLICATE,
-            ]);
+            $source->delete();
+//            $source->update([
+//                'state' => SourceState::DUPLICATE,
+//            ]);
         }
 
         return $source;
