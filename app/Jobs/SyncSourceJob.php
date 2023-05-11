@@ -25,7 +25,7 @@ class SyncSourceJob implements ShouldQueue
         $xml = file_get_contents($this->source->url);
 
         $entries = (new ParseRssFeed($this->source))($xml);
-
+        
         foreach ($entries as $entry) {
             $post = Post::updateOrCreate(
                 [

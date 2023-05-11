@@ -14,28 +14,6 @@ final readonly class ParseRssFeed
         private Source $source,
     ) {}
 
-    /**
-     * @param string $xml
-     *
-     * @return \App\Data\RssEntry[]|\Illuminate\Support\Collection
-     */
-    public function __invoke(string $xml): Collection
-    {
-        $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA);
-        $json = json_encode($xml);
-        $array = json_decode($json, true);
-
-        return $this->resolveItems($array)
-            ->map(function (array $item) {
-                return new RssEntry(
-                    url: $this->resolveUrl($item),
-                    title: $this->decode($this->resolveTitle($item)),
-                    createdAt: $this->resolveCreatedAt($item),
-                    payload: $item,
-                );
-            });
-    }
-
     private function resolveTitle(array $item): string
     {
         $title = $item['title'] ?? null;
@@ -69,6 +47,28 @@ final readonly class ParseRssFeed
         }
 
         return $item['link']['@attributes']['href'] ?? $item['link'];
+    }
+
+    /**
+     * @param string $xml
+     *
+     * @return \App\Data\RssEntry[]|\Illuminate\Support\Collection
+     */
+    public function __invoke(string $xml): Collection
+    {
+        $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA | LIBXML_NOERROR);
+        $json = json_encode($xml);
+        $array = json_decode($json, true);
+
+        return $this->resolveItems($array)
+            ->map(function (array $item) {
+                return new RssEntry(
+                    url: $this->resolveUrl($item),
+                    title: $this->decode($this->resolveTitle($item)),
+                    createdAt: $this->resolveCreatedAt($item),
+                    payload: $item,
+                );
+            });
     }
 
     private function resolveCreatedAt(array $item): ?Carbon
