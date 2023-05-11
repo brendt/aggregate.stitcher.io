@@ -28,29 +28,28 @@
 
             <div class="">
                 @if (($user->is_admin ?? false) && ($totalVisitsSparkLine ?? null))
-                    <div class="overflow-x-hidden block lg:px-12 p-4 md:flex border-b border-gray-200">
-                        <div class="md:flex items-end">
-                            <div>
-                                <h1 class="font-bold break-words">
-                                    Total visits: {{ $totalVisitsSparkLine->getTotal() }}
-                                </h1>
+                    <div class="overflow-x-hidden lg:px-12 p-4 border-b border-gray-200">
+                        <h1 class="font-bold break-words">
+                            {{ $totalVisitsSparkLine->getPeriod()?->start()->format('Y-m-d') }} — {{ $totalVisitsSparkLine->getPeriod()?->end()->format('Y-m-d') }}
+                        </h1>
+
+                        <div class="lg:flex justify-between">
+                            <div class="md:flex items-end">
                                 <div class="text-sm font-light text-gray-800">
-                                    {{ $totalVisitsSparkLine->getPeriod()?->start()->format('Y-m-d') }} — {{ $totalVisitsSparkLine->getPeriod()?->end()->format('Y-m-d') }}
+                                    Visits this period: {{ $totalVisitsSparkLine->getTotal() }}
+                                </div>
+                                <div class="mt-4 lg:mt-0 ml-0 lg:ml-8">
+                                    {!! $totalVisitsSparkLine !!}
                                 </div>
                             </div>
-                            <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
-                                {!! $totalVisitsSparkLine !!}
-                            </div>
-                        </div>
 
-                        <div class="md:flex items-end mt-8 md:ml-4">
-                            <div>
-                                <h1 class="font-bold break-words">
-                                    Published posts: {{ $totalPostsSparkLine->getTotal() }}
-                                </h1>
-                            </div>
-                            <div class="mt-2 ml-0 lg:ml-8 lg:mt-0 ">
-                                {!! $totalPostsSparkLine !!}
+                            <div class="md:flex items-end mt-8">
+                                <div class="text-sm font-light text-gray-800">
+                                    Published posts this period: {{ $totalPostsSparkLine->getTotal() }}
+                                </div>
+                                <div class="mt-4 lg:mt-0 ml-0 lg:ml-8">
+                                    {!! $totalPostsSparkLine !!}
+                                </div>
                             </div>
                         </div>
                     </div>

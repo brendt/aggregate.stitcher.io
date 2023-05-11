@@ -13,7 +13,7 @@
                 </h1>
 
                 <p>
-                    Thanks for being interested in joining Aggregate. Right now, Aggregate has an invite-only registration model: only existing users can invite new users.
+                    Thanks for being interested in joining Aggregate. Right now, registered Aggregate Users are able to comment on posts. Aggregate has an invite-only registration model: only existing users can invite new users.
                 </p>
 
                 <p>

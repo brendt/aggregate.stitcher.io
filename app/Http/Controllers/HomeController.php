@@ -11,6 +11,7 @@ use Brendt\SparkLine\SparkLineDay;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\HtmlString;
 
 final class HomeController
 {
@@ -26,7 +27,7 @@ final class HomeController
         return view('home', [
             'user' => $user,
             'posts' => $posts,
-            'message' => $request->get('message'),
+            'message' => $request->get('message', $this->defaultMessage()),
             'totalVisitsSparkLine' => $user ? $this->getTotalVisitsSparkLine() : null,
             'totalPostsSparkLine' => $user ? $this->getTotalPostsSparkLine() : null,
         ]);
@@ -71,5 +72,10 @@ final class HomeController
             ->withMaxItemAmount(31)
             ->withDimensions(width: 310)
             ->withColors('#4285F4', '#31ACF2', '#2BC9F4');
+    }
+
+    private function defaultMessage(): HtmlString
+    {
+        return new HtmlString('New on Aggregate: comments. <a href="/about-invites" class="underline hover:no-underline">Read about them here</a>!');
     }
 }
