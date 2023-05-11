@@ -20,6 +20,7 @@
                         class="
                                 pt-6
                                 block px-12 p-4
+                                {{ $source->hasRecentError() ? 'bg-red-50' : '' }}
                                 {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
                                 {{ $source->isPending() ? 'bg-gray-200' : '' }}
                                 {{ $source->isDenied() ? 'bg-red-100' : '' }}
@@ -33,6 +34,13 @@
                         </h1>
 
                         <div class="flex gap-2 text-sm pt-2">
+
+                            @if($source->last_error_at)
+                                <span class="font-bold text-red-400 py-2 mr-4">
+                                    Last error at: {{ $source->last_error_at }}
+                                </span>
+                            @endif
+
                             @if($source->isPublished())
                                 <a href="{{ action(\App\Http\Controllers\Sources\AdminSourceDetailController::class, $source) }}"
                                    class="underline hover:no-underline mr-4 py-2"

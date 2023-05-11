@@ -6,12 +6,16 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-dom": "*",
+        "ext-libxml": "*",
+        "ext-simplexml": "*",
         "brendt/php-sparkline": "^1.0",
         "dg/rss-php": "^1.5",
         "dg/twitter-php": "^4.1",
         "doctrine/dbal": "^3.3",
         "donatello-za/rake-php-plus": "^1.0",
         "guzzlehttp/guzzle": "^7.2",
+        "laminas/laminas-feed": "^2.20",
         "laravel/framework": "^9.2",
         "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.14.1",
@@ -23,9 +27,7 @@
         "spatie/laravel-mail-preview": "^6.0",
         "spatie/laravel-route-attributes": "^1.10",
         "spatie/laravel-stubs": "^2.4",
-        "spatie/period": "^2.3",
-        "ext-simplexml" : "*",
-        "ext-libxml" : "*"
+        "spatie/period": "^2.3"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

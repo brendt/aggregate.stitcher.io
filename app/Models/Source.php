@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Throwable;
 
 class Source extends Model
 {
@@ -16,6 +17,7 @@ class Source extends Model
 
     protected $casts = [
         'state' => SourceState::class,
+        'last_error_at' => 'datetime',
     ];
 
     protected static function booted()
@@ -35,6 +37,15 @@ class Source extends Model
     public function isExternals(): bool
     {
         return $this->name === 'https://externals.io';
+    }
+
+    public function hasRecentError(): bool
+    {
+        if (! $this->last_error_at) {
+            return false;
+        }
+
+        return $this->last_error_at->gte(now()->subDay());
     }
 
     public function isPublishing(): bool
@@ -95,5 +106,13 @@ class Source extends Model
             ->whereNot('id', $this->id)
             ->where('name', $this->getBaseUrl())
             ->exists();
+    }
+
+    public function markWithError(Throwable $throwable): void
+    {
+        $this->update([
+            'last_error_at' => now(),
+            'last_error' => json_encode($throwable->getTrace()),
+        ]);
     }
 }

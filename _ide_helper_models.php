@@ -179,6 +179,8 @@ namespace App\Models{
  * @property string|null $twitter_handle
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property \Illuminate\Support\Carbon|null $last_error_at
+ * @property string|null $last_error
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\Post> $posts
  * @property-read int|null $posts_count
  * @method static \Database\Factories\SourceFactory factory($count = null, $state = [])
@@ -187,6 +189,8 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Source query()
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Source whereLastError($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Source whereLastErrorAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereState($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Source whereTwitterHandle($value)
@@ -239,11 +243,11 @@ namespace App\Models{
  * @property int $id
  * @property int|null $invited_by
  * @property string|null $invitation_code
- * @property string $name
+ * @property string|null $name
  * @property string $email
  * @property int $is_admin
  * @property \Illuminate\Support\Carbon|null $email_verified_at
- * @property string $password
+ * @property string|null $password
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at

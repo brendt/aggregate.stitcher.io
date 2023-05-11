@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Source;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
+use Laminas\Feed\Reader\Reader;
 
 final readonly class ParseRssFeed
 {
@@ -54,11 +55,11 @@ final readonly class ParseRssFeed
      *
      * @return \App\Data\RssEntry[]|\Illuminate\Support\Collection
      */
-    public function __invoke(string $xml): Collection
+    public function __invoke(string $input): Collection
     {
-        $xml = simplexml_load_string($xml, "SimpleXMLElement", LIBXML_NOCDATA | LIBXML_NOERROR);
+        $xml = simplexml_load_string($input, "SimpleXMLElement", LIBXML_NOCDATA);
         $json = json_encode($xml);
-        $array = json_decode($json, true);
+        $array = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
 
         return $this->resolveItems($array)
             ->map(function (array $item) {
@@ -102,6 +103,10 @@ final readonly class ParseRssFeed
 
     private function resolveItems(mixed $array): Collection
     {
+        if (! is_array($array)) {
+            return collect();
+        }
+
         return collect(
             $array['entry']
             ?? $array['entries']

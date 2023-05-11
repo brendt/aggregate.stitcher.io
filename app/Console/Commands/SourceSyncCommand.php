@@ -9,7 +9,7 @@ use Throwable;
 
 class SourceSyncCommand extends Command
 {
-    protected $signature = 'source:sync {--source=}';
+    protected $signature = 'source:sync {--source=} {--debug}';
 
     public function handle()
     {
@@ -32,6 +32,12 @@ class SourceSyncCommand extends Command
             try {
                 dispatch(new SyncSourceJob($source));
             } catch (Throwable $e) {
+                $source->markWithError($e);
+
+                if ($this->option('debug')) {
+                    throw $e;
+                }
+
                 $this->output->writeln("\t[<fg=green>{$source->name}</> (#{$source->id})] <bg=red;fg=white>{$e->getMessage()}</>");
             }
         }
