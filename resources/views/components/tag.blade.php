@@ -8,13 +8,13 @@
     unset($attributes['style'], $attributes['class']);
 @endphp
 
-<span {{ $attributes }}>
+<span>
     @isset($url)
-        <a class="{{ $class }} hover:bg-{{ $color }}-200 hover:border-{{ $color }}-300" href="{{ $url }}" style="{{ $style }}">
+        <a {{ $attributes }} class="{{ $class }} hover:bg-{{ $color }}-200 hover:border-{{ $color }}-300" href="{{ $url }}" style="{{ $style }}">
             {{ $slot }}
         </a>
     @else
-        <div class="{{ $class }} cursor-default" style="{{ $style }}">
+        <div {{ $attributes }} class="{{ $class }} cursor-default" style="{{ $style }}">
             {{ $slot }}
         </div>
     @endisset
