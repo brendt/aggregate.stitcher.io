@@ -11,7 +11,7 @@ final class StorePostCommentController
     public function __invoke(Post $post, Request $request)
     {
         $validated = $request->validate([
-            'comment' => ['required', 'string', 'min:10']
+            'comment' => ['required', 'string', 'min:3']
         ]);
 
         PostComment::create([

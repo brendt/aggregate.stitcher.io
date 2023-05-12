@@ -53,7 +53,9 @@ class Post extends Model implements Feedable
 
     public function comments(): HasMany
     {
-        return $this->hasMany(PostComment::class)->orderByDesc('created_at');
+        return $this->hasMany(PostComment::class)
+            ->whereHas('user', fn (Builder $builder) => $builder->whereNull('banned_at'))
+            ->orderByDesc('created_at');
     }
 
     public function scopeHomePage(Builder|Post $query): void

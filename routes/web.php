@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminInfoController;
 use App\Http\Controllers\LatestMailController;
+use App\Http\Controllers\Posts\DeletePostCommentController;
 use App\Http\Controllers\Posts\FindPostController;
 use App\Http\Controllers\Posts\HidePostController;
 use App\Http\Controllers\Links\AdminLinksController;
@@ -42,6 +43,7 @@ use App\Http\Controllers\Tweets\PublishTweetController;
 use App\Http\Controllers\Tweets\TweetController;
 use App\Http\Controllers\Tweets\TweetPostController;
 use App\Http\Controllers\Users\AcceptInvitationController;
+use App\Http\Controllers\Users\BanUserController;
 use App\Http\Controllers\Users\SendUserInvitationController;
 use App\Http\Controllers\Users\SendInviteController;
 use App\Http\Controllers\Users\StoreAcceptedInvitationController;
@@ -101,6 +103,7 @@ Route::middleware(['auth', IsAdminMiddleware::class])
         Route::get('/posts/tweet/{post}', TweetPostController::class);
         Route::get('/posts/hide/{post}', HidePostController::class);
         Route::get('/posts/hide-permanently/{post}', PermanentlyHidePostController::class);
+        Route::get('/posts/comments/{postComment}/delete', DeletePostCommentController::class);
 
         Route::get('/mutes/create', CreateMuteController::class);
         Route::post('/mutes/create', StoreMuteController::class);
@@ -124,6 +127,8 @@ Route::middleware(['auth', IsAdminMiddleware::class])
         Route::get('/links', AdminLinksController::class);
         Route::get('/links/create', CreateLinkController::class);
         Route::post('/links/create', StoreLinkController::class);
+
+        Route::get('/users/{user}/ban', BanUserController::class);
     });
 
 Route::get('/dashboard', function () {

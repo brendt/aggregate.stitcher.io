@@ -21,6 +21,8 @@ class User extends Authenticatable
         'invited_by',
         'invitation_code',
         'email_verified_at',
+        'banned_at',
+        'remember_token',
     ];
 
     protected $hidden = [
@@ -30,6 +32,7 @@ class User extends Authenticatable
 
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'banned_at' => 'datetime',
     ];
 
     public function invitedBy(): BelongsTo
