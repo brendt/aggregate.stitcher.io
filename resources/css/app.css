@@ -21,3 +21,19 @@
 .tweet-text em {
     background-color: rgb(252, 249, 175);
 }
+
+.is-new-comment {
+    box-shadow: 0 0 0 2px lightskyblue;
+    background-color: aliceblue;
+}
+
+.has-new-comments {
+    box-shadow: 0 0 0 2px lightskyblue;
+    background-color: aliceblue;
+    font-weight: bold;
+}
+
+.has-new-comments svg,
+.has-new-comments span {
+    color: black;
+}

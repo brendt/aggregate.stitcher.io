@@ -29,6 +29,7 @@ class Post extends Model implements Feedable
         'state' => PostState::class,
         'visits' => 'integer',
         'published_at' => 'datetime',
+        'last_comment_at' => 'datetime',
         'published_at_day' => 'date',
         'hide_until' => 'datetime',
     ];

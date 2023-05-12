@@ -13,9 +13,18 @@ final class PostCommentsController
             'comments.user'
         ]);
 
+        $user = $request->user();
+
+        $lastSeenAt = $user?->lastSeenAt($post);
+
+        if ($user) {
+            $user->addPostVisit($post);
+        }
+
         return view('postComments', [
             'post' => $post,
-            'user' => $request->user()
+            'user' => $user,
+            'lastSeenAt' => $lastSeenAt,
         ]);
     }
 }

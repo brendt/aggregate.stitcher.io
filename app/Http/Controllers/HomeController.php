@@ -22,7 +22,7 @@ final class HomeController
             ->homePage()
             ->paginate(20);
 
-        $user = $request->user();
+        $user = $request->user()?->load('postVisits');
 
         return view('home', [
             'user' => $user,
@@ -76,6 +76,6 @@ final class HomeController
 
     private function defaultMessage(): HtmlString
     {
-        return new HtmlString('New on Aggregate: comments. <a href="/about-invites" class="underline hover:no-underline">Read about them here</a>!');
+        return new HtmlString('New on Aggregate: comments! <a href="/about-invites" class="underline hover:no-underline">Read about them here</a>.');
     }
 }

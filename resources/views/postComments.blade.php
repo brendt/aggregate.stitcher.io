@@ -99,7 +99,17 @@
 
             <div class="px-2 md:px-4 mb-2">
                 @foreach ($post->comments as $comment)
-                    <div class="my-1 md:my-4 bg-gray-100 rounded p-2 md:p-4">
+                    <div class="
+                        my-1
+                        md:my-4
+                        bg-gray-100
+                        rounded
+                        p-2
+                        md:p-4
+                        @if($user ?? null)
+                            {{ $user->hasSeenComment($comment, $lastSeenAt) ? '' : 'is-new-comment' }}
+                        @endif
+                    ">
                         <div class="font-bold">
                             {{ $comment->user->name }}
                             <span class="font-light text-sm ml-1">

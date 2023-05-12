@@ -94,6 +94,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $published_at_day
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property int $visits
+ * @property \Illuminate\Support\Carbon|null $last_comment_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostComment> $comments
  * @property-read int|null $comments_count
  * @property-read \App\Models\Source|null $source
@@ -107,6 +108,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereHideUntil($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Post whereLastCommentAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post wherePublishedAtDay($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Post whereSourceId($value)
@@ -254,6 +256,8 @@ namespace App\Models{
  * @property-read User|null $invitedBy
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\UserPostVisit> $postVisits
+ * @property-read int|null $post_visits_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
  * @property-read int|null $tokens_count
  * @method static \Database\Factories\UserFactory factory($count = null, $state = [])
@@ -273,5 +277,28 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\UserPostVisit
+ *
+ * @property int $id
+ * @property int $user_id
+ * @property int $post_id
+ * @property string $visited_at
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPostVisit whereVisitedAt($value)
+ */
+	class UserPostVisit extends \Eloquent {}
 }
 

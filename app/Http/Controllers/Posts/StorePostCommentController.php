@@ -20,6 +20,10 @@ final class StorePostCommentController
             'comment' => $validated['comment'],
         ]);
 
+        $post->update([
+            'last_comment_at' => now(),
+        ]);
+
         return redirect()->action(PostCommentsController::class, $post->uuid);
     }
 }
