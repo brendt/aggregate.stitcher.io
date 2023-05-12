@@ -28,9 +28,9 @@
                     </h1>
                 </a>
 
-                <div class="flex text-xs mt-1">
+                <x-tags class="mt-1">
                     @include('includes.postButtons')
-                </div>
+                </x-tags>
             </div>
         </div>
     </div>
