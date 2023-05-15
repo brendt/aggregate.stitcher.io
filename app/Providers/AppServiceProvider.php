@@ -8,6 +8,7 @@ use App\Models\PostState;
 use App\Models\Source;
 use App\Models\SourceState;
 use App\Models\Tweet;
+use App\Services\PostSharing\Posters\HackerNewsPoster;
 use DG\Twitter\Twitter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
@@ -21,12 +22,20 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->singleton(Twitter::class, function () {
             return new Twitter(
-                config('services.twitter.api_key'),
-                config('services.twitter.api_secret_key'),
-                config('services.twitter.access_token'),
-                config('services.twitter.access_token_secret'),
+                consumerKey: config('services.twitter.api_key'),
+                consumerSecret: config('services.twitter.api_secret_key'),
+                accessToken: config('services.twitter.access_token'),
+                accessTokenSecret: config('services.twitter.access_token_secret'),
             );
         });
+
+        $this->app->singleton(
+            HackerNewsPoster::class,
+            fn () => new HackerNewsPoster(
+                user: config('services.hackernews.user'),
+                password: config('services.hackernews.password')
+            ),
+        );
     }
 
     public function boot()

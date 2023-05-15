@@ -10,6 +10,7 @@ use Livewire\Component;
 class ShareButton extends Component
 {
     protected $listeners = ['handleKeypress'];
+
     public bool $modalShown = false;
 
     public array $form = [];

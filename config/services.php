@@ -39,4 +39,8 @@ return [
         'list_id' => env('TWITTER_LIST_ID'),
     ],
 
+    'hackernews' => [
+        'user' => env('HACKER_NEWS_USER'),
+        'password' => env('HACKER_NEWS_PASSWORD'),
+    ],
 ];
