@@ -37,3 +37,20 @@
 .has-new-comments span {
     color: black;
 }
+
+.modal {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: default;
+}
+
+.modal .popup {
+    width: 40%;
+    margin-bottom: 15%;
+}

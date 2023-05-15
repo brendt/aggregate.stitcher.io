@@ -17,6 +17,8 @@
 
     <meta name="title" content="aggregate.stitcher.io">
     <meta name="description" content="My community-driven RSS feed">
+
+    @livewireStyles
 </head>
 <body class="bg-gray-100">
 
@@ -43,5 +45,7 @@
         </a>
     @endif
 </div>
+
+@livewireScripts
 </body>
 </html>

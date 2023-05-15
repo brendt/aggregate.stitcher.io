@@ -8,6 +8,8 @@
             @include('includes.adminMenu')
         @endif
 
+        <livewire:share-timeline></livewire:share-timeline>
+
         <div class="bg-white mx-4 shadow-md grid">
             @if($message)
                 <div class="px-12 py-4 bg-green-100 font-bold block text-center">

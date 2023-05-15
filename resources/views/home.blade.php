@@ -74,5 +74,8 @@
 
     @auth()
         @include('includes.copyLink')
+        <script>
+            document.addEventListener('keydown', (e) => Livewire.emit('handleKeypress', e.code));
+        </script>
     @endauth
 @endcomponent

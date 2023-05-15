@@ -151,6 +151,38 @@ namespace App\Models{
 
 namespace App\Models{
 /**
+ * App\Models\PostShare
+ *
+ * @property int $id
+ * @property int $post_id
+ * @property \App\Services\PostSharing\SharingChannel $channel
+ * @property \Illuminate\Support\Carbon $share_at
+ * @property \Illuminate\Support\Carbon|null $shared_at
+ * @property string|null $description
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Post $post
+ * @method static \App\Services\PostSharing\PostShareCollection<int, static> all($columns = ['*'])
+ * @method static \App\Services\PostSharing\PostShareCollection<int, static> get($columns = ['*'])
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare latestForChannel(\App\Services\PostSharing\SharingChannel $channel)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare latestForPost(\App\Models\Post $post)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereDescription($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereShareAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereSharedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereUpdatedAt($value)
+ */
+	class PostShare extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\PostVisit
  *
  * @property int $id

@@ -19,6 +19,7 @@
         "laravel/horizon": "^5.9",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "livewire/livewire": "^2.12",
         "paquettg/php-html-parser": "^3.1",
         "ramsey/uuid": "^4.3",
         "spatie/laravel-backup": "^8.1",
@@ -26,7 +27,7 @@
         "spatie/laravel-mail-preview": "^6.0",
         "spatie/laravel-route-attributes": "^1.10",
         "spatie/laravel-stubs": "^2.4",
-        "spatie/period": "^2.3"
+        "spatie/period": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Services\PostSharing\SharingChannel;
 use App\Models\PostVisit;
 use Brendt\SparkLine\SparkLine;
 use Brendt\SparkLine\SparkLineDay;
