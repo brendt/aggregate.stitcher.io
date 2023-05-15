@@ -8,14 +8,20 @@ use Carbon\CarbonInterval;
 
 final class HackerNewsSchedule extends SharingSchedule
 {
-    protected function getIntervalForSamePostPeriod(): CarbonInterval
+    protected function cannotRepostWithin(): CarbonInterval
     {
-        return new CarbonInterval(months: 36);
+        return new CarbonInterval(
+            years: 0,
+            months: 36
+        );
     }
 
-    protected function getIntervalForChannelPeriod(): CarbonInterval
+    protected function cannotPostWithin(): CarbonInterval
     {
-        return new CarbonInterval(weeks: 2);
+        return new CarbonInterval(
+            years: 0,
+            weeks: 2
+        );
     }
 
     protected function getChannel(): SharingChannel

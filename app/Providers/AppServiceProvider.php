@@ -28,14 +28,6 @@ class AppServiceProvider extends ServiceProvider
                 accessTokenSecret: config('services.twitter.access_token_secret'),
             );
         });
-
-        $this->app->singleton(
-            HackerNewsPoster::class,
-            fn () => new HackerNewsPoster(
-                user: config('services.hackernews.user'),
-                password: config('services.hackernews.password')
-            ),
-        );
     }
 
     public function boot()

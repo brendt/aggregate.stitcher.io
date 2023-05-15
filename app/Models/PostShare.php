@@ -42,6 +42,11 @@ class PostShare extends Model
         ;
     }
 
+    public function getShareLink(): string
+    {
+        return $this->channel->getShareLink($this->post);
+    }
+
     public function getDate(): CarbonImmutable
     {
         return ($this->shared_at ?? $this->share_at)->toImmutable();

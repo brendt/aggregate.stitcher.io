@@ -19,14 +19,14 @@ abstract class SharingSchedule
         $nextTimeslot = null;
 
         while ($nextTimeslot === null) {
-            $periodForSamePost = Period::make(
-                start: $searchDate->sub($this->getIntervalForSamePostPeriod()),
-                end: $searchDate->add($this->getIntervalForSamePostPeriod()),
+            $gracePeriodForRepost = Period::make(
+                start: $searchDate->sub($this->cannotRepostWithin()),
+                end: $searchDate->add($this->cannotRepostWithin()),
             );
 
             if ($shares
                 ->forPost($post)
-                ->forPeriod($periodForSamePost)
+                ->forPeriod($gracePeriodForRepost)
                 ->forChannel($this->getChannel())
                 ->isNotEmpty()
             ) {
@@ -34,14 +34,14 @@ abstract class SharingSchedule
                 continue;
             }
 
-            $periodForChannel = Period::make(
-                start: $searchDate->sub($this->getIntervalForChannelPeriod()),
-                end: $searchDate->add($this->getIntervalForChannelPeriod()),
+            $gracePeriodForChannel = Period::make(
+                start: $searchDate->sub($this->cannotPostWithin()),
+                end: $searchDate->add($this->cannotPostWithin()),
             );
 
             if ($shares
-                ->forPeriod($periodForChannel)
                 ->forChannel($this->getChannel())
+                ->forPeriod($gracePeriodForChannel)
                 ->isNotEmpty()
             ) {
                 $searchDate = $searchDate->addDay();
@@ -54,9 +54,9 @@ abstract class SharingSchedule
         return $nextTimeslot;
     }
 
-    abstract protected function getIntervalForSamePostPeriod(): CarbonInterval;
+    abstract protected function cannotRepostWithin(): CarbonInterval;
 
-    abstract protected function getIntervalForChannelPeriod(): CarbonInterval;
+    abstract protected function cannotPostWithin(): CarbonInterval;
 
     abstract protected function getChannel(): SharingChannel;
 }

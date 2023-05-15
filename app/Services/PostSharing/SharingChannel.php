@@ -2,6 +2,7 @@
 
 namespace App\Services\PostSharing;
 
+use App\Models\Post;
 use App\Services\PostSharing\Posters\HackerNewsPoster;
 use App\Services\PostSharing\Schedules\HackerNewsSchedule;
 use App\Services\PostSharing\Schedules\RedditPHPSchedule;
@@ -26,18 +27,6 @@ enum SharingChannel: string
             self::R_programming => new RedditProgrammingSchedule(),
             self::R_webdev => new RedditWebdevSchedule(),
             self::R_PHP => new RedditPHPSchedule(),
-        };
-    }
-
-    public function getPoster(): ChannelPoster
-    {
-        return match ($this) {
-            self::HackerNews => app(HackerNewsPoster::class),
-            default => throw new Exception('TODO'),
-//            self::Twitter => new TwitterSchedule(),
-//            self::R_programming => new RedditProgrammingSchedule(),
-//            self::R_webdev => new RedditWebdevSchedule(),
-//            self::R_PHP => new RedditPHPSchedule(),
         };
     }
 }

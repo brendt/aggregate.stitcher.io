@@ -37,6 +37,10 @@ module.exports = {
         'hover:bg-purple-200',
         'border-purple-400',
         'hover:border-purple-300',
+        'bg-orange-100',
+        'hover:bg-orange-200',
+        'border-orange-400',
+        'hover:border-orange-300',
     ],
 
     plugins: [require('@tailwindcss/forms')],

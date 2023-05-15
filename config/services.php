@@ -38,9 +38,4 @@ return [
         'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
         'list_id' => env('TWITTER_LIST_ID'),
     ],
-
-    'hackernews' => [
-        'user' => env('HACKER_NEWS_USER'),
-        'password' => env('HACKER_NEWS_PASSWORD'),
-    ],
 ];

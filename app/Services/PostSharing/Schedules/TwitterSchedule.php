@@ -8,14 +8,20 @@ use Carbon\CarbonInterval;
 
 final class TwitterSchedule extends SharingSchedule
 {
-    protected function getIntervalForSamePostPeriod(): CarbonInterval
+    protected function cannotRepostWithin(): CarbonInterval
     {
-        return new CarbonInterval(months: 3);
+        return new CarbonInterval(
+            years: 0,
+            months: 3
+        );
     }
 
-    protected function getIntervalForChannelPeriod(): CarbonInterval
+    protected function cannotPostWithin(): CarbonInterval
     {
-        return new CarbonInterval(days: 1);
+        return new CarbonInterval(
+            years: 0,
+            days: 1
+        );
     }
 
     protected function getChannel(): SharingChannel
