@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminInfoController;
+use App\Http\Controllers\Auth\TwitterOAuthController;
 use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\DeletePostCommentController;
 use App\Http\Controllers\Posts\FindPostController;
@@ -88,6 +89,7 @@ Route::middleware(['auth'])
 Route::middleware(['auth', IsAdminMiddleware::class])
     ->prefix('/admin')
     ->group(function () {
+        Route::get('/twitter', TwitterOAuthController::class);
         Route::get('/find', FindPostController::class);
         Route::get('/info', AdminInfoController::class);
         Route::get('/stats', StatsController::class);

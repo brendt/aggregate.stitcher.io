@@ -9,6 +9,7 @@ use App\Models\Source;
 use App\Models\SourceState;
 use App\Models\Tweet;
 use App\Services\PostSharing\Posters\HackerNewsPoster;
+use Coderjerk\BirdElephant\BirdElephant;
 use DG\Twitter\Twitter;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\ServiceProvider;
@@ -27,6 +28,16 @@ class AppServiceProvider extends ServiceProvider
                 accessToken: config('services.twitter.access_token'),
                 accessTokenSecret: config('services.twitter.access_token_secret'),
             );
+        });
+
+        $this->app->singleton(BirdElephant::class, function () {
+            return new BirdElephant([
+                'consumer_key' => config('services.twitter.v2.api_key'),
+                'consumer_secret' => config('services.twitter.v2.api_key_secret'),
+                'bearer_token' => config('services.twitter.v2.bearer_token'),
+                'token_identifier' => config('services.twitter.access_token'),
+                'token_secret' => config('services.twitter.access_token_secret'),
+            ]);
         });
     }
 

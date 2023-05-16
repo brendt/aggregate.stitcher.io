@@ -37,5 +37,16 @@ return [
         'access_token' => env('TWITTER_ACCESS_TOKEN'),
         'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
         'list_id' => env('TWITTER_LIST_ID'),
+
+
+        'v2' => [
+            'api_key' => env('TWITTER_V2_API_KEY'),
+            'api_key_secret' => env('TWITTER_V2_API_KEY_SECRET'),
+            'bearer_token' => env('TWITTER_V2_BEARER_TOKEN'),
+            'access_token' => env('TWITTER_V2_ACCESS_TOKEN'),
+            'access_token_secret' => env('TWITTER_V2_ACCESS_TOKEN_SECRET'),
+            'client_id' => env('TWITTER_V2_CLIENT_ID'),
+            'client_secret' => env('TWITTER_V2_CLIENT_SECRET'),
+        ],
     ],
 ];

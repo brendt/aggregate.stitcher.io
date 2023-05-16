@@ -7,20 +7,25 @@ use Illuminate\Console\Command;
 
 class SharePostCommand extends Command
 {
-    protected $signature = 'post:share {postShare}';
+    protected $signature = 'share:post';
 
     protected $description = 'Share a post';
 
     public function handle(): void
     {
-        $postShare = PostShare::findOrFail($this->argument('postShare'));
+        $this->error('unsupported');
+        return;
+        $postShares = PostShare::query()
+            ->whereNull('shared_at')
+            ->where('share_at', '<', now())
+            ->get();
 
-        $channel = $postShare->channel;
+        $this->comment("Sharing {$postShares->count()} posts");
 
-        $this->comment("Sharing on {$channel->name}: \"{$postShare->post->title}\"");
+        foreach ($postShares as $postShare) {
+            $poster = $postShare->channel->getPoster();
 
-        $channel->getPoster()->post($postShare->post, $postShare);
-
-        $this->info("Done: ");
+            $poster->post($postShare);
+        }
     }
 }
