@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\PostShare;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class ShareTimeline extends Component
@@ -28,7 +27,7 @@ class ShareTimeline extends Component
         while ($currentDay && $currentDay <= $maxDay) {
             $timeline[$currentDay->format('Y-m')] ??= [];
             $timeline[$currentDay->format('Y-m')][$currentDay->format('Y-m-d')] = $postShares[$currentDay->format('Y-m-d')] ?? [];
-                $currentDay->addDay();
+            $currentDay->addDay();
         }
 
         return view('livewire.share-timeline', [
@@ -39,5 +38,17 @@ class ShareTimeline extends Component
     public function postShareAdded(): void
     {
         // Just re-rendering
+    }
+
+    public function markAsShared(PostShare $share): void
+    {
+        $share->update([
+            'shared_at' => now(),
+        ]);
+    }
+
+    public function markAsRemoved(PostShare $share): void
+    {
+        $share->delete();
     }
 }

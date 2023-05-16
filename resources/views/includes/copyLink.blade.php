@@ -1,4 +1,8 @@
 <script>
+    document.addEventListener('keydown', (e) => Livewire.emit('handleKeypress', e.code));
+</script>
+
+<script>
     const links = document.querySelectorAll('.link-copy');
 
     links.forEach(function (link) {
