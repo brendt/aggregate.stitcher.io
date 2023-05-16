@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Ramsey\Uuid\Uuid;
 use Spatie\Feed\Feedable;
 use Spatie\Feed\FeedItem;
@@ -258,5 +259,10 @@ class Post extends Model implements Feedable
         $message .= PHP_EOL . PHP_EOL . $this->getPublicUrl();
 
         return $message;
+    }
+
+    public function getTruncatedTitle(): string
+    {
+        return Str::limit($this->title, 30);
     }
 }

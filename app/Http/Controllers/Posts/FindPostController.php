@@ -20,7 +20,6 @@ final class FindPostController
                 ->where('hide_until', '<', now())
                 ->orWhereNull('hide_until'))
             ->orderByDesc('visits')
-            ->where('published_at', '<', now()->subMonths(6))
             ->paginate(20);
 
         return view('find', [

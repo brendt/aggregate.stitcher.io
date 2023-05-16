@@ -24,9 +24,12 @@
     </x-tag>
 
     @if($modalShown)
-        <div class="modal">
-            <div class="popup p-2 bg-gray-200 text-base border-2 border-gray-700 rounded grid grid-cols-12 gap-2">
-                <select name="channel" id="channel" class="col-span-9 rounded border" wire:model="form.channel">
+        <div class="modal z-50">
+            <div class="popup p-2 bg-gray-200 text-base border-2 border-gray-700 rounded grid
+                grid-cols-12
+                gap-2
+            ">
+                <select name="channel" id="channel" class="col-span-6 md:col-span-9 rounded border" wire:model="form.channel">
                     <option value="" selected=""></option>
                     @foreach($this->channels as $channel)
                         <option value="{{ $channel->value }}">{{ $channel->name }}</option>
@@ -34,14 +37,14 @@
                 </select>
 
                 <button
-                    class="col-span-2 font-bold cursor-pointer hover:bg-orange-200 hover:border-orange-300 bg-orange-100 rounded border border-orange-400 py-1 px-2 flex items-center justify-center"
+                    class="col-span-4 md:col-span-2 font-bold cursor-pointer hover:bg-orange-200 hover:border-orange-300 bg-orange-100 rounded border border-orange-400 py-1 px-2 flex items-center justify-center"
                     wire:click.prevent="storeForm()"
                 >
                     Schedule
                 </button>
 
                 <button
-                    class="col-span-1 font-bold cursor-pointer hover:bg-gray-200 hover:border-gray-300 bg-gray-100 rounded border border-gray-400 py-1 px-2 flex items-center justify-center"
+                    class="col-span-2 md:col-span-1 font-bold cursor-pointer hover:bg-gray-200 hover:border-gray-300 bg-gray-100 rounded border border-gray-400 py-1 px-2 flex items-center justify-center"
                     wire:click.prevent="hideModal()"
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">

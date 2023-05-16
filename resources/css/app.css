@@ -50,7 +50,9 @@
     cursor: default;
 }
 
-.modal .popup {
-    width: 40%;
-    margin-bottom: 15%;
+@media(min-width: 1000px) {
+    .modal .popup {
+        width: 40%;
+        margin-bottom: 15%;
+    }
 }

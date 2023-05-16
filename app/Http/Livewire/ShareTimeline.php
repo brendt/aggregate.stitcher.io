@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\PostShare;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class ShareTimeline extends Component
@@ -22,15 +23,16 @@ class ShareTimeline extends Component
         $currentDay = Carbon::make($postShares->keys()->first());
         $maxDay = Carbon::make($postShares->keys()->last());
 
-        $postSharesPerDay = collect();
+        $timeline = [];
 
         while ($currentDay && $currentDay <= $maxDay) {
-            $postSharesPerDay[$currentDay->format('Y-m-d')] = $postShares[$currentDay->format('Y-m-d')] ?? [];
-            $currentDay->addDay();
+            $timeline[$currentDay->format('Y-m')] ??= [];
+            $timeline[$currentDay->format('Y-m')][$currentDay->format('Y-m-d')] = $postShares[$currentDay->format('Y-m-d')] ?? [];
+                $currentDay->addDay();
         }
 
         return view('livewire.share-timeline', [
-            'postSharesPerDay' => $postSharesPerDay,
+            'timeline' => $timeline,
         ]);
     }
 
