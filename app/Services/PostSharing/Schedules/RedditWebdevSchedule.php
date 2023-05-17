@@ -35,6 +35,6 @@ final class RedditWebdevSchedule extends SharingSchedule
 
     protected function getChannel(): SharingChannel
     {
-        return SharingChannel::R_webdev;
+        return SharingChannel::R_WEBDEV;
     }
 }

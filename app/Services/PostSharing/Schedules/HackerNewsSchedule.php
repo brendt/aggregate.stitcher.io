@@ -35,6 +35,6 @@ final class HackerNewsSchedule extends SharingSchedule
 
     protected function getChannel(): SharingChannel
     {
-        return SharingChannel::HackerNews;
+        return SharingChannel::HACKERNEWS;
     }
 }

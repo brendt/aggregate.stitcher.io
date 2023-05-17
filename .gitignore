@@ -16,3 +16,4 @@ public/css
 public/js
 storage/debugbar
 storage/twitter_oauth
+storage/reddit_oauth

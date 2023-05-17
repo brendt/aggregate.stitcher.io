@@ -1,7 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminInfoController;
+use App\Http\Controllers\Auth\RedditOAuthController;
+use App\Http\Controllers\Auth\RedditOAuthRedirectController;
 use App\Http\Controllers\Auth\TwitterOAuthController;
+use App\Http\Controllers\Auth\TwitterOAuthRedirectController;
 use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\DeletePostCommentController;
 use App\Http\Controllers\Posts\FindPostController;
@@ -50,7 +53,9 @@ use App\Http\Controllers\Users\SendInviteController;
 use App\Http\Controllers\Users\StoreAcceptedInvitationController;
 use App\Http\Controllers\Users\AboutInvitesController;
 use App\Http\Middleware\IsAdminMiddleware;
+use App\Services\OAuth\Token;
 use Illuminate\Support\Facades\Route;
+use Laravel\Socialite\Facades\Socialite;
 
 /*
 |--------------------------------------------------------------------------
@@ -89,7 +94,11 @@ Route::middleware(['auth'])
 Route::middleware(['auth', IsAdminMiddleware::class])
     ->prefix('/admin')
     ->group(function () {
-        Route::get('/twitter', TwitterOAuthController::class);
+        Route::get('/reddit/auth', RedditOAuthController::class);
+        Route::get('/reddit/redirect', RedditOAuthRedirectController::class);
+        Route::get('/twitter/auth', TwitterOAuthController::class);
+        Route::get('/twitter/redirect', TwitterOAuthRedirectController::class);
+
         Route::get('/find', FindPostController::class);
         Route::get('/info', AdminInfoController::class);
         Route::get('/stats', StatsController::class);

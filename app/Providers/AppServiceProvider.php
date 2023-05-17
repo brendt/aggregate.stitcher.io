@@ -3,11 +3,15 @@
 namespace App\Providers;
 
 use App\Console\Commands\SourceDebugCommand;
+use App\Http\Controllers\Auth\RedditOAuthRedirectController;
+use App\Http\Controllers\Auth\TwitterOAuthRedirectController;
 use App\Models\Post;
 use App\Models\PostState;
 use App\Models\Source;
 use App\Models\SourceState;
 use App\Models\Tweet;
+use App\Services\OAuth\RedditHttpClient;
+use App\Services\OAuth\TwitterHttpClient;
 use App\Services\PostSharing\Posters\HackerNewsPoster;
 use Coderjerk\BirdElephant\BirdElephant;
 use DG\Twitter\Twitter;
@@ -30,15 +34,20 @@ class AppServiceProvider extends ServiceProvider
             );
         });
 
-        $this->app->singleton(BirdElephant::class, function () {
-            return new BirdElephant([
-                'consumer_key' => config('services.twitter.v2.api_key'),
-                'consumer_secret' => config('services.twitter.v2.api_key_secret'),
-                'bearer_token' => config('services.twitter.v2.bearer_token'),
-                'token_identifier' => config('services.twitter.access_token'),
-                'token_secret' => config('services.twitter.access_token_secret'),
-            ]);
-        });
+        $this->app->singleton(RedditHttpClient::class, fn () => new RedditHttpClient(
+            clientId: config('services.reddit.client_id'),
+            clientSecret: config('services.reddit.client_secret'),
+            redirectUrl: action(RedditOAuthRedirectController::class),
+        ));
+
+        $this->app->singleton(TwitterHttpClient::class, fn () => new TwitterHttpClient(
+            oauth: new \Smolblog\OAuth2\Client\Provider\Twitter([
+                'clientId' => config('services.twitter.v2.client_id'),
+                'clientSecret' => config('services.twitter.v2.client_secret'),
+                'redirectUri' => action(TwitterOAuthRedirectController::class),
+            ]),
+            redirectUrl: action(TwitterOAuthRedirectController::class),
+        ));
     }
 
     public function boot()

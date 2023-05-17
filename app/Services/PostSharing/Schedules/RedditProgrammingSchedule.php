@@ -35,6 +35,6 @@ final class RedditProgrammingSchedule extends SharingSchedule
 
     protected function getChannel(): SharingChannel
     {
-        return SharingChannel::R_programming;
+        return SharingChannel::R_PROGRAMMING;
     }
 }

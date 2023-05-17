@@ -31,13 +31,16 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
-    'twitter' => [
-        'api_key' => env('TWITTER_API_KEY'),
-        'api_secret_key' => env('TWITTER_API_SECRET_KEY'),
-        'access_token' => env('TWITTER_ACCESS_TOKEN'),
-        'access_token_secret' => env('TWITTER_ACCESS_TOKEN_SECRET'),
-        'list_id' => env('TWITTER_LIST_ID'),
+    'reddit' => [
+        'client_id' => env('REDDIT_CLIENT_ID'),
+        'client_secret' => env('REDDIT_CLIENT_SECRET'),
+        'redirect' => env('REDDIT_REDIRECT_URI')
+    ],
 
+    'twitter' => [
+        'client_id' => env('TWITTER_V2_CLIENT_ID'),
+        'client_secret' => env('TWITTER_V2_CLIENT_SECRET'),
+        'redirect' => env('TWITTER_REDIRECT_URI'),
 
         'v2' => [
             'api_key' => env('TWITTER_V2_API_KEY'),

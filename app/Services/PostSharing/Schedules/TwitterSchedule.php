@@ -35,6 +35,6 @@ final class TwitterSchedule extends SharingSchedule
 
     protected function getChannel(): SharingChannel
     {
-        return SharingChannel::Twitter;
+        return SharingChannel::TWITTER;
     }
 }
