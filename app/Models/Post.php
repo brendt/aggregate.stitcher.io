@@ -268,7 +268,7 @@ class Post extends Model implements Feedable
 
         $message .= PHP_EOL . PHP_EOL . $this->getPublicUrl();
 
-        return $message;
+        return html_entity_decode($message);
     }
 
     public function getTruncatedTitle(): string

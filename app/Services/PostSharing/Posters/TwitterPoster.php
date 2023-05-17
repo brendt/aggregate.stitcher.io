@@ -15,9 +15,9 @@ final class TwitterPoster implements ChannelPoster
     public function post(PostShare $postShare): void
     {
         // Just in case something goes wrong: I don't want to spam Twitter, so I immediately set shared at.
-        $postShare->update([
-            'shared_at' => now(),
-        ]);
+//        $postShare->update([
+//            'shared_at' => now(),
+//        ]);
 
         $response = $this->twitter->tweet($postShare->post->getTweetMessage());
 
