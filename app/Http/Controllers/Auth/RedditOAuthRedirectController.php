@@ -16,6 +16,6 @@ final class RedditOAuthRedirectController
             state: $request->get('state')
         );
 
-        return 'done';
+        return redirect()->action(RedditOAuthStatusController::class);
     }
 }

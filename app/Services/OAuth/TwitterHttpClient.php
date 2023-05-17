@@ -73,6 +73,11 @@ final class TwitterHttpClient
         return $this->client()->tweets()->tweet($tweet);
     }
 
+    public function me(): object
+    {
+        return $this->client()->user('brendt_gd');
+    }
+
     private function client(): BirdElephant
     {
         return new BirdElephant([

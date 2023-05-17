@@ -3,8 +3,10 @@
 use App\Http\Controllers\AdminInfoController;
 use App\Http\Controllers\Auth\RedditOAuthController;
 use App\Http\Controllers\Auth\RedditOAuthRedirectController;
+use App\Http\Controllers\Auth\RedditOAuthStatusController;
 use App\Http\Controllers\Auth\TwitterOAuthController;
 use App\Http\Controllers\Auth\TwitterOAuthRedirectController;
+use App\Http\Controllers\Auth\TwitterOAuthStatusController;
 use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\DeletePostCommentController;
 use App\Http\Controllers\Posts\FindPostController;
@@ -96,8 +98,11 @@ Route::middleware(['auth', IsAdminMiddleware::class])
     ->group(function () {
         Route::get('/reddit/auth', RedditOAuthController::class);
         Route::get('/reddit/redirect', RedditOAuthRedirectController::class);
+        Route::get('/reddit/status', RedditOAuthStatusController::class);
+
         Route::get('/twitter/auth', TwitterOAuthController::class);
         Route::get('/twitter/redirect', TwitterOAuthRedirectController::class);
+        Route::get('/twitter/status', TwitterOAuthStatusController::class);
 
         Route::get('/find', FindPostController::class);
         Route::get('/info', AdminInfoController::class);

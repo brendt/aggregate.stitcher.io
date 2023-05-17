@@ -16,6 +16,6 @@ final class TwitterOAuthRedirectController
             $request->get('state')
         );
 
-        return 'done';
+        return redirect()->action(TwitterOAuthStatusController::class);
     }
 }
