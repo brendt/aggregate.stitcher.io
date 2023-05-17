@@ -158,6 +158,7 @@ namespace App\Models{
  * @property \App\Services\PostSharing\SharingChannel $channel
  * @property \Illuminate\Support\Carbon $share_at
  * @property \Illuminate\Support\Carbon|null $shared_at
+ * @property string|null $reference
  * @property string|null $description
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -174,6 +175,7 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereReference($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereShareAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereSharedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereUpdatedAt($value)

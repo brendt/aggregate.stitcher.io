@@ -33,7 +33,7 @@ enum SharingChannel: string
     {
         return match ($this) {
             self::Twitter => app(TwitterPoster::class),
-            default=> new VoidPoster(),
+            default => new VoidPoster(),
 //            self::R_PHP => new RedditPHPSchedule(),
 //            self::R_webdev => new RedditWebdevSchedule(),
 //            self::R_programming => new RedditProgrammingSchedule(),

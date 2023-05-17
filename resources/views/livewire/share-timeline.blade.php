@@ -15,6 +15,8 @@
     md:text-md
     gap-1
     overflow-x-scroll
+    shadow
+    border-orange-300
     ">
     @foreach($timeline as $month => $sharesPerDay)
         <div class="font-bold mx-4 flex items-center">

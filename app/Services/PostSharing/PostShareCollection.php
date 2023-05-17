@@ -9,6 +9,13 @@ use Spatie\Period\Period;
 
 final class PostShareCollection extends Collection
 {
+    public function pendingShares(): self
+    {
+        return $this->filter(
+            fn(PostShare $share) => $share->shared_at === null
+        );
+    }
+
     public function forPost(Post $post): self
     {
         return $this->filter(

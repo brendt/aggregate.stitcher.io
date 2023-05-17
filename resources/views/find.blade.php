@@ -26,12 +26,12 @@
                 @endforeach
             </div>
 
-            @if($posts->hasMorePages())
-                <a class="px-12 py-4 font-bold block text-center hover:bg-pink-200" href="{{ $posts->nextPageUrl() }}"
-                   title="Add your own">
-                    more
-                </a>
-            @endif
+{{--            @if($posts->hasMorePages())--}}
+{{--                <a class="px-12 py-4 font-bold block text-center hover:bg-pink-200" href="{{ $posts->nextPageUrl() }}"--}}
+{{--                   title="Add your own">--}}
+{{--                    more--}}
+{{--                </a>--}}
+{{--            @endif--}}
         </div>
 
     @auth()

@@ -26,7 +26,25 @@ final class TwitterOAuthController
                 'scope' => [
                     'tweet.read',
                     'tweet.write',
-                ],
+                    'tweet.moderate.write',
+                    'users.read',
+                    'follows.read',
+                    'follows.write',
+                    'offline.access',
+                    'space.read',
+                    'mute.read',
+                    'mute.write',
+                    'like.read',
+                    'like.write',
+                    'list.read',
+                    'list.write',
+                    'block.read',
+                    'block.write',
+                    'bookmark.read',
+                    'bookmark.write',
+//                    'dm.read',
+//                    'dm.write',
+                ]
             ];
 
             $authUrl = $provider->getAuthorizationUrl($options);

@@ -22,32 +22,37 @@ final class TwitterPoster implements ChannelPoster
 
     public function post(PostShare $postShare): void
     {
-        try {
-            $tweet = (new Tweet)->text("Test, feel free to ignore");
+        // Just in case something goes wrong: I don't want to spam Twitter, so I immediately set shared at.
+        $postShare->update([
+            'shared_at' => now(),
+        ]);
 
-            $this->twitter->tweets()->tweet($tweet);
-        }  catch (Exception $e) {
-            dd($e->getMessage());
-        }
+        $tweet = (new Tweet)->text($postShare->post->getTweetMessage());
+
+        $response = $this->twitter->tweets()->tweet($tweet);
+
+        $postShare->update([
+            'reference' => json_encode($response),
+        ]);
     }
 
     private function getCredentials(): array
     {
         return [
-            'consumer_key' => config('services.twitter.v2.api_key'),
-            'consumer_secret' => config('services.twitter.v2.api_key_secret'),
-            'bearer_token' => config('services.twitter.v2.bearer_token'),
-            'token_identifier' => config('services.twitter.access_token'),
-            'token_secret' => config('services.twitter.access_token_secret'),
-        ] + $this->getToken();
+                'consumer_key' => config('services.twitter.v2.api_key'),
+                'consumer_secret' => config('services.twitter.v2.api_key_secret'),
+                'bearer_token' => config('services.twitter.v2.bearer_token'),
+                'token_identifier' => config('services.twitter.access_token'),
+                'token_secret' => config('services.twitter.access_token_secret'),
+            ] + $this->getToken();
     }
 
     private function getToken(): array
     {
         $provider = new Twitter([
-            'clientId'     => config('services.twitter.v2.client_id'),
+            'clientId' => config('services.twitter.v2.client_id'),
             'clientSecret' => config('services.twitter.v2.api_key_secret'),
-            'redirectUri'  => action(TwitterOAuthController::class),
+            'redirectUri' => action(TwitterOAuthController::class),
         ]);
 
         $token = new AccessToken(json_decode(file_get_contents(storage_path('twitter_oauth')), true));

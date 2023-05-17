@@ -57,6 +57,18 @@
                         Next timeslot: {{ $nextTimeslot->format('Y-m-d H:i') }}
                     </div>
                 @endif
+
+                <div class="col-span-12">
+                    <div class="grid gap-2 p-2">
+                        @foreach ($post->pendingShares as $share)
+                            <div class="flex items-center gap-2">
+                                {!! $share->channel->getIcon() !!}
+
+                                <span class="text-sm">{{ $share->share_at->format("M d, Y, H:i") }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
             </div>
         </div>
     @endif

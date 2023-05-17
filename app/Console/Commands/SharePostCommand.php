@@ -13,8 +13,6 @@ class SharePostCommand extends Command
 
     public function handle(): void
     {
-        $this->error('unsupported');
-        return;
         $postShares = PostShare::query()
             ->whereNull('shared_at')
             ->where('share_at', '<', now())
@@ -23,6 +21,14 @@ class SharePostCommand extends Command
         $this->comment("Sharing {$postShares->count()} posts");
 
         foreach ($postShares as $postShare) {
+            if (!$this->option('no-interaction')) {
+                $result = $this->confirm("Share {$postShare->post->title} on {$postShare->channel->name}?");
+
+                if (!$result) {
+                    continue;
+                }
+            }
+
             $poster = $postShare->channel->getPoster();
 
             $poster->post($postShare);

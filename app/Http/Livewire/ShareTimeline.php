@@ -15,6 +15,7 @@ class ShareTimeline extends Component
         $postShares = PostShare::query()
             ->whereNull('shared_at')
             ->orderBy('share_at')
+            ->where('share_at', '<', now()->addYear())
             ->with('post')
             ->get()
             ->groupBy(fn (PostShare $postShare) => $postShare->share_at->format('Y-m-d'));
