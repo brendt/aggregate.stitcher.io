@@ -93,9 +93,9 @@
 {{--                        {!! $post->getRanking() !!}--}}
 {{--                    </div>--}}
 
-                    <div class="">
-                        {!! $post->getSparkLine() !!}
-                    </div>
+{{--                    <div class="">--}}
+{{--                        {!! $post->getSparkLine() !!}--}}
+{{--                    </div>--}}
                 </x-tags>
             </div>
         </div>
