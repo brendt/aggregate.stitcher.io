@@ -89,9 +89,9 @@
                         </x-tag>
                     @endif
 
-                    <div class="bg-gray-100 rounded py-1 px-2 flex items-center justify-center" style="color:#fff; background-color:hsl(110 ,{{ $post->getRanking()->getSaturation() }}%, 34%)">
-                        {!! $post->getRanking() !!}
-                    </div>
+{{--                    <div class="bg-gray-100 rounded py-1 px-2 flex items-center justify-center" style="color:#fff; background-color:hsl(110 ,{{ $post->getRanking()->getSaturation() }}%, 34%)">--}}
+{{--                        {!! $post->getRanking() !!}--}}
+{{--                    </div>--}}
 
                     <div class="">
                         {!! $post->getSparkLine() !!}
