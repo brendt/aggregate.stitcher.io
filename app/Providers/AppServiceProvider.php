@@ -12,10 +12,9 @@ use App\Models\SourceState;
 use App\Models\Tweet;
 use App\Services\OAuth\RedditHttpClient;
 use App\Services\OAuth\TwitterHttpClient;
-use App\Services\PostSharing\Posters\HackerNewsPoster;
-use Coderjerk\BirdElephant\BirdElephant;
 use DG\Twitter\Twitter;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\View;
 

@@ -12,7 +12,7 @@ final class FindPostController
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('source', 'pendingShares')
+            ->with('source', 'pendingShares', 'comments')
             ->whereHas('pendingShares', operator: '<', count: 3)
             ->where('state', PostState::PUBLISHED)
             ->where(fn (Builder $builder) => $builder
