@@ -65,7 +65,7 @@ class Post extends Model implements Feedable
     public function comments(): HasMany
     {
         return $this->hasMany(PostComment::class)
-            ->whereHas('user', fn (Builder $builder) => $builder->whereNull('banned_at'))
+            ->whereHas('user', fn(Builder $builder) => $builder->whereNull('banned_at'))
             ->orderByDesc('created_at');
     }
 
@@ -210,7 +210,7 @@ class Post extends Model implements Feedable
         $posts = Cache::remember(
             'posts_ranking',
             now()->addSeconds(10),
-            fn () => DB::query()
+            fn() => DB::query()
                 ->select('id', 'visits')
                 ->from($this->getTable())
                 ->where('state', PostState::PUBLISHED->value)
@@ -218,7 +218,7 @@ class Post extends Model implements Feedable
                 ->get()
         );
 
-        $position = $posts->mapWithKeys(fn (object $row, int $position) => [$row->id => $position])[$this->id] ?? 0;
+        $position = $posts->mapWithKeys(fn(object $row, int $position) => [$row->id => $position])[$this->id] ?? 0;
 
         return new PostRank(position: $position, total: $posts->count());
     }
@@ -240,7 +240,7 @@ class Post extends Model implements Feedable
             ->orderByDesc('created_at_day')
 //            ->limit(20)
             ->get()
-            ->map(fn (object $row) => new SparkLineDay(
+            ->map(fn(object $row) => new SparkLineDay(
                 count: $row->visits,
                 day: Carbon::make($row->created_at_day),
             ));
@@ -262,7 +262,9 @@ class Post extends Model implements Feedable
     {
         $message = $this->title;
 
-        if ($handle = ($this->source->twitter_handle ?? null)) {
+        $handle = $this->source->twitter_handle ?? null;
+
+        if ($handle !== null && $handle !== '@brendt_gd') {
             $message .= " by {$handle}";
         }
 
