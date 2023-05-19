@@ -119,7 +119,7 @@
                         <div class="mt-1 md:mt-2">
                             {!! $comment->getEscapedComment() !!}
                         </div>
-                        @if($user->is_admin)
+                        @if($user?->is_admin)
                             <x-tags class="mt-2">
                                 <x-tag
                                     :url="action(\App\Http\Controllers\Posts\DeletePostCommentController::class, $comment->id)"
