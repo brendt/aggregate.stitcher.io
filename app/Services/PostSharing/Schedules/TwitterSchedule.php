@@ -21,7 +21,7 @@ final class TwitterSchedule extends SharingSchedule
     {
         return new CarbonInterval(
             years: 0,
-            months: 3
+            months: 6
         );
     }
 
