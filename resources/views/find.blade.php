@@ -10,21 +10,36 @@
 
         <livewire:share-timeline></livewire:share-timeline>
 
-        <div class="bg-white mx-4 shadow-md p-2 px-4 flex gap-2 items-center">
+        <div class="bg-white mx-4 shadow-md p-2 px-4 flex flex-wrap gap-2 items-center">
             <span>Find for:</span>
-            <x-tag color="blue" class="text-sm" :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::TWITTER->value])">
+            <x-tag
+                color="blue"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::TWITTER ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::TWITTER->value])">
                 Twitter
             </x-tag>
-            <x-tag color="orange" class="text-sm" :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::HACKERNEWS->value])">
+            <x-tag
+                color="orange"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::HACKERNEWS ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::HACKERNEWS->value])">
                 HackerNews
             </x-tag>
-            <x-tag color="purple" class="text-sm" :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_PHP->value])">
+            <x-tag
+                color="purple"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::R_PHP ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_PHP->value])">
                 /r/php
             </x-tag>
-            <x-tag color="red" class="text-sm" :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_WEBDEV->value])">
+            <x-tag
+                color="green"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::R_WEBDEV ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_WEBDEV->value])">
                 /r/webdev
             </x-tag>
-            <x-tag color="red" class="text-sm" :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_PROGRAMMING->value])">
+            <x-tag
+                color="red"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::R_PROGRAMMING ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_PROGRAMMING->value])">
                 /r/programming
             </x-tag>
         </div>

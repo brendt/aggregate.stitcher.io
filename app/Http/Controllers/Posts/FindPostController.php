@@ -61,6 +61,7 @@ final class FindPostController
             'user' => $request->user(),
             'posts' => $posts,
             'message' => $request->get('message'),
+            'filter' => $filter
         ]);
     }
 }
