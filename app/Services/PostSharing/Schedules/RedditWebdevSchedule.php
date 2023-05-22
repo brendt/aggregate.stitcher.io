@@ -12,9 +12,15 @@ final class RedditWebdevSchedule extends SharingSchedule
 {
     public function getNextTimeslot(Post $post): CarbonImmutable
     {
-        return parent::getNextTimeslot($post)
-            ->setHour(random_int(7, 8))
+        $date = parent::getNextTimeslot($post)
+            ->setHour(16)
             ->setMinute(random_int(1, 59));
+
+        while (! $date->isSaturday()) {
+            $date = $date->addDay();
+        }
+
+        return $date;
     }
 
     protected function cannotRepostWithin(): CarbonInterval
