@@ -35,7 +35,8 @@ final class RedditPHPSchedule extends SharingSchedule
     {
         return new CarbonInterval(
             years: 0,
-            weeks: 1
+            weeks: 0,
+            days: 6,
         );
     }
 

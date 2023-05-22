@@ -27,7 +27,7 @@ final class RedditWebdevSchedule extends SharingSchedule
     {
         return new CarbonInterval(
             years: 0,
-            months: 12
+            months: 12,
         );
     }
 
@@ -35,7 +35,8 @@ final class RedditWebdevSchedule extends SharingSchedule
     {
         return new CarbonInterval(
             years: 0,
-            weeks: 2
+            weeks: 0,
+            days: 13,
         );
     }
 

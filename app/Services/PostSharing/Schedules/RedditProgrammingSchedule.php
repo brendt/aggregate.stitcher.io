@@ -35,7 +35,8 @@ final class RedditProgrammingSchedule extends SharingSchedule
     {
         return new CarbonInterval(
             years: 0,
-            weeks: 2
+            weeks: 0,
+            days: 13,
         );
     }
 

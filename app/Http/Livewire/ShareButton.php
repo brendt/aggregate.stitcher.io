@@ -17,7 +17,14 @@ class ShareButton extends Component
 
     public Post $post;
 
+    public ?SharingChannel $channelFilter = null;
+
     public ?PostShare $postShare = null;
+
+    public function mount(): void
+    {
+        $this->form['channel'] = $this->channelFilter?->value;
+    }
 
     public function render()
     {

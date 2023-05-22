@@ -25,7 +25,7 @@
                 </h1>
 
                 <x-tags class="flex-wrap mt-1">
-                    <livewire:share-button :post="$post"></livewire:share-button>
+                    <livewire:share-button :post="$post" :channel-filter="$channelFilter ?? null"></livewire:share-button>
 
                     {!! $buttons ?? null !!}
 
