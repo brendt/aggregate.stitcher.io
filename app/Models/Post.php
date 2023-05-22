@@ -62,6 +62,11 @@ class Post extends Model implements Feedable
         return $this->hasMany(PostShare::class)->whereNull('shared_at')->orderBy('share_at');
     }
 
+    public function shareSnoozes(): HasMany
+    {
+        return $this->hasMany(PostShareSnooze::class);
+    }
+
     public function comments(): HasMany
     {
         return $this->hasMany(PostComment::class)

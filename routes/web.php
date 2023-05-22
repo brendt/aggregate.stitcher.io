@@ -18,6 +18,7 @@ use App\Http\Controllers\Links\VisitLinkController;
 use App\Http\Controllers\Posts\AdminPostsController;
 use App\Http\Controllers\Posts\PermanentlyHidePostController;
 use App\Http\Controllers\Posts\PostCommentsController;
+use App\Http\Controllers\Posts\SnoozeShareController;
 use App\Http\Controllers\Posts\StorePostCommentController;
 use App\Http\Controllers\Posts\TopPostController;
 use App\Http\Controllers\StatsController;
@@ -120,6 +121,7 @@ Route::middleware(['auth', IsAdminMiddleware::class])
         Route::get('/posts/hide/{post}', HidePostController::class);
         Route::get('/posts/hide-permanently/{post}', PermanentlyHidePostController::class);
         Route::get('/posts/comments/{postComment}/delete', DeletePostCommentController::class);
+        Route::get('/post-shares/snooze/{post}/{channel}', SnoozeShareController::class);
 
         Route::get('/mutes/create', CreateMuteController::class);
         Route::post('/mutes/create', StoreMuteController::class);

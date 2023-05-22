@@ -97,6 +97,12 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $last_comment_at
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostComment> $comments
  * @property-read int|null $comments_count
+ * @property-read \App\Services\PostSharing\PostShareCollection<int, \App\Models\PostShare> $pendingShares
+ * @property-read int|null $pending_shares_count
+ * @property-read \Illuminate\Database\Eloquent\Collection<int, \App\Models\PostShareSnooze> $shareSnoozes
+ * @property-read int|null $share_snoozes_count
+ * @property-read \App\Services\PostSharing\PostShareCollection<int, \App\Models\PostShare> $shares
+ * @property-read int|null $shares_count
  * @property-read \App\Models\Source|null $source
  * @method static \Database\Factories\PostFactory factory($count = null, $state = [])
  * @method static \Illuminate\Database\Eloquent\Builder|Post homePage()
@@ -181,6 +187,30 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|PostShare whereUpdatedAt($value)
  */
 	class PostShare extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\PostShareSnooze
+ *
+ * @property int $id
+ * @property int $post_id
+ * @property \App\Services\PostSharing\SharingChannel $channel
+ * @property \Illuminate\Support\Carbon $snooze_until
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Post $post
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze query()
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze whereChannel($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze wherePostId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze whereSnoozeUntil($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|PostShareSnooze whereUpdatedAt($value)
+ */
+	class PostShareSnooze extends \Eloquent {}
 }
 
 namespace App\Models{

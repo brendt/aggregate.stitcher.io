@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Posts;
 
 use App\Models\Post;
 use App\Models\PostShare;
+use App\Models\PostShareSnooze;
 use App\Models\PostState;
 use App\Services\PostSharing\SharingChannel;
 use Illuminate\Database\Eloquent\Builder;
@@ -22,27 +23,31 @@ final class FindPostController
 
         if ($filter) {
             $query
-                ->where(function (Builder $builder) use ($filter) {
-                    $builder
-                        // No pending share for same channel
-                        ->whereDoesntHave(
-                            relation: 'pendingShares',
-                            callback: function (Builder|PostShare $builder) use ($filter) {
-                                $builder->where('channel', $filter);
-                            })
-                        // No share less than repost grace period for channel
-                        ->whereDoesntHave(
-                            relation: 'shares',
-                            callback: function (Builder|PostShare $builder) use ($filter) {
-                                $builder
-                                    ->where('channel', $filter)
-                                    ->where('shared_at', '>', now()->sub($filter->getSchedule()->cannotRepostWithin())->addDay());
-                            }
-                        );
-                })
-                ->where(fn(Builder $builder) => $builder
-                    ->where('hide_until', '<', now()->addYears(50))
-                    ->orWhereNull('hide_until'));
+                // No pending share for same channel
+                ->whereDoesntHave(
+                    relation: 'pendingShares',
+                    callback: function (Builder|PostShare $builder) use ($filter) {
+                        $builder->where('channel', $filter);
+                    })
+
+                // No share less than repost grace period for channel
+                ->whereDoesntHave(
+                    relation: 'shares',
+                    callback: function (Builder|PostShare $builder) use ($filter) {
+                        $builder
+                            ->where('channel', $filter)
+                            ->where('shared_at', '>', now()->sub($filter->getSchedule()->cannotRepostWithin())->addDay());
+                    }
+                )
+
+                ->whereDoesntHave(
+                    relation: 'shareSnoozes',
+                    callback: function (Builder|PostShareSnooze $builder) use ($filter) {
+                        $builder
+                            ->where('channel', $filter)
+                            ->where('snooze_until', '>', now());
+                    }
+                );
         } else {
             $query
                 ->whereHas(
