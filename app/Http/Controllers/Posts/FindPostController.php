@@ -18,23 +18,28 @@ final class FindPostController
         $query = Post::query()
             ->with('source', 'pendingShares', 'comments')
             ->where('state', PostState::PUBLISHED)
-            ->where(fn(Builder $builder) => $builder
-                ->where('hide_until', '<', now())
-                ->orWhereNull('hide_until'))
             ->orderByDesc('visits');
 
         if ($filter) {
-            $query->whereDoesntHave(
-                relation: 'pendingShares',
-                callback: function (Builder|PostShare $builder) use ($filter) {
-                    $builder->where('channel', $filter);
-                });
+            $query
+                ->whereDoesntHave(
+                    relation: 'pendingShares',
+                    callback: function (Builder|PostShare $builder) use ($filter) {
+                        $builder->where('channel', $filter);
+                    })
+                ->where(fn(Builder $builder) => $builder
+                    ->where('hide_until', '<', now()->addYears(50))
+                    ->orWhereNull('hide_until'));
         } else {
-            $query->whereHas(
-                relation: 'pendingShares',
-                operator: '<',
-                count: 3
-            );
+            $query
+                ->whereHas(
+                    relation: 'pendingShares',
+                    operator: '<',
+                    count: 3
+                )
+                ->where(fn(Builder $builder) => $builder
+                    ->where('hide_until', '<', now())
+                    ->orWhereNull('hide_until'));
         }
 
         $posts = $query->paginate(50);
