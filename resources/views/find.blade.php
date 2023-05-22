@@ -42,6 +42,12 @@
                 :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::R_PROGRAMMING->value])">
                 /r/programming
             </x-tag>
+            <x-tag
+                color="red"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::LOBSTERS ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::LOBSTERS->value])">
+                Lobste.rs
+            </x-tag>
         </div>
 
         <div class="bg-white mx-4 shadow-md grid">

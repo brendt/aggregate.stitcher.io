@@ -54,6 +54,11 @@
                                href="https://news.ycombinator.com/submitlink?u={{$share->post->getFullUrl()}}&t={{$share->post->title}}">
                                 {{ $share->post->getTruncatedTitle() }}
                             </a>
+                        @elseif($share->channel === SharingChannel::LOBSTERS)
+                            <a class="underline hover:no-underline"
+                               href="https://lobste.rs/stories/new?url={{$share->post->getFullUrl()}}&title={{$share->post->title}}">
+                                {{ $share->post->getTruncatedTitle() }}
+                            </a>
                         @else
                             {{ $share->post->getTruncatedTitle() }}
                         @endif
