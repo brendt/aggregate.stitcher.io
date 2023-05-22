@@ -28,7 +28,7 @@ final class HomeController
         return view('home', [
             'user' => $user,
             'posts' => $posts,
-            'message' => $request->get('message', $this->defaultMessage()),
+            'message' => $request->get('message'),
             'totalVisitsSparkLine' => $user ? $this->getTotalVisitsSparkLine() : null,
             'totalPostsSparkLine' => $user ? $this->getTotalPostsSparkLine() : null,
         ]);
