@@ -22,11 +22,24 @@ final class FindPostController
 
         if ($filter) {
             $query
-                ->whereDoesntHave(
-                    relation: 'pendingShares',
-                    callback: function (Builder|PostShare $builder) use ($filter) {
-                        $builder->where('channel', $filter);
-                    })
+                ->where(function (Builder $builder) use ($filter) {
+                    $builder
+                        // No pending share for same channel
+                        ->whereDoesntHave(
+                            relation: 'pendingShares',
+                            callback: function (Builder|PostShare $builder) use ($filter) {
+                                $builder->where('channel', $filter);
+                            })
+                        // No share less than 1 month ago
+                        ->whereDoesntHave(
+                            relation: 'shares',
+                            callback: function (Builder|PostShare $builder) use ($filter) {
+                                $builder
+                                    ->where('channel', $filter)
+                                    ->where('shared_at', '>', now()->subMonth());
+                            }
+                        );
+                })
                 ->where(fn(Builder $builder) => $builder
                     ->where('hide_until', '<', now()->addYears(50))
                     ->orWhereNull('hide_until'));
