@@ -42,6 +42,6 @@ final class LobstersSchedule extends SharingSchedule
 
     protected function getChannel(): SharingChannel
     {
-        return SharingChannel::R_PHP;
+        return SharingChannel::LOBSTERS;
     }
 }

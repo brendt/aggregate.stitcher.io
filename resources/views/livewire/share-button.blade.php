@@ -52,7 +52,7 @@
                     </svg>
                 </button>
 
-                @if($nextTimeslot)
+                @if($channel)
                     <div class="text-sm col-span-12 text-right">
                         Next timeslot: {{ $channel?->getSchedule()->getNextTimeslot($this->post)->format('Y-m-d H:i') }}
                     </div>
