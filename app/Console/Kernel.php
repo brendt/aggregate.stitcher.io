@@ -12,8 +12,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command(SourceSyncCommand::class)->everyFifteenMinutes();
-        $schedule->command(SharePostCommand::class, ['--
-        no-interaction'])->everyMinute();
+        $schedule->command(SharePostCommand::class, ['--no-interaction'])->everyMinute();
     }
 
     protected function commands()
