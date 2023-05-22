@@ -11,6 +11,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
 class SyncSourceJob implements ShouldQueue
 {
@@ -22,23 +23,27 @@ class SyncSourceJob implements ShouldQueue
 
     public function handle()
     {
-        $xml = file_get_contents($this->source->url);
+        try {
+            $xml = file_get_contents($this->source->url);
 
-        $entries = (new ParseRssFeed($this->source))($xml);
+            $entries = (new ParseRssFeed($this->source))($xml);
 
-        foreach ($entries as $entry) {
-            $post = Post::updateOrCreate(
-                [
-                    'source_id' => $this->source->id,
-                    'url' => $entry->url,
-                ],
-                [
-                    'title' => $entry->title,
-                    'created_at' => $entry->createdAt,
-                ]
-            );
+            foreach ($entries as $entry) {
+                $post = Post::updateOrCreate(
+                    [
+                        'source_id' => $this->source->id,
+                        'url' => $entry->url,
+                    ],
+                    [
+                        'title' => $entry->title,
+                        'created_at' => $entry->createdAt,
+                    ]
+                );
 
-            event(new PostResolved($post, $entry->payload));
+                event(new PostResolved($post, $entry->payload));
+            }
+        } catch (Throwable $exception) {
+            $this->source->markWithError($exception);
         }
     }
 }

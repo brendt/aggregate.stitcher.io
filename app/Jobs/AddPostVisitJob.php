@@ -29,15 +29,15 @@ class AddPostVisitJob implements ShouldQueue
             'post_id' => $this->post->id,
         ]);
 
-        Post::query()
-            ->homePage()
-            ->paginate(20)
-            ->each(function (Post $post) {
-                Cache::forget($post->getVisitsGraphCacheKey());
+//        Post::query()
+//            ->homePage()
+//            ->paginate(20)
+//            ->each(function (Post $post) {
+//                Cache::forget($post->getVisitsGraphCacheKey());
+//
+//                $post->getSparkLine();
+//            });
 
-                $post->getSparkLine();
-            });
-
-        Cache::forget($this->post->getVisitsGraphCacheKey());
+//        Cache::forget($this->post->getVisitsGraphCacheKey());
     }
 }
