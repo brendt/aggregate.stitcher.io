@@ -15,9 +15,11 @@ final class RedditPoster implements ChannelPoster
 
     public function post(PostShare $postShare): void
     {
-        $postShare->update([
-            'shared_at' => now(),
-        ]);
+        if (! app()->environment('local')) {
+            $postShare->update([
+                'shared_at' => now(),
+            ]);
+        }
 
         $response = $this->reddit->submitLink(
             subReddit: $this->subReddit,

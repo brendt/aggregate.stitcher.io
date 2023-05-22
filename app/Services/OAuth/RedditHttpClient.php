@@ -70,6 +70,10 @@ final class RedditHttpClient
 
     public function submitLink(string $subReddit, string $url, string $title): Response
     {
+        if (app()->environment('local')) {
+            $subReddit = 'brendt_testing';
+        }
+
         return $this->httpClient()->asForm()->post(
             url: 'https://oauth.reddit.com/api/submit',
             data: [
@@ -93,10 +97,6 @@ final class RedditHttpClient
     private function resolveToken(): AccessToken
     {
         $token = $this->tokenFromFile();
-
-        if (! $token->hasExpired()) {
-            return $token;
-        }
 
         $authToken = base64_encode("{$this->clientId}:{$this->clientSecret}");
 
