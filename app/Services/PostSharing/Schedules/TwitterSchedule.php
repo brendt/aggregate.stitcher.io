@@ -17,7 +17,7 @@ final class TwitterSchedule extends SharingSchedule
             ->setMinute(random_int(1, 35));
     }
 
-    protected function cannotRepostWithin(): CarbonInterval
+    public function cannotRepostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,
@@ -25,7 +25,7 @@ final class TwitterSchedule extends SharingSchedule
         );
     }
 
-    protected function cannotPostWithin(): CarbonInterval
+    public function cannotPostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,

@@ -54,9 +54,9 @@ abstract class SharingSchedule
         return $nextTimeslot;
     }
 
-    abstract protected function cannotRepostWithin(): CarbonInterval;
+    abstract public function cannotRepostWithin(): CarbonInterval;
 
-    abstract protected function cannotPostWithin(): CarbonInterval;
+    abstract public function cannotPostWithin(): CarbonInterval;
 
     abstract protected function getChannel(): SharingChannel;
 }

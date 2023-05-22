@@ -30,13 +30,13 @@ final class FindPostController
                             callback: function (Builder|PostShare $builder) use ($filter) {
                                 $builder->where('channel', $filter);
                             })
-                        // No share less than 1 month ago
+                        // No share less than repost grace period for channel
                         ->whereDoesntHave(
                             relation: 'shares',
                             callback: function (Builder|PostShare $builder) use ($filter) {
                                 $builder
                                     ->where('channel', $filter)
-                                    ->where('shared_at', '>', now()->subMonth());
+                                    ->where('shared_at', '>', now()->sub($filter->getSchedule()->cannotRepostWithin())->addDay());
                             }
                         );
                 })

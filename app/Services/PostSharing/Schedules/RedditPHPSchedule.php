@@ -23,7 +23,7 @@ final class RedditPHPSchedule extends SharingSchedule
         return $date;
     }
 
-    protected function cannotRepostWithin(): CarbonInterval
+    public function cannotRepostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,
@@ -31,7 +31,7 @@ final class RedditPHPSchedule extends SharingSchedule
         );
     }
 
-    protected function cannotPostWithin(): CarbonInterval
+    public function cannotPostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,

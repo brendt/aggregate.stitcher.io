@@ -17,7 +17,7 @@ final class HackerNewsSchedule extends SharingSchedule
             ->setMinute(random_int(1, 59));
     }
 
-    protected function cannotRepostWithin(): CarbonInterval
+    public function cannotRepostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,
@@ -25,7 +25,7 @@ final class HackerNewsSchedule extends SharingSchedule
         );
     }
 
-    protected function cannotPostWithin(): CarbonInterval
+    public function cannotPostWithin(): CarbonInterval
     {
         return new CarbonInterval(
             years: 0,
