@@ -30,10 +30,8 @@ class ShareButton extends Component
     {
         $channel = $this->getChannel();
 
-        $nextTimeslot = $channel?->getSchedule()->getNextTimeslot($this->post);
-
         return view('livewire.share-button', [
-            'nextTimeslot' => $nextTimeslot,
+            'channel' => $channel,
         ]);
     }
 
