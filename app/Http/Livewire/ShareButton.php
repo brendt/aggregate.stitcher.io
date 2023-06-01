@@ -5,6 +5,8 @@ namespace App\Http\Livewire;
 use App\Models\Post;
 use App\Models\PostShare;
 use App\Services\PostSharing\SharingChannel;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Livewire\Component;
 
 class ShareButton extends Component
@@ -21,6 +23,8 @@ class ShareButton extends Component
 
     public ?PostShare $postShare = null;
 
+    public bool $useCustomDate = false;
+
     public function mount(): void
     {
         $this->form['channel'] = $this->channelFilter?->value;
@@ -35,6 +39,11 @@ class ShareButton extends Component
         ]);
     }
 
+    public function getNextTimeSlot(): ?CarbonImmutable
+    {
+        return $this->getChannel()?->getSchedule()->getNextTimeslot($this->post);
+    }
+
     public function storeForm(): void
     {
         $channel = $this->getChannel();
@@ -43,10 +52,16 @@ class ShareButton extends Component
             return;
         }
 
+        if ($this->form['customDate'] ?? null) {
+            $shareAt = Carbon::make($this->form['customDate'])->setHour(11)->setMinute(random_int(1, 20));
+        } else {
+            $shareAt = $channel->getSchedule()->getNextTimeslot($this->post);
+        }
+
         $this->postShare = PostShare::create([
             'channel' => $channel,
             'post_id' => $this->post->id,
-            'share_at' => $channel->getSchedule()->getNextTimeslot($this->post),
+            'share_at' => $shareAt,
         ]);
 
         $this->hideModal();
@@ -75,6 +90,17 @@ class ShareButton extends Component
     public function getChannelsProperty(): array
     {
         return SharingChannel::cases();
+    }
+
+    public function toggleCustomDate(): void
+    {
+        $this->useCustomDate = ! $this->useCustomDate;
+
+        if ($this->useCustomDate) {
+            $this->form['customDate'] = now()->toDateString();
+        } else {
+            $this->form['customDate'] = null;
+        }
     }
 
     public function handleKeypress(string $key): void

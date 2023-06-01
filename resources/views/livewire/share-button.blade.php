@@ -54,7 +54,19 @@
 
                 @if($channel)
                     <div class="text-sm col-span-12 text-right">
-                        Next timeslot: {{ $channel?->getSchedule()->getNextTimeslot($this->post)->format('Y-m-d H:i') }}
+                        @if($useCustomDate)
+                            <div class="flex gap-2 items-center justify-end">
+                                <label for="customDate">Share at:</label>
+                                <input type="date" wire:model="form.customDate" name="customDate" id="customDate">
+                                <button wire:click="toggleCustomDate" class="underline hover:no-underline py-4">
+                                    Use scheduler
+                                </button>
+                            </div>
+                        @else
+                            <button wire:click="toggleCustomDate" class="py-4">
+                                Next timeslot: <span class="underline hover:no-underline">{{ $this->getNextTimeSlot()->format('Y-m-d H:i') }}</span>
+                            </button>
+                        @endif
                     </div>
                 @endif
 
