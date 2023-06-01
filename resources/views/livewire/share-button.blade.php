@@ -64,7 +64,7 @@
                             </div>
                         @else
                             <button wire:click="toggleCustomDate" class="py-4">
-                                Next timeslot: <span class="underline hover:no-underline">{{ $this->getNextTimeSlot()->format('Y-m-d H:i') }}</span>
+                                Next timeslot: <span class="underline hover:no-underline">{{ $this->getNextTimeSlot()?->format('Y-m-d H:i') }}</span>
                             </button>
                         @endif
                     </div>
