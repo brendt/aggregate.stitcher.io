@@ -1,5 +1,5 @@
 <script>
-    document.addEventListener('keydown', (e) => Livewire.emit('handleKeypress', e.code));
+    // document.addEventListener('keydown', (e) => Livewire.emit('handleKeypress', e.code));
 </script>
 
 <script>

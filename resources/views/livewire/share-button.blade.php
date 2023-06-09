@@ -2,7 +2,7 @@
     <x-tag
         class="cursor-pointer"
         :color="$postShare ? 'green' : 'orange'"
-        wire:click="showModal()" wire:keydown.Escape="hideModal()"
+        wire:click="showModal()"
     >
         @if($postShare)
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-green-500">
