@@ -20,6 +20,20 @@ final class FindPostController
             ->with('source', 'pendingShares', 'comments')
             ->orderByDesc('visits');
 
+        $q = $request->get('q');
+
+        if ($q) {
+            $query->where(function (Builder $builder) use ($q) {
+                $builder
+                    ->where('title', 'LIKE', "%{$q}%")
+                    ->orWhereHas('source', function (Builder $builder) use ($q) {
+                        $builder->where('name', 'LIKE', "%{$q}%");
+                    });
+            })
+
+            ;
+        }
+
         if ($filter === SharingChannel::AGGREGATE) {
             $query
                 ->where('source_id', 1)
@@ -74,7 +88,8 @@ final class FindPostController
             'user' => $request->user(),
             'posts' => $posts,
             'message' => $request->get('message'),
-            'filter' => $filter
+            'filter' => $filter,
+            'q' => $q,
         ]);
     }
 }

@@ -57,6 +57,11 @@
                 :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::AGGREGATE->value])">
                 Aggregate
             </x-tag>
+            <form method="get" action="{{ action(\App\Http\Controllers\Posts\FindPostController::class) }}" class="text-sm">
+                <input type="text" name="q" value="{{ $q }}" class="text-sm"/>
+                <input type="hidden" name="filter" value="{{ $filter }}"/>
+                <input type="submit" value="Search">
+            </form>
         </div>
 
         <div class="bg-white mx-4 shadow-md grid">
