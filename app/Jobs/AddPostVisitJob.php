@@ -16,17 +16,19 @@ class AddPostVisitJob implements ShouldQueue
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
     public function __construct(
-        public readonly Post $post
+        public readonly int $postId
     ) {}
 
     public function handle()
     {
-        $this->post->update([
-            'visits' => $this->post->visits + 1,
+        $post = Post::find($this->postId);
+
+        $post->update([
+            'visits' => $post->visits + 1,
         ]);
 
         PostVisit::create([
-            'post_id' => $this->post->id,
+            'post_id' => $post->id,
         ]);
 
 //        Post::query()
@@ -38,6 +40,6 @@ class AddPostVisitJob implements ShouldQueue
 //                $post->getSparkLine();
 //            });
 
-//        Cache::forget($this->post->getVisitsGraphCacheKey());
+//        Cache::forget($post->getVisitsGraphCacheKey());
     }
 }

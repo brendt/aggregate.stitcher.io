@@ -11,7 +11,7 @@ final class ShowPostController
 {
     public function __invoke(Post $post)
     {
-        dispatch(new AddPostVisitJob($post));
+        dispatch(new AddPostVisitJob($post->id));
 
         return redirect()->to($post->getFullUrl());
     }
