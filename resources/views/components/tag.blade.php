@@ -1,11 +1,25 @@
 @php
     $color = $attributes['color'] ?? 'gray';
-
-    $class = $attributes['class'] . " bg-{$color}-100 rounded border border-{$color}-400 py-1 px-2 flex items-center";
-
+    $textColor = $attributes['text-color'] ?? null;
+    $borderColor = $attributes['border-color'] ?? null;
     $style = $attributes['style'] ?? '';
+    $class = $attributes['class'] . " rounded border py-1 px-2 flex items-center";
 
-    unset($attributes['style'], $attributes['class']);
+    if (str_starts_with($color, '#')) {
+        $style .= " background-color: {$color};";
+    } else {
+        $class .= " bg-{$color}-100 border-{$color}-400";
+    }
+
+    if ($textColor) {
+        $style .= " color: {$textColor};";
+    }
+
+    if ($borderColor) {
+        $style .= " border-color: {$borderColor};";
+    }
+
+    unset($attributes['style'], $attributes['class'], $attributes['text-color']);
 @endphp
 
 <span>

@@ -3,9 +3,11 @@
 namespace App\Services\PostSharing;
 
 use App\Services\OAuth\RedditHttpClient;
+use App\Services\PostSharing\Posters\AggregatePoster;
 use App\Services\PostSharing\Posters\RedditPoster;
 use App\Services\PostSharing\Posters\TwitterPoster;
 use App\Services\PostSharing\Posters\VoidPoster;
+use App\Services\PostSharing\Schedules\AggregateSchedule;
 use App\Services\PostSharing\Schedules\HackerNewsSchedule;
 use App\Services\PostSharing\Schedules\LobstersSchedule;
 use App\Services\PostSharing\Schedules\RedditPHPSchedule;
@@ -21,6 +23,7 @@ enum SharingChannel: string
     case R_WEBDEV = 'r_webdev';
     case R_PROGRAMMING = 'r_programming';
     case LOBSTERS = 'Lobsters';
+    case AGGREGATE = 'Aggregate';
 
     public function getSchedule(): SharingSchedule
     {
@@ -31,6 +34,7 @@ enum SharingChannel: string
             self::R_WEBDEV => new RedditWebdevSchedule(),
             self::R_PHP => new RedditPHPSchedule(),
             self::LOBSTERS => new LobstersSchedule(),
+            self::AGGREGATE => new AggregateSchedule(),
         };
     }
 
@@ -50,6 +54,7 @@ enum SharingChannel: string
                 reddit: app(RedditHttpClient::class),
                 subReddit: 'programming',
             ),
+            self::AGGREGATE => new AggregatePoster(),
             default => new VoidPoster(),
         };
     }
@@ -77,6 +82,11 @@ enum SharingChannel: string
             self::LOBSTERS => <<<SVG
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
               <path style="stroke: #6e0900; color : #6e0900" fill-rule="evenodd" d="M6.56 1.14a.75.75 0 01.177 1.045 3.989 3.989 0 00-.464.86c.185.17.382.329.59.473A3.993 3.993 0 0110 2c1.272 0 2.405.594 3.137 1.518.208-.144.405-.302.59-.473a3.989 3.989 0 00-.464-.86.75.75 0 011.222-.869c.369.519.65 1.105.822 1.736a.75.75 0 01-.174.707 7.03 7.03 0 01-1.299 1.098A4 4 0 0114 6c0 .52-.301.963-.723 1.187a6.961 6.961 0 01-1.158.486c.13.208.231.436.296.679 1.413-.174 2.779-.5 4.081-.96a19.655 19.655 0 00-.09-2.319.75.75 0 111.493-.146 21.239 21.239 0 01.08 3.028.75.75 0 01-.482.667 20.874 20.874 0 01-5.153 1.249 2.51 2.51 0 01-.107.247 20.86 20.86 0 015.253 1.257.75.75 0 01.48.74 20.946 20.946 0 01-.907 5.107.75.75 0 01-1.433-.444c.415-1.34.69-2.743.806-4.19-.495-.174-1-.328-1.512-.461.05.284.076.575.076.873 0 1.814-.517 3.312-1.426 4.37A4.639 4.639 0 0110 19a4.64 4.64 0 01-3.574-1.63C5.516 16.311 5 14.813 5 13c0-.298.026-.59.076-.873-.513.133-1.017.287-1.512.46.116 1.448.39 2.85.806 4.191a.75.75 0 01-1.433.444 20.94 20.94 0 01-.908-5.107.75.75 0 01.482-.74 20.857 20.857 0 015.252-1.257 2.481 2.481 0 01-.107-.247 20.874 20.874 0 01-5.153-1.249.75.75 0 01-.482-.667 21.342 21.342 0 01.08-3.028.75.75 0 111.493.146 19.745 19.745 0 00-.09 2.32c1.302.459 2.668.785 4.08.959.066-.243.166-.471.297-.679a6.962 6.962 0 01-1.158-.486A1.348 1.348 0 016 6a4 4 0 01.166-1.143 7.032 7.032 0 01-1.3-1.098.75.75 0 01-.173-.707 5.48 5.48 0 01.822-1.736.75.75 0 011.046-.176z" clip-rule="evenodd" />
+            </svg>
+            SVG,
+            self::AGGREGATE => <<<SVG
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path style="stroke: #fe2977" stroke-linecap="round" stroke-linejoin="round" d="M12.75 19.5v-.75a7.5 7.5 0 00-7.5-7.5H4.5m0-6.75h.75c7.87 0 14.25 6.38 14.25 14.25v.75M6 18.75a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
             </svg>
             SVG,
         };

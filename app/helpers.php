@@ -11,6 +11,6 @@ function getTitle(string $url): string
 
 function l(...$subject): void {
     foreach ($subject as $item) {
-        \Log::debug(json_encode($item, JSON_PRETTY_PRINT));
+        \Log::debug(var_export($item, JSON_PRETTY_PRINT));
     }
 }

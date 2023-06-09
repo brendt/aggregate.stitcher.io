@@ -18,8 +18,13 @@ final class FindPostController
 
         $query = Post::query()
             ->with('source', 'pendingShares', 'comments')
-            ->where('state', PostState::PUBLISHED)
             ->orderByDesc('visits');
+
+        if ($filter === SharingChannel::AGGREGATE) {
+            $query->where('source_id', 1); // stitcher.io, all posts
+        }  else {
+            $query->where('state', PostState::PUBLISHED);
+        }
 
         if ($filter) {
             $query
@@ -50,6 +55,7 @@ final class FindPostController
                 );
         } else {
             $query
+                ->where('state', PostState::PUBLISHED)
                 ->whereHas(
                     relation: 'pendingShares',
                     operator: '<',

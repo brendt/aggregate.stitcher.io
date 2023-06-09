@@ -43,10 +43,19 @@
                 /r/programming
             </x-tag>
             <x-tag
-                color="red"
+                color="#ac150d"
+                border-color="#000"
+                text-color="white"
                 class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::LOBSTERS ? 'font-bold' : '' }}"
                 :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::LOBSTERS->value])">
                 Lobste.rs
+            </x-tag>
+            <x-tag
+                color="#fcf4f5"
+                border-color="#fe2977"
+                class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::AGGREGATE ? 'font-bold' : '' }}"
+                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::AGGREGATE->value])">
+                Aggregate
             </x-tag>
         </div>
 

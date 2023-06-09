@@ -89,7 +89,15 @@ class ShareButton extends Component
 
     public function getChannelsProperty(): array
     {
-        return SharingChannel::cases();
+        $sharingChannels = SharingChannel::cases();
+
+        if (! $this->post->isPublished()) {
+            return $sharingChannels;
+        }
+
+        return collect($sharingChannels)
+            ->reject(fn (SharingChannel $sharingChannel) => $sharingChannel === SharingChannel::AGGREGATE)
+            ->all();
     }
 
     public function toggleCustomDate(): void
