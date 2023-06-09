@@ -212,20 +212,13 @@ class Post extends Model implements Feedable
 
     public function getRanking(): PostRank
     {
-        $posts = Cache::remember(
+        $maxVisits = Cache::remember(
             'posts_ranking',
-            now()->addSeconds(10),
-            fn() => DB::query()
-                ->select('id', 'visits')
-                ->from($this->getTable())
-                ->where('state', PostState::PUBLISHED->value)
-                ->orderByDesc('visits')
-                ->get()
+            now()->addMinute(),
+            fn() => self::query()->max('visits')
         );
 
-        $position = $posts->mapWithKeys(fn(object $row, int $position) => [$row->id => $position])[$this->id] ?? 0;
-
-        return new PostRank(position: $position, total: $posts->count());
+        return new PostRank(position: $this->visits, total: $maxVisits);
     }
 
     public function getSparkLine(): string
