@@ -21,7 +21,9 @@ final class FindPostController
             ->orderByDesc('visits');
 
         if ($filter === SharingChannel::AGGREGATE) {
-            $query->where('source_id', 1); // stitcher.io, all posts
+            $query
+                ->where('source_id', 1)
+                ->where('state', PostState::DENIED); // stitcher.io, denied posts
         }  else {
             $query->where('state', PostState::PUBLISHED);
         }
