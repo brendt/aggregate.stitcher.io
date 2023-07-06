@@ -76,19 +76,8 @@ class Link extends Model
                 day: Carbon::make($row->created_at_day),
             ));
 
-        $maxValue = DB::query()
-            ->selectRaw("COUNT(*) AS `visits`, `created_at_day`, `link_id`")
-            ->from((new LinkVisit)->getTable())
-            ->groupByRaw('`created_at_day`, `link_id`')
-            ->orderByDesc('visits')
-            ->limit(1)
-            ->get('visits');
-
-        $maxValue = ($maxValue[0] ?? null)?->visits;
-
         $sparkLine = SparkLine::new($days)
             ->withMaxItemAmount(20)
-            ->withMaxValue($maxValue)
             ->make();
 
         Cache::put(
