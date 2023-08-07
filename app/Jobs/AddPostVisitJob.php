@@ -9,7 +9,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Cache;
 
 class AddPostVisitJob implements ShouldQueue
 {
@@ -30,6 +29,8 @@ class AddPostVisitJob implements ShouldQueue
         PostVisit::create([
             'post_id' => $post->id,
         ]);
+
+        $post->source->increment('visits');
 
 //        Post::query()
 //            ->homePage()

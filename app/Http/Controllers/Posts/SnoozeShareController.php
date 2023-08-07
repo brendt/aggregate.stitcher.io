@@ -21,6 +21,10 @@ final class SnoozeShareController
                 : now()->addMonths(2),
         ]);
 
+        if ($back = $request->get('back')) {
+            return redirect()->to($back);
+        }
+
         return redirect()->action(FindPostController::class, ['filter' => $channel->value]);
     }
 }

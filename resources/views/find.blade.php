@@ -54,7 +54,7 @@
                 color="#fcf4f5"
                 border-color="#fe2977"
                 class="text-sm {{ $filter === \App\Services\PostSharing\SharingChannel::AGGREGATE ? 'font-bold' : '' }}"
-                :url="action(\App\Http\Controllers\Posts\FindPostController::class, ['filter' => \App\Services\PostSharing\SharingChannel::AGGREGATE->value])">
+                :url="action(\App\Http\Controllers\Posts\FindPostsForAggregateController::class)">
                 Aggregate
             </x-tag>
             <form method="get" action="{{ action(\App\Http\Controllers\Posts\FindPostController::class) }}" class="text-sm">
@@ -90,7 +90,12 @@
                                     </span>
                                 </x-tag>
                                 <x-tag
-                                    :url="action(\App\Http\Controllers\Posts\SnoozeShareController::class, ['post' => $post, 'channel' => $filter->value, 'permanent' => true])"
+                                    :url="action(\App\Http\Controllers\Posts\SnoozeShareController::class, [
+                                        'post' => $post,
+                                        'channel' => $filter->value,
+                                        'permanent' => true,
+                                        'back' => request()->url(),
+                                    ])"
                                     color="red"
                                 >
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 text-gray-500">

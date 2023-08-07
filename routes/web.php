@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\TwitterOAuthStatusController;
 use App\Http\Controllers\LatestMailController;
 use App\Http\Controllers\Posts\DeletePostCommentController;
 use App\Http\Controllers\Posts\FindPostController;
+use App\Http\Controllers\Posts\FindPostsForAggregateController;
 use App\Http\Controllers\Posts\HidePostController;
 use App\Http\Controllers\Links\AdminLinksController;
 use App\Http\Controllers\Links\CreateLinkController;
@@ -106,6 +107,7 @@ Route::middleware(['auth', IsAdminMiddleware::class])
         Route::get('/twitter/status', TwitterOAuthStatusController::class);
 
         Route::get('/find', FindPostController::class);
+        Route::get('/find/aggregate', FindPostsForAggregateController::class);
         Route::get('/info', AdminInfoController::class);
         Route::get('/stats', StatsController::class);
         Route::get('/posts', AdminPostsController::class);
