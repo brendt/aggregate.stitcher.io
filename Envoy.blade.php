@@ -28,7 +28,7 @@ runYarn
 generateAssets
 updateSymlinks
 optimizeInstallation
-backupDatabase
+#backupDatabase
 migrateDatabase
 blessNewRelease
 cleanOldReleases
@@ -42,7 +42,7 @@ cloneRepository
 runComposer
 updateSymlinks
 optimizeInstallation
-backupDatabase
+#backupDatabase
 migrateDatabase
 blessNewRelease
 cleanOldReleases
