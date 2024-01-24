@@ -20,7 +20,6 @@
                         class="
                                 pt-6
                                 block px-12 p-4
-                                {{ $source->hasRecentError() ? 'bg-red-50' : '' }}
                                 {{ $source->isPublishing() ? 'bg-blue-100' : '' }}
                                 {{ $source->isPending() ? 'bg-gray-200' : '' }}
                                 {{ $source->isDenied() ? 'bg-red-100' : '' }}
@@ -52,7 +51,7 @@
                             <a href="{{ $source->getBaseUrl() }}"
                                class="underline hover:no-underline mr-4 py-2"
                             >
-                                Show
+                                Visit
                             </a>
 
                             @if($source->canPublish())
