@@ -80,7 +80,7 @@
                                     :url="action(\App\Http\Controllers\Posts\SnoozeShareController::class, [
                                         'post' => $post,
                                         'channel' => $filter->value,
-                                        'back' => request()->url(),
+                                        'back' => request()->fullUrl(),
                                     ])"
                                     color="blue"
                                 >
@@ -98,7 +98,7 @@
                                         'post' => $post,
                                         'channel' => $filter->value,
                                         'permanent' => true,
-                                        'back' => request()->url(),
+                                        'back' => request()->fullUrl(),
                                     ])"
                                     color="red"
                                 >
