@@ -34,7 +34,7 @@
 
                         <div class="flex gap-2 text-sm pt-2">
 
-                            @if($source->last_error_at)
+                            @if($source->hasRecentError())
                                 <span class="font-bold text-red-400 py-2 mr-4">
                                     Last error at: {{ $source->last_error_at }}
                                 </span>
