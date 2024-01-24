@@ -29,8 +29,8 @@ final class StoreSourceSuggestionController
             return redirect()->action(AdminSourcesController::class);
         }
 
-        Mail::to(User::find(1)->email)
-            ->send(new SourceAddedMail($source));
+//        Mail::to(User::find(1)->email)
+//            ->send(new SourceAddedMail($source));
 
         return redirect()->action(HomeController::class, [
             'message' => 'Thank you for your suggestion, we\'ll review it soon!',
