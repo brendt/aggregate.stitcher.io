@@ -40,6 +40,7 @@ class Post extends Model implements Feedable
         self::creating(function (Post $post) {
             $post->state ??= PostState::PENDING;
             $post->uuid ??= Uuid::uuid4()->toString();
+            $post->created_at ??= now();
         });
 
         self::saving(function (Post $post) {
