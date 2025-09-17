@@ -13,7 +13,9 @@ use App\Admin\AdminController;
     </x-slot>
 
     <div class="max-w-[800px] m-auto grid gap-2">
-        <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts" />
+        <div class="grid gap-2 mb-8 mt-4">
+            <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts" />
+        </div>
 
         <a
                 :foreach="$posts as $post"
