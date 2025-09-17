@@ -20,10 +20,10 @@ final class AppSeeder implements DatabaseSeeder
             role: Role::ADMIN,
         );
 
-        Source::create(
-            name: 'stitcher.io',
-            uri: 'https://stitcher.io/rss',
-            state: SourceState::PUBLISHED,
-        );
+//        Source::create(
+//            name: 'stitcher.io',
+//            uri: 'https://stitcher.io/rss',
+//            state: SourceState::PUBLISHED,
+//        );
     }
 }
