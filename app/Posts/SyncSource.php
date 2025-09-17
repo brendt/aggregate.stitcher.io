@@ -3,10 +3,13 @@
 namespace App\Posts;
 
 use App\Posts\Events\PostSynced;
+use App\Posts\Events\SourceSynced;
+use App\Posts\Events\SourceSyncFailed;
 use Tempest\Cache\Cache;
 use Tempest\DateTime\DateTime;
 use Tempest\DateTime\Duration;
 use Tempest\Support\Arr\ImmutableArray;
+use Throwable;
 use function Tempest\event;
 use function Tempest\Support\arr;
 
@@ -20,30 +23,41 @@ final readonly class SyncSource
     {
         $xml = $this->cache->resolve(
             'source_' . $source->id,
-            fn () => file_get_contents($source->uri),
+            fn () => @file_get_contents($source->uri),
             Duration::minutes(10),
         );
 
-        $this->parseXml($xml, $source)
-            ->each(function (RssEntry $entry) use ($source) {
-                $post = Post::select()
-                    ->where('uri = ? AND source_id = ?', $entry->uri, $source->id)
-                    ->first();
+        if ($xml === false) {
+            event(new SourceSyncFailed($source->uri));
 
-                if (! $post) {
-                    $post = Post::new(
-                        uri: $entry->uri,
-                        source: $source,
-                    );
-                }
+            return;
+        }
 
-                $post->title = $entry->title;
-                $post->createdAt = $entry->createdAt;
+        try {
+            $this->parseXml($xml, $source)
+                ->each(function (RssEntry $entry) use ($source) {
+                    $post = Post::select()
+                        ->where('uri = ? AND source_id = ?', $entry->uri, $source->id)
+                        ->first();
 
-                $post->save();
+                    if (! $post) {
+                        $post = Post::new(
+                            uri: $entry->uri,
+                            source: $source,
+                        );
+                    }
 
-                event(new PostSynced($post->uri));
-            });
+                    $post->title = $entry->title;
+                    $post->createdAt = $entry->createdAt;
+
+                    $post->save();
+
+                    event(new PostSynced($post->uri));
+                });
+            event(new SourceSynced($source->uri));
+        } catch (Throwable) {
+            event(new SourceSyncFailed($source->uri));
+        }
     }
 
     private function parseXml(string $input, Source $source): ImmutableArray

@@ -4,8 +4,9 @@ namespace App\Posts;
 
 use Tempest\Database\IsDatabaseModel;
 use Tempest\Database\Virtual;
+use Tempest\Router\Bindable;
 
-final class Source
+final class Source implements Bindable
 {
     use IsDatabaseModel;
 

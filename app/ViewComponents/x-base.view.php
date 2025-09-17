@@ -8,7 +8,7 @@ use function Tempest\Http\csrf_token;
 <!doctype html>
 <html lang="en" class="h-dvh flex flex-col scroll-smooth bg-gray-800 md:p-4">
 <head>
-    <title>{{ $title ?? 'Tempest' }}</title>
+    <title>{{ $title ?? 'Aggregate' }}</title>
 
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -17,7 +17,8 @@ use function Tempest\Http\csrf_token;
     <x-vite-tags />
 </head>
 <body class="flex flex-col h-full antialiased">
-<main class="bg-gray-100 w-full min-h-full p-3 md:p-4 md:rounded-sm shadow-md overflow-auto">
+
+<main class="bg-gray-100 w-full min-h-full p-3 md:p-4 md:rounded-sm shadow-md overflow-auto relative">
     <x-slot/>
 </main>
 <x-slot name="scripts"/>

@@ -3,6 +3,7 @@
 use function Tempest\Router\uri;
 use App\Posts\PostsController;
 use App\Home\HomeController;
+use App\Admin\AdminController;
 
 ?>
 
@@ -12,7 +13,7 @@ use App\Home\HomeController;
     </x-slot>
 
     <div class="max-w-[800px] m-auto grid gap-2">
-        <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts"/>
+        <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts" />
 
         <a
                 :foreach="$posts as $post"
@@ -24,10 +25,17 @@ use App\Home\HomeController;
             </h1>
         </a>
 
-        <a
-                :if="$page->hasNext"
-                :href="uri(HomeController::class, page: $page->nextPage)"
-                class="mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
-        >Read more</a>
+        <div class="flex gap-2">
+            <a
+                    :if="$page->hasNext"
+                    :href="uri(HomeController::class, page: $page->nextPage)"
+                    class="flex-auto mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
+            >Read more</a>
+            <a
+                    :if="$user?->isAdmin"
+                    :href="uri([AdminController::class, 'admin'])"
+                    class="flex-auto mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
+            >Admin</a>
+        </div>
     </div>
 </x-base>

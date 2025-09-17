@@ -3,6 +3,8 @@
 namespace App\Posts;
 
 use App\Posts\Events\PostSynced;
+use App\Posts\Events\SourceSynced;
+use App\Posts\Events\SourceSyncFailed;
 use Tempest\Console\ConsoleArgument;
 use Tempest\Console\ConsoleCommand;
 use Tempest\Console\HasConsole;
@@ -27,6 +29,9 @@ final class SyncSourcesCommand
             $this->eventBus->listen($this->onPostSynced(...));
         }
 
+        $this->eventBus->listen($this->onSourceSynced(...));
+        $this->eventBus->listen($this->onSourceSyncFailed(...));
+
         $sources = Source::select()->where('state', SourceState::PUBLISHED->value)->all();
 
         $this->info(sprintf(
@@ -36,16 +41,22 @@ final class SyncSourcesCommand
         ));
 
         foreach ($sources as $source) {
-            $this->info($source->name);
-
             ($this->syncSource)($source);
-
-            $this->success($source->name);
         }
     }
 
     public function onPostSynced(PostSynced $event): void
     {
         $this->writeln("  - {$event->uri}");
+    }
+
+    public function onSourceSynced(SourceSynced $event): void
+    {
+        $this->success($event->uri);
+    }
+
+    public function onSourceSyncFailed(SourceSyncFailed $event): void
+    {
+        $this->error($event->uri);
     }
 }
