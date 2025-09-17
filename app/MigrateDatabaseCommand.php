@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Links\Link;
 use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\Source;
@@ -25,6 +26,8 @@ final class MigrateDatabaseCommand
     #[ConsoleCommand]
     public function __invoke(): void
     {
+        $this->syncLinks();
+
         $this->syncSources();
 
         $this->syncPosts();
@@ -86,6 +89,31 @@ final class MigrateDatabaseCommand
             )->execute();
 
             $this->success("{$item['title']} created");
+        }
+    }
+
+    private function syncLinks(): void
+    {
+        $linkItems = $this->old->fetch(new Query('SELECT * FROM links'));
+
+        foreach ($linkItems as $item) {
+            $id = $item['id'];
+
+            if ($link = Link::select()->where('id', $id)->first()) {
+                $this->info("{$link->uri} already exists");
+
+                continue;
+            }
+
+            query(Link::class)->insert(
+                id: $id,
+                uuid: $item['uuid'],
+                uri: $item['url'],
+                title: $item['title'],
+                visits: $item['visits'],
+            )->execute();
+
+            $this->success("Link `{$item['title']}` created");
         }
     }
 }
