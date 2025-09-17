@@ -1,0 +1,23 @@
+@import "tailwindcss";
+@source inline("bg-slate-{50,100,200,300,400}");
+@source inline("bg-white");
+
+.htmx-button {
+    & .during-input {
+        display: inline-block;
+    }
+
+    & .during-request {
+        display: none;
+    }
+}
+
+.htmx-button.htmx-request {
+    & .during-input {
+        display: none;
+    }
+
+    & .during-request {
+        display: inline-block;
+    }
+}

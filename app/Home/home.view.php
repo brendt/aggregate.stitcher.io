@@ -1,0 +1,33 @@
+<?php
+
+use function Tempest\Router\uri;
+use App\Posts\PostsController;
+use App\Home\HomeController;
+
+?>
+
+<x-base>
+    <x-slot name="head">
+        <script :if="$user?->isAdmin" src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+    </x-slot>
+
+    <div class="max-w-[800px] m-auto grid gap-2">
+        <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts"/>
+
+        <a
+                :foreach="$posts as $post"
+                class="p-4 rounded-lg shadow-sm {{ $color($post) }} hover:shadow-lg hover:underline"
+                :href="uri([PostsController::class, 'visit'], post: $post->id)"
+        >
+            <h1>
+                <span class="font-bold">{{ $post->title }}</span>&nbsp;<span class="text-sm">–&nbsp;{{ $post->source->name }}</span>
+            </h1>
+        </a>
+
+        <a
+                :if="$page->hasNext"
+                :href="uri(HomeController::class, page: $page->nextPage)"
+                class="mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
+        >Read more</a>
+    </div>
+</x-base>

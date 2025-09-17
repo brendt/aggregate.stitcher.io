@@ -1,0 +1,49 @@
+{
+    "name": "tempest/app",
+    "type": "project",
+    "require": {
+        "tempest/framework": "^2.0",
+        "league/oauth2-google": "^4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.3.10",
+        "symfony/var-dumper": "^7.3.3",
+        "carthage-software/mago": "1.0.0-beta.13"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "post-create-project-cmd": [
+            "@php ./vendor/bin/tempest install framework -f",
+            "@php ./tempest discovery:generate --no-interaction"
+        ],
+        "post-autoload-dump": [
+            "@php ./vendor/bin/tempest discovery:generate --no-interaction"
+        ],
+        "phpunit": "vendor/bin/phpunit --display-warnings --display-skipped --display-deprecations --display-errors --display-notices",
+        "fmt": "vendor/bin/mago fmt",
+        "lint": "vendor/bin/mago lint --fix --format-after-fix",
+        "qa": [
+            "composer fmt",
+            "composer phpunit",
+            "composer lint"
+        ]
+    },
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true,
+            "carthage-software/mago": true
+        }
+    }
+}

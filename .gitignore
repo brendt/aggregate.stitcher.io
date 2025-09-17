@@ -1,0 +1,15 @@
+.tempest
+node_modules/
+vendor/
+/public/main.css
+/package-lock.json
+/.php-cs-fixer.cache
+.env
+.idea
+.phpunit.result.cache
+log/
+*.local.config.php
+*.dev.config.php
+
+vite-tempest
+public/build/
