@@ -2,7 +2,6 @@
 
 namespace App\Authentication;
 
-use App\Home\HomeController;
 use League\OAuth2\Client\Provider\Google;
 use League\OAuth2\Client\Provider\GoogleUser;
 use Tempest\Auth\Authentication\Authenticator;
