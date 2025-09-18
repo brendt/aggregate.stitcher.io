@@ -41,15 +41,15 @@ final class HomeController
             $rebasedValue = $post->visits - $minVisits;
 
             if ($rebasedMax === 0) {
-                $ratio = 0;
+                $localRank = 0;
             } else {
-                $ratio = round($rebasedValue / $rebasedMax, 1);
+                $localRank = round($rebasedValue / $rebasedMax, 1);
             }
 
             return match(true) {
-                $ratio > 0.9 => 'bg-slate-300',
-                $ratio > 0.6 => 'bg-slate-200',
-                $ratio > 0.3 => 'bg-slate-100',
+                $localRank > 0.9 => 'bg-slate-300',
+                $localRank > 0.6 => 'bg-slate-200',
+                $localRank > 0.3 => 'bg-slate-100',
                 default => 'bg-white',
             };
         };
@@ -58,9 +58,7 @@ final class HomeController
         $user = $authenticator->current();
 
         if ($user?->isAdmin) {
-            $pendingPosts = Post::select()
-                ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
-                ->with('source')
+            $pendingPosts = Post::published()
                 ->orderBy('createdAt DESC')
                 ->limit(5)
                 ->all();

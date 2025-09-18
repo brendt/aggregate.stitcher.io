@@ -41,11 +41,9 @@ final class PostsController
 
     private function render(): View
     {
-        $pendingPosts = Post::select()
-            ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
+        $pendingPosts = Post::published()
             ->orderBy('createdAt DESC')
             ->limit(5)
-            ->with('source')
             ->all();
 
         return view('x-pending-posts.view.php', pendingPosts: $pendingPosts);
