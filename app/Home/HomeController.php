@@ -60,7 +60,7 @@ final class HomeController
         if ($user?->isAdmin) {
             $pendingPosts = Post::select()
                 ->with('source')
-                ->where('sources.state = ?', SourceState::PUBLISHED)
+                ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
                 ->orderBy('createdAt DESC')
                 ->limit(5)
                 ->all();
