@@ -7,7 +7,6 @@ use Tempest\DateTime\DateTime;
 use Tempest\Http\Response;
 use Tempest\Http\Responses\Ok;
 use Tempest\Router\Get;
-use Tempest\Support\Arr\ImmutableArray;
 
 final class RssController
 {

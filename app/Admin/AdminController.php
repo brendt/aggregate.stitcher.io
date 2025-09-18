@@ -76,10 +76,10 @@ final class AdminController
     private function data(): array
     {
         $pendingPosts = Post::select()
-            ->where('state', PostState::PENDING)
+            ->with('source')
+            ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
             ->orderBy('createdAt DESC')
             ->limit(5)
-            ->with('source')
             ->all();
 
         $pendingSources = Source::select()

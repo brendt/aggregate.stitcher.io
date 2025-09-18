@@ -15,8 +15,12 @@ use App\Authentication\AuthController;
     </x-slot>
 
     <div class="max-w-[800px] m-auto grid gap-2">
-        <div class="grid gap-2 mb-8 mt-4">
-            <x-pending-posts :if="$user?->isAdmin" :pendingPosts="$pendingPosts" />
+        <div class="flex justify-center items-center gap-2 mb-4 mt-4">
+            <span class="font-bold text-slate-600">Aggregate</span>
+        </div>
+
+        <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin" >
+            <x-pending-posts :pendingPosts="$pendingPosts" />
         </div>
 
         <a

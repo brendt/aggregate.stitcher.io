@@ -4,6 +4,7 @@ namespace App\Home;
 
 use App\Posts\Post;
 use App\Posts\PostState;
+use App\Posts\SourceState;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\Router\Get;
 use Tempest\View\View;
@@ -58,10 +59,10 @@ final class HomeController
 
         if ($user?->isAdmin) {
             $pendingPosts = Post::select()
-                ->where('state', PostState::PENDING)
+                ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
+                ->with('source')
                 ->orderBy('createdAt DESC')
                 ->limit(5)
-                ->with('source')
                 ->all();
         } else {
             $pendingPosts = [];
