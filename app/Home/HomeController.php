@@ -20,7 +20,6 @@ final class HomeController
 
         $page = Post::select()
             ->where('state', PostState::PUBLISHED)
-            ->where('source_id', 565)
             ->orderBy('createdAt DESC')
             ->with('source')
             ->paginate(currentPage: $currentPage);
