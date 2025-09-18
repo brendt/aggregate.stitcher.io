@@ -4,6 +4,8 @@ use function Tempest\Router\uri;
 use App\Posts\PostsController;
 use App\Home\HomeController;
 use App\Admin\AdminController;
+use Tempest\DateTime\DateTime;
+use App\Authentication\AuthController;
 
 ?>
 
@@ -38,6 +40,13 @@ use App\Admin\AdminController;
                     :href="uri([AdminController::class, 'admin'])"
                     class="flex-auto mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
             >Admin</a>
+        </div>
+
+        <div class="flex justify-center text-sm mt-8 gap-1 text-gray-500">
+            <a class="underline hover:no-underline" :if="$user === null" href="{{ uri([AuthController::class, 'login']) }}">Login</a>
+            <a class="underline hover:no-underline" :else href="{{ uri([AuthController::class, 'logout']) }}">Logout</a>
+            <span>–</span>
+            <span>&copy;{{ DateTime::now()->format('YYYY') }} stitcher.io</span>
         </div>
     </div>
 </x-base>

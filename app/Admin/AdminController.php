@@ -7,6 +7,7 @@ use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\Source;
 use App\Posts\SourceState;
+use Tempest\Http\Request;
 use Tempest\Router;
 use Tempest\View\View;
 use function Tempest\Database\query;
@@ -20,6 +21,33 @@ final class AdminController
         return view(
             'admin.view.php',
             ...$this->data(),
+        );
+    }
+
+    #[Router\Post('/admin/search', middleware: [AdminMiddleware::class])]
+    public function search(Request $request): View
+    {
+        $filter = $request->get('filter');
+
+        $query = Source::select()
+            ->orderBy('id DESC');
+
+        if (! $filter) {
+            $query->where('state', SourceState::PUBLISHED);
+        } else {
+            $query
+                ->where(
+                    'name LIKE :filter OR uri LIKE :filter',
+                    filter: "%{$filter}%",
+                )
+                ->limit(20);
+        }
+
+        $sources = $query->all();
+
+        return view(
+            '../Posts/x-sources-search-result.view.php',
+            sources: $sources,
         );
     }
 

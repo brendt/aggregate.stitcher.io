@@ -7,7 +7,7 @@ use Tempest\View\View;
 use Tempest\Router;
 use function Tempest\view;
 
-final class SourcesController
+final class PendingSourcesController
 {
     #[Router\Post('/sources/deny/{source}', middleware: [AdminMiddleware::class])]
     public function deny(Source $source): View
@@ -19,7 +19,7 @@ final class SourcesController
     }
 
     #[Router\Post('/sources/accept/{source}', middleware: [AdminMiddleware::class])]
-    public function accept(Source $source, SyncSource $syncSource): View
+    public function publish(Source $source, SyncSource $syncSource): View
     {
         $source->state = SourceState::PUBLISHED;
         $source->save();

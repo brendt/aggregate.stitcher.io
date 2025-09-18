@@ -14,7 +14,9 @@ final class PostsController
     #[Router\Get('/posts/{post}')]
     public function visit(Post $post): Redirect
     {
+        $post->load('source');
         new Query('UPDATE posts SET visits = visits + 1 WHERE id = ?', [$post->id])->execute();
+        new Query('UPDATE sources SET visits = visits + 1 WHERE id = ?', [$post->source->id])->execute();
 
         return new Redirect($post->uri);
     }

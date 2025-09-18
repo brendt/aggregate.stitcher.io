@@ -1,5 +1,5 @@
 <?php
-use App\Posts\SourcesController;
+use App\Posts\PendingSourcesController;
 use function Tempest\Router\uri;
 ?>
 
@@ -13,11 +13,11 @@ use function Tempest\Router\uri;
         </h1>
 
         <div class="flex gap-2">
-            <x-action-button :action="uri([SourcesController::class, 'accept'], source: $pendingSource->id)" target="#pending-sources">
+            <x-action-button :action="uri([PendingSourcesController::class, 'publish'], source: $pendingSource->id)" target="#pending-sources">
                 <x-icon name="lucide:check" class="size-5 text-gray-400"/>
             </x-action-button>
 
-            <x-action-button :action="uri([SourcesController::class, 'deny'], source: $pendingSource->id)" target="#pending-sources">
+            <x-action-button :action="uri([PendingSourcesController::class, 'deny'], source: $pendingSource->id)" target="#pending-sources">
                 <x-icon name="lucide:trash-2" class="size-5 text-gray-400"/>
             </x-action-button>
 

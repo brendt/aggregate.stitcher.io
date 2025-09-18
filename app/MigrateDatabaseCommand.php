@@ -50,6 +50,7 @@ final class MigrateDatabaseCommand
                 id: $id,
                 uri: $item['url'],
                 name: $item['name'],
+                visits: $item['visits'],
                 state: SourceState::tryFrom($item['state']) ?? SourceState::PENDING,
             );
 

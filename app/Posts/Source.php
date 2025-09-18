@@ -12,10 +12,26 @@ final class Source implements Bindable
 
     public string $name;
     public string $uri;
+    public int $visits;
     public SourceState $state = SourceState::PENDING;
 
     #[Virtual]
     public bool $isExternals {
-        get => $this->name === 'externals.io';
+        get => $this->name === 'https://externals.io';
+    }
+
+    #[Virtual]
+    public bool $isPending {
+        get => $this->state === SourceState::PENDING;
+    }
+
+    #[Virtual]
+    public bool $isDenied {
+        get => $this->state === SourceState::DENIED;
+    }
+
+    #[Virtual]
+    public bool $isPublished {
+        get => $this->state === SourceState::PUBLISHED;
     }
 }

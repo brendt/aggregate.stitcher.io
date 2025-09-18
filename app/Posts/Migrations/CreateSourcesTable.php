@@ -17,6 +17,7 @@ final class CreateSourcesTable implements MigratesUp
             ->primary()
             ->string('name')
             ->string('uri')
+            ->integer('visits', unsigned: true, default: 0)
             ->enum('state', SourceState::class);
     }
 }
