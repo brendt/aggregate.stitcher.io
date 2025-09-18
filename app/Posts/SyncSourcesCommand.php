@@ -8,6 +8,8 @@ use App\Posts\Events\SourceSyncFailed;
 use Tempest\Console\ConsoleArgument;
 use Tempest\Console\ConsoleCommand;
 use Tempest\Console\HasConsole;
+use Tempest\Console\Schedule;
+use Tempest\Console\Scheduler\Every;
 use Tempest\EventBus\EventBus;
 use function Tempest\Support\str;
 
@@ -21,6 +23,7 @@ final class SyncSourcesCommand
     ) {}
 
     #[ConsoleCommand]
+    #[Schedule(Every::HOUR)]
     public function __invoke(
         #[ConsoleArgument(aliases: ['-v'])]
         bool $verbose = false,
