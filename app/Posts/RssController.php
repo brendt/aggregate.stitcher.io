@@ -15,9 +15,8 @@ final class RssController
     {
         $xml = $cache->resolve(
             key: 'rss',
-            callback: fn () => $this->renderRssFeed(Post::select()
+            callback: fn () => $this->renderRssFeed(Post::published()
                 ->orderBy('createdAt DESC')
-                ->where('state', PostState::PUBLISHED)
                 ->limit(100)
                 ->all()
             ),

@@ -25,6 +25,7 @@ final class SyncSourcesCommand
     #[ConsoleCommand]
     #[Schedule(Every::HOUR)]
     public function __invoke(
+        ?string $source = null,
         #[ConsoleArgument(aliases: ['-v'])]
         bool $verbose = false,
     ): void {
@@ -35,7 +36,17 @@ final class SyncSourcesCommand
         $this->eventBus->listen($this->onSourceSynced(...));
         $this->eventBus->listen($this->onSourceSyncFailed(...));
 
-        $sources = Source::select()->where('state', SourceState::PUBLISHED->value)->all();
+        $query = Source::select()
+            ->where('state = :state', state: SourceState::PUBLISHED->value);
+
+        if ($source) {
+            $query->where(
+                'name LIKE :filter OR uri LIKE :filter',
+                filter: "%{$source}%",
+            );
+        }
+
+        $sources = $query->all();
 
         $this->info(sprintf(
             "Syncing %s %s…\n",

@@ -20,6 +20,7 @@ final class HomeController
 
         $page = Post::select()
             ->where('state', PostState::PUBLISHED)
+            ->where('source_id', 565)
             ->orderBy('createdAt DESC')
             ->with('source')
             ->paginate(currentPage: $currentPage);
@@ -58,7 +59,9 @@ final class HomeController
         $user = $authenticator->current();
 
         if ($user?->isAdmin) {
-            $pendingPosts = Post::published()
+            $pendingPosts = Post::select()
+                ->with('source')
+                ->where('sources.state = ?', SourceState::PUBLISHED)
                 ->orderBy('createdAt DESC')
                 ->limit(5)
                 ->all();
