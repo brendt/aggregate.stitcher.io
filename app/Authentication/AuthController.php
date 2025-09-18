@@ -90,6 +90,6 @@ final class AuthController
 
         $authenticator->authenticate($user);
 
-        return new Redirect(uri(HomeController::class));
+        return new Redirect('/');
     }
 }
