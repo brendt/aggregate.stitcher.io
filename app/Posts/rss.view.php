@@ -19,7 +19,7 @@ use Tempest\DateTime\FormatPattern;
             <link rel="alternate" href="<?= $post->cleanUri ?>"/>
             <id><?= $post->cleanUri ?></id>
             <updated><?= $post->createdAt->format(FormatPattern::ISO8601) ?></updated>
-            <published><?= $post->createdAt->format(FormatPattern::ISO8601) ?></published>
+            <published><?= $post->publicationDate->format(FormatPattern::ISO8601) ?></published>
         </entry>
     <?php endforeach; ?>
 </feed>
