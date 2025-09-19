@@ -4,6 +4,8 @@ namespace App\Posts;
 
 use App\Authentication\AdminMiddleware;
 use Tempest\Database\Query;
+use Tempest\DateTime\DateTime;
+use Tempest\DateTime\FormatPattern;
 use Tempest\Http\Responses\Redirect;
 use Tempest\View\View;
 use Tempest\Router;
@@ -34,6 +36,33 @@ final class PostsController
     public function accept(Post $post): View
     {
         $post->state = PostState::PUBLISHED;
+        $post->save();
+
+        return $this->render();
+    }
+
+    #[Router\Post('/posts/queue/{post}', middleware: [AdminMiddleware::class])]
+    public function queue(Post $post): View
+    {
+        $lastFullDay = new Query(<<<SQL
+        SELECT publicationDate
+        FROM posts
+        WHERE publicationDate > :publicationDate
+        AND state = :state
+        GROUP BY publicationDate
+        HAVING COUNT(*) >= 5
+        ORDER BY publicationDate DESC
+        LIMIT 1;
+        SQL)->fetchFirst(
+            publicationDate: DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
+            state: PostState::PUBLISHED,
+        );
+
+        $nextDate = DateTime::parse($lastFullDay['publicationDate'] ?? 'now')->plusDay();
+
+        $post->state = PostState::PUBLISHED;
+        $post->publicationDate = $nextDate;
+
         $post->save();
 
         return $this->render();

@@ -17,6 +17,51 @@ final class SourceFactory implements Factory
     private ?int $rank = null;
     private ?SourceState $state = null;
 
+    public function withName(string $name): self
+    {
+        $clone = clone $this;
+
+        $clone->name = $name;
+
+        return $clone;
+    }
+
+    public function withUri(string $uri): self
+    {
+        $clone = clone $this;
+
+        $clone->uri = $uri;
+
+        return $clone;
+    }
+
+    public function withVisits(int $visits): self
+    {
+        $clone = clone $this;
+
+        $clone->visits = $visits;
+
+        return $clone;
+    }
+
+    public function withRank(int $rank): self
+    {
+        $clone = clone $this;
+
+        $clone->rank = $rank;
+
+        return $clone;
+    }
+
+    public function withState(SourceState $state): self
+    {
+        $clone = clone $this;
+
+        $clone->state = $state;
+
+        return $clone;
+    }
+
     public function make(int $i = 0): Source
     {
         return Source::create(
@@ -24,7 +69,7 @@ final class SourceFactory implements Factory
             uri: $this->uri ?? "https://example.com/rss/{$i}",
             visits: $this->visits ?? 0,
             rank: $this->rank ?? 0,
-            state: $this->state ?? SourceState::PENDING,
+            state: $this->state ?? SourceState::PUBLISHED,
         );
     }
 }

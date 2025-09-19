@@ -15,10 +15,11 @@ final class RssController
     {
         $xml = $cache->resolve(
             key: 'rss',
-            callback: fn () => $this->renderRssFeed(Post::published()
-                ->orderBy('createdAt DESC')
-                ->limit(100)
-                ->all()
+            callback: fn () => $this->renderRssFeed(
+                Post::published()
+                    ->orderBy('createdAt DESC')
+                    ->limit(100)
+                    ->all(),
             ),
             expiration: DateTime::now()->plusHours(1),
         );

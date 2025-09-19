@@ -6,6 +6,8 @@ use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\SourceState;
 use Tempest\Auth\Authentication\Authenticator;
+use Tempest\Clock\Clock;
+use Tempest\DateTime\FormatPattern;
 use Tempest\Router\Get;
 use Tempest\View\View;
 use function Tempest\Support\arr;
@@ -14,12 +16,11 @@ use function Tempest\view;
 final class HomeController
 {
     #[Get('/{page:.?}')]
-    public function __invoke(string $page, Authenticator $authenticator): View
+    public function __invoke(string $page, Authenticator $authenticator, Clock $clock): View
     {
         $currentPage = $page ? intval($page) : 1;
 
-        $page = Post::select()
-            ->where('state', PostState::PUBLISHED)
+        $page = Post::published()
             ->orderBy('createdAt DESC')
             ->with('source')
             ->paginate(currentPage: $currentPage);
@@ -46,7 +47,7 @@ final class HomeController
                 $localRank = round($rebasedValue / $rebasedMax, 1);
             }
 
-            return match(true) {
+            return match (true) {
                 $localRank > 0.9 => 'bg-slate-300',
                 $localRank > 0.6 => 'bg-slate-200',
                 $localRank > 0.3 => 'bg-slate-100',

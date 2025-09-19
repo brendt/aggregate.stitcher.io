@@ -16,6 +16,7 @@ final class PostFactory implements Factory
     private ?string $title = null;
     public ?string $uri = null;
     public ?DateTime $createdAt = null;
+    public ?DateTime $publicationDate = null;
     public ?Source $source = null;
     public ?PostState $state = null;
     public ?int $visits = null;
@@ -84,12 +85,22 @@ final class PostFactory implements Factory
         return $clone;
     }
 
+    public function withPublicationDate(DateTime $publicationDate): self
+    {
+        $clone = clone $this;
+
+        $clone->publicationDate = $publicationDate;
+
+        return $clone;
+    }
+
     public function make(int $i = 0): Post
     {
         return Post::create(
             title: $this->title ?? "Test Post {$i}",
             uri: $this->uri ?? "https://example.com/posts/{$i}",
             createdAt: $this->createdAt ?? DateTime::now(),
+            publicationDate: $this->publicationDate,
             source: $this->source ?? new SourceFactory()->make(),
             state: $this->state ?? PostState::PENDING,
             visits: $this->visits ?? 0,
