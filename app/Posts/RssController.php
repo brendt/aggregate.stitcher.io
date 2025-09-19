@@ -17,7 +17,7 @@ final class RssController
             key: 'rss',
             callback: fn () => $this->renderRssFeed(
                 Post::published()
-                    ->orderBy('createdAt DESC')
+                    ->orderBy('publicationDate DESC')
                     ->limit(100)
                     ->all(),
             ),
