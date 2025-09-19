@@ -38,8 +38,8 @@ use App\Authentication\AuthController;
             <span class="font-bold text-slate-600">My community-driven RSS feed</span>
         </div>
 
-        <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin" >
-            <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue" />
+        <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin">
+            <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue"/>
         </div>
 
         <div
@@ -51,20 +51,20 @@ use App\Authentication\AuthController;
             </div>
 
             <a :href="uri([PostsController::class, 'visit'], post: $post->id)" class="hover:underline grow p-4">
-                <h1 class="flex gap-2 items-baseline">
-                    <span class="font-bold">{{ $post->title }}</span>
-                    <span class="text-sm">{{ $post->source->name }}</span>
-                </h1>
+                <span class="font-bold">{{ $post->title }}</span>
+                <br class="inline sm:hidden">
+                <span class="hidden sm:inline">&nbsp;</span>
+                <span class="text-sm">{{ $post->source->name }}</span>
             </a>
 
             <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="uri([PostsController::class, 'visit'], post: $post->id)">
                 <x-icon
-                    name="lucide:link"
-                    class="icon-copy size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
+                        name="lucide:link"
+                        class="icon-copy size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
                 />
                 <x-icon
-                    name="lucide:check"
-                    class="icon-copied size-6 p-1 bg-emerald-600 text-emerald-50 rounded-sm"
+                        name="lucide:check"
+                        class="icon-copied size-6 p-1 bg-emerald-600 text-emerald-50 rounded-sm"
                 />
             </div>
         </div>
