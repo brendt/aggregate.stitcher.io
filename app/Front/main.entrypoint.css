@@ -1,6 +1,27 @@
 @import "tailwindcss";
+
 @source inline("bg-slate-{50,100,200,300,400}");
 @source inline("bg-white");
+
+.copy-uri {
+    & > .icon-copy {
+        display: inline-block;
+    }
+
+    & > .icon-copied {
+        display: none;
+    }
+
+    &.copied {
+        & > .icon-copy {
+            display: none;
+        }
+
+        & > .icon-copied {
+            display: inline-block;
+        }
+    }
+}
 
 .htmx-button {
     & .during-input {

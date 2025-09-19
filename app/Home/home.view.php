@@ -12,6 +12,25 @@ use App\Authentication\AuthController;
 <x-base>
     <x-slot name="head">
         <script :if="$user?->isAdmin" src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.6/dist/htmx.min.js" integrity="sha384-Akqfrbj/HpNVo8k11SXBb6TlBWmXXlYQrCSqEWmyKJe+hDm3Z/B2WVG4smwBkRVm" crossorigin="anonymous"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+                let copyUris = document.querySelectorAll('.copy-uri');
+
+                copyUris.forEach(element => {
+                    element.addEventListener('click', () => {
+                        if (navigator.clipboard) {
+                            navigator.clipboard.writeText(element.getAttribute('data-uri'));
+                        }
+
+                        copyUris.forEach(elementToClear => {
+                            elementToClear.classList.remove('copied');
+                        })
+
+                        element.classList.add('copied');
+                    });
+                })
+            });
+        </script>
     </x-slot>
 
     <div class="max-w-[800px] m-auto grid gap-2">
@@ -23,15 +42,32 @@ use App\Authentication\AuthController;
             <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue" />
         </div>
 
-        <a
+        <div
                 :foreach="$posts as $post"
-                class="p-4 rounded-lg shadow-sm {{ $color($post) }} hover:shadow-lg hover:underline"
-                :href="uri([PostsController::class, 'visit'], post: $post->id)"
+                class="rounded-lg shadow-sm {{ $color($post) }} hover:shadow-lg flex items-center justify-between"
         >
-            <h1>
-                <span class="font-bold">{{ $post->title }}</span>&nbsp;<span class="text-sm">–&nbsp;{{ $post->source->name }}</span>
-            </h1>
-        </a>
+            <div class="pl-4">
+                <span class="text-xs p-1 px-2 bg-gray-100 rounded-sm">{{ $post->visits }}</span>
+            </div>
+
+            <a :href="uri([PostsController::class, 'visit'], post: $post->id)" class="hover:underline grow p-4">
+                <h1 class="flex gap-2 items-baseline">
+                    <span class="font-bold">{{ $post->title }}</span>
+                    <span class="text-sm">{{ $post->source->name }}</span>
+                </h1>
+            </a>
+
+            <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="$post->uri">
+                <x-icon
+                    name="lucide:link"
+                    class="icon-copy size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
+                />
+                <x-icon
+                    name="lucide:check"
+                    class="icon-copied size-6 p-1 bg-emerald-600 text-emerald-50 rounded-sm"
+                />
+            </div>
+        </div>
 
         <div class="flex gap-2">
             <a
