@@ -39,7 +39,7 @@ final class HomeControllerTest extends IntegrationTestCase
             ->assertOk()
             ->assertSee('Published');
     }
-    
+
     public function test_pending_posts_are_shown_to_admins(): void
     {
         $this->login(role: Role::ADMIN);
@@ -127,9 +127,10 @@ final class HomeControllerTest extends IntegrationTestCase
             ->withPublicationDate(DateTime::parse('2025-01-01 00:00:00'))
             ->times(4)
             ->make();
-        {}
+
         $this->http->get('/')
             ->assertOk()
+            ->assertSee('publish')
             ->assertNotSee('queue');
 
         new PostFactory()
@@ -139,6 +140,7 @@ final class HomeControllerTest extends IntegrationTestCase
 
         $this->http->get('/')
             ->assertOk()
-            ->assertSee('queue');
+            ->assertSee('queue')
+            ->assertNotSee('publish');
     }
 }
