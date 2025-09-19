@@ -57,7 +57,7 @@ use App\Authentication\AuthController;
                 </h1>
             </a>
 
-            <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="$post->uri">
+            <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="uri([PostsController::class, 'visit'], post: $post->id)">
                 <x-icon
                     name="lucide:link"
                     class="icon-copy size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
