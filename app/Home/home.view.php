@@ -35,7 +35,7 @@ use App\Authentication\AuthController;
 
     <div class="max-w-[800px] m-auto grid gap-2">
         <div class="flex justify-center items-center gap-2 mb-4 mt-4">
-            <span class="font-bold text-slate-600">My community-driven RSS feed</span>
+            <span class="font-bold text-slate-600">My community-driven feed, follow via <a href="/rss" class="underline hover:no-underline">RSS</a></span>
         </div>
 
         <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin">
