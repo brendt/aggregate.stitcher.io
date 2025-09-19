@@ -12,10 +12,10 @@ use App\Posts\Migrations\CreatePostsTable;
 use App\Posts\Migrations\CreateSourcesTable;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\Database\Migrations\CreateMigrationsTable;
+use Tempest\Framework\Testing\IntegrationTest;
 use Tests\Factories\UserFactory;
-use function Tempest\get;
 
-abstract class IntegrationTest extends \Tempest\Framework\Testing\IntegrationTest
+abstract class IntegrationTestCase extends IntegrationTest
 {
     protected function setUp(): void
     {

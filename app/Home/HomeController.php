@@ -13,7 +13,6 @@ use Tempest\DateTime\FormatPattern;
 use Tempest\Router\Get;
 use Tempest\View\View;
 use function Tempest\Database\query;
-use function Tempest\get;
 use function Tempest\Support\arr;
 use function Tempest\view;
 
@@ -25,7 +24,7 @@ final class HomeController
         $currentPage = $page ? intval($page) : 1;
 
         $page = Post::published()
-            ->orderBy('createdAt DESC')
+            ->orderBy('publicationDate DESC')
             ->with('source')
             ->paginate(currentPage: $currentPage);
 
@@ -63,14 +62,12 @@ final class HomeController
         $user = $authenticator->current();
 
         if ($user?->isAdmin) {
-            $pendingPosts = Post::select()
-                ->with('source')
-                ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
-                ->orderBy('createdAt DESC')
-                ->limit(5)
-                ->all();
+            $pendingPosts = Post::pending()->limit(5)->all();
+            $publishedPostsToday = Post::publishedToday();
+            $shouldQueue = $publishedPostsToday >= 5;
         } else {
             $pendingPosts = [];
+            $shouldQueue = null;
         }
 
         return view(
@@ -80,6 +77,7 @@ final class HomeController
             posts: $posts,
             pendingPosts: $pendingPosts,
             color: $color,
+            shouldQueue: $shouldQueue,
         );
     }
 }

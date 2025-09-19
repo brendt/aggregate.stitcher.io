@@ -9,6 +9,7 @@ use Tempest\DateTime\FormatPattern;
 use Tempest\Http\Responses\Redirect;
 use Tempest\View\View;
 use Tempest\Router;
+use function Tempest\Database\query;
 use function Tempest\view;
 
 final class PostsController
@@ -36,7 +37,7 @@ final class PostsController
     public function publish(Post $post): View
     {
         $post->state = PostState::PUBLISHED;
-        $post->publicationDate = DateTime::now()->startOfDay();
+        $post->publicationDate = DateTime::now();
         $post->save();
 
         return $this->render();
@@ -72,13 +73,14 @@ final class PostsController
 
     private function render(): View
     {
-        $pendingPosts = Post::select()
-            ->with('source')
-            ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
-            ->orderBy('createdAt DESC')
-            ->limit(5)
-            ->all();
+        $pendingPosts = Post::pending()->limit(5)->all();
+        $publishedPostsToday = Post::publishedToday();
+        $shouldQueue = $publishedPostsToday >= 5;
 
-        return view('x-pending-posts.view.php', pendingPosts: $pendingPosts);
+        return view(
+            'x-pending-posts.view.php',
+            pendingPosts: $pendingPosts,
+            shouldQueue: $shouldQueue,
+        );
     }
 }

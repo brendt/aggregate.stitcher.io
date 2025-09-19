@@ -9,6 +9,7 @@ use Tempest\Database\Virtual;
 use Tempest\DateTime\DateTime;
 use Tempest\DateTime\FormatPattern;
 use Tempest\Router\Bindable;
+use function Tempest\Database\query;
 use function Tempest\get;
 
 final class Post implements Bindable
@@ -44,5 +45,29 @@ final class Post implements Bindable
             )
             ->with('source')
             ->where('posts.state = ? AND sources.state = ?', PostState::PUBLISHED, SourceState::PUBLISHED);
+    }
+
+    /**
+     * @return SelectQueryBuilder<Post>
+     */
+    public static function pending(): SelectQueryBuilder
+    {
+        return self::select()
+            ->with('source')
+            ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
+            ->orderBy('createdAt DESC');
+    }
+
+    public static function publishedToday(): int
+    {
+        return query(self::class)
+            ->select('COUNT(*) as count')
+            ->join('sources ON sources.id = posts.source_id')
+            ->where('posts.state = ?', PostState::PUBLISHED)
+            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->where('posts.publicationDate = ?', DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
+            ->groupBy('posts.publicationDate')
+            ->build()
+            ->fetchFirst()['count'] ?? 0;
     }
 }

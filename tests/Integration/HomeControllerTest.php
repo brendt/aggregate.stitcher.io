@@ -10,9 +10,9 @@ use App\Posts\SourceState;
 use Tempest\DateTime\DateTime;
 use Tests\Factories\PostFactory;
 use Tests\Factories\SourceFactory;
-use Tests\IntegrationTest;
+use Tests\IntegrationTestCase;
 
-final class HomeControllerTest extends IntegrationTest
+final class HomeControllerTest extends IntegrationTestCase
 {
     public function test_home_only_shows_published_posts(): void
     {
@@ -111,5 +111,34 @@ final class HomeControllerTest extends IntegrationTest
         $this->http->get('/')
             ->assertOk()
             ->assertSee('Published');
+    }
+
+    public function test_queue_button_only_shows_when_there_are_five_or_more_published_posts_today(): void
+    {
+        $this->login(role: Role::ADMIN);
+        $this->clock('2025-01-01 00:00:00');
+
+        new PostFactory()
+            ->withState(PostState::PENDING)
+            ->make();
+
+        new PostFactory()
+            ->withState(PostState::PUBLISHED)
+            ->withPublicationDate(DateTime::parse('2025-01-01 00:00:00'))
+            ->times(4)
+            ->make();
+        {}
+        $this->http->get('/')
+            ->assertOk()
+            ->assertNotSee('queue');
+
+        new PostFactory()
+            ->withState(PostState::PUBLISHED)
+            ->withPublicationDate(DateTime::parse('2025-01-01 00:00:00'))
+            ->make();
+
+        $this->http->get('/')
+            ->assertOk()
+            ->assertSee('queue');
     }
 }

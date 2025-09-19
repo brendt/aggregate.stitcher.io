@@ -9,10 +9,10 @@ use App\Posts\PostsController;
 use App\Posts\PostState;
 use Tempest\DateTime\DateTime;
 use Tests\Factories\PostFactory;
-use Tests\IntegrationTest;
+use Tests\IntegrationTestCase;
 use function Tempest\Router\uri;
 
-final class PostsControllerTest extends IntegrationTest
+final class PostsControllerTest extends IntegrationTestCase
 {
     public function test_queue_finds_the_correct_future_publication_date(): void
     {
@@ -44,7 +44,7 @@ final class PostsControllerTest extends IntegrationTest
     {
         $this->login(role: Role::ADMIN);
 
-        $this->clock('2025-01-01 00:00:00');
+        $this->clock('2025-01-01 10:00:00');
 
         new PostFactory()
             ->withState(PostState::PUBLISHED)
@@ -63,6 +63,6 @@ final class PostsControllerTest extends IntegrationTest
 
         $this->assertSame(PostState::PUBLISHED, $post->state);
         $this->assertNotNull($post->publicationDate);
-        $this->assertTrue($post->publicationDate->equals('2025-01-01 00:00:00'));
+        $this->assertTrue($post->publicationDate->equals('2025-01-01 10:00:00'));
     }
 }

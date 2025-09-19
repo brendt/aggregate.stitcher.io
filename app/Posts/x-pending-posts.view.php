@@ -25,7 +25,7 @@ use function Tempest\Router\uri;
                 <x-icon name="lucide:check" class="size-5 text-gray-400"/>
             </x-action-button>
 
-            <x-action-button :action="uri([PostsController::class, 'publish'], post: $pendingPost->id)" target="#pending-posts">
+            <x-action-button :if="$shouldQueue" :action="uri([PostsController::class, 'queue'], post: $pendingPost->id)" target="#pending-posts">
                 <x-icon name="lucide:alarm-clock-check" class="size-5 text-gray-400"/>
             </x-action-button>
         </div>
