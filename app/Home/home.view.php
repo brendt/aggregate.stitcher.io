@@ -86,6 +86,8 @@ use App\Authentication\AuthController;
             <a class="underline hover:no-underline" :if="$user === null" href="{{ uri([AuthController::class, 'login']) }}">Login</a>
             <a class="underline hover:no-underline" :else href="{{ uri([AuthController::class, 'logout']) }}">Logout</a>
             <span>–</span>
+            <a href="/rss" class="underline hover:no-underline">RSS</a>
+            <span>–</span>
             <span>&copy;{{ DateTime::now()->format('YYYY') }} stitcher.io</span>
         </div>
     </div>
