@@ -44,10 +44,10 @@ use App\Authentication\AuthController;
 
         <div
                 :foreach="$posts as $post"
-                class="rounded-lg shadow-sm {{ $color($post) }} hover:shadow-lg flex items-center justify-between"
+                class="rounded-lg bg-white shadow-sm hover:shadow-lg flex items-center justify-between"
         >
             <div class="pl-4">
-                <span class="text-xs p-1 px-2 bg-gray-100 rounded-sm">{{ $post->visits }}</span>
+                <span class="text-md sm:text-xs p-1 px-2 rounded-sm {{ $color($post) }}">{{ $post->visits }}</span>
             </div>
 
             <a :href="uri([PostsController::class, 'visit'], post: $post->id)" class="hover:underline grow p-4">
@@ -60,11 +60,11 @@ use App\Authentication\AuthController;
             <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="uri([PostsController::class, 'visit'], post: $post->id)">
                 <x-icon
                         name="lucide:link"
-                        class="icon-copy size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
+                        class="icon-copy size-7 sm:size-6 p-1 bg-gray-100 rounded-sm group-hover:bg-gray-200"
                 />
                 <x-icon
                         name="lucide:check"
-                        class="icon-copied size-6 p-1 bg-emerald-600 text-emerald-50 rounded-sm"
+                        class="icon-copied size-7 sm:size-6 p-1 bg-emerald-600 text-emerald-50 rounded-sm"
                 />
             </div>
         </div>

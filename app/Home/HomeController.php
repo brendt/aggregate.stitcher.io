@@ -54,7 +54,7 @@ final class HomeController
                 $localRank > 0.9 => 'bg-slate-300',
                 $localRank > 0.6 => 'bg-slate-200',
                 $localRank > 0.3 => 'bg-slate-100',
-                default => 'bg-white',
+                default => 'bg-gray-100',
             };
         };
 
