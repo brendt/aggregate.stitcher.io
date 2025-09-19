@@ -18,7 +18,7 @@ final class PendingSourcesController
         return $this->render();
     }
 
-    #[Router\Post('/sources/accept/{source}', middleware: [AdminMiddleware::class])]
+    #[Router\Post('/sources/publish/{source}', middleware: [AdminMiddleware::class])]
     public function publish(Source $source, SyncSource $syncSource): View
     {
         $source->state = SourceState::PUBLISHED;

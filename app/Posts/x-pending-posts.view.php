@@ -21,11 +21,11 @@ use function Tempest\Router\uri;
                 <x-icon name="lucide:trash-2" class="size-5 text-gray-400"/>
             </x-action-button>
 
-            <x-action-button :action="uri([PostsController::class, 'accept'], post: $pendingPost->id)" target="#pending-posts">
+            <x-action-button :action="uri([PostsController::class, 'publish'], post: $pendingPost->id)" target="#pending-posts">
                 <x-icon name="lucide:check" class="size-5 text-gray-400"/>
             </x-action-button>
 
-            <x-action-button :action="uri([PostsController::class, 'accept'], post: $pendingPost->id)" target="#pending-posts">
+            <x-action-button :action="uri([PostsController::class, 'publish'], post: $pendingPost->id)" target="#pending-posts">
                 <x-icon name="lucide:alarm-clock-check" class="size-5 text-gray-400"/>
             </x-action-button>
         </div>

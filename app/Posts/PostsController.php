@@ -32,10 +32,11 @@ final class PostsController
         return $this->render();
     }
 
-    #[Router\Post('/posts/accept/{post}', middleware: [AdminMiddleware::class])]
-    public function accept(Post $post): View
+    #[Router\Post('/posts/publish/{post}', middleware: [AdminMiddleware::class])]
+    public function publish(Post $post): View
     {
         $post->state = PostState::PUBLISHED;
+        $post->publicationDate = DateTime::now()->startOfDay();
         $post->save();
 
         return $this->render();
@@ -58,11 +59,12 @@ final class PostsController
             state: PostState::PUBLISHED,
         );
 
-        $nextDate = DateTime::parse($lastFullDay['publicationDate'] ?? 'now')->plusDay();
+        $nextDate = DateTime::parse($lastFullDay['publicationDate'] ?? 'now')
+            ->plusDay()
+            ->startOfDay();
 
         $post->state = PostState::PUBLISHED;
         $post->publicationDate = $nextDate;
-
         $post->save();
 
         return $this->render();
