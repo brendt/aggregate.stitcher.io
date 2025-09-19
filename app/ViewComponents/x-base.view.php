@@ -2,11 +2,15 @@
 /**
  * @var string|null $title The webpage's title
  */
+
+use function Tempest\get;
 use function Tempest\Http\csrf_token;
+use Tempest\Core\AppConfig;
+$isProduction = get(AppConfig::class)->environment->isProduction();
 ?>
 
 <!doctype html>
-<html lang="en" class="h-dvh flex flex-col scroll-smooth bg-gray-800 md:p-4">
+<html lang="en" class="h-dvh flex flex-col scroll-smooth md:p-4" :class="$isProduction ? 'bg-gray-800' : 'bg-green-800'">
 <head>
     <title>{{ $title ?? 'Aggregate' }}</title>
 
