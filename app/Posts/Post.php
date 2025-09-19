@@ -65,8 +65,12 @@ final class Post implements Bindable
             ->join('sources ON sources.id = posts.source_id')
             ->where('posts.state = ?', PostState::PUBLISHED)
             ->where('sources.state = ?', SourceState::PUBLISHED)
-            ->where('posts.publicationDate = ?', DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
-            ->groupBy('posts.publicationDate')
+            ->where(
+                'posts.publicationDate >= ? AND posts.publicationDate < ?',
+                DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
+                DateTime::now()->plusDay()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
+            )
+            ->groupBy('DATE_FORMAT(posts.publicationDate, "YYYY-MM-DD")')
             ->build()
             ->fetchFirst()['count'] ?? 0;
     }

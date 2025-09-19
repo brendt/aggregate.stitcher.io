@@ -116,7 +116,7 @@ final class HomeControllerTest extends IntegrationTestCase
     public function test_queue_button_only_shows_when_there_are_five_or_more_published_posts_today(): void
     {
         $this->login(role: Role::ADMIN);
-        $this->clock('2025-01-01 00:00:00');
+        $this->clock('2025-01-01 10:10:10');
 
         new PostFactory()
             ->withState(PostState::PENDING)
@@ -135,7 +135,7 @@ final class HomeControllerTest extends IntegrationTestCase
 
         new PostFactory()
             ->withState(PostState::PUBLISHED)
-            ->withPublicationDate(DateTime::parse('2025-01-01 00:00:00'))
+            ->withPublicationDate(DateTime::parse('2025-01-01 14:00:00'))
             ->make();
 
         $this->http->get('/')
