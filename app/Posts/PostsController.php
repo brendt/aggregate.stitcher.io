@@ -76,11 +76,13 @@ final class PostsController
         $pendingPosts = Post::pending()->limit(5)->all();
         $publishedPostsToday = Post::publishedToday();
         $shouldQueue = $publishedPostsToday >= 5;
+        $futureQueued = Post::futureQueued();
 
         return view(
             'x-pending-posts.view.php',
             pendingPosts: $pendingPosts,
             shouldQueue: $shouldQueue,
+            futureQueued: $futureQueued,
         );
     }
 }

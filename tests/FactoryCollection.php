@@ -30,7 +30,7 @@ final class FactoryCollection
         $items = [];
 
         foreach (range(1, $this->times) as $i) {
-            $items[] = $this->factory->make();
+            $items[] = $this->factory->make($i);
         }
 
         return $items;

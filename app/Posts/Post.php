@@ -74,4 +74,19 @@ final class Post implements Bindable
             ->build()
             ->fetchFirst()['count'] ?? 0;
     }
+
+    public static function futureQueued(): int
+    {
+        return query(self::class)
+            ->select('COUNT(*) as count')
+            ->join('sources ON sources.id = posts.source_id')
+            ->where('posts.state = ?', PostState::PUBLISHED)
+            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->where(
+                'posts.publicationDate >= ?',
+                DateTime::now()->plusDay()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
+            )
+            ->build()
+            ->fetchFirst()['count'] ?? 0;
+    }
 }

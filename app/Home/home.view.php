@@ -39,7 +39,7 @@ use App\Authentication\AuthController;
         </div>
 
         <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin">
-            <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue"/>
+            <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue" :futureQueued="$futureQueued"/>
         </div>
 
         <div

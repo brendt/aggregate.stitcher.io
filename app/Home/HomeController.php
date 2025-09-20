@@ -62,6 +62,7 @@ final class HomeController
         $user = $authenticator->current();
 
         if ($user?->isAdmin) {
+            $futureQueued = Post::futureQueued();
             $pendingPosts = Post::pending()->limit(5)->all();
             $publishedPostsToday = Post::publishedToday();
             $shouldQueue = $publishedPostsToday >= 5;
@@ -78,6 +79,7 @@ final class HomeController
             pendingPosts: $pendingPosts,
             color: $color,
             shouldQueue: $shouldQueue,
+            futureQueued: $futureQueued,
         );
     }
 }
