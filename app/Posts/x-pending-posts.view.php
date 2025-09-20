@@ -12,7 +12,7 @@ use function Tempest\Router\uri;
             <span class="font-bold">{{ $pendingPost->title }}</span>&nbsp;<span class="text-sm">–&nbsp;{{ $pendingPost->source->name }}</span>
         </h1>
 
-        <div class="flex gap-4 sm:gap-2">
+        <div class="flex gap-8 sm:gap-2">
             <a class="bg-gray-100 p-2 rounded-md htmx-button flex items-center" :href="$pendingPost->uri">
                 <x-icon name="lucide:external-link" class="size-6 sm:size-5 text-gray-400"/>
             </a>
