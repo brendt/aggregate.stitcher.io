@@ -1,11 +1,11 @@
 <?php
 
-namespace Tests\Factories;
+namespace App\Factories;
 
 use App\Posts\Source;
 use App\Posts\SourceState;
-use Tests\Factory;
-use Tests\IsFactory;
+use App\Support\Factory;
+use App\Support\IsFactory;
 
 final class SourceFactory implements Factory
 {

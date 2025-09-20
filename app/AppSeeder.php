@@ -4,9 +4,11 @@ namespace App;
 
 use App\Authentication\Role;
 use App\Authentication\User;
+use App\Factories\PostFactory;
+use App\Factories\SourceFactory;
+use App\Factories\SuggestionFactory;
+use App\Posts\PostState;
 use Tempest\Database\DatabaseSeeder;
-use Tests\Factories\PostFactory;
-use Tests\Factories\SourceFactory;
 use UnitEnum;
 use function Tempest\env;
 
@@ -23,6 +25,10 @@ final class AppSeeder implements DatabaseSeeder
         $source = new SourceFactory()->make();
 
         new PostFactory()->withSource($source)->times(40)->make();
+
+        new PostFactory()->withState(PostState::PUBLISHED)->withSource($source)->times(40)->make();
+
+        new SuggestionFactory()->times(5)->make();
 
 //        Source::create(
 //            name: 'stitcher.io',

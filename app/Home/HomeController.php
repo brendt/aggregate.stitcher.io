@@ -5,6 +5,7 @@ namespace App\Home;
 use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\SourceState;
+use App\Suggestions\Suggestion;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\Clock\Clock;
 use Tempest\Database\Query;
@@ -67,6 +68,7 @@ final class HomeController
             $publishedPostsToday = Post::publishedToday();
             $shouldQueue = $publishedPostsToday >= 5;
             $pendingCount = Post::pendingCount();
+            $suggestions = Suggestion::select()->all();
         }
 
         return view(
@@ -79,6 +81,7 @@ final class HomeController
             shouldQueue: $shouldQueue ?? null,
             futureQueued: $futureQueued ?? null,
             pendingCount: $pendingCount ?? null,
+            suggestions: $suggestions ?? [],
         );
     }
 }

@@ -5,14 +5,15 @@ namespace Tests;
 use App\Authentication\CreateUsersTable;
 use App\Authentication\Role;
 use App\Authentication\User;
+use App\Factories\UserFactory;
 use App\Posts\Migrations\AddPublicationDateToPost;
 use App\Posts\Migrations\AddRankToPosts;
 use App\Posts\Migrations\AddRankToSources;
 use App\Posts\Migrations\CreatePostsTable;
 use App\Posts\Migrations\CreateSourcesTable;
+use App\Suggestions\CreateSuggestionsTable;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\Database\Migrations\CreateMigrationsTable;
-use Tests\Factories\UserFactory;
 
 abstract class IntegrationTestCase extends \Tempest\Framework\Testing\IntegrationTest
 {
@@ -33,6 +34,7 @@ abstract class IntegrationTestCase extends \Tempest\Framework\Testing\Integratio
             AddRankToSources::class,
             AddRankToPosts::class,
             AddPublicationDateToPost::class,
+            CreateSuggestionsTable::class,
         );
     }
 

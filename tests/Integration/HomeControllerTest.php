@@ -5,11 +5,12 @@ declare(strict_types=1);
 namespace Tests\Integration;
 
 use App\Authentication\Role;
+use App\Factories\PostFactory;
+use App\Factories\SourceFactory;
+use App\Factories\SuggestionFactory;
 use App\Posts\PostState;
 use App\Posts\SourceState;
 use Tempest\DateTime\DateTime;
-use Tests\Factories\PostFactory;
-use Tests\Factories\SourceFactory;
 use Tests\IntegrationTestCase;
 
 final class HomeControllerTest extends IntegrationTestCase
@@ -142,5 +143,22 @@ final class HomeControllerTest extends IntegrationTestCase
             ->assertOk()
             ->assertSee('queue')
             ->assertNotSee('publish');
+    }
+
+    public function test_admin_sees_suggestions(): void
+    {
+        new SuggestionFactory()
+            ->withUri('suggestion.com')
+            ->make();
+
+        $this->http->get('/')
+            ->assertOk()
+            ->assertNotSee('suggestion.com');
+
+        $this->login(role: Role::ADMIN);
+
+        $this->http->get('/')
+            ->assertOk()
+            ->assertSee('suggestion.com');
     }
 }

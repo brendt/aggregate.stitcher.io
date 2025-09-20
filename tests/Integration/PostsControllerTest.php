@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Tests\Integration;
 
 use App\Authentication\Role;
+use App\Factories\PostFactory;
 use App\Posts\PostsController;
 use App\Posts\PostState;
 use Tempest\DateTime\DateTime;
-use Tests\Factories\PostFactory;
 use Tests\IntegrationTestCase;
 use function Tempest\Router\uri;
 

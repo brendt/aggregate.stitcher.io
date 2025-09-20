@@ -1,12 +1,16 @@
 <?php
 
-namespace Tests\Factories;
+namespace App\Factories;
 
 use App\Authentication\Role;
 use App\Authentication\User;
+use App\Support\Factory;
+use App\Support\IsFactory;
 
-final class UserFactory
+final class UserFactory implements Factory
 {
+    use IsFactory;
+
     private string $name = 'test';
     private string $email = 'test@test.com';
     private ?Role $role = null;
@@ -43,7 +47,7 @@ final class UserFactory
         return $clone;
     }
 
-    public function make(): User
+    public function make(int $i = 0): User
     {
         return User::create(
             name: $this->name,

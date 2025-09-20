@@ -63,8 +63,7 @@ final class AdminController
 
         return $this->render();
     }
-
-
+    
     private function render(): View
     {
         return view(

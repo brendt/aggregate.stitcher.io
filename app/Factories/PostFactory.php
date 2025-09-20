@@ -1,13 +1,13 @@
 <?php
 
-namespace Tests\Factories;
+namespace App\Factories;
 
 use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\Source;
+use App\Support\Factory;
+use App\Support\IsFactory;
 use Tempest\DateTime\DateTime;
-use Tests\Factory;
-use Tests\IsFactory;
 
 final class PostFactory implements Factory
 {
