@@ -10,6 +10,7 @@ use Tempest\Http\Responses\Redirect;
 use Tempest\View\View;
 use Tempest\Router;
 use function Tempest\Database\query;
+use function Tempest\defer;
 use function Tempest\view;
 
 final class PostsController
@@ -17,9 +18,11 @@ final class PostsController
     #[Router\Get('/posts/{post}')]
     public function visit(Post $post): Redirect
     {
-        $post->load('source');
-        new Query('UPDATE posts SET visits = visits + 1 WHERE id = ?', [$post->id])->execute();
-        new Query('UPDATE sources SET visits = visits + 1 WHERE id = ?', [$post->source->id])->execute();
+        defer(function () use ($post) {
+            $post->load('source');
+            new Query('UPDATE posts SET visits = visits + 1 WHERE id = ?', [$post->id])->execute();
+            new Query('UPDATE sources SET visits = visits + 1 WHERE id = ?', [$post->source->id])->execute();
+        });
 
         return new Redirect($post->uri);
     }

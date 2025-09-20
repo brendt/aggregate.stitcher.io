@@ -10,7 +10,7 @@ $isProduction = get(AppConfig::class)->environment->isProduction();
 ?>
 
 <!doctype html>
-<html lang="en" class="h-dvh flex flex-col scroll-smooth md:p-4" :class="$isProduction ? 'bg-slate-700' : 'bg-green-800'">
+<html lang="en" class="h-dvh flex flex-col scroll-smooth md:p-4" :class="$isProduction ? 'bg-slate-700' : 'bg-green-600'">
 <head>
     <title>{{ $title ?? 'Aggregate' }}</title>
 
