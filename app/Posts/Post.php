@@ -89,4 +89,15 @@ final class Post implements Bindable
             ->build()
             ->fetchFirst()['count'] ?? 0;
     }
+
+    public static function pendingCount(): int
+    {
+        return query(self::class)
+            ->select('COUNT(*) as count')
+            ->join('sources ON sources.id = posts.source_id')
+            ->where('posts.state = ?', PostState::PENDING)
+            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->build()
+            ->fetchFirst()['count'] ?? 0;
+    }
 }

@@ -66,9 +66,7 @@ final class HomeController
             $pendingPosts = Post::pending()->limit(5)->all();
             $publishedPostsToday = Post::publishedToday();
             $shouldQueue = $publishedPostsToday >= 5;
-        } else {
-            $pendingPosts = [];
-            $shouldQueue = null;
+            $pendingCount = Post::pendingCount();
         }
 
         return view(
@@ -76,10 +74,11 @@ final class HomeController
             user: $user,
             page: $page,
             posts: $posts,
-            pendingPosts: $pendingPosts,
             color: $color,
-            shouldQueue: $shouldQueue,
-            futureQueued: $futureQueued,
+            pendingPosts: $pendingPosts ?? [],
+            shouldQueue: $shouldQueue ?? null,
+            futureQueued: $futureQueued ?? null,
+            pendingCount: $pendingCount ?? null,
         );
     }
 }

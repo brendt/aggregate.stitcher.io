@@ -31,7 +31,10 @@ use function Tempest\Router\uri;
         </div>
     </div>
 
-    <div class="flex justify-end" :if="$futureQueued">
+    <div class="flex justify-between" :if="$futureQueued">
+        <div class="bg-gray-200 p-2 text-xs rounded-lg shadow-xs">
+            {{ $pendingCount }} pending
+        </div>
         <div class="bg-gray-200 p-2 text-xs rounded-lg shadow-xs">
             {{ $futureQueued }} queued
         </div>
