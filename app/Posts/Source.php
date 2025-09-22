@@ -5,6 +5,7 @@ namespace App\Posts;
 use Tempest\Database\IsDatabaseModel;
 use Tempest\Database\Virtual;
 use Tempest\Router\Bindable;
+use Tempest\Support\Str\ImmutableString;
 
 final class Source implements Bindable
 {
@@ -35,5 +36,10 @@ final class Source implements Bindable
     #[Virtual]
     public bool $isPublished {
         get => $this->state === SourceState::PUBLISHED;
+    }
+
+    #[Virtual]
+    public string $shortName {
+        get => new ImmutableString($this->name)->afterFirst('http://')->afterFirst('www.')->truncate(25, '…');
     }
 }

@@ -55,7 +55,7 @@ use App\Authentication\AuthController;
                 <span class="font-bold">{{ $post->title }}</span>
                 <br class="inline sm:hidden">
                 <span class="hidden sm:inline">&nbsp;</span>
-                <span class="text-sm">{{ $post->source->name }}</span>
+                <span class="text-sm block overflow-hidden">{{ $post->source->shortName }}</span>
             </a>
 
             <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="uri([PostsController::class, 'visit'], post: $post->id)">
