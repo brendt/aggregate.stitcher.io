@@ -5,6 +5,7 @@ namespace App\Posts;
 use Tempest\Database\IsDatabaseModel;
 use Tempest\Database\Virtual;
 use Tempest\Router\Bindable;
+use Tempest\Support\Str\ImmutableString;
 
 final class Source implements Bindable
 {
