@@ -17,6 +17,10 @@ use function Tempest\Router\uri;
                 <x-icon name="lucide:external-link" class="size-6 sm:size-5 text-gray-400"/>
             </a>
 
+            <x-action-button :if="$shouldQueue" :action="uri([PostsController::class, 'publish'], post: $pendingPost->id)" target="#pending-posts">
+                <x-icon name="lucide:check" class="size-6 sm:size-5 text-gray-400"/>
+            </x-action-button>
+
             <x-action-button :action="uri([PostsController::class, 'deny'], post: $pendingPost->id)" target="#pending-posts">
                 <x-icon name="lucide:trash-2" class="size-6 sm:size-5 text-gray-400"/>
             </x-action-button>
