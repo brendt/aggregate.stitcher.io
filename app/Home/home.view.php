@@ -6,6 +6,7 @@ use App\Home\HomeController;
 use App\Admin\AdminController;
 use Tempest\DateTime\DateTime;
 use App\Authentication\AuthController;
+use App\Suggestions\SuggestionController;
 
 ?>
 
@@ -41,6 +42,16 @@ use App\Authentication\AuthController;
         <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin">
             <x-suggestions :suggestions="$suggestions" />
             <x-pending-posts :pendingPosts="$pendingPosts" :shouldQueue="$shouldQueue" :futureQueued="$futureQueued"/>
+        </div>
+
+        <div class="rounded-lg bg-white shadow-sm hover:shadow-lg flex text-center">
+            <span :if="$success" class="grow p-4 font-bold text-emerald-700">
+                Your suggestion has been added!
+                <a :href="uri([SuggestionController::class, 'suggest'])" class="underline hover:no-underline">Add another one</a>
+            </span>
+            <a :else :href="uri([SuggestionController::class, 'suggest'])" class="underline hover:no-underline grow p-4 font-bold">
+                Add your own
+            </a>
         </div>
 
         <div

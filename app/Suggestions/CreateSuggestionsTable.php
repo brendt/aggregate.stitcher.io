@@ -15,6 +15,7 @@ final class CreateSuggestionsTable implements MigratesUp
         return new CreateTableStatement('suggestions')
             ->primary()
             ->string('uri')
+            ->string('feedUri', nullable: true)
             ->datetime('suggestedAt')
             ->text('suggestedBy');
     }

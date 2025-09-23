@@ -11,6 +11,7 @@ use Tempest\Clock\Clock;
 use Tempest\Database\Query;
 use Tempest\DateTime\DateTime;
 use Tempest\DateTime\FormatPattern;
+use Tempest\Http\Request;
 use Tempest\Router\Get;
 use Tempest\View\View;
 use function Tempest\Database\query;
@@ -20,7 +21,7 @@ use function Tempest\view;
 final class HomeController
 {
     #[Get('/{page:.?}')]
-    public function __invoke(string $page, Authenticator $authenticator, Clock $clock): View
+    public function __invoke(string $page, Authenticator $authenticator, Clock $clock, Request $request): View
     {
         $currentPage = $page ? intval($page) : 1;
 
@@ -82,6 +83,7 @@ final class HomeController
             futureQueued: $futureQueued ?? null,
             pendingCount: $pendingCount ?? null,
             suggestions: $suggestions ?? [],
+            success: $request->has('success')
         );
     }
 }
