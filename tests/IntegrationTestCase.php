@@ -11,6 +11,7 @@ use App\Posts\Migrations\AddRankToPosts;
 use App\Posts\Migrations\AddRankToSources;
 use App\Posts\Migrations\CreatePostsTable;
 use App\Posts\Migrations\CreateSourcesTable;
+use App\Posts\Migrations\MakeSourceNullable;
 use App\Suggestions\CreateSuggestionsTable;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\Database\Migrations\CreateMigrationsTable;
@@ -35,6 +36,7 @@ abstract class IntegrationTestCase extends \Tempest\Framework\Testing\Integratio
             AddRankToPosts::class,
             AddPublicationDateToPost::class,
             CreateSuggestionsTable::class,
+            MakeSourceNullable::class,
         );
     }
 

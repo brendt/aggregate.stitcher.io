@@ -27,7 +27,6 @@ final class HomeController
 
         $page = Post::published()
             ->orderBy('publicationDate DESC')
-            ->with('source')
             ->paginate(currentPage: $currentPage);
 
         $posts = arr($page->data);

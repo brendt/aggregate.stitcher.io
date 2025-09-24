@@ -64,9 +64,11 @@ use App\Suggestions\SuggestionController;
 
             <a :href="uri([PostsController::class, 'visit'], post: $post->id)" class="hover:underline grow p-4">
                 <span class="font-bold">{{ $post->title }}</span>
-                <br class="inline sm:hidden">
-                <span class="hidden sm:inline">&nbsp;</span>
-                <span class="text-sm block overflow-hidden">{{ $post->source->shortName }}</span>
+                <x-template :if="$post->source">
+                    <br class="inline sm:hidden">
+                    <span class="hidden sm:inline">&nbsp;</span>
+                    <span class="text-sm block overflow-hidden">{{ $post->source->shortName }}</span>
+                </x-template>
             </a>
 
             <div class="flex p-4 cursor-pointer group copy-uri" :data-uri="uri([PostsController::class, 'visit'], post: $post->id)">

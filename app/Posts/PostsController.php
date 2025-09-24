@@ -9,6 +9,7 @@ use Tempest\DateTime\FormatPattern;
 use Tempest\Http\Responses\Redirect;
 use Tempest\View\View;
 use Tempest\Router;
+use Throwable;
 use function Tempest\Database\query;
 use function Tempest\defer;
 use function Tempest\view;
@@ -19,9 +20,14 @@ final class PostsController
     public function visit(Post $post): Redirect
     {
         defer(function () use ($post) {
-            $post->load('source');
             new Query('UPDATE posts SET visits = visits + 1 WHERE id = ?', [$post->id])->execute();
-            new Query('UPDATE sources SET visits = visits + 1 WHERE id = ?', [$post->source->id])->execute();
+
+            try {
+                $post->load('source');
+                new Query('UPDATE sources SET visits = visits + 1 WHERE id = ?', [$post->source->id])->execute();
+            } catch (Throwable) {
+                // This is a post without a source
+            }
         });
 
         return new Redirect($post->uri);

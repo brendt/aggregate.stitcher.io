@@ -13,6 +13,7 @@ final class SuggestionFactory implements Factory
     use IsFactory;
 
     private ?string $uri = null;
+    private ?string $feedUri = null;
     private ?DateTime $suggestedAt = null;
     private ?string $suggestedBy = null;
 
@@ -21,6 +22,15 @@ final class SuggestionFactory implements Factory
         $clone = clone $this;
 
         $clone->uri = $uri;
+
+        return $clone;
+    }
+
+    public function withFeedUri(?string $feedUri): self
+    {
+        $clone = clone $this;
+
+        $clone->feedUri = $feedUri;
 
         return $clone;
     }
@@ -47,6 +57,7 @@ final class SuggestionFactory implements Factory
     {
         return Suggestion::create(
             uri: $this->uri ?? 'https://example.com/posts/' . $i,
+            feedUri: $this->feedUri ?? null,
             suggestedAt: $this->suggestedAt ?? DateTime::now(),
             suggestedBy: $this->suggestedBy ?? new UuidV4()->toString(),
         );

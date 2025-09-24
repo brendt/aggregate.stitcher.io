@@ -20,10 +20,10 @@ final class Post implements Bindable
     public string $uri;
     public DateTime $createdAt;
     public ?DateTime $publicationDate = null;
-    public Source $source;
+    public ?Source $source = null;
     public PostState $state = PostState::PENDING;
-    public int $visits;
-    public int $rank;
+    public int $visits = 0;
+    public int $rank = 0;
 
     #[Virtual]
     public string $cleanUri {
@@ -38,13 +38,19 @@ final class Post implements Bindable
     public static function published(): SelectQueryBuilder
     {
         return self::select()
+            ->join('LEFT JOIN sources ON sources.id = posts.source_id')
             ->where(
-                'posts.state = ? AND (posts.publicationDate IS NULL OR posts.publicationDate <= ?)',
-                PostState::PUBLISHED,
-                get(Clock::class)->now()->format(FormatPattern::SQL_DATE_TIME),
+                '(posts.state = ?)',
+                PostState::PUBLISHED
             )
-            ->with('source')
-            ->where('posts.state = ? AND sources.state = ?', PostState::PUBLISHED, SourceState::PUBLISHED);
+            ->where(
+                '(posts.publicationDate IS NULL OR posts.publicationDate <= ?)',
+                get(Clock::class)->now()->format(FormatPattern::SQL_DATE_TIME)
+            )
+            ->where(
+                '(posts.source_id IS NULL OR sources.state = ?)',
+                SourceState::PUBLISHED,
+            );
     }
 
     /**

@@ -13,8 +13,8 @@ final class Source implements Bindable
 
     public string $name;
     public string $uri;
-    public int $visits;
-    public int $rank;
+    public int $visits = 0;
+    public int $rank = 0;
 
     public SourceState $state = SourceState::PENDING;
 
