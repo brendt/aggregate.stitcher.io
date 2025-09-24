@@ -6,6 +6,7 @@ namespace Tests\Integration;
 
 use App\Authentication\Role;
 use App\Factories\PostFactory;
+use App\Posts\Post;
 use App\Posts\PostsController;
 use App\Posts\PostState;
 use Tempest\DateTime\DateTime;
@@ -33,7 +34,7 @@ final class PostsControllerTest extends IntegrationTestCase
         $this->http->post(uri([PostsController::class, 'queue'], post: $post->id))
             ->assertOk();
 
-        $post->refresh();
+        $post = Post::select()->get($post->id);
 
         $this->assertSame(PostState::PUBLISHED, $post->state);
         $this->assertNotNull($post->publicationDate);
@@ -59,7 +60,7 @@ final class PostsControllerTest extends IntegrationTestCase
         $this->http->post(uri([PostsController::class, 'publish'], post: $post->id))
             ->assertOk();
 
-        $post->refresh();
+        $post = Post::select()->get($post->id);
 
         $this->assertSame(PostState::PUBLISHED, $post->state);
         $this->assertNotNull($post->publicationDate);

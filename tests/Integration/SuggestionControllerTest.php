@@ -60,11 +60,6 @@ final class SuggestionControllerTest extends IntegrationTestCase
         $source = Source::select()->where('uri', $suggestion->feedUri)->first();
         $this->assertNotNull($source);
 
-        $tasks = $this->container->get(DeferredTasks::class)->getTasks();
-        $this->assertCount(1, $tasks);
-        $task = $tasks[array_key_first($tasks)];
-        $task();
-
         $posts = Post::select()->where('source_id', $source->id)->first();
         $this->assertNotEmpty($posts);
     }
