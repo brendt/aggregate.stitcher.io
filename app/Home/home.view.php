@@ -35,8 +35,8 @@ use App\Suggestions\SuggestionController;
     </x-slot>
 
     <div class="max-w-[800px] m-auto grid gap-2">
-        <div class="flex justify-center items-center gap-2 mb-4 mt-4">
-            <span class="font-bold text-slate-600">My community-driven feed, follow via <a href="/rss" class="underline hover:no-underline">RSS</a></span>
+        <div class="flex justify-center text-center items-center gap-2 mb-4 mt-4">
+            <span class="font-bold text-slate-600">Aggregate: a community-driven feed<br>follow via <a href="/rss" class="underline hover:no-underline">RSS</a></span>
         </div>
 
         <div class="grid gap-2 mb-8 mt-4" :if="$user?->isAdmin">

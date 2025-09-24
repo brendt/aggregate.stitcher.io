@@ -29,15 +29,13 @@ $original = $session->getOriginalValueFor($name, $default);
 ?>
 
 <div class="grid gap-2 items-center flex-wrap">
-    <div class="flex items-center">
-        <label :for="$id" class="grow">
-            <x-slot name="label">{{ $label }}</x-slot>
-        </label>
-        <textarea :if="$type === 'textarea'" :name="$name" :id="$id">{{ $original }}</textarea>
-        <input :else :type="$type" :name="$name" :id="$id" :value="$original"
-                class="bg-white p-2 rounded w-full"
-        />
-    </div>
+    <label :for="$id">
+        <x-slot name="label">{{ $label }}</x-slot>
+    </label>
+    <textarea :if="$type === 'textarea'" :name="$name" :id="$id">{{ $original }}</textarea>
+    <input :else :type="$type" :name="$name" :id="$id" :value="$original"
+            class="bg-white p-2 rounded w-full"
+    />
 
     <ul :if="$errors !== []" class="grow text-red-500 font-bold flex justify-end">
         <li :foreach="$errors as $error">
