@@ -1,7 +1,7 @@
 <div id="suggestions" class="grid gap-2">
     <div
         :foreach="$suggestions as $suggestion"
-        class="p-2 pl-4 rounded-lg shadow-sm bg-gray-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
+        class="p-2 pl-4 rounded-lg shadow-sm bg-slate-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
     >
 
         <h1 class="text-gray-500">
@@ -15,6 +15,10 @@
 
             <x-action-button :action="uri([PostsController::class, 'deny'], suggestion: $suggestion->id)" target="#suggestions">
                 <x-icon name="lucide:trash-2" class="size-6 sm:size-5 text-gray-400"/>
+            </x-action-button>
+
+            <x-action-button :if="$suggestion->feedUri" :action="uri([PostsController::class, 'publish'], suggestion: $suggestion->id)" target="#suggestions">
+                <x-icon name="lucide:check-check" class="size-6 sm:size-5 text-gray-400"/>
             </x-action-button>
 
             <x-action-button :action="uri([PostsController::class, 'publish'], suggestion: $suggestion->id)" target="#suggestions">

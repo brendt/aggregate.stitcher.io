@@ -24,7 +24,6 @@ final readonly class SuggestionController
     #[Router\Post('/suggestions/publish/{suggestion}', middleware: [AdminMiddleware::class])]
     public function publish(Suggestion $suggestion): View
     {
-        // TODO
         return $this->render();
     }
 
