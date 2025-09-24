@@ -142,7 +142,7 @@ final class HomeControllerTest extends IntegrationTestCase
         $this->http->get('/')
             ->assertOk()
             ->assertSee('queue')
-            ->assertNotSee('publish');
+            ->assertSee('publish');
     }
 
     public function test_admin_sees_suggestions(): void
