@@ -37,7 +37,8 @@ final readonly class SyncSource
             $this->parseXml($xml, $source)
                 ->each(function (RssEntry $entry) use ($source) {
                     $post = Post::select()
-                        ->where('uri = ? AND source_id = ?', $entry->uri, $source->id)
+                        ->where('posts.uri = ?', $entry->uri)
+                        ->with('source')
                         ->first();
 
                     if (! $post) {

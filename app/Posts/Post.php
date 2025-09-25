@@ -62,10 +62,24 @@ final class Post implements Bindable
             ->with('sources')
             ->where('posts.state = ?', PostState::PENDING)
             ->where(
-                '(posts.source_id IS NULL OR sources.state = ?)',
+                'sources.state = ?',
                 SourceState::PUBLISHED,
             )
             ->orderBy('createdAt DESC');
+    }
+
+    public static function pendingCount(): int
+    {
+        return query(self::class)
+            ->select('COUNT(*) as count')
+            ->join('sources ON sources.id = posts.source_id')
+            ->where('posts.state = ?', PostState::PENDING)
+            ->where(
+                'sources.state = ?',
+                SourceState::PUBLISHED,
+            )
+            ->build()
+            ->fetchFirst()['count'] ?? 0;
     }
 
     public static function publishedToday(): int
@@ -101,20 +115,6 @@ final class Post implements Bindable
             ->where(
                 'posts.publicationDate >= ?',
                 DateTime::now()->plusDay()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
-            )
-            ->build()
-            ->fetchFirst()['count'] ?? 0;
-    }
-
-    public static function pendingCount(): int
-    {
-        return query(self::class)
-            ->select('COUNT(*) as count')
-            ->join('sources ON sources.id = posts.source_id')
-            ->where('posts.state = ?', PostState::PENDING)
-            ->where(
-                '(posts.source_id IS NULL OR sources.state = ?)',
-                SourceState::PUBLISHED,
             )
             ->build()
             ->fetchFirst()['count'] ?? 0;
