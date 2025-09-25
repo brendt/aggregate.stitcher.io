@@ -3,7 +3,7 @@ use App\Posts\PostsController;
 use function Tempest\Router\uri;
 ?>
 
-<div id="pending-posts" class="grid gap-2" hx-trigger="" hx-get="/contacts/table">
+<div id="pending-posts" class="grid gap-2">
     <div
             :foreach="$pendingPosts as $pendingPost"
             class="p-2 pl-4 rounded-lg shadow-sm bg-gray-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
