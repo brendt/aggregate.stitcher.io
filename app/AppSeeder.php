@@ -26,9 +26,9 @@ final class AppSeeder implements DatabaseSeeder
 
 //        new PostFactory()->withSource($source)->times(40)->make();
 
-//        new PostFactory()->withState(PostState::PUBLISHED)->withSource($source)->times(40)->make();
+        new PostFactory()->withState(PostState::PUBLISHED)->withSource($source)->times(40)->make();
 
-        new SuggestionFactory()->withUri('https://stitcher.io')->withFeedUri('https://stitcher.io/rss')->make();
+//        new SuggestionFactory()->withUri('https://stitcher.io')->withFeedUri('https://stitcher.io/rss')->make();
 
 //        Source::create(
 //            name: 'stitcher.io',

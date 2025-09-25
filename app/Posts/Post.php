@@ -38,7 +38,7 @@ final class Post implements Bindable
     public static function published(): SelectQueryBuilder
     {
         return self::select()
-            ->join('LEFT JOIN sources ON sources.id = posts.source_id')
+            ->with('sources')
             ->where(
                 '(posts.state = ?)',
                 PostState::PUBLISHED
@@ -59,8 +59,12 @@ final class Post implements Bindable
     public static function pending(): SelectQueryBuilder
     {
         return self::select()
-            ->with('source')
-            ->where('posts.state = ? AND sources.state = ?', PostState::PENDING, SourceState::PUBLISHED)
+            ->with('sources')
+            ->where('posts.state = ?', PostState::PENDING)
+            ->where(
+                '(posts.source_id IS NULL OR sources.state = ?)',
+                SourceState::PUBLISHED,
+            )
             ->orderBy('createdAt DESC');
     }
 
@@ -68,9 +72,12 @@ final class Post implements Bindable
     {
         return query(self::class)
             ->select('COUNT(*) as count')
-            ->join('sources ON sources.id = posts.source_id')
+            ->join('LEFT JOIN sources ON sources.id = posts.source_id')
             ->where('posts.state = ?', PostState::PUBLISHED)
-            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->where(
+                '(posts.source_id IS NULL OR sources.state = ?)',
+                SourceState::PUBLISHED,
+            )
             ->where(
                 'posts.publicationDate >= ? AND posts.publicationDate < ?',
                 DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
@@ -85,9 +92,12 @@ final class Post implements Bindable
     {
         return query(self::class)
             ->select('COUNT(*) as count')
-            ->join('sources ON sources.id = posts.source_id')
+            ->join('LEFT JOIN sources ON sources.id = posts.source_id')
             ->where('posts.state = ?', PostState::PUBLISHED)
-            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->where(
+                '(posts.source_id IS NULL OR sources.state = ?)',
+                SourceState::PUBLISHED,
+            )
             ->where(
                 'posts.publicationDate >= ?',
                 DateTime::now()->plusDay()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
@@ -102,7 +112,10 @@ final class Post implements Bindable
             ->select('COUNT(*) as count')
             ->join('sources ON sources.id = posts.source_id')
             ->where('posts.state = ?', PostState::PENDING)
-            ->where('sources.state = ?', SourceState::PUBLISHED)
+            ->where(
+                '(posts.source_id IS NULL OR sources.state = ?)',
+                SourceState::PUBLISHED,
+            )
             ->build()
             ->fetchFirst()['count'] ?? 0;
     }
