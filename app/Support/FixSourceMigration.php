@@ -24,8 +24,9 @@ final readonly class FixSourceMigration
             ->where(
                 '(posts.state = ? or posts.state = ?) AND source_id IS NULL',
                 PostState::PENDING,
-            PostState::PUBLISHED,
+                PostState::PUBLISHED,
             )
+            ->where('createdAt > ?', '2025-01-01 00:00:00')
             ->chunk(function (array $posts) use ($sources) {
                 /** @var Post $post */
                 foreach ($posts as $post) {
