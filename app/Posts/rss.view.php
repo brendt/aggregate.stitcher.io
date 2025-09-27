@@ -23,6 +23,11 @@ use function Tempest\Router\uri;
             <id><?= $post->cleanUri ?></id>
             <updated><?= $post->createdAt->format(FormatPattern::ISO8601) ?></updated>
             <published><?= $post->publicationDate->format(FormatPattern::ISO8601) ?></published>
+            <author>
+                <name>
+                    <![CDATA[ Aggregate ]]>
+                </name>
+            </author>
         </entry>
     <?php endforeach; ?>
 </feed>
