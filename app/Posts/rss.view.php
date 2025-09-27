@@ -1,6 +1,9 @@
 <?php
 /** @var \App\Posts\Post[] $posts */
+
+use App\Posts\PostsController;
 use Tempest\DateTime\FormatPattern;
+use function Tempest\Router\uri;
 
 ?>
 
@@ -16,7 +19,7 @@ use Tempest\DateTime\FormatPattern;
     <?php foreach ($posts as $post): ?>
         <entry>
             <title><![CDATA[ <?= $post->title ?> ]]></title>
-            <link rel="alternate" href="<?= $post->cleanUri ?>"/>
+            <link rel="alternate" href="<?= uri([PostsController::class, 'visit'], post: $post->id) ?>"/>
             <id><?= $post->cleanUri ?></id>
             <updated><?= $post->createdAt->format(FormatPattern::ISO8601) ?></updated>
             <published><?= $post->publicationDate->format(FormatPattern::ISO8601) ?></published>
