@@ -33,7 +33,6 @@ final class RankRatioCommand
             }
 
             $ratio = (int) floor((($amountPublished / $amountTotal) * 100));
-            ld($ratio, $amountPublished, $amountTotal);
 
             $source->publicationRatio = $ratio;
             $source->save();
