@@ -8,7 +8,9 @@ use App\Posts\PendingSourcesController;
         :foreach="($sources ?? []) as $source"
         class="p-2 pl-4 rounded-lg shadow-sm bg-gray-200 flex items-center justify-between"
     >
-        <h1>
+
+        <h1 class="flex items-center gap-2">
+            <span class="text-md sm:text-xs p-1 px-2 bg-slate-100 rounded-sm">{{ $source->publicationRatio }}</span>
             <span class="font-bold">{{ $source->name }}</span>
         </h1>
 

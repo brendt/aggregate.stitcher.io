@@ -3,14 +3,11 @@
 namespace App\Admin;
 
 use App\Authentication\AdminMiddleware;
-use App\Posts\Post;
-use App\Posts\PostState;
 use App\Posts\Source;
 use App\Posts\SourceState;
 use Tempest\Http\Request;
 use Tempest\Router;
 use Tempest\View\View;
-use function Tempest\Database\query;
 use function Tempest\view;
 
 final class AdminController
@@ -39,11 +36,10 @@ final class AdminController
                 ->where(
                     'name LIKE :filter OR uri LIKE :filter',
                     filter: "%{$filter}%",
-                )
-                ->limit(20);
+                );
         }
 
-        $sources = $query->all();
+        $sources = $query->limit(20)->all();
 
         return view(
             '../Posts/x-sources-search-result.view.php',
@@ -51,18 +47,6 @@ final class AdminController
         );
     }
 
-    #[Router\Post('/admin/deny-all-pending', middleware: [AdminMiddleware::class])]
-    public function denyAllPending(): View
-    {
-        query(Post::class)
-            ->update(
-                state: PostState::DENIED,
-            )
-            ->where('state', PostState::PENDING)
-            ->execute();
-
-        return $this->render();
-    }
     
     private function render(): View
     {
@@ -74,21 +58,7 @@ final class AdminController
 
     private function data(): array
     {
-        $pendingPosts = Post::published()
-            ->orderBy('createdAt DESC')
-            ->limit(5)
-            ->all();
-
-        $pendingSources = Source::select()
-            ->where('state', SourceState::PENDING)
-            ->orderBy('id DESC')
-            ->limit(5)
-            ->all();
-
         return [
-            'pendingCount' => query(Post::class)->count()->where('state', PostState::PENDING)->execute(),
-            'pendingPosts' => $pendingPosts,
-            'pendingSources' => $pendingSources,
         ];
     }
 }
