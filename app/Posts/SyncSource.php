@@ -63,7 +63,12 @@ final readonly class SyncSource
 
     private function parseXml(string $input, Source $source): ImmutableArray
     {
-        $xml = simplexml_load_string($input, "SimpleXMLElement", LIBXML_NOCDATA);
+        $xml = simplexml_load_string($input, "SimpleXMLElement", LIBXML_NOCDATA | LIBXML_NOWARNING | LIBXML_NOERROR);
+
+        if (! $xml) {
+            return arr();
+        }
+
         $json = json_encode($xml);
         $array = json_decode($json, true, flags: JSON_THROW_ON_ERROR);
 
