@@ -55,7 +55,7 @@ final readonly class FindSuggestionFeedUri
 
         $uriFromContent = $this->uriFromContent($uri);
 
-        if (str_starts_with($uriFromContent, '/')) {
+        if ($uriFromContent && str_starts_with($uriFromContent, '/')) {
             $uriFromContent = "{$scheme}://{$host}{$uriFromContent}";
         }
 
@@ -114,7 +114,7 @@ final readonly class FindSuggestionFeedUri
             return $url;
         }
 
-        $dom = HTMLDocument::createFromString($html);
+        $dom = HTMLDocument::createFromString($html, LIBXML_NOERROR | LIBXML_HTML_NOIMPLIED);
 
         [$link] = $dom->querySelector('head link[type="application/rss+xml"]');
 
