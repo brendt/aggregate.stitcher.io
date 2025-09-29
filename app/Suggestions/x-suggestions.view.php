@@ -6,11 +6,11 @@ use App\Suggestions\SuggestionController;
 <div id="suggestions" class="grid gap-2">
     <div
         :foreach="$suggestions as $suggestion"
-        class="p-2 pl-4 rounded-lg shadow-sm bg-slate-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
+        class="overflow-hidden p-2 pl-4 rounded-lg shadow-sm bg-slate-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
     >
 
         <h1 class="text-gray-500">
-            <span class="font-bold">{{ $suggestion->uri }}</span>
+            <span class="font-bold truncate text-ellipsis">{{ $suggestion->uri }}</span>
         </h1>
 
         <div class="flex gap-8 sm:gap-2">
