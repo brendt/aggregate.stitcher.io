@@ -66,7 +66,7 @@ final class HomeController
     }
 
     #[Get('/top')]
-    public function top(): View
+    public function top(Authenticator $authenticator): View
     {
         $posts = arr(Post::published()
             ->orderBy('posts.visits DESC')
@@ -95,7 +95,7 @@ final class HomeController
             futureQueued: $futureQueued ?? null,
             pendingCount: $pendingCount ?? null,
             suggestions: $suggestions ?? [],
-            user: null,
+            user: $authenticator->current(),
             page: null,
         );
     }
