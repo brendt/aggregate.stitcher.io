@@ -80,6 +80,7 @@ final class AuthController
             $user = User::create(
                 email: $ownerDetails->getEmail(),
                 name: $ownerDetails->getName(),
+                role: Role::USER,
             );
         }
 
