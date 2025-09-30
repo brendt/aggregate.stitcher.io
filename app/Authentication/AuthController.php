@@ -84,9 +84,9 @@ final class AuthController
             );
         }
 
-        if ($appConfig->environment->isProduction() && $user->email !== env('ADMIN_EMAIL')) {
-            return new Invalid($request);
-        }
+//        if ($appConfig->environment->isProduction() && $user->email !== env('ADMIN_EMAIL')) {
+//            return new Invalid($request);
+//        }
 
         $authenticator->authenticate($user);
 
