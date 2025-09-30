@@ -45,7 +45,7 @@ use App\Suggestions\SuggestionController;
         </div>
 
         <div class="rounded-lg bg-white shadow-sm hover:shadow-lg flex text-center">
-            <span :if="$success" class="grow p-4 font-bold text-emerald-700">
+            <span :if="$success ?? null" class="grow p-4 font-bold text-emerald-700">
                 Your suggestion has been added!
                 <a :href="uri([SuggestionController::class, 'suggest'])" class="underline hover:no-underline">Add another one</a>
             </span>
@@ -85,8 +85,8 @@ use App\Suggestions\SuggestionController;
 
         <div class="flex gap-2">
             <a
-                    :if="$page->hasNext"
-                    :href="uri(HomeController::class, page: $page->nextPage)"
+                    :if="$page?->hasNext"
+                    :href="uri([HomeController::class, 'home'], page: $page->nextPage)"
                     class="flex-auto mt-8 text-center bg-white font-bold hover:underline p-3 rounded-lg shadow-sm"
             >Read more</a>
             <a

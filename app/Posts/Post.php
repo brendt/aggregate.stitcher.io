@@ -44,8 +44,8 @@ final class Post implements Bindable
                 PostState::PUBLISHED
             )
             ->where(
-                '(posts.publicationDate IS NULL OR posts.publicationDate <= ?)',
-                get(Clock::class)->now()->format(FormatPattern::SQL_DATE_TIME)
+                '(posts.publicationDate IS NULL OR posts.publicationDate < ?)',
+                get(Clock::class)->now()->plusDay()->startOfDay()->format(FormatPattern::SQL_DATE_TIME)
             )
             ->where(
                 '(posts.source_id IS NULL OR sources.state = ?)',
