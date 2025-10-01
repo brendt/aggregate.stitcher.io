@@ -45,6 +45,7 @@ final class PostsController
     #[Router\Post('/posts/publish/{post}', middleware: [AdminMiddleware::class])]
     public function publish(Post $post): View
     {
+        $post->load('source');
         $post->state = PostState::PUBLISHED;
         $post->publicationDate = DateTime::now();
         $post->save();
@@ -64,6 +65,9 @@ final class PostsController
         HAVING COUNT(*) >= 5
         ORDER BY publicationDate DESC
         LIMIT 1;
+
+        $post->load('source');
+
         SQL)->fetchFirst(
             publicationDate: DateTime::now()->startOfDay()->format(FormatPattern::SQL_DATE_TIME),
             state: PostState::PUBLISHED,
