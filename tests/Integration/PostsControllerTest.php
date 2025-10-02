@@ -24,7 +24,7 @@ final class PostsControllerTest extends IntegrationTestCase
         new PostFactory()
             ->withState(PostState::PUBLISHED)
             ->withPublicationDate(DateTime::parse('2025-01-02 00:00:00'))
-            ->times(5)
+            ->times(3)
             ->make();
 
         $post = new PostFactory()

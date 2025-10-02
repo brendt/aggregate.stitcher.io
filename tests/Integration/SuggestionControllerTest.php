@@ -1,6 +1,6 @@
 <?php
 
-namespace Integration;
+namespace Tests\Integration;
 
 use App\Authentication\Role;
 use App\Factories\SuggestionFactory;

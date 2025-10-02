@@ -22,22 +22,7 @@ abstract class IntegrationTestCase extends \Tempest\Framework\Testing\Integratio
     {
         parent::setUp();
 
-        $this->setupDatabase();
-    }
-
-    protected function migrateDatabase(): void
-    {
-        $this->migrate(
-            CreateMigrationsTable::class,
-            CreateUsersTable::class,
-            CreateSourcesTable::class,
-            CreatePostsTable::class,
-            AddRankToSources::class,
-            AddRankToPosts::class,
-            AddPublicationDateToPost::class,
-            CreateSuggestionsTable::class,
-            MakeSourceNullable::class,
-        );
+        $this->database->reset();
     }
 
     protected function login(?User $user = null, ?Role $role = null): User

@@ -60,7 +60,7 @@ final class PostsController
         WHERE publicationDate > :publicationDate
         AND state = :state
         GROUP BY publicationDate
-        HAVING COUNT(*) >= 5
+        HAVING COUNT(*) >= 3
         ORDER BY publicationDate DESC
         LIMIT 1;
 
