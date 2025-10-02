@@ -2,7 +2,7 @@
     "name": "tempest/app",
     "type": "project",
     "require": {
-        "tempest/framework": "^2.1.0",
+        "tempest/framework": "^2.2.0",
         "league/oauth2-google": "^4.0"
     },
     "require-dev": {

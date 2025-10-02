@@ -2,14 +2,15 @@
 
 namespace App\Authentication;
 
-use League\OAuth2\Client\Provider\Google;
-use League\OAuth2\Client\Provider\GoogleUser;
+use Tempest\Auth\Authentication\Authenticatable;
 use Tempest\Auth\Authentication\Authenticator;
+use Tempest\Auth\OAuth\OAuthClient;
+use Tempest\Auth\OAuth\OAuthUser;
+use Tempest\Container\Tag;
 use Tempest\Core\AppConfig;
 use Tempest\Database\PrimaryKey;
 use Tempest\Http\Request;
 use Tempest\Http\Response;
-use Tempest\Http\Responses\Invalid;
 use Tempest\Http\Responses\Redirect;
 use Tempest\Http\Session\Session;
 use Tempest\Router\Get;
@@ -42,53 +43,31 @@ final class AuthController
     }
 
     #[Get('/auth/google')]
-    public function google(Request $request, Session $session, Google $google, Authenticator $authenticator, AppConfig $appConfig): Response
-    {
-        if ($request->get('error')) {
-            return new Invalid($request);
-        }
-
+    public function google(
+        Request $request,
+        #[Tag('google')] OAuthClient $oauth,
+    ): Response {
         $code = $request->get('code');
 
         if ($code === null) {
-            $authUrl = $google->getAuthorizationUrl();
-            $session->set('oauth2state', $google->getState());
-
-            return new Redirect($authUrl);
+            return $oauth->createRedirect();
         }
 
-        $state = $session->get('oauth2state');
+        $oauth->authenticate($request, function (OAuthUser $oauthUser): Authenticatable {
+            $user = User::select()
+                ->where('email = ?', $oauthUser->email)
+                ->first();
 
-        if ($state === null || $state !== $session->get('oauth2state')) {
-            $session->remove('oauth2state');
+            if (! $user) {
+                $user = User::create(
+                    email: $oauthUser->email,
+                    name: $oauthUser->name,
+                    role: Role::USER,
+                );
+            }
 
-            return new Invalid($request);
-        }
-
-        $token = $google->getAccessToken('authorization_code', [
-            'code' => $code,
-        ]);
-
-        /** @var GoogleUser $ownerDetails */
-        $ownerDetails = $google->getResourceOwner($token);
-
-        $user = User::select()
-            ->where('email = ?', $ownerDetails->getEmail())
-            ->first();
-
-        if (! $user) {
-            $user = User::create(
-                email: $ownerDetails->getEmail(),
-                name: $ownerDetails->getName(),
-                role: Role::USER,
-            );
-        }
-
-//        if ($appConfig->environment->isProduction() && $user->email !== env('ADMIN_EMAIL')) {
-//            return new Invalid($request);
-//        }
-
-        $authenticator->authenticate($user);
+            return $user;
+        });
 
         return new Redirect('/');
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a4a9b7df962602f81334cd1e45e21a25",
+    "content-hash": "a998caa01cf0e92d6ffd93c2a33e29f1",
     "packages": [
         {
             "name": "composer/semver",
@@ -4320,16 +4320,16 @@
         },
         {
             "name": "tempest/framework",
-            "version": "v2.1.0",
+            "version": "v2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/tempestphp/tempest-framework.git",
-                "reference": "6019495288d3658dc47205e623f3b8aad259c8f0"
+                "reference": "cd02256daf22497ddd48e9f57d5c28ee1e9c1b15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/tempestphp/tempest-framework/zipball/6019495288d3658dc47205e623f3b8aad259c8f0",
-                "reference": "6019495288d3658dc47205e623f3b8aad259c8f0",
+                "url": "https://api.github.com/repos/tempestphp/tempest-framework/zipball/cd02256daf22497ddd48e9f57d5c28ee1e9c1b15",
+                "reference": "cd02256daf22497ddd48e9f57d5c28ee1e9c1b15",
                 "shasum": ""
             },
             "require": {
@@ -4538,7 +4538,7 @@
             "description": "The PHP framework that gets out of your way.",
             "support": {
                 "issues": "https://github.com/tempestphp/tempest-framework/issues",
-                "source": "https://github.com/tempestphp/tempest-framework/tree/v2.1.0"
+                "source": "https://github.com/tempestphp/tempest-framework/tree/v2.2.0"
             },
             "funding": [
                 {
@@ -4546,7 +4546,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-10-02T06:18:00+00:00"
+            "time": "2025-10-02T12:03:29+00:00"
         },
         {
             "name": "tempest/highlight",
