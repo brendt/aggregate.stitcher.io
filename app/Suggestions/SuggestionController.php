@@ -3,6 +3,7 @@
 namespace App\Suggestions;
 
 use App\Authentication\AdminMiddleware;
+use App\Posts\Actions\ResolveTitle;
 use App\Posts\Post;
 use App\Posts\PostState;
 use App\Posts\Source;
@@ -55,7 +56,7 @@ final readonly class SuggestionController
     }
 
     #[Router\Post('/suggestions/publish/{suggestion}', middleware: [AdminMiddleware::class])]
-    public function publish(Suggestion $suggestion, Request $request, SyncSource $syncSource): View
+    public function publish(Suggestion $suggestion, Request $request, SyncSource $syncSource, ResolveTitle $resolveTitle): View
     {
         $publishFeed = $request->has('feed');
 
@@ -68,8 +69,7 @@ final readonly class SuggestionController
 
             $syncSource($source);
         } else {
-            $title = get_meta_tags($suggestion->uri);
-            $title = html_entity_decode($title['title'] ?? $title['og:title'] ?? $title['twitter:title'] ?? $suggestion->uri);
+            $title = $resolveTitle($suggestion->uri);
 
             Post::create(
                 title: $title,

@@ -2,6 +2,7 @@
 
 namespace App\Posts;
 
+use App\Posts\Actions\ResolveTitle;
 use App\Posts\Events\PostSynced;
 use App\Posts\Events\SourceSynced;
 use App\Posts\Events\SourceSyncFailed;
@@ -17,6 +18,7 @@ final readonly class SyncSource
 {
     public function __construct(
         private Cache $cache,
+        private ResolveTitle $resolveTitle,
     ) {}
 
     public function __invoke(Source $source): void
@@ -85,22 +87,7 @@ final readonly class SyncSource
 
     private function resolveTitle(array $item): string
     {
-        $title = $item['title'] ?? null;
-
-        if (! $title) {
-            $meta = get_meta_tags($item['id']);
-
-            return $meta['title']
-                ?? $meta['twitter:title']
-                ?? $meta['og:title']
-                ?? $item['id'];
-        }
-
-        $title = preg_replace_callback("/(&#[0-9]+;)/", function ($match) {
-            return mb_convert_encoding($match[1], "UTF-8", "HTML-ENTITIES");
-        }, $title);
-
-        return trim(html_entity_decode(html_entity_decode($title)));
+        return ($this->resolveTitle)($item['id']);
     }
 
     private function resolveUrl(Source $source, $item): string
