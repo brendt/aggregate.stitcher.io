@@ -69,7 +69,7 @@ final readonly class SuggestionController
             $syncSource($source);
         } else {
             $title = get_meta_tags($suggestion->uri);
-            $title = $title['title'] ?? $title['og:title'] ?? $title['twitter:title'] ?? $suggestion->uri;
+            $title = html_entity_decode($title['title'] ?? $title['og:title'] ?? $title['twitter:title'] ?? $suggestion->uri);
 
             Post::create(
                 title: $title,
