@@ -70,7 +70,7 @@ final class HomeController
     {
         $posts = arr(Post::published()
             ->orderBy('posts.visits DESC')
-            ->where('publicationDate > ?', DateTime::now()->minusDays(7)->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
+            ->where('publicationDate > ?', DateTime::now()->minusDays(31)->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
             ->limit(20)
             ->all());
 
