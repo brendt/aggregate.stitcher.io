@@ -87,7 +87,10 @@ final readonly class SyncSource
 
     private function resolveTitle(array $item): string
     {
-        return ($this->resolveTitle)($item['id']);
+        return $item['title'] ?? ($this->resolveTitle)(
+            $item['link']['@attributes']['href']
+            ?? $item['id']
+        );
     }
 
     private function resolveUrl(Source $source, $item): string

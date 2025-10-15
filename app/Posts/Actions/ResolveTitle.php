@@ -8,7 +8,11 @@ final class ResolveTitle
 {
     public function __invoke(string $uri): string
     {
-        $meta = get_meta_tags($uri);
+        $meta = @get_meta_tags($uri);
+
+        if (! $meta) {
+            $meta = null;
+        }
 
         $title = $meta['title']
             ?? $meta['twitter:title']
@@ -17,8 +21,11 @@ final class ResolveTitle
 
         if (! $title) {
             $content = @file_get_contents($uri);
-            $content = str($content ?? '');
-            $title = $content->between('<title>', '</title>');
+
+            if ($content) {
+                $content = str($content ?? '');
+                $title = $content->between('<title>', '</title>');
+            }
         }
 
         if (! $title) {
