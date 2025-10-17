@@ -55,7 +55,7 @@ use App\Suggestions\SuggestionController;
         </div>
 
         <div
-                :foreach="$posts as $post"
+                :foreach="$posts as $index => $post"
                 class="rounded-lg bg-white shadow-sm hover:shadow-lg flex items-center justify-between"
         >
             <div class="pl-4">

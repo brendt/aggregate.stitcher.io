@@ -4,11 +4,13 @@ namespace App\Home;
 
 use App\Posts\Post;
 use App\Suggestions\Suggestion;
+use Closure;
 use Tempest\Auth\Authentication\Authenticator;
 use Tempest\DateTime\DateTime;
 use Tempest\DateTime\FormatPattern;
 use Tempest\Http\Request;
 use Tempest\Router\Get;
+use Tempest\Support\Arr\ImmutableArray;
 use Tempest\View\View;
 use function Tempest\Support\arr;
 use function Tempest\view;
@@ -25,18 +27,6 @@ final class HomeController
             ->paginate(currentPage: $currentPage);
 
         $posts = arr($page->data);
-
-        $maxVisits = $posts->reduce(
-            fn (int $max, Post $post) => max($max, $post->visits),
-            0,
-        );
-
-        $minVisits = $posts->reduce(
-            fn (int $min, Post $post) => min($min, $post->visits),
-            0,
-        );
-
-        $color = fn (Post $post) => $this->color($post, $maxVisits, $minVisits);
 
         /** @var \App\Authentication\User $user */
         $user = $authenticator->current();
@@ -55,7 +45,7 @@ final class HomeController
             user: $user,
             page: $page,
             posts: $posts,
-            color: $color,
+            color: $this->createColorFunction($posts),
             pendingPosts: $pendingPosts ?? [],
             shouldQueue: $shouldQueue ?? null,
             futureQueued: $futureQueued ?? null,
@@ -74,22 +64,12 @@ final class HomeController
             ->limit(20)
             ->all());
 
-        $maxVisits = $posts->reduce(
-            fn (int $max, Post $post) => max($max, $post->visits),
-            0,
-        );
-
-        $minVisits = $posts->reduce(
-            fn (int $min, Post $post) => min($min, $post->visits),
-            0,
-        );
-
-        $color = fn (Post $post) => $this->color($post, $maxVisits, $minVisits);
+        $posts = $posts->sortByCallback(fn (Post $a, Post $b) => $b->publicationDate <=> $a->publicationDate);
 
         return view(
             'home.view.php',
             posts: $posts,
-            color: $color,
+            color: $this->createColorFunction($posts),
             pendingPosts: $pendingPosts ?? [],
             shouldQueue: $shouldQueue ?? null,
             futureQueued: $futureQueued ?? null,
@@ -100,21 +80,23 @@ final class HomeController
         );
     }
 
-    public function color(Post $post, int $maxVisits, int $minVisits): string
+    private function createColorFunction(ImmutableArray $posts): Closure
     {
-        $rebasedMax = $maxVisits - $minVisits;
-        $rebasedValue = $post->visits - $minVisits;
+        $postRating = $posts
+            ->sortByCallback(fn (Post $a, Post $b) => $b->visits <=> $a->visits)
+            ->values()
+            ->mapWithKeys(fn (Post $post, int $index) => yield $post->id->value => $index);
 
-        if ($rebasedMax === 0) {
-            $localRank = 0;
-        } else {
-            $localRank = round($rebasedValue / $rebasedMax, 1);
-        }
+        return fn (Post $post) => $this->color($postRating[$post->id->value] ?? null);
+    }
 
+    public function color(?int $index): string
+    {
         return match (true) {
-            $localRank > 0.9 => 'bg-slate-300',
-            $localRank > 0.6 => 'bg-slate-200',
-            $localRank > 0.3 => 'bg-slate-100',
+            $index === 0 => 'bg-slate-400',
+            $index < 4 => 'bg-slate-300',
+            $index < 6 => 'bg-slate-200',
+            $index <= 10 => 'bg-slate-100',
             default => 'bg-gray-100',
         };
     }
