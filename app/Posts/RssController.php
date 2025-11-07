@@ -7,10 +7,11 @@ use Tempest\DateTime\DateTime;
 use Tempest\Http\Response;
 use Tempest\Http\Responses\Ok;
 use Tempest\Router\Get;
+use Tempest\Router\Stateless;
 
 final class RssController
 {
-    #[Get('/rss')]
+    #[Stateless, Get('/rss')]
     public function __invoke(Cache $cache): Response
     {
         $xml = $cache->resolve(

@@ -1,9 +1,9 @@
 <?php
 
 use Tempest\DateTime\Duration;
-use Tempest\Http\Session\Config\FileSessionConfig;
+use Tempest\Http\Session\Config\DatabaseSessionConfig;
+use Tempest\Http\Session\Models\DatabaseSession;
 
-return new FileSessionConfig(
-    path: 'sessions',
+return new DatabaseSessionConfig(
     expiration: Duration::days(30),
 );

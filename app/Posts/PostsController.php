@@ -10,13 +10,12 @@ use Tempest\Http\Responses\Redirect;
 use Tempest\View\View;
 use Tempest\Router;
 use Throwable;
-use function Tempest\Database\query;
 use function Tempest\defer;
 use function Tempest\view;
 
 final class PostsController
 {
-    #[Router\Get('/posts/{post}')]
+    #[Router\Stateless, Router\Get('/posts/{post}')]
     public function visit(Post $post): Redirect
     {
         defer(function () use ($post) {
