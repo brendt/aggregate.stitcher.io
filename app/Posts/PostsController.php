@@ -84,7 +84,7 @@ final class PostsController
     {
         $pendingPosts = Post::pending()->limit(5)->all();
         $publishedPostsToday = Post::publishedToday();
-        $shouldQueue = $publishedPostsToday >= 5;
+        $shouldQueue = $publishedPostsToday >= 3;
         $futureQueued = Post::futureQueued();
         $pendingCount = Post::pendingCount();
 

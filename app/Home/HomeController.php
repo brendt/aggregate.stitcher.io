@@ -35,7 +35,7 @@ final class HomeController
             $futureQueued = Post::futureQueued();
             $pendingPosts = Post::pending()->limit(5)->all();
             $publishedPostsToday = Post::publishedToday();
-            $shouldQueue = $publishedPostsToday >= 5;
+            $shouldQueue = $publishedPostsToday >= 3;
             $pendingCount = Post::pendingCount();
             $suggestions = Suggestion::select()->all();
         }
