@@ -13,9 +13,10 @@ use Throwable;
 use function Tempest\defer;
 use function Tempest\view;
 
+#[Router\Stateless]
 final class PostsController
 {
-    #[Router\Stateless, Router\Get('/posts/{post}')]
+    #[Router\Get('/posts/{post}')]
     public function visit(Post $post): Redirect
     {
         defer(function () use ($post) {

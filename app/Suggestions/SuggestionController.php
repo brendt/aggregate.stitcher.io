@@ -12,6 +12,7 @@ use App\Posts\SyncSource;
 use Tempest\DateTime\DateTime;
 use Tempest\Http\Request;
 use Tempest\Http\Responses\Redirect;
+use Tempest\Router\Stateless;
 use Tempest\View\View;
 use Tempest\Router;
 use function Tempest\defer;
@@ -47,7 +48,7 @@ final readonly class SuggestionController
         return new Redirect('/?success');
     }
 
-    #[Router\Post('/suggestions/deny/{suggestion}', middleware: [AdminMiddleware::class])]
+    #[Stateless, Router\Post('/suggestions/deny/{suggestion}', middleware: [AdminMiddleware::class])]
     public function deny(Suggestion $suggestion): View
     {
         $suggestion->delete();
@@ -55,7 +56,7 @@ final readonly class SuggestionController
         return $this->render();
     }
 
-    #[Router\Post('/suggestions/publish/{suggestion}', middleware: [AdminMiddleware::class])]
+    #[Stateless, Router\Post('/suggestions/publish/{suggestion}', middleware: [AdminMiddleware::class])]
     public function publish(Suggestion $suggestion, Request $request, SyncSource $syncSource, ResolveTitle $resolveTitle): View
     {
         $publishFeed = $request->has('feed');

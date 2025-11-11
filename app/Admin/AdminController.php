@@ -7,9 +7,11 @@ use App\Posts\Source;
 use App\Posts\SourceState;
 use Tempest\Http\Request;
 use Tempest\Router;
+use Tempest\Router\Stateless;
 use Tempest\View\View;
 use function Tempest\view;
 
+#[Stateless]
 final class AdminController
 {
     #[Router\Get('/admin', middleware: [AdminMiddleware::class])]
