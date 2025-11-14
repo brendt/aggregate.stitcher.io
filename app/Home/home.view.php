@@ -63,7 +63,7 @@ use App\Suggestions\SuggestionController;
             </div>
 
             <a :href="uri([PostsController::class, 'visit'], post: $post->id)" class="hover:underline grow p-4">
-                <span class="font-bold break-all">{{ $post->title }}</span>
+                <span class="font-bold wrap-anywhere">{{ $post->title }}</span>
                 <x-template :if="$post->source">
                     <br class="inline sm:hidden">
                     <span class="hidden sm:inline">&nbsp;</span>

@@ -10,7 +10,7 @@ use App\Suggestions\SuggestionController;
     >
 
         <h1 class="text-gray-500">
-            <span class="font-bold break-all">{{ $suggestion->uri }}</span>
+            <span class="font-bold wrap-anywhere">{{ $suggestion->uri }}</span>
         </h1>
 
         <div class="flex gap-8 sm:gap-2">

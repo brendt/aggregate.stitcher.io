@@ -9,7 +9,7 @@ use function Tempest\Router\uri;
             class="p-2 pl-4 rounded-lg shadow-sm bg-gray-200 flex gap-2 flex-col sm:flex-row items-center justify-between"
     >
         <h1 class="text-gray-500">
-            <span class="font-bold break-all">{{ $pendingPost->title }}</span>&nbsp;<span class="text-sm break-all">–&nbsp;{{ $pendingPost->source->name }}</span>
+            <span class="font-bold wrap-anywhere">{{ $pendingPost->title }}</span>&nbsp;<span class="text-sm break-all">–&nbsp;{{ $pendingPost->source->name }}</span>
         </h1>
 
         <div class="flex gap-8 sm:gap-2">
