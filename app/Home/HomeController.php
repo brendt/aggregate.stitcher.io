@@ -17,8 +17,8 @@ use function Tempest\view;
 
 final class HomeController
 {
-    #[Get('/{page:.?}')]
-    public function home(string $page, Authenticator $authenticator, Request $request): View
+    #[Get('/{?page}')]
+    public function home(?string $page, Authenticator $authenticator, Request $request): View
     {
         $currentPage = $page ? intval($page) : 1;
 
