@@ -9,6 +9,7 @@ use Tempest\Auth\Authentication\Authenticator;
 use Tempest\DateTime\DateTime;
 use Tempest\DateTime\FormatPattern;
 use Tempest\Http\Request;
+use Tempest\Http\Responses\Redirect;
 use Tempest\Router\Get;
 use Tempest\Support\Arr\ImmutableArray;
 use Tempest\View\View;
@@ -18,66 +19,70 @@ use function Tempest\view;
 final class HomeController
 {
     #[Get('/{?page}')]
-    public function home(?string $page, Authenticator $authenticator, Request $request): View
+    public function home(?string $page, Authenticator $authenticator, Request $request): Redirect
     {
-        $currentPage = $page ? intval($page) : 1;
+        return new Redirect('https://stitcher.io/feed');
 
-        $page = Post::published()
-            ->orderBy('publicationDate DESC')
-            ->paginate(currentPage: $currentPage);
-
-        $posts = arr($page->data);
-
-        /** @var \App\Authentication\User $user */
-        $user = $authenticator->current();
-
-        if ($user?->isAdmin) {
-            $futureQueued = Post::futureQueued();
-            $pendingPosts = Post::pending()->limit(5)->all();
-            $publishedPostsToday = Post::publishedToday();
-            $shouldQueue = $publishedPostsToday >= 3;
-            $pendingCount = Post::pendingCount();
-            $suggestions = Suggestion::select()->all();
-        }
-
-        return view(
-            'home.view.php',
-            user: $user,
-            page: $page,
-            posts: $posts,
-            color: $this->createColorFunction($posts),
-            pendingPosts: $pendingPosts ?? [],
-            shouldQueue: $shouldQueue ?? null,
-            futureQueued: $futureQueued ?? null,
-            pendingCount: $pendingCount ?? null,
-            suggestions: $suggestions ?? [],
-            success: $request->has('success'),
-        );
+//        $currentPage = $page ? intval($page) : 1;
+//
+//        $page = Post::published()
+//            ->orderBy('publicationDate DESC')
+//            ->paginate(currentPage: $currentPage);
+//
+//        $posts = arr($page->data);
+//
+//        /** @var \App\Authentication\User $user */
+//        $user = $authenticator->current();
+//
+//        if ($user?->isAdmin) {
+//            $futureQueued = Post::futureQueued();
+//            $pendingPosts = Post::pending()->limit(5)->all();
+//            $publishedPostsToday = Post::publishedToday();
+//            $shouldQueue = $publishedPostsToday >= 3;
+//            $pendingCount = Post::pendingCount();
+//            $suggestions = Suggestion::select()->all();
+//        }
+//
+//        return view(
+//            'home.view.php',
+//            user: $user,
+//            page: $page,
+//            posts: $posts,
+//            color: $this->createColorFunction($posts),
+//            pendingPosts: $pendingPosts ?? [],
+//            shouldQueue: $shouldQueue ?? null,
+//            futureQueued: $futureQueued ?? null,
+//            pendingCount: $pendingCount ?? null,
+//            suggestions: $suggestions ?? [],
+//            success: $request->has('success'),
+//        );
     }
 
     #[Get('/top')]
-    public function top(Authenticator $authenticator): View
+    public function top(Authenticator $authenticator): Redirect
     {
-        $posts = arr(Post::published()
-            ->orderBy('posts.visits DESC')
-            ->where('publicationDate > ?', DateTime::now()->minusDays(31)->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
-            ->limit(20)
-            ->all());
+        return new Redirect('https://stitcher.io/feed');
 
-        $posts = $posts->sortByCallback(fn (Post $a, Post $b) => $b->publicationDate <=> $a->publicationDate);
-
-        return view(
-            'home.view.php',
-            posts: $posts,
-            color: $this->createColorFunction($posts),
-            pendingPosts: $pendingPosts ?? [],
-            shouldQueue: $shouldQueue ?? null,
-            futureQueued: $futureQueued ?? null,
-            pendingCount: $pendingCount ?? null,
-            suggestions: $suggestions ?? [],
-            user: $authenticator->current(),
-            page: null,
-        );
+//        $posts = arr(Post::published()
+//            ->orderBy('posts.visits DESC')
+//            ->where('publicationDate > ?', DateTime::now()->minusDays(31)->startOfDay()->format(FormatPattern::SQL_DATE_TIME))
+//            ->limit(20)
+//            ->all());
+//
+//        $posts = $posts->sortByCallback(fn (Post $a, Post $b) => $b->publicationDate <=> $a->publicationDate);
+//
+//        return view(
+//            'home.view.php',
+//            posts: $posts,
+//            color: $this->createColorFunction($posts),
+//            pendingPosts: $pendingPosts ?? [],
+//            shouldQueue: $shouldQueue ?? null,
+//            futureQueued: $futureQueued ?? null,
+//            pendingCount: $pendingCount ?? null,
+//            suggestions: $suggestions ?? [],
+//            user: $authenticator->current(),
+//            page: null,
+//        );
     }
 
     private function createColorFunction(ImmutableArray $posts): Closure

@@ -6,6 +6,7 @@ use Tempest\Cache\Cache;
 use Tempest\DateTime\DateTime;
 use Tempest\Http\Response;
 use Tempest\Http\Responses\Ok;
+use Tempest\Http\Responses\Redirect;
 use Tempest\Router\Get;
 use Tempest\Router\Stateless;
 
@@ -14,6 +15,8 @@ final class RssController
     #[Stateless, Get('/rss')]
     public function __invoke(Cache $cache): Response
     {
+        return new Redirect('https://stitcher.io/feed/rss');
+
         $xml = $cache->resolve(
             key: 'rss',
             callback: fn () => $this->renderRssFeed(
